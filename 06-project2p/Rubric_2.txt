@@ -1,0 +1,100 @@
+Sincerely yours,
+Dr. Carlos Mera Gómez
+
+Rúbrica
+Final Project
+Final Project
+Criterios	Calificaciones	Pts
+Este criterio depende de una competencia de aprendizajePresentation of project information details
+Presentation of project information details (client, objectives, scope, scenarios, etc.)
+3 pts
+Con marcas
+0 pts
+Sin marcas
+3 pts
+Este criterio depende de una competencia de aprendizajeJustification of the relevant architectural decisions made
+Justification of the relevant architectural decisions made (including selected tools/frameworks)
+3 pts
+Con marcas
+0 pts
+Sin marcas
+3 pts
+Este criterio depende de una competencia de aprendizajeDemonstration of the use of the application features
+Demonstration of the use of the application features
+10 pts
+Con marcas
+0 pts
+Sin marcas
+10 pts
+Este criterio depende de una competencia de aprendizajePresentation of testing management and documentation
+Presentation of testing management and documentation
+4 pts
+Con marcas
+0 pts
+Sin marcas
+4 pts
+Este criterio depende de una competencia de aprendizajeAppendixes with user manual
+Appendixes with user manual
+10 pts
+Con marcas
+0 pts
+Sin marcas
+10 pts
+Este criterio depende de una competencia de aprendizajeAppendixes with installation guide
+Appendixes with installation guide
+10 pts
+Con marcas
+0 pts
+Sin marcas
+10 pts
+Este criterio depende de una competencia de aprendizajePieces of evidence about project details, communication, and architectural decisions
+Pieces of evidence about project details, communication, and architectural decisions
+10 pts
+Con marcas
+0 pts
+Sin marcas
+10 pts
+Este criterio depende de una competencia de aprendizajeRisk-based testing and test documentation
+Risk-based testing and test documentation
+10 pts
+Con marcas
+0 pts
+Sin marcas
+10 pts
+Este criterio depende de una competencia de aprendizajeEvidence of adherence to SCRUM
+Evidence of adherence to SCRUM: backlogs, sprint reviews, planning, charts, user stories, etc.
+5 pts
+Con marcas
+0 pts
+Sin marcas
+5 pts
+Este criterio depende de una competencia de aprendizajeEnforcing coding standards (e.g., Checkstyle) and Preemptive error detection (e.g., PMD)
+Enforcing coding standards (e.g., Checkstyle) and Preemptive error detection (e.g., PMD)
+10 pts
+Con marcas
+0 pts
+Sin marcas
+10 pts
+Este criterio depende de una competencia de aprendizajeUse of a continuous integration tool (e.g., Jenkins) with quality data
+Use of a continuous integration tool (e.g., Jenkins) with quality data
+10 pts
+Con marcas
+0 pts
+Sin marcas
+10 pts
+Este criterio depende de una competencia de aprendizajeUse of a tool to perform acceptance testing (e.g., Cucumber)
+Use of a tool to perform acceptance testing (e.g., Cucumber)
+10 pts
+Con marcas
+0 pts
+Sin marcas
+10 pts
+Este criterio depende de una competencia de aprendizajeCompliance with SOLID principles, design patterns, and refactoring
+Compliance with SOLID principles, design patterns, and refactoring
+5 pts
+Con marcas
+0 pts
+Sin marcas
+5 pts
+Puntos totales: 100
+

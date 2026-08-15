@@ -38,8 +38,10 @@
     \hline
 }
 \newcommand{\continuedonnextpage}[1]{%
-    \hline
     \multicolumn{#1}{r}{\textit{Continued on next page}}\\
+}
+\newcommand{\tablelastrow}{%
+    \\* \hline
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,7 +61,7 @@ BOPADIGITAL Final Project Report}
 \datesoutenance{August 2026}
 \datedepot{August 2026}
 
-\directeur{}{Shirley Aragon}{Facultad de Ingenieria en Electricidad y Computación}
+\directeur{}{Shirley Aragón}{Facultad de Ingenieria en Electricidad y Computación}
 
 %\directeur{Mrs.}{Prénom Nom}{Nom du département et institution}
 
@@ -141,77 +143,77 @@ BOPADIGITAL Final Project Report}
 \chapter{INTRODUCTION AND PROJECT CONTEXT}
 
 \section{Project Context}
-BOHORQUEZ \& PAUTA CORP. BOPACORP S.A. is a business-to-business (B2B) company that provides telecommunications products and services to corporate clients. Its commercial operation depends on sales advisors who prospect for clients, schedule visits, manage negotiations, collect supporting documentation, and follow up on service activation. Supervisors and managers also need updated information about the sales pipeline, field activity, documentation status, and commercial performance.
+BOHORQUEZ \& PAUTA CORP. BOPACORP S.A. is a business-to-business (B2B) telecommunications company. Sales advisors prospect for clients, schedule visits, manage negotiations, collect documents, and follow up on service activation. Supervisors and managers need updated information about sales, field activity, documents, and commercial performance.
 
-Before BOPADIGITAL, many activities relied on spreadsheets, shared folders, messaging applications, and email. These disconnected tools made it difficult to maintain a timely and unified view of each client and negotiation. The project was therefore defined as a digital platform to centralize the commercial lifecycle and support all users involved in the process.
+Before BOPADIGITAL, many activities relied on spreadsheets, shared folders, messaging applications, and email. These separate tools made it difficult to keep one current view of each client and negotiation. BOPADIGITAL was created to centralize this commercial process.
 
-The project context and initial requirements were established during Software Engineering I. The requirements document identified the business problem, stakeholders, functional and non-functional requirements, use cases, prototypes, and initial risks. The client accepted that requirements baseline on November 4, 2025. During Software Engineering II, the team continued the implementation through successive Scrum iterations and delivered the final documentation and deployment evidence.
+The project context and initial requirements were established during Software Engineering I. The requirements document defined the problem, stakeholders, requirements, use cases, prototypes, and initial risks. The client accepted this baseline on November 4, 2025. During Software Engineering II, the team implemented the system through Scrum sprints and prepared the final documentation and deployment evidence.
 
 \section{Problem Statement}
 The initial analysis identified three operational bottlenecks in BOPACORP's commercial process:
 
 \begin{enumerate}
-    \item \textbf{Document delivery and operational delay:} After closing or advancing a sale, advisors may need to collect contracts, identification documents, taxpayer information, and other files from the client. When these documents are handled physically or through separate channels, the advisor may need to return to the office, creating avoidable dead time and delaying the operational review.
-    \item \textbf{Limited visibility of field activity:} Supervisors and management do not have a centralized view of the visits, negotiation progress, and activities performed by each advisor. Monitoring therefore depends on individual messages and manual status updates.
-    \item \textbf{Manual sales tracking and reporting:} Client portfolios, negotiations, and performance indicators were previously consolidated through spreadsheets and manual reports. This increases the effort required for follow-up meetings and makes it more difficult to use current information for decision-making.
+    \item \textbf{Document delivery and operational delay:} Advisors collect contracts, identification documents, taxpayer information, and other files. Physical or separate delivery channels can cause office trips and delay the review.
+    \item \textbf{Limited visibility of field activity:} Supervisors and managers lacked one view of visits, negotiation progress, and advisor activities. Monitoring depended on messages and manual updates.
+    \item \textbf{Manual sales tracking and reporting:} Portfolios, negotiations, and performance indicators were managed in spreadsheets and manual reports. This made follow-up and decision-making more difficult.
 \end{enumerate}
 
-BOPADIGITAL addresses these bottlenecks by connecting public information, internal commercial management, document workflows, and reporting capabilities through a shared software platform.
+BOPADIGITAL addresses these problems through one platform for public information, commercial management, documents, and reports.
 
 \section{Project Description and Evolution}
-BOPADIGITAL is an integrated digital platform composed of a public website, an internal CRM, a mobile advisor application, a centralized REST API, and shared TypeScript contracts and validation schemas. The public website supports the presentation of services, contact with the commercial team, content administration, and employability workflows. The internal applications support client and negotiation management, visits, documents, supervision, reporting, and role-based access.
+BOPADIGITAL combines a public website, an internal CRM, a mobile advisor application, a REST API, and shared TypeScript contracts and validation schemas. The public website provides services, contact, content administration, and employability workflows. The internal applications manage clients, negotiations, visits, documents, supervision, reports, and role-based access.
 
-The mobile repository, \texttt{bopacorp-mobile}, uses Expo and React Native and contains advisor-oriented routes for authentication, clients, negotiations, documentation, and settings. The verified mobile workflows are documented together with the corresponding runtime evidence in the testing and demonstration chapters.
+The mobile repository, \texttt{bopacorp-mobile}, uses Expo and React Native. It contains advisor routes for authentication, clients, negotiations, documents, and settings. The testing and demonstration chapters document the verified mobile workflows.
 
-The project evolved from the requirements and prototypes produced in Software Engineering I into an implementation and delivery process in Software Engineering II. The later stages added automated quality checks, frontend and API testing, risk-based testing documentation, deployment and installation guides, user manuals, and final acceptance evidence.
+The project started with requirements and prototypes in Software Engineering I. In Software Engineering II, the team added quality checks, frontend and API tests, risk-based testing, deployment and installation guides, user manuals, and acceptance evidence.
 
 \section{Project Objectives}
-The general objective is \textbf{to digitize and centralize} BOPACORP's B2B commercial lifecycle in order to improve operational efficiency, information availability, and managerial visibility.
+The general objective is \textbf{to digitize and centralize} BOPACORP's B2B commercial lifecycle to improve efficiency, information access, and management visibility.
 
 The specific objectives are:
 
 \begin{enumerate}
     \item \textbf{To support} the registration and management of corporate clients and commercial prospects.
     \item \textbf{To track} negotiations, visits, statuses, and relevant commercial observations.
-    \item \textbf{To enable} advisors to manage field information and supporting documentation through the available web and mobile workflows.
+    \item \textbf{To enable} advisors to manage field information and documents through web and mobile workflows.
     \item \textbf{To centralize} the review and approval status of documents required by the commercial process.
-    \item \textbf{To provide} supervisors and managers with consolidated information for monitoring and decision-making.
+    \item \textbf{To provide} supervisors and managers with consolidated information for monitoring and decisions.
     \item \textbf{To offer} a public service catalog, a content management interface, and an employability workflow for external users and candidates.
-    \item \textbf{To enforce} authentication, authorization, shared data contracts, automated quality checks, and reproducible deployment practices.
+    \item \textbf{To enforce} authentication, shared data contracts, quality checks, and repeatable deployment.
 \end{enumerate}
 
 \section{Project Scope and Exclusions}
 The final scope is organized around the following components:
 
 \begin{itemize}
-    \item \textbf{Public Website:} public company information, service catalog, service details, contact with the commercial team, and employability workflows.
-    \item \textbf{Content Management System:} authorized management of public content, catalog information, and related media.
-    \item \textbf{CRM:} role-based management of clients, negotiations, visits, documents, supervision, reports, organization, and employability information.
-    \item \textbf{Mobile Advisor Application:} mobile access to advisor-oriented client, negotiation, and documentation workflows implemented in the Expo/React Native repository.
-    \item \textbf{REST API and Shared Contracts:} authentication, authorization, business services, persistence integration, request validation, and shared TypeScript/Zod contracts.
-    \item \textbf{Deployment and Documentation:} continuous integration, deployment configuration, installation instructions, user manuals, testing evidence, and client acceptance records.
+    \item \textbf{Public Website:} company information, service catalog, contact, and employability workflows.
+    \item \textbf{Content Management System:} authorized management of public content, catalog data, and media.
+    \item \textbf{CRM:} role-based management of clients, negotiations, visits, documents, supervision, reports, organization, and employability.
+    \item \textbf{Mobile Advisor Application:} advisor access to clients, negotiations, and documents through Expo/React Native.
+    \item \textbf{REST API and Shared Contracts:} authentication, authorization, business services, validation, persistence, and TypeScript/Zod contracts.
+    \item \textbf{Deployment and Documentation:} CI, deployment, installation, manuals, testing evidence, and client acceptance.
 \end{itemize}
 
-The Offer Matrices module was removed from the final functional scope by decision of the client. Consequently, matrix construction, matrix approval, subsidy calculations, and related calculations are not presented as final BOPADIGITAL features or demonstration scenarios. Historical requirements, diagrams, or code references to this module are treated as legacy context or residual technical material.
+The client removed the Offer Matrices module from the final scope. Matrix construction, approval, subsidy calculations, and related calculations are excluded from the final features and scenarios. Historical references to this module are legacy material.
 
-The final report presents the capabilities included in the agreed scope and supported by the project evidence package. Capabilities outside that scope are treated as limitations or future work and are not used to support the acceptance scenarios.
+The final report includes only features in the agreed scope and supported by the evidence package. Other capabilities are limitations or future work.
 
 \section{Stakeholders, Roles and Target Users}
 The main stakeholders and target users are:
 
 \begin{itemize}
-    \item \textbf{Business Client:} explores the public service catalog and contacts BOPACORP to start a commercial conversation.
-    \item \textbf{Sales Advisor:} manages assigned clients, negotiations, visits, observations, and supporting documents during the commercial process.
-    \item \textbf{Supervisor or Sales Manager:} monitors the work of advisors, reviews commercial progress, and supervises pending activities and documents.
-    \item \textbf{Documentation Coordinator:} reviews the documentation associated with negotiations and updates its status for operational processing.
-    \item \textbf{Management or Executive Board:} consults consolidated reports and performance information for strategic decisions.
-    \item \textbf{Sales Advisor Candidate:} reviews job vacancies and submits an application through the public website.
-    \item \textbf{Web Administrator:} maintains public website content, catalog data, and related CMS information.
-    \item \textbf{Client Representative:} reviews sprint increments, provides feedback, and signs the corresponding acceptance records.
+    \item \textbf{Business Client:} views the catalog and contacts BOPACORP.
+    \item \textbf{Sales Advisor:} manages assigned clients, negotiations, visits, and documents.
+    \item \textbf{Supervisor or Sales Manager:} monitors advisors, progress, activities, and documents.
+    \item \textbf{Documentation Coordinator:} reviews negotiation documents and updates their status.
+    \item \textbf{Management or Executive Board:} consults reports and performance information.
+    \item \textbf{Sales Advisor Candidate:} views vacancies and submits an application.
+    \item \textbf{Web Administrator:} manages public content, catalog data, and CMS information.
+    \item \textbf{Client Representative:} reviews sprint increments and signs acceptance records.
 \end{itemize}
 
 \section{Development Timeline and Client Acceptance}
-The project was developed through seven accepted Scrum sprints followed by a final acceptance process. The acceptance records provide the project chronology shown in Table~\ref{tab:project_timeline}.
+The project was developed through seven accepted Scrum sprints and a final acceptance process. Table~\ref{tab:project_timeline} summarizes this chronology.
 
 \begin{longtable}{|L{1.8cm}|L{3.0cm}|L{8.8cm}|}
 \caption{BOPADIGITAL Development and Acceptance Timeline}
@@ -225,34 +227,34 @@ The project was developed through seven accepted Scrum sprints followed by a fin
 \continuedonnextpage{3}
 \endfoot
 \endlastfoot
-Sprint 1 & May 24, 2026 & Initial development increment: repositories, quality tools, database, Express server, JWT authentication, RBAC, login, and Scrum planning. \\ \hline
-Sprint 2 & June 7, 2026 & Catalog, CMS, employability, organization, user modules, public web work, and the beginning of CRM implementation. \\ \hline
-Sprint 3 & June 21, 2026 & Backend consolidation and integration work between the public website, CRM, and backend services. \\ \hline
-Sprint 4 & July 5, 2026 & Frontend automated tests and compilation of Scrum evidence, including sprint reviews and retrospectives. \\ \hline
-Sprint 5 & July 14, 2026 & Acceptance-testing activities, risk-based testing documentation, integration testing, quality metrics, and defect tracking. \\ \hline
-Sprint 6 & July 21, 2026 & SOLID and design-pattern review, refactoring, preventive error detection, coding standards, CI quality data, security, cross-browser checks, and accessibility adjustments. \\ \hline
-Sprint 7 & July 28, 2026 & Final production deployment, installation guide, role-based user manual, final report, functional and non-functional validation, video preparation, and project closure coordination. \\ \hline
-Final acceptance & August 7, 2026 & Final review and formal acceptance of the project deliverables by the client representative. \\ \hline
+Sprint 1 & May 24, 2026 & Repositories, quality tools, database, Express, JWT/RBAC, login, and Scrum planning. \\ \hline
+Sprint 2 & June 7, 2026 & Catalog, CMS, employability, organization, users, public web, and initial CRM work. \\ \hline
+Sprint 3 & June 21, 2026 & Backend consolidation and integration of the website, CRM, and API. \\ \hline
+Sprint 4 & July 5, 2026 & Frontend tests and Scrum evidence, including reviews and retrospectives. \\ \hline
+Sprint 5 & July 14, 2026 & Acceptance tests, risk-based testing, integration tests, quality metrics, and defect tracking. \\ \hline
+Sprint 6 & July 21, 2026 & SOLID, design patterns, refactoring, static analysis, coding standards, CI data, security, browser, and accessibility checks. \\ \hline
+Sprint 7 & July 28, 2026 & Production deployment, guides, manual, final report, validation, video, and project closure. \\ \hline
+Final acceptance & August 7, 2026 & Final review and formal acceptance of the project deliverables by the client representative. \tablelastrow
 \end{longtable}
 
 The communications repository contains the chronological acceptance records for all seven sprints and the final acceptance process. Detailed letters, sprint reviews, client feedback, and supporting images are included in the appendices.
 
 \section{Project Dimensions and Demonstration Scope}
-The initial requirements baseline contains 68 user stories, including 7 stories associated with the Offer Matrices module. After excluding MAT from the final scope, the non-MAT baseline contains 61 user stories for traceability purposes. This count is different from the 46 product backlog items identified in the current Scrum backlog and from the task and subtask count reported by the Scrum documentation.
+The initial requirements baseline contains 68 user stories. Seven belong to the excluded Offer Matrices module, leaving 61 stories for final traceability. This differs from the 46 product backlog items and the task/subtask count in the Scrum records.
 
 The demonstration scope comprises the following scenarios:
 
 \begin{enumerate}
-    \item A public visitor filters the service catalog, reviews service information, and submits a contact request.
-    \item A candidate reviews a vacancy, triggers validation feedback, and submits a valid application with a PDF resume.
-    \item An administrator authenticates, edits CMS or catalog information, and verifies the public result.
-    \item A sales advisor registers a client, creates or updates a negotiation, registers a visit, and manages a supporting document.
-    \item A supervisor or coordinator reviews assigned work and approves or rejects documentation with an appropriate reason.
-    \item A manager consults reports, applies filters, and exports a result.
-    \item An advisor uses the mobile client to access the client, negotiation, and documentation workflows.
+    \item A visitor filters the catalog, views a service, and sends a contact request.
+    \item A candidate views a vacancy, receives validation feedback, and submits a PDF resume.
+    \item An administrator edits CMS or catalog data and checks the public result.
+    \item A sales advisor registers a client, manages a negotiation, records a visit, and handles a document.
+    \item A supervisor or coordinator reviews work and approves or rejects a document with a reason.
+    \item A manager views reports, applies filters, and exports a result.
+    \item An advisor uses the mobile client for clients, negotiations, and documents.
 \end{enumerate}
 
-The complete step-by-step demonstration, test evidence, and user instructions are organized in the later chapters and appendices. This chapter establishes the project context and scope, while the remaining chapters provide the detailed testing, architecture, Scrum, and deployment evidence.
+Later chapters and appendices contain the detailed demonstration, tests, and user instructions. This chapter defines the project context and scope.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 2: RELEVANT ARCHITECTURAL DECISIONS
@@ -260,9 +262,9 @@ The complete step-by-step demonstration, test evidence, and user instructions ar
 \chapter{RELEVANT ARCHITECTURAL DECISIONS}
 
 \section{Repository Ecosystem and System Boundaries}
-The final BOPADIGITAL solution is organized as a coordinated ecosystem of repositories instead of a single application. This organization separates public communication, internal commercial management, field work, backend services, shared contracts, and deployment operations. The separation also allows each part of the system to be developed and validated according to its own technical responsibilities while preserving a common integration boundary through the REST API.
+The final BOPADIGITAL solution uses several repositories with clear responsibilities: public website, CRM, mobile application, API, shared contracts, deployment, and project evidence. Clients connect through the REST API, and the shared package keeps their data contracts consistent.
 
-Table~\ref{tab:repository_ecosystem} summarizes the repositories considered in the final architecture. The communications repository is part of the project evidence package, while the other repositories contain executable software or deployment resources.
+Table~\ref{tab:repository_ecosystem} summarizes these repositories. The communications repository stores project evidence; the other repositories contain software or deployment resources.
 
 \begin{longtable}{|L{3.2cm}|L{2.8cm}|L{3.0cm}|L{4.6cm}|}
 \caption{BOPADIGITAL repository ecosystem and responsibilities}
@@ -278,30 +280,30 @@ Table~\ref{tab:repository_ecosystem} summarizes the repositories considered in t
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-\texttt{bopacorp-\allowbreak{}web} & Public website and CMS & React, TypeScript, Vite & Presents public catalog, contact, vacancy, and content-management workflows. It does not access the database directly. \\
+\texttt{bopacorp-\allowbreak{}web} & Public website and CMS & React, TypeScript, Vite & Provides catalog, contact, vacancy, and CMS workflows. It does not access the database directly. \\
 \hline
-\texttt{bopacorp-\allowbreak{}crm} & Internal commercial platform & React, TypeScript, Vite & Provides protected CRM, catalog, employability, organization, documentation, negotiation, and reporting interfaces. It communicates with the API through an Axios client. \\
+\texttt{bopacorp-\allowbreak{}crm} & Internal commercial platform & React, TypeScript, Vite & Provides protected CRM and administration workflows. It uses the API through Axios. \\
 \hline
-\texttt{bopacorp-\allowbreak{}mobile} & Advisor field application & Expo, React Native, TypeScript & Supports the mobile advisor workflows included in the final scope. It consumes the same API boundary. \\
+\texttt{bopacorp-\allowbreak{}mobile} & Advisor field application & Expo, React Native, TypeScript & Provides advisor client, negotiation, and document workflows through the API. \\
 \hline
-\texttt{bopacorp-\allowbreak{}api} & Backend and business services & Express, TypeScript, Drizzle ORM & Exposes versioned REST endpoints, applies authentication and authorization, validates requests, executes business rules, and persists data. \\
+\texttt{bopacorp-\allowbreak{}api} & Backend and business services & Express, TypeScript, Drizzle ORM & Provides REST endpoints, security, validation, business rules, and persistence. \\
 \hline
-\texttt{bopacorp-\allowbreak{}shared} & Shared contracts and schemas & TypeScript and Zod & Publishes request, response, enumeration, and validation contracts consumed by the API and clients. \\
+\texttt{bopacorp-\allowbreak{}shared} & Shared contracts and schemas & TypeScript and Zod & Provides types, schemas, enums, and response contracts for the API and clients. \\
 \hline
-\texttt{deploy} & Local and server deployment & Docker Compose and Caddy & Builds and runs the API, CRM, and public website containers and optionally exposes them through a reverse proxy. \\
+\texttt{deploy} & Local and server deployment & Docker Compose and Caddy & Builds and runs the API, CRM, and website; Caddy can add a reverse proxy. \\
 \hline
-\texttt{communications} & Client and project evidence & Markdown and captured evidence & Indexes sprint communications, acceptance forms, and final client evidence; it is not part of the runtime system. \\
+\texttt{communications} & Client and project evidence & Markdown and captured evidence & Indexes sprint communications and acceptance evidence; it is not a runtime component. \tablelastrow
 \end{longtable}
 
-The system boundary is therefore defined by the clients, the API, the shared contract package, and the persistence and external-service layer. The clients do not contain database credentials and do not issue SQL queries. They communicate with the API through the versioned path \emph{/api/v1}. The API is responsible for enforcing the rules that must remain consistent across web, CRM, and mobile clients.
+The system boundary includes the clients, API, shared package, database, and external services. Clients do not store database credentials or issue SQL. They call the versioned path \emph{/api/v1}, while the API enforces shared rules.
 
-The architecture follows a client--server boundary with a modular-monolith backend. This choice avoids duplicating business rules across several frontends while preserving independent user interfaces for public users, administrators, sales advisors, supervisors, coordinators, and managers. The resulting structure is simpler to deploy than a group of independent backend services, but it still provides internal separation through domain modules and one-way dependencies.
+The architecture uses a client--server boundary and a modular-monolith backend. This avoids duplicated business rules and is simpler to deploy than microservices. Domain modules still provide internal separation and one-way dependencies.
 
 \section{Technology Selection}
-The technology decisions were evaluated according to the nature of the project, the existing team skills, the need for rapid iteration during Scrum sprints, the number of client applications, and the requirement to demonstrate a complete and maintainable product. The following comparisons document the engineering rationale for the final stack. They are retrospective justifications of the implemented architecture and do not claim that every alternative was formally prototyped.
+The technology decisions reflect the project scope, team skills, Scrum schedule, number of clients, and maintainability needs. The following tables summarize the reasons for the selected stack.
 
 \subsection{Frontend Framework}
-BOPADIGITAL requires more than one user interface: the public website, the internal CRM, and the advisor mobile client. For the web applications, the team selected React with TypeScript and Vite.
+BOPADIGITAL has a public website, an internal CRM, and a mobile client. The web applications use React, TypeScript, and Vite.
 
 \begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of web frontend alternatives}
@@ -317,22 +319,21 @@ BOPADIGITAL requires more than one user interface: the public website, the inter
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Language and typing & TypeScript support and a large ecosystem of typed libraries. & TypeScript is integrated into the framework. & TypeScript is supported with a progressive framework model. \\
+Language and typing & Large ecosystem of typed libraries. & Built-in TypeScript support. & Progressive TypeScript support. \\
 \hline
-Application model & Component library that allows the team to select routing, forms, data fetching, and UI tools according to each application. & More prescriptive framework with integrated conventions. & Component-based framework with an intermediate level of prescription. \\
+Application model & Flexible component ecosystem. & Prescriptive framework with conventions. & Component-based framework. \\
 \hline
-Fit for this project & Supports a shared visual approach across the public website and CRM while allowing feature-oriented organization. & Provides more built-in structure, but introduces a larger framework surface for the current team and scope. & Provides a productive alternative, but would require changing the selected ecosystem and current implementation. \\
+Fit for this project & Matches the current web applications and shared UI approach. & More structure, but a larger framework for this scope. & Productive, but would require changing the current stack. \\
 \hline
-Build and development & Vite provides fast development feedback and efficient production builds. & Angular CLI offers an integrated build workflow. & Vite is also available, but the existing repositories are already implemented with React. \\
+Build and development & Fast feedback and production builds. & Integrated CLI workflow. & Vite is available, but the repositories already use React. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{React with TypeScript and Vite was selected for the public website and CRM. React Native through Expo extends the same language and component-oriented approach to the mobile application.} \\
-\hline
+Decision & \multicolumn{3}{L{11.2cm}|}{React with TypeScript and Vite was selected for the public website and CRM. React Native through Expo extends the same language and component-oriented approach to the mobile application.} \tablelastrow
 \end{longtable}
 
-React was selected because it provides component reuse, TypeScript integration, a mature ecosystem, and a lower migration cost for the existing implementation. Vite supports rapid feedback during development, while Tailwind CSS and shadcn/ui provide a reusable interface foundation. The selection also enables the team to share frontend conventions without forcing the public website and CRM to have identical navigation or business responsibilities.
+React was selected for component reuse, TypeScript support, mature libraries, and low migration cost. Vite, Tailwind CSS, and shadcn/ui support fast development and shared UI conventions.
 
 \subsection{Backend Framework}
-The backend must expose REST endpoints, enforce permissions, validate input, execute business rules, and integrate with a relational database. Express with TypeScript was selected for the API.
+The backend needs REST endpoints, security, validation, business rules, and database access. The API uses Express with TypeScript.
 
 \begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of backend alternatives}
@@ -348,20 +349,19 @@ The backend must expose REST endpoints, enforce permissions, validate input, exe
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Language and ecosystem & TypeScript aligns the API with the web, CRM, mobile, and shared-contract repositories. & Python provides a mature full-stack ecosystem. & PHP provides a mature framework with strong conventions. \\
+Language and ecosystem & TypeScript matches all project repositories. & Mature Python ecosystem. & Mature PHP framework. \\
 \hline
-API flexibility & Lightweight middleware and routing allow the team to define explicit layers and module boundaries. & Includes many conventions and features through Django and Django REST Framework. & Includes conventions and framework services for common web tasks. \\
+API flexibility & Lightweight middleware and explicit layers. & Many built-in conventions. & Framework services and conventions. \\
 \hline
-Integration fit & Directly reuses TypeScript types and Zod contracts from \texttt{@bopacorp/\allowbreak{}shared}. & Would require a separate type and schema integration strategy. & Would require a separate type and schema integration strategy. \\
+Integration fit & Reuses TypeScript and Zod contracts from \texttt{@bopacorp/\allowbreak{}shared}. & Needs a separate type and schema strategy. & Needs a separate type and schema strategy. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{Express with TypeScript was selected because it provides the required REST and middleware capabilities while keeping one typed language across the project ecosystem.} \\
-\hline
+Decision & \multicolumn{3}{L{11.2cm}|}{Express with TypeScript was selected because it provides the required REST and middleware capabilities while keeping one typed language across the project ecosystem.} \tablelastrow
 \end{longtable}
 
-The API is implemented as a modular monolith. Each business domain is represented by routes, controllers, and services. Routes configure endpoints and middleware, controllers translate HTTP requests and responses, and services contain business logic and database operations. This structure was selected because it provides clear responsibilities without the operational overhead of independently deployed microservices.
+The API is a modular monolith with routes, controllers, and services for each domain. This separates responsibilities without the operational cost of microservices.
 
 \subsection{Relational Database and Persistence}
-The commercial lifecycle contains users, roles, permissions, organizations, catalog records, vacancies, applications, negotiations, documents, and reporting data. These entities have relationships, constraints, and state changes, which make a relational database appropriate.
+The commercial lifecycle contains related users, roles, organizations, catalog records, negotiations, documents, and reports. These relationships and constraints require a relational database.
 
 \begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of database alternatives}
@@ -377,22 +377,21 @@ The commercial lifecycle contains users, roles, permissions, organizations, cata
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Data model & Relational model with constraints, joins, and transactional operations. & Relational model with constraints and transactions. & Document model with flexible schemas and denormalized data. \\
+Data model & Relational model with constraints and transactions. & Relational model with constraints and transactions. & Flexible document model. \\
 \hline
-Fit for this project & Appropriate for relationships among users, roles, negotiations, documents, and organizational entities. & Also appropriate for relational workloads, but not the database selected by the current implementation. & Would require additional modeling decisions for highly related commercial data. \\
+Fit for this project & Fits the related commercial entities. & Also fits relational data, but is not the selected database. & Needs extra modeling for related data. \\
 \hline
-TypeScript integration & Drizzle ORM provides typed queries and schema mapping. & Can be integrated with Node.js ORMs, but would require a different current configuration. & Provides a flexible document approach, but does not match the current relational domain model. \\
+TypeScript integration & Drizzle provides typed queries and schema mapping. & Needs a different Node.js ORM configuration. & Does not match the relational domain model. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{PostgreSQL was selected as the relational engine. Supabase was used only as the development hosting environment, while production is planned to use PostgreSQL hosted on the deployment server.} \\
-\hline
+Decision & \multicolumn{3}{L{11.2cm}|}{PostgreSQL was selected as the relational engine. Supabase was used only as the development hosting environment, while production uses PostgreSQL hosted on the deployment server.} \tablelastrow
 \end{longtable}
 
-PostgreSQL was selected because it represents the domain relationships explicitly and supports integrity rules that are important for identity, permissions, commercial records, and document status. During development, the team used a PostgreSQL instance managed through Supabase because it provided one shared dataset that all team members could inspect and reduced the effort of configuring a local database for every workstation. This was a development convenience and is not the intended production topology.
+PostgreSQL represents the domain relationships and supports important integrity rules. During development, Supabase provided one shared database, so all team members could inspect the same data without configuring a local database.
 
-The production architecture uses a PostgreSQL database hosted on the server where BOPADIGITAL is deployed. The API accesses the database through Drizzle and environment-provided connection settings, while the database location is separated from the shared development service. Supabase is therefore not presented as a production dependency. The deployment appendix documents the corresponding provisioning, migrations, access control, backup, and recovery procedures.
+Production uses PostgreSQL on the deployment server. The API keeps the same Drizzle boundary and receives the connection through environment settings. Supabase is a development-only service. The deployment appendix documents provisioning, migrations, access control, backups, and recovery.
 
 \subsection{Mobile Development Framework}
-The mobile component is intended for advisors who need access to field-oriented client, negotiation, and documentation workflows. Expo with React Native was selected instead of maintaining separate Android and iOS implementations.
+The mobile component gives advisors access to client, negotiation, and document workflows. Expo with React Native was selected instead of separate Android and iOS applications.
 
 \begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of mobile development alternatives}
@@ -408,20 +407,19 @@ The mobile component is intended for advisors who need access to field-oriented 
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Language and reuse & TypeScript and React conventions can be reused from the web ecosystem. & Uses Dart and a separate widget ecosystem. & Requires Kotlin/Java and Swift/Objective-C implementations. \\
+Language and reuse & Reuses TypeScript and React knowledge. & Uses a separate Dart ecosystem. & Uses separate platform languages. \\
 \hline
-Delivery effort & One codebase can target supported mobile platforms through Expo. & One codebase can also target multiple platforms, but requires a different language and tooling stack. & Provides platform-specific control with higher implementation and maintenance cost. \\
+Delivery effort & One codebase targets supported platforms. & One codebase, but a different stack. & Higher implementation and maintenance cost. \\
 \hline
-Fit for current scope & Matches the existing mobile repository and advisor-oriented routes. & Technically viable, but not aligned with the current repository. & Excessive for the current team and final scope. \\
+Fit for current scope & Matches the existing repository and routes. & Not aligned with the current repository. & Too costly for the current scope. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{Expo with React Native and TypeScript was selected to provide the mobile advisor workflows while reusing TypeScript conventions and the common API boundary.} \\
-\hline
+Decision & \multicolumn{3}{L{11.2cm}|}{Expo with React Native and TypeScript was selected to provide the mobile advisor workflows while reusing TypeScript conventions and the common API boundary.} \tablelastrow
 \end{longtable}
 
-The mobile decision reduces duplication and keeps the data boundary consistent with the web and CRM applications. It does not imply that every mobile route is accepted as a final demonstrated feature; runtime verification remains the acceptance condition for the workflows described in the demonstration and manuals.
+Expo/React Native reduces duplicated code and keeps the mobile client on the same TypeScript and API boundary. The demonstration and manuals include the verified advisor workflows.
 
 \subsection{Shared Contracts and Validation}
-The applications exchange structured data through the API, so duplicated request and response definitions would create a risk of drift. The team selected a shared package based on TypeScript and Zod.
+The applications exchange structured data through the API. A shared TypeScript/Zod package prevents different clients from using different contracts.
 
 \begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of contract-management alternatives}
@@ -437,20 +435,19 @@ The applications exchange structured data through the API, so duplicated request
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Consistency & One package provides common schemas, types, enums, and response structures. & Each client may evolve a different representation of the same resource. & Compatibility depends on informal conventions. \\
+Consistency & One package provides schemas, types, enums, and response structures. & Each client may define resources differently. & Depends on informal conventions. \\
 \hline
-Runtime protection & Zod validates request data at runtime and TypeScript supports compile-time feedback. & TypeScript types alone do not validate external runtime input. & Invalid data can reach business logic without an explicit boundary. \\
+Runtime protection & Zod validates input at runtime; TypeScript adds compile-time checks. & Types do not validate external input. & Invalid data can reach business logic. \\
 \hline
-Maintenance & Changes can be published and consumed as a versioned package. & Changes must be synchronized manually in multiple repositories. & Changes are difficult to detect before execution. \\
+Maintenance & Changes use a versioned package. & Changes require manual synchronization. & Changes are hard to detect before execution. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{The \texttt{@bopacorp/shared} package was selected as the common contract boundary for the API and client applications.} \\
-\hline
+Decision & \multicolumn{3}{L{11.2cm}|}{The \texttt{@bopacorp/shared} package was selected as the common contract boundary for the API and client applications.} \tablelastrow
 \end{longtable}
 
-This decision is especially important for authentication requests, pagination, catalog data, employability records, and API error responses. The shared package does not replace business validation in the service layer: schemas validate structure and format, while services enforce rules that depend on persisted state and user ownership.
+The shared package is important for authentication, pagination, catalog, employability, and API errors. Schemas validate structure and format; services enforce persisted-state and ownership rules.
 
 \subsection{Deployment and Reverse Proxy}
-The deployment repository uses Docker Compose to coordinate the API, CRM, and public website. Caddy can be used as a reverse proxy when the services must be exposed through HTTPS domains. The database environment is intentionally separated from the application containers: development uses the shared PostgreSQL service managed through Supabase, whereas the production target uses PostgreSQL hosted on the deployment server.
+The deployment repository uses Docker Compose for the API, CRM, and public website. Caddy can expose the services through HTTPS. Development uses Supabase PostgreSQL; production uses PostgreSQL on the deployment server.
 
 \begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of deployment alternatives}
@@ -466,20 +463,19 @@ The deployment repository uses Docker Compose to coordinate the API, CRM, and pu
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Reproducibility & Service definitions, ports, environment interfaces, and dependencies are described as code. & Depends on machine-specific commands and manual configuration. & Can be reproducible, but requires more infrastructure and service coordination. \\
+Reproducibility & Services, ports, and dependencies are defined as code. & Depends on machine-specific commands. & Requires more infrastructure and coordination. \\
 \hline
-Local development & The API, CRM, and website can be built and started using a common orchestration file. & Developers must configure every process separately. & Separate deployment targets increase setup and operational cost. \\
+Local development & API, CRM, and website start from one orchestration file. & Each process needs separate configuration. & Separate targets increase setup cost. \\
 \hline
-Network boundary & Caddy can terminate HTTPS and route domains to local container ports. & TLS and routing must be configured independently for each process. & Managed platforms may provide routing, but introduce provider-specific configuration. \\
+Network boundary & Caddy terminates HTTPS and routes domains to containers. & TLS and routing are configured per process. & Managed platforms add provider-specific configuration. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{Docker Compose was selected for service orchestration, with Caddy as an optional reverse proxy for HTTPS exposure.} \\
-\hline
+Decision & \multicolumn{3}{L{11.2cm}|}{Docker Compose was selected for service orchestration, with Caddy as an optional reverse proxy for HTTPS exposure.} \tablelastrow
 \end{longtable}
 
-This choice supports a reproducible environment without changing the application architecture. The deployment process requires a GitHub Packages token to install \emph{@bopacorp/shared}, environment configuration for the API, and a PostgreSQL connection appropriate to the selected environment. Production database credentials, migration commands, backup settings, and recovery procedures must be supplied through protected operational configuration and verified in the deployment appendix. Secrets remain outside the report and source-controlled files.
+This choice provides reproducible deployment without changing the application architecture. The process requires a GitHub Packages token, API environment settings, and a PostgreSQL connection for the selected environment. Production credentials and database operations use protected configuration and are documented in the deployment appendix. Secrets remain outside the report and source control.
 
 \section{Authentication, Authorization and RBAC}
-Authentication and authorization are separated so that the API can identify the caller before deciding whether the requested operation is permitted. Protected routes use the middleware order shown in Figure~\ref{fig:authorization_flow}.
+The API first identifies the caller and then checks permissions. Protected routes use the middleware order shown in Figure~\ref{fig:authorization_flow}.
 
 \begin{figure}[htbp]
 \centering
@@ -502,7 +498,7 @@ $\downarrow$\\[-0.1em]
 \end{figure}
 
 \subsection{Token-Based Authentication}
-During login, the API normalizes the email, applies rate limiting, retrieves the active user, compares the password using bcrypt, records the login result, and issues an access token together with an opaque refresh token. The access token is a short-lived JWT, while the refresh token is stored as a SHA-256 hash in the database. This limits the exposure period of the access token and allows refresh sessions to be revoked during logout, password changes, user deactivation, or token-rotation replay detection.
+The authentication flow starts with credentials, rate limiting, an active-user check, bcrypt password comparison, login logging, and token issuance. The API returns a short-lived JWT and an opaque refresh token. The refresh token is stored as a SHA-256 hash, so sessions can be revoked or rotated.
 
 \begin{longtable}{|L{2.8cm}|L{3.1cm}|L{3.2cm}|L{4.5cm}|}
 \caption{Authentication token responsibilities}
@@ -518,19 +514,18 @@ During login, the API normalizes the email, applies rate limiting, retrieves the
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Access token & JWT & 15 minutes in the current configuration & Sent with protected API requests. Its short lifetime limits the exposure window because it is not directly revoked through the database. \\
+Access token & JWT & 15 minutes & Sent with protected requests; its short lifetime limits exposure. \\
 \hline
-Refresh token & Opaque random value stored through a SHA-256 hash & 7 days in the current configuration & Used to obtain a new token pair. The database record can be revoked and the token is rotated after use. \\
-\hline
+Refresh token & Opaque value stored as a SHA-256 hash & 7 days & Obtains a new token pair and can be revoked or rotated. \tablelastrow
 \end{longtable}
 
 \subsection{Permission Enforcement}
-The \emph{authenticate} middleware extracts the bearer token, verifies the JWT signature, loads the active user and roles, and attaches the authenticated identity to the request. The \emph{authorize} middleware then checks the permission codes required by the route.
+The \emph{authenticate} middleware verifies the bearer token and loads the active user and roles. The \emph{authorize} middleware checks the permission required by the route. Permissions use the \emph{module.action} format, such as \emph{users.read} or \emph{catalog\_items.create}. Invalid identity returns unauthorized; missing permission returns forbidden.
 
-Permissions use the \emph{module.action} convention. Examples include \emph{users.read}, \emph{catalog\_items.create}, and \emph{content\_blocks.update}. A valid identity without the required permission receives a forbidden response, while a missing or invalid identity receives an unauthorized response.
+Roles group permissions, while routes declare the required permission. Validation follows authorization. Services enforce ownership and state rules.
 
 \subsection{Layered Protection}
-The authorization design is role-based, but the route checks are expressed as permissions. This allows a role to group several capabilities while keeping the endpoint declaration explicit. Validation occurs after the authorization decision, preventing unauthorized requests from receiving unnecessary detailed validation feedback. Services remain responsible for ownership and state-dependent rules, such as whether a user may view or modify a record associated with a particular organization or workflow.
+The authorization design uses roles to group permissions, while routes declare the required permission. Validation follows authorization, and services enforce ownership and state rules.
 
 \begin{longtable}{|L{3.0cm}|L{4.0cm}|L{5.0cm}|}
 \caption{Authorization responsibilities by layer}
@@ -546,28 +541,27 @@ The authorization design is role-based, but the route checks are expressed as pe
 \continuedonnextpage{3}
 \endfoot
 \endlastfoot
-Authentication middleware & Establish the identity of the caller. & Verify the JWT and confirm that the user remains active. \\
+Authentication middleware & Identifies the caller. & Verifies the JWT and active user. \\
 \hline
-Authorization middleware & Check the permissions declared by a route. & Require \texttt{users.read} before listing users. \\
+Authorization middleware & Checks route permissions. & Requires \texttt{users.read} before listing users. \\
 \hline
-Validation middleware & Check the structure and format of request data. & Validate body, path parameters, and query parameters with a shared Zod schema. \\
+Validation middleware & Checks request structure and format. & Validates body, path, and query data with Zod. \\
 \hline
-Service layer & Enforce business rules and persisted-state constraints. & Confirm resource existence, ownership, permitted transitions, and uniqueness. \\
+Service layer & Enforces business and state rules. & Checks existence, ownership, transitions, and uniqueness. \\
 \hline
-Database & Enforce persistence constraints. & Apply relational constraints and retain token/session records. \\
-\hline
+Database & Enforces database constraints. & Stores token and session records. \tablelastrow
 \end{longtable}
 
 \section{Shared Contracts and Data Architecture}
-The shared contract package is the integration boundary between the API and its clients. It provides common primitives, request schemas, response schemas, enumerations, and API response wrappers. The package is published as \emph{@bopacorp/shared} and is consumed by the API, public website, CRM, and mobile repository.
+The shared contract package is the integration boundary between the API and its clients. It provides common primitives, schemas, enums, and response wrappers. The package is published as \emph{@bopacorp/shared} and is consumed by the API, public website, CRM, and mobile repository.
 
-The request path is divided into four responsibilities. First, the route selects the endpoint and attaches middleware. Second, the controller reads already-validated request data and delegates the operation. Third, the service applies business rules and performs Drizzle queries. Finally, the database persists or retrieves the data. This one-way dependency flow is represented as:
+The request flow has four steps. Routes select the endpoint and add middleware. Controllers handle HTTP data. Services apply business rules and run Drizzle queries. The database stores or returns data:
 
 \begin{center}
 \emph{routes} $\rightarrow$ \emph{controller} $\rightarrow$ \emph{service} $\rightarrow$ \emph{database}
 \end{center}
 
-The API uses a common response envelope. A successful operation returns \emph{success: true} and its data; a paginated operation also returns metadata; and an error returns \emph{success: false} with a stable error code and message. The convention makes error handling predictable for all clients and prevents each frontend from implementing a different interpretation of HTTP responses.
+The API uses one response envelope. Successful responses include data; paginated responses also include metadata; errors include \emph{success: false}, a stable code, and a message. This keeps client error handling consistent.
 
 \begin{longtable}{|L{2.6cm}|L{3.5cm}|L{3.1cm}|L{4.3cm}|}
 \caption{Shared API contract categories}
@@ -583,22 +577,21 @@ The API uses a common response envelope. A successful operation returns \emph{su
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Common primitives & \texttt{@bopacorp/\allowbreak{}shared/\allowbreak{}common} & API and all clients & UUIDs, emails, timestamps, pagination, and response wrappers. \\
+Common primitives & \texttt{@bopacorp/\allowbreak{}shared/\allowbreak{}common} & API and all clients & UUIDs, emails, timestamps, pagination, and wrappers. \\
 \hline
-Authentication contracts & \texttt{@bopacorp/\allowbreak{}shared/\allowbreak{}auth} & API, CRM, web, and mobile & Login, refresh, user, role, and permission request/response structures. \\
+Authentication contracts & \texttt{@bopacorp/\allowbreak{}shared/\allowbreak{}auth} & API, CRM, web, and mobile & Login, refresh, user, role, and permission data. \\
 \hline
-Domain contracts & Shared domain subpaths & API and relevant clients & Catalog, organization, employability, CRM, document, and notification data structures. \\
+Domain contracts & Shared domain subpaths & API and relevant clients & Catalog, organization, employability, CRM, documents, and notifications. \\
 \hline
-Validation schemas & Zod schemas in the shared package & API middleware and client forms & Runtime validation and consistent field-level error reporting. \\
-\hline
+Validation schemas & Zod schemas in the shared package & API middleware and client forms & Runtime validation and consistent errors. \tablelastrow
 \end{longtable}
 
-The persistence architecture uses PostgreSQL schemas and tables accessed through Drizzle ORM. The API modules represent business concerns rather than reproducing the database schema one-to-one. For example, authentication, users, and roles use related identity and permission tables, while catalog operations may span catalog and CMS data. This distinction keeps the public API organized around user-facing responsibilities rather than exposing internal storage details.
+The API uses PostgreSQL schemas and tables through Drizzle ORM. API modules represent business concerns instead of exposing the database schema one-to-one. This keeps the API organized around user-facing responsibilities.
 
-The final scope deliberately excludes the matrix-construction and matrix-approval module. Although historical requirements and some shared-package exports may mention matrices, they are not part of the final demonstrated architecture or acceptance scenarios. The report therefore treats them as excluded or future work instead of using them to justify current system behavior.
+The final scope excludes matrix construction and approval. Historical requirements or shared-package exports may mention matrices, but they are legacy material and are not used in the final architecture or acceptance scenarios.
 
 \section{Components Diagram}
-Figure~\ref{fig:components_diagram} presents the component view of BOPADIGITAL. The public website and CRM are React single-page applications that use their own routing, pages, forms, data-fetching, and UI layers. They communicate with the API through REST requests and do not access the database directly. The shared package provides types and validation schemas across the application boundary.
+Figure~\ref{fig:components_diagram} shows the BOPADIGITAL components. The website and CRM are React applications with their own routes, pages, forms, data fetching, and UI. They access data through REST requests. The shared package provides common types and schemas.
 
 \begin{figure}[htbp]
 \centering
@@ -607,12 +600,12 @@ Figure~\ref{fig:components_diagram} presents the component view of BOPADIGITAL. 
 \label{fig:components_diagram}
 \end{figure}
 
-Inside the API boundary, Express receives the request and applies cross-cutting middleware before routing it to a domain module. The service layer owns business operations and uses Drizzle to reach PostgreSQL. Logging and typed errors remain cross-cutting concerns, while the shared validation package prevents clients and the API from silently diverging in their data expectations.
+Inside the API, Express applies common middleware and routes requests to domain modules. Services run business operations and use Drizzle to access PostgreSQL. Logging, errors, and shared validation support all modules.
 
-The mobile client follows the same API boundary, but its final feature claims must be tied to device or emulator evidence. This distinction is important because the presence of a route or component in a repository proves implementation structure, but not necessarily successful runtime acceptance.
+The mobile client follows the same API boundary. Its demonstrated workflows are supported by device or emulator evidence.
 
 \section{Deployment Diagram}
-Figure~\ref{fig:deployment_diagram} illustrates the deployment arrangement described by the deployment repository. Docker Compose builds and runs the API, CRM, and public website. The API is exposed internally on container port 3000 and mapped to host port 3001; the CRM uses container port 5173 and host port 3002; and the public website uses container port 5173 and host port 3003. The clients use the configured API public URL and the \emph{/api/v1} prefix.
+Figure~\ref{fig:deployment_diagram} shows the deployment arrangement. Docker Compose runs the API, CRM, and website. The API uses container port 3000 and host port 3001. CRM and website use container port 5173 and host ports 3002 and 3003. Clients use the configured API URL and the \emph{/api/v1} prefix.
 
 \begin{figure}[htbp]
 \centering
@@ -621,9 +614,9 @@ Figure~\ref{fig:deployment_diagram} illustrates the deployment arrangement descr
 \label{fig:deployment_diagram}
 \end{figure}
 
-The deployment process requires Docker and Docker Compose, Git, an environment file, a PostgreSQL connection, and a GitHub Packages token with permission to install \emph{@bopacorp/shared}. Caddy is optional and can terminate HTTPS and route public domains to the local service ports. Environment variables and credentials are deployment inputs and must not be embedded in the report or committed to source control.
+Deployment requires Docker Compose, Git, an environment file, a PostgreSQL connection, and a GitHub Packages token for \emph{@bopacorp/shared}. Caddy can provide HTTPS and route public domains to the service ports. Credentials must stay in protected configuration.
 
-The diagram is an architectural overview, while the deployment appendix documents the reproducible commands, health checks, external-storage configuration, domain mapping, and revision-specific evidence for the deployed environment.
+The deployment appendix documents the reproducible commands, health checks, external-storage configuration, domain mapping, and revision-specific evidence.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 3: SCRUM EVIDENCE

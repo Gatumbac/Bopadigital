@@ -27,10 +27,12 @@ The previous Software Engineering I report and the Nintventario report are not e
 - For every important result, record repository revision or SHA, execution date, environment, command or scenario, expected result, observed result, and evidence location.
 - Do not present old screenshots, historical “Passed” claims, or static inspection as current verification.
 - Use figures only when they clarify architecture, flow, user interaction, or evidence. Captures in manuals must show numbered steps, arrows, rectangles, or other consistent click indicators.
+- Prefer basic professional English: short sentences, one idea per paragraph, active voice, and no repeated explanation after a decision table.
 - Insert user manuals and installation guides as PDF appendices after their final PDFs and editable sources are available.
 - Keep the LaTeX source self-contained and preserve the agreed table and typography standards:
   - Use longtable for long tables and L{width} left-aligned text columns.
   - Include “Continued from previous page” and “Continued on next page” in every longtable.
+  - End every longtable with the shared \tablelastrow pattern so the bottom border stays attached to the final row.
   - Avoid an isolated final horizontal line before endlastfoot.
   - Permit breaks in repository and package names so no table column overflows.
   - Keep the ETS body font unchanged. Use normal body text, emph for technical identifiers in prose, and texttt only for exact technical values where it improves readability.

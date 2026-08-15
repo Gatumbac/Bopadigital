@@ -26,4 +26,4 @@ Alcanzar al menos 80% de cobertura del conjunto de código frontend crítico, co
 
 ## Estado
 
-Este paquete define el trabajo; no afirma que las fases estén ejecutadas. Cada fase debe cerrarse con comando, SHA, fecha, resultado y artifact verificable.
+Las Fases 1 y 2 tienen ejecución local registrada con comandos, revisión base, fecha, resultados y artifacts verificables. Las Fases 3 en adelante permanecen pendientes; la ejecución remota de CI todavía debe registrarse cuando exista un run de GitHub Actions.

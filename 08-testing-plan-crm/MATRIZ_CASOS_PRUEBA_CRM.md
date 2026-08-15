@@ -1,20 +1,20 @@
 # Matriz de casos de prueba del CRM
 
-**Estado inicial:** definidos para ejecución; no marcar `Pass` hasta registrar una corrida real.  
+**Última ejecución:** `CRM-F2-2026-08-15-01` sobre el working tree basado en `3c4dd51`.
 **Leyenda:** `Existente` significa que el caso aparece en el código actual; `Pendiente` significa que aún debe implementarse o ejecutarse.
 
 ## 1. Casos existentes
 
 | ID | Capa | Caso | Archivo | Estado |
 |---|---|---|---|---|
-| CRM-AUTH-001 | Componente | Redirigir al login sin sesión | `RequireAuth.test.tsx` | Existente / ejecución pendiente |
-| CRM-AUTH-002 | Componente | Permitir contenido con permiso y rol | `RequirePermission.test.tsx` | Existente / ejecución pendiente |
-| CRM-AUTH-003 | Componente | Redirigir cuando falta permiso | `RequirePermission.test.tsx` | Existente / ejecución pendiente |
-| CRM-AUTH-004 | Integración de contexto | Guardar sesión, tokens y usuario al iniciar | `AuthContext.test.tsx` | Existente / ejecución pendiente |
-| CRM-AUTH-005 | Integración de contexto | Limpiar estado local al cerrar | `AuthContext.test.tsx` | Existente / ejecución pendiente |
-| CRM-API-001 | Unitario | Desenvolver respuesta `{ success: true }` | `api.test.ts` | Existente / ejecución pendiente |
-| CRM-API-002 | Unitario | Normalizar sobre de error | `api.test.ts` | Existente / ejecución pendiente |
-| CRM-API-003 | Unitario | No refrescar 401 en rutas públicas | `api.test.ts` | Existente / ejecución pendiente |
+| CRM-AUTH-001 | Componente | Redirigir al login sin sesión | `RequireAuth.test.tsx` | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-002 | Componente | Permitir contenido con permiso y rol | `RequirePermission.test.tsx` | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-003 | Componente | Redirigir cuando falta permiso | `RequirePermission.test.tsx` | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-004 | Integración de contexto | Guardar sesión, tokens y usuario al iniciar | `AuthContext.test.tsx` | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-005 | Integración de contexto | Limpiar estado local al cerrar | `AuthContext.test.tsx` | Pass — CRM-F2-2026-08-15-01 |
+| CRM-API-001 | Unitario | Desenvolver respuesta `{ success: true }` | `api.test.ts` | Pass — CRM-F2-2026-08-15-01 |
+| CRM-API-002 | Unitario | Normalizar sobre de error | `api.test.ts` | Pass — CRM-F2-2026-08-15-01 |
+| CRM-API-003 | Unitario | No refrescar 401 en rutas públicas | `api.test.ts` | Pass — CRM-F2-2026-08-15-01 |
 
 > El repositorio actualmente contiene seis declaraciones directas `it(...)` y un `it.each` con tres rutas públicas. La tabla separa comportamientos verificables para el plan; el registro de ejecución debe distinguir entre declaraciones, casos parametrizados y ejecuciones reales.
 
@@ -22,16 +22,21 @@
 
 | ID | Capa | Caso | Prioridad | Estado |
 |---|---|---|---|---|
-| CRM-AUTH-006 | Unitario | Login inválido muestra error de autenticación | P0 | Pendiente |
-| CRM-AUTH-007 | Unitario | `/auth/me` inválido limpia sesión | P0 | Pendiente |
-| CRM-AUTH-008 | Unitario | Refresh exitoso actualiza tokens | P0 | Pendiente |
-| CRM-AUTH-009 | Unitario | Refresh fallido cierra sesión | P0 | Pendiente |
-| CRM-AUTH-010 | Unitario | Requests concurrentes esperan un refresh | P1 | Pendiente |
-| CRM-AUTH-011 | Componente | `Can` oculta acción sin permiso | P0 | Pendiente |
-| CRM-AUTH-012 | Componente | `Can` filtra por rol | P0 | Pendiente |
-| CRM-API-004 | Unitario | Bearer token agregado a request | P0 | Pendiente |
-| CRM-API-005 | Unitario | Error de red se normaliza | P1 | Pendiente |
-| CRM-API-006 | Unitario | Respuesta paginada conserva metadata | P1 | Pendiente |
+| CRM-AUTH-006 | Unitario | Login inválido muestra error de autenticación | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-007 | Unitario | `/auth/me` inválido limpia sesión | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-008 | Unitario | Refresh exitoso actualiza tokens | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-009 | Unitario | Refresh fallido cierra sesión | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-010 | Unitario | Requests concurrentes esperan un refresh | P1 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-011 | Componente | `Can` oculta acción sin permiso | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-012 | Componente | `Can` filtra por rol | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-API-004 | Unitario | Bearer token agregado a request | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-API-005 | Unitario | Error de red se normaliza | P1 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-API-006 | Unitario | Respuesta paginada conserva metadata | P1 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-013 | Unitario | Sesión almacenada se restaura desde `/auth/me` | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-014 | Componente | Cuenta bloqueada muestra el mensaje traducido | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-015 | Unitario | Storage persiste y elimina tokens actuales y legacy | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-AUTH-016 | Unitario | JWT decodifica permisos y usa fallback seguro | P0 | Pass — CRM-F2-2026-08-15-01 |
+| CRM-API-007 | Unitario | Servicios de auth envían login, logout y `/auth/me` | P0 | Pass — CRM-F2-2026-08-15-01 |
 
 ## 3. Clientes
 

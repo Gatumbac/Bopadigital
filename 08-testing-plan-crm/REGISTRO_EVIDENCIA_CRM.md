@@ -50,6 +50,7 @@ Nota de entorno: la primera ejecución aislada de `npm ci` no pudo escribir los 
 |---|---:|---:|---:|---:|---|---|
 | Archivos actuales de baseline (4 archivos configurados originalmente) | 47.02% | 34.72% | 50.00% | 45.80% | 2026-08-15 | Resumen de consola; reemplazado localmente por el reporte crítico |
 | Código crítico fase 2 (10 archivos de auth/API) | 40.17% | 22.22% | 42.37% | 39.63% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
+| Código crítico fase 2 después de implementar pruebas | 92.76% | 80.34% | 98.30% | 93.11% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
 | Código crítico final | — | — | — | — | Pendiente | Pendiente |
 
 ## 5. Ejecución en CI
@@ -80,3 +81,26 @@ Un resultado puede aparecer como `Pass` en el informe final solamente si existe:
 3. resultado observado;
 4. artifact o captura reproducible;
 5. retest registrado cuando hubo defecto.
+
+## 8. Ejecución de Fase 2
+
+| Campo | Valor |
+|---|---|
+| ID de ejecución | `CRM-F2-2026-08-15-01` |
+| Fecha/hora | `2026-08-15T15:43:41-05:00` |
+| Revisión base | `3c4dd5175acda0be1a7119e136f2c22572a8b41b` |
+| Estado de revisión | Working tree con cambios de Fase 2 sin commit |
+| Tests | Pass; 10 archivos y 49 tests |
+| Cobertura | Pass; 92.76% statements, 80.34% branches, 98.30% functions, 93.11% lines |
+| Lint | Pass; 230 archivos revisados |
+| TypeScript | Pass; `npx tsc -b --noEmit` |
+| Build | Pass; Vite transformó 3820 módulos |
+| Artefactos | `coverage/index.html`, `coverage/lcov.info` |
+| CI remoto | Pendiente; no marcar Pass por inspección local |
+
+### Casos Fase 2 ejecutados
+
+| Caso | Resultado observado | Estado | Evidencia |
+|---|---|---|---|
+| `CRM-AUTH-006` a `CRM-AUTH-016` | Login, sesión, permisos, roles, storage y JWT exitosos | Pass | `CRM-F2-2026-08-15-01`; reporte de cobertura |
+| `CRM-API-004` a `CRM-API-007` | Bearer, errores, paginación, refresh y servicios auth exitosos | Pass | `CRM-F2-2026-08-15-01`; reporte de cobertura |

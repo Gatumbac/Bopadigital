@@ -265,6 +265,18 @@ La línea base original, limitada a cuatro archivos, obtuvo 47.02% de statements
 
 Las rutas protegidas, permisos y refresh no tienen caminos críticos sin prueba.
 
+### Resultado de ejecución de Fase 2 — 2026-08-15
+
+- [x] Se añadieron pruebas para `AuthContext`, guards, `Can`, `usePermission`, `LoginPage`, `auth-storage`, `auth.service`, `jwt` y `api`.
+- [x] La suite ejecutó 10 archivos y 49 tests exitosos.
+- [x] Se cubrieron login inválido y bloqueado, restauración desde `/auth/me`, logout con fallo remoto, permisos/roles, persistencia, JWT, Bearer token, paginación, errores de red, refresh, refresh fallido y cola concurrente.
+- [x] Cobertura del conjunto crítico: 92.76% statements, 80.34% branches, 98.30% functions y 93.11% lines.
+- [x] Lint, TypeScript y build de producción exitosos.
+- [x] Se corrigió el retry de la primera request protegida para asignar el nuevo Bearer token después de un refresh exitoso.
+- [ ] Ejecución remota y artifact de GitHub Actions pendientes.
+
+La corrida `CRM-F2-2026-08-15-01` se realizó sobre el working tree basado en `3c4dd51`; el resultado debe asociarse al commit de Fase 2 cuando se cree.
+
 ### Fase 3 — Cubrir clientes, negociaciones y visitas
 
 **Objetivo:** cubrir el flujo comercial principal del asesor y la supervisión.

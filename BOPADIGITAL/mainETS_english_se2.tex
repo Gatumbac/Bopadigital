@@ -44,6 +44,17 @@
     \\* \hline
 }
 
+% Compact, reproducible code excerpts used as technical evidence in the report.
+\lstset{
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    columns=fullflexible,
+    frame=single,
+    keepspaces=true,
+    showstringspaces=false,
+    tabsize=2
+}
+
 % Compact PB-to-task references used inside sprint backlog cells.
 \newcommand{\pbhu}[3]{%
     #1 &
@@ -1623,19 +1634,389 @@ with risks in application behavior.
 \chapter{CODING STANDARDS DOCUMENTATION}
 
 \section{Build Automation Configuration}
-% TODO: Document build, package and repository automation.
+The BOPADIGITAL implementation uses a repository-oriented automation model. The API, CRM, Web,
+Mobile, and Shared repositories contain the application or contract source code, while Deploy
+contains the container and reverse-proxy configuration. This separation allows each repository to
+validate its own responsibilities while preserving a common quality contract across the platform.
+
+The JavaScript and TypeScript repositories use Node.js 22, npm lockfiles, and reproducible
+installation through \texttt{npm ci}. Their common validation sequence is:
+
+\begin{center}
+\texttt{npm ci} $\rightarrow$ \texttt{format:check} $\rightarrow$ \texttt{lint}
+$\rightarrow$ \texttt{typecheck} $\rightarrow$ \texttt{test:coverage} $\rightarrow$ \texttt{build}
+\end{center}
+
+The \texttt{check} script combines the non-mutating quality checks used by developers and
+continuous integration. Formatting changes are performed explicitly through the formatting script
+or through the staged-file hook; the CI check does not rewrite the workspace. This distinction makes
+the result reproducible and prevents a successful pipeline from concealing uncommitted changes.
+
+The API uses a modular monolith structure. Its build runs the TypeScript compiler and resolves the
+compiled aliases before packaging the application. The CRM and Web applications use the Vite build
+pipeline, while Mobile uses the Expo build pipeline. Shared compiles its domain schemas and
+declaration files before publication. All application repositories execute automated tests and
+produce a coverage report as part of their quality workflow.
+
+Deploy applies the same principle to infrastructure. Its validation checks Docker Compose, Caddy,
+service names, ports, required variables, image references, and service health without exposing
+credential values. Communications and this report repository apply the equivalent rule to
+documentation by validating Markdown structure and internal links.
+
+\begin{longtable}{|L{2.4cm}|L{2.7cm}|L{2.6cm}|L{2.7cm}|L{3.4cm}|}
+\caption{Repository automation and final evidence baseline}
+\label{tab:chapter4_repository_automation}\\
+\hline
+\textbf{Repository} & \textbf{Revision} & \textbf{Build or validation} & \textbf{Quality sequence} & \textbf{Evidence role} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{5}
+\textbf{Repository} & \textbf{Revision} & \textbf{Build or validation} & \textbf{Quality sequence} & \textbf{Evidence role} \\
+\hline
+\endhead
+\continuedonnextpage{5}
+\endfoot
+\endlastfoot
+API & \texttt{4018bd5} & TypeScript and alias build & Lint, typecheck, tests, coverage & Backend implementation \\
+\hline
+CRM & \texttt{5011dc4} & Vite production build & Lint, typecheck, tests, coverage & Internal operations client \\
+\hline
+Web & \texttt{f527679} & Vite production build & Lint, typecheck, tests, coverage & Public website and CMS \\
+\hline
+Mobile & \texttt{4638ea1} & Expo web/application build & Lint, typecheck, tests, coverage & Mobile client \\
+\hline
+Shared & \texttt{4cbf3d4} & TypeScript declaration build & Lint, typecheck, schema tests, coverage & Shared contracts \\
+\hline
+Deploy & \texttt{b6f2f6f} & Compose and Caddy validation & Configuration and health checks & Runtime orchestration \\
+\hline
+Communications & \texttt{369ae94} & Documentation validation & Markdown and link checks & Project evidence \\ \tablelastrow
+\end{longtable}
+
+The revision identifiers in Table~\ref{tab:chapter4_repository_automation} identify the repository
+state associated with the final evidence package. Each result is associated with its tested SHA,
+environment, command, and artifact reference. Chapter~5 expands the compiler, Biome, hook,
+and CI diagnostics; this chapter focuses on the automation design that makes those diagnostics
+repeatable.
+\begin{lstlisting}[caption={Representative continuous-integration quality sequence},label={lst:chapter4_ci_pipeline}]
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - run: npm run test:coverage
+      - run: npm run build
+\end{lstlisting}
 
 \section{Coding Standards and Enforcers}
-% TODO: Document Biome, TypeScript, naming, formatting and organization rules.
+The project applies one coding-quality baseline across its TypeScript repositories. TypeScript uses
+explicit strict checking, unused-code diagnostics, fall-through protection, and verbatim module
+syntax. Biome provides formatting and linting from the same repository configuration. The common
+format is two spaces, a maximum line width of 100 characters, single quotes, semicolons, and ES5
+trailing commas. Unused imports and variables are errors, and explicit \texttt{any} is rejected so
+that type information remains available across the API and client boundaries.
+
+The standard also defines how source code is organized. Identifiers and source-level documentation
+use English naming, while user-facing messages remain localized when required by the product. The
+API groups routes, middleware, controllers, services, and database access by domain. CRM and Web
+group pages, components, forms, hooks, and services by feature. Mobile keeps screens, components,
+contexts, and services separated according to the Expo application structure. Shared exposes
+explicit domain barrels and derives TypeScript types from Zod schemas instead of duplicating request
+and response definitions.
+
+\begin{longtable}{|L{2.3cm}|L{2.4cm}|L{2.6cm}|L{4.1cm}|L{2.7cm}|}
+\caption{Common coding standards by repository}
+\label{tab:chapter4_coding_standards}\\
+\hline
+\textbf{Repository} & \textbf{Type system} & \textbf{Formatter and linter} & \textbf{Organization rule} & \textbf{Quality artifact} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{5}
+\textbf{Repository} & \textbf{Type system} & \textbf{Formatter and linter} & \textbf{Organization rule} & \textbf{Quality artifact} \\
+\hline
+\endhead
+\continuedonnextpage{5}
+\endfoot
+\endlastfoot
+API & Strict TypeScript & Biome, recommended rules & Domain layers and shared utilities & Test coverage \\
+\hline
+CRM & Strict TypeScript & Biome and React accessibility rules & Feature modules and reusable CRUD primitives & Test coverage \\
+\hline
+Web & Strict TypeScript & Biome and React accessibility rules & Feature modules, services, and hooks & Test coverage \\
+\hline
+Mobile & Strict TypeScript & Biome with Expo-compatible exclusions & Screens, components, contexts, and services & Test coverage \\
+\hline
+Shared & Strict TypeScript and Zod inference & Biome, declaration-safe rules & Four-file domain contract pattern & Schema coverage \\ \tablelastrow
+\end{longtable}
+
+The API demonstrates the rule through modules such as
+\texttt{src/modules/reports/reports.routes.ts},
+\texttt{src/modules/reports/reports.controller.ts}, and
+\texttt{src/modules/reports/reports.service.ts}. The route composes authentication, authorization,
+and validation middleware; the controller coordinates the request and response envelope; and the
+service contains the domain operation. This organization makes responsibilities visible during
+review and gives the quality tools a predictable source tree.
+
+The client repositories apply the same idea at a different level. CRM centralizes pagination,
+unsaved-form protection, and common list controls in reusable hooks and UI components. Web isolates
+CMS requests in a service and loading state in a hook. Mobile keeps authentication state in a
+Context/Provider and HTTP behavior in a service facade. These structures reduce repeated code while
+preserving the boundaries required by each user interface.
+
+The Shared repository completes the boundary by exporting request and response schemas from each
+domain. For example, the CRM and document domains expose explicit barrel files and Zod definitions.
+Consumers therefore validate data at the API boundary and infer compatible TypeScript types from the
+same source of truth.
+\begin{lstlisting}[caption={Representative Biome quality rules from the API configuration},label={lst:chapter4_biome}]
+{
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": { "noExplicitAny": "error" },
+      "correctness": {
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error"
+      }
+    }
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Strict TypeScript compiler options},label={lst:chapter4_tsconfig}]
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true
+  }
+}
+\end{lstlisting}
 
 \section{Git Hooks and Commit Validation}
-% TODO: Document Husky, lint-staged, Commitlint and pre-commit validation.
+The repository workflow applies quality checks before code reaches the shared branch. Husky owns the
+Git hook lifecycle, lint-staged limits local formatting and linting to staged source files, and
+Commitlint validates the commit message against the Conventional Commits format. The pre-commit hook
+therefore protects the smallest relevant change set, while CI repeats the full repository checks on
+the complete revision.
+
+The standardized commit flow is:
+
+\begin{enumerate}
+\item The developer stages the intended files.
+\item lint-staged runs Biome on the staged TypeScript, JavaScript, and related source files.
+\item The pre-commit hook stops the commit when the staged source cannot satisfy the local rules.
+\item The commit-msg hook validates the commit type, optional scope, subject, and message format.
+\item CI installs the lockfile-defined dependencies and repeats formatting, linting, type checking,
+      tests, coverage, and build validation.
+\end{enumerate}
+
+API, CRM, Web, Mobile, and Shared use the same hook contract. Deploy and Communications use
+repository-specific CI checks instead of application-language hooks because their quality risks are
+Compose configuration and documentation integrity. In both cases, the principle is identical: a
+change is accepted only after its relevant automated controls complete successfully.
+
+\begin{longtable}{|L{2.5cm}|L{2.4cm}|L{2.4cm}|L{3.2cm}|L{3.6cm}|}
+\caption{Commit and continuous-integration controls}
+\label{tab:chapter4_commit_controls}\\
+\hline
+\textbf{Repository} & \textbf{Pre-commit} & \textbf{Commit message} & \textbf{CI controls} & \textbf{Protected result} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{5}
+\textbf{Repository} & \textbf{Pre-commit} & \textbf{Commit message} & \textbf{CI controls} & \textbf{Protected result} \\
+\hline
+\endhead
+\continuedonnextpage{5}
+\endfoot
+\endlastfoot
+API & Husky and lint-staged & Commitlint & Quality, tests, coverage, build & Deployable backend \\
+\hline
+CRM & Husky and lint-staged & Commitlint & Quality, tests, coverage, build & Reliable internal client \\
+\hline
+Web & Husky and lint-staged & Commitlint & Quality, tests, coverage, build & Reliable public client \\
+\hline
+Mobile & Husky and lint-staged & Commitlint & Quality, tests, coverage, build & Reproducible mobile client \\
+\hline
+Shared & Husky and lint-staged & Commitlint & Quality, schema tests, coverage, build & Compatible contracts \\
+\hline
+Deploy and Communications & Repository-specific validation & Conventional change record & Compose or Markdown checks & Safe operational evidence \\ \tablelastrow
+\end{longtable}
+\begin{lstlisting}[caption={Git hooks and staged-file validation},label={lst:chapter4_hooks_commitlint}]
+# .husky/pre-commit
+echo "Running Biome check on staged files..."
+npx lint-staged
+
+# .husky/commit-msg
+npx --no -- commitlint --edit "$1"
+
+# package.json
+"lint-staged": {
+  "*.{ts,tsx,js,jsx}": [
+    "biome check --write --no-errors-on-unmatched"
+  ]
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Representative API quality execution at revision \texttt{4018bd5}},label={lst:chapter4_quality_output}]
+$ npm run lint
+Checked 219 files. No fixes applied.
+
+$ npx tsc --noEmit
+passed
+
+$ npm run test:run
+Test Files  61 passed (61)
+Tests       415 passed (415)
+
+$ npm run build
+tsc && tsc-alias
+passed
+\end{lstlisting}
 
 \section{SOLID Principles and Design Patterns}
-% TODO: Add concrete examples from the current codebase.
+The implementation applies SOLID principles as design criteria for concrete boundaries rather than as
+labels attached to entire repositories. The most visible application is the separation of the API
+request pipeline. Routes declare access and validation, controllers coordinate transport concerns,
+services execute domain operations, and shared error classes represent HTTP outcomes. The resulting
+boundaries make changes easier to locate and reduce the risk of repeating cross-cutting behavior.
+
+The following examples connect the principles to current source files:
+
+\begin{itemize}
+\item \textbf{Single Responsibility:} API controllers coordinate transport while services contain
+      domain operations; in Web, \texttt{cms.service.ts} communicates with the API while
+      \texttt{useContentBlocks.ts} manages loading and retry state.
+\item \textbf{Open/Closed:} CRM pagination and unsaved-form behavior are implemented as reusable
+      hooks and shared UI primitives, allowing new CRUD screens to reuse the behavior without
+      copying its implementation.
+\item \textbf{Liskov Substitution:} the specialized errors in
+      \texttt{src/shared/errors/http-error.ts} extend the common HTTP error contract and are handled
+      consistently by the error middleware.
+\item \textbf{Interface Segregation:} Shared separates request and response schemas by domain, so a
+      consumer imports only the contract required by its operation.
+\item \textbf{Dependency Inversion:} application features depend on service and contract boundaries
+      rather than embedding request parsing, validation, and response formatting in every screen or
+      route. The final design documents the remaining concrete infrastructure dependencies explicitly.
+\end{itemize}
+
+Several design patterns reinforce these decisions. The API uses layered architecture and a
+middleware pipeline for authentication, authorization, validation, and error handling. The Web and
+CRM applications use reusable hooks and feature modules to isolate stateful behavior from visual
+components. Mobile uses a service facade over Axios, a Context/Provider for authentication state,
+and a configured client for cross-screen communication. Shared uses a schema-contract pattern in
+which Zod validation and inferred TypeScript types are exported together.
+
+\begin{longtable}{|L{2.8cm}|L{3.1cm}|L{5.0cm}|L{3.0cm}|}
+\caption{Design patterns applied in the implementation}
+\label{tab:chapter4_design_patterns}\\
+\hline
+\textbf{Pattern} & \textbf{Repository} & \textbf{Concrete implementation} & \textbf{Reason for use} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{4}
+\textbf{Pattern} & \textbf{Repository} & \textbf{Concrete implementation} & \textbf{Reason for use} \\
+\hline
+\endhead
+\continuedonnextpage{4}
+\endfoot
+\endlastfoot
+Layered architecture & API & Routes, middleware, controllers, services, and database access & Visible responsibility boundaries \\
+\hline
+Middleware pipeline & API & Authentication, authorization, validation, and error handling & Consistent cross-cutting controls \\
+\hline
+Facade & Web and Mobile & Centralized HTTP clients and service functions & Encapsulated external communication \\
+\hline
+Context/Provider & CRM and Mobile & Authentication state and session events & Controlled shared state \\
+\hline
+Reusable Hook & CRM and Web & Pagination, form guards, and content loading & Reduced duplication \\
+\hline
+Schema contract & Shared & Zod request/response schemas and inferred types & Compatible boundaries \\ \tablelastrow
+\end{longtable}
 
 \section{Refactoring Example}
-% TODO: Document one verified before/after refactoring example.
+The principal refactoring example is recorded in revision \texttt{ed79e6b}, titled
+\emph{refactor(shared): extract duplicated utilities to shared modules}. Before this change,
+several modules contained similar authentication constants, request helpers, query handling, and
+formatting logic. That structure increased the number of locations that required modification when
+the shared behavior changed.
+
+The refactoring extracted the duplicated behavior into explicit shared modules, including
+\texttt{src/shared/constants/auth.ts}, \texttt{src/shared/utils/format.ts},
+\texttt{src/shared/utils/query.ts}, and \texttt{src/shared/utils/request.ts}. The affected modules
+then imported the shared implementation instead of maintaining local copies. The change touched 16
+files and removed repeated utility code while adding a smaller, reusable shared surface.
+
+\begin{longtable}{|L{3.1cm}|L{3.7cm}|L{3.8cm}|L{3.4cm}|}
+\caption{Before-and-after analysis of the API utility refactoring}
+\label{tab:chapter4_refactoring_before_after}\\
+\hline
+\textbf{Aspect} & \textbf{Before} & \textbf{After} & \textbf{Benefit} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{4}
+\textbf{Aspect} & \textbf{Before} & \textbf{After} & \textbf{Benefit} \\
+\hline
+\endhead
+\continuedonnextpage{4}
+\endfoot
+\endlastfoot
+Utility ownership & Duplicated inside feature modules & Centralized in shared constants and utilities & Single source of truth \\
+\hline
+Request handling & Repeated local request logic & Reusable request helper & Consistent behavior \\
+\hline
+Formatting & Multiple local implementations & Shared formatting utility & Lower duplication \\
+\hline
+Maintenance & Several update points & One update point & Lower maintenance cost \\
+\hline
+Quality impact & Duplication could diverge & Shared code is checked once and reused & More predictable changes \\ \tablelastrow
+\end{longtable}
+\begin{lstlisting}[caption={Before-and-after refactoring excerpt from revision \texttt{ed79e6b}},label={lst:chapter4_refactor_diff}]
+- const permissionCodes = new Set<string>();
+- // duplicated query and permission collection
++ const permissionCodes = await fetchPermissionCodes(roleIds);
+
++ // src/shared/constants/auth.ts
++ export const BCRYPT_SALT_ROUNDS = 12;
+
+Summary:
+16 files changed, 60 insertions(+), 105 deletions(-)
+\end{lstlisting}
+
+The same refactoring principle appears in the client repositories. Revision \texttt{be8aa54} in CRM
+extracted reusable CRUD primitives for pagination, form protection, and shared UI. Revision
+\texttt{b30c779} in Web separated the CMS page into a service, a content-loading hook, and a
+presentation component. Revision \texttt{f31ecf9} reorganized the administrative area into feature
+modules and explicit route protection. These changes demonstrate that refactoring was used to
+reduce duplication and clarify responsibility boundaries, not only to change file locations.
+
+The result is a coherent standard across the platform: shared rules protect the source code,
+repository automation prevents inconsistent changes, design patterns preserve the architecture, and
+refactoring keeps repeated behavior in reusable modules. Together, these practices provide the
+technical foundation for the preventive diagnostics described in Chapter~5.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 5: PREEMPTIVE ERROR DETECTION

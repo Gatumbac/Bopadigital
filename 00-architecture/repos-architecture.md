@@ -19,7 +19,7 @@ System-wide architecture of the BOPADIGITAL platform. Source: each repo's `CLAUD
              └────────► bopacorp-api ◄────────────┘
                         REST /api/v1
                               │
-                     PostgreSQL (Supabase)
+          PostgreSQL (dev: Supabase; prod: deployment server)
 ```
 
 - All clients talk only to `bopacorp-api` over REST.
@@ -28,7 +28,9 @@ System-wide architecture of the BOPADIGITAL platform. Source: each repo's `CLAUD
 
 ## bopacorp-api — Modular Monolith (backend)
 
-Stack: Node 22+, Express 5, TypeScript 6 (ESM only), Drizzle ORM, PostgreSQL/Supabase, Zod 4, JWT (bcrypt), Pino, Vitest, Biome.
+Stack: Node 22+, Express 5, TypeScript 6 (ESM only), Drizzle ORM, PostgreSQL, Zod 4, JWT (bcrypt), Pino, Vitest, Biome.
+
+**Database environments:** Supabase is used as the shared PostgreSQL hosting service for development. It is not the intended production dependency. The production target is a PostgreSQL database hosted on the server where the application is deployed; the API keeps the same Drizzle persistence boundary and receives the environment-specific connection settings through protected configuration.
 
 **Boot**: `src/index.ts` (dotenv + Zod env validation `src/config/env.ts`) → `src/server.ts` (Express app, middleware, route mounting).
 
@@ -84,6 +86,8 @@ Subpath exports (tree-shakeable):
 Publish: `npm version patch && npm publish`.
 
 ## Deployment
+
+The deployment plan separates database environments: development uses the shared PostgreSQL service managed through Supabase, while production uses PostgreSQL hosted on the selected deployment server. Provisioning, migrations, access control, backups, and recovery must be verified for the production server before they are reported as completed.
 
 Repo `../proy/deploy` — Docker Compose orchestrates local/prod. `deploy.sh` clones repos (except shared → npm), builds images, runs containers.
 

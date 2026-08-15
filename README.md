@@ -12,7 +12,7 @@ Context and reference documents for the **BOPADIGITAL** project. Used by agents 
 
 | Repo | Role | Stack |
 |------|------|-------|
-| `bopacorp-api` | Single backend (REST) | Node 22+, Express 5, TS 6 ESM, PostgreSQL/Supabase, Drizzle, Zod 4, JWT, Vitest, Biome |
+| `bopacorp-api` | Single backend (REST) | Node 22+, Express 5, TS 6 ESM, PostgreSQL (Supabase for development), Drizzle, Zod 4, JWT, Vitest, Biome |
 | `bopacorp-crm` | CRM frontend (supervisors/coordinators) | React + Vite + TS |
 | `bopacorp-web` | Landing + CMS frontend | React + Vite + TS |
 | `bopacorp-shared` | Shared Zod schemas/types (`@bopacorp/shared`) | TS |

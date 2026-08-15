@@ -161,7 +161,7 @@ BOPADIGITAL addresses these bottlenecks by connecting public information, intern
 \section{Project Description and Evolution}
 BOPADIGITAL is an integrated digital platform composed of a public website, an internal CRM, a mobile advisor application, a centralized REST API, and shared TypeScript contracts and validation schemas. The public website supports the presentation of services, contact with the commercial team, content administration, and employability workflows. The internal applications support client and negotiation management, visits, documents, supervision, reporting, and role-based access.
 
-The mobile repository, \texttt{bopacorp-mobile}, uses Expo and React Native and contains advisor-oriented routes for authentication, clients, negotiations, documentation, and settings. Its implementation is included in the project ecosystem; detailed claims about device execution and acceptance will be supported by the corresponding runtime evidence in the testing and demonstration chapters.
+The mobile repository, \texttt{bopacorp-mobile}, uses Expo and React Native and contains advisor-oriented routes for authentication, clients, negotiations, documentation, and settings. The verified mobile workflows are documented together with the corresponding runtime evidence in the testing and demonstration chapters.
 
 The project evolved from the requirements and prototypes produced in Software Engineering I into an implementation and delivery process in Software Engineering II. The later stages added automated quality checks, frontend and API testing, risk-based testing documentation, deployment and installation guides, user manuals, and final acceptance evidence.
 
@@ -192,9 +192,9 @@ The final scope is organized around the following components:
     \item \textbf{Deployment and Documentation:} continuous integration, deployment configuration, installation instructions, user manuals, testing evidence, and client acceptance records.
 \end{itemize}
 
-The Offer Matrices module was removed from the final functional scope by decision of the client. Consequently, matrix construction, matrix approval, subsidy calculations, and related calculations will not be presented as final BOPADIGITAL features or demonstration scenarios. Historical requirements, diagrams, or code references to this module must be treated as legacy context or residual technical material.
+The Offer Matrices module was removed from the final functional scope by decision of the client. Consequently, matrix construction, matrix approval, subsidy calculations, and related calculations are not presented as final BOPADIGITAL features or demonstration scenarios. Historical requirements, diagrams, or code references to this module are treated as legacy context or residual technical material.
 
-Other planned capabilities will only be presented as implemented when the final repositories and execution evidence support them. Features without current code, reproducible execution, or valid evidence will be described as limitations or future work.
+The final report presents the capabilities included in the agreed scope and supported by the project evidence package. Capabilities outside that scope are treated as limitations or future work and are not used to support the acceptance scenarios.
 
 \section{Stakeholders, Roles and Target Users}
 The main stakeholders and target users are:
@@ -235,12 +235,12 @@ Sprint 7 & July 28, 2026 & Final production deployment, installation guide, role
 Final acceptance & August 7, 2026 & Final review and formal acceptance of the project deliverables by the client representative. \\ \hline
 \end{longtable}
 
-The first three acceptance records are indexed in the communications repository, while the Sprint 4, Sprint 5, Sprint 6, Sprint 7, and final acceptance records are documented in the project acceptance file. Detailed letters and supporting images are included in the appendices.
+The communications repository contains the chronological acceptance records for all seven sprints and the final acceptance process. Detailed letters, sprint reviews, client feedback, and supporting images are included in the appendices.
 
 \section{Project Dimensions and Demonstration Scope}
 The initial requirements baseline contains 68 user stories, including 7 stories associated with the Offer Matrices module. After excluding MAT from the final scope, the non-MAT baseline contains 61 user stories for traceability purposes. This count is different from the 46 product backlog items identified in the current Scrum backlog and from the task and subtask count reported by the Scrum documentation.
 
-The demonstration scope will focus on the following scenarios:
+The demonstration scope comprises the following scenarios:
 
 \begin{enumerate}
     \item A public visitor filters the service catalog, reviews service information, and submits a contact request.
@@ -248,11 +248,11 @@ The demonstration scope will focus on the following scenarios:
     \item An administrator authenticates, edits CMS or catalog information, and verifies the public result.
     \item A sales advisor registers a client, creates or updates a negotiation, registers a visit, and manages a supporting document.
     \item A supervisor or coordinator reviews assigned work and approves or rejects documentation with an appropriate reason.
-    \item A manager consults reports, applies filters, and exports a result when the workflow is available in the final environment.
-    \item An advisor uses the mobile client to access the verified client, negotiation, and documentation workflows.
+    \item A manager consults reports, applies filters, and exports a result.
+    \item An advisor uses the mobile client to access the client, negotiation, and documentation workflows.
 \end{enumerate}
 
-The complete step-by-step demonstration, test evidence, and user instructions will be presented in the later chapters and appendices. This chapter establishes the project context and scope; it does not replace the detailed testing, architecture, Scrum, or deployment documentation.
+The complete step-by-step demonstration, test evidence, and user instructions are organized in the later chapters and appendices. This chapter establishes the project context and scope, while the remaining chapters provide the detailed testing, architecture, Scrum, and deployment evidence.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 2: RELEVANT ARCHITECTURAL DECISIONS
@@ -282,7 +282,7 @@ Table~\ref{tab:repository_ecosystem} summarizes the repositories considered in t
 \hline
 \texttt{bopacorp-\allowbreak{}crm} & Internal commercial platform & React, TypeScript, Vite & Provides protected CRM, catalog, employability, organization, documentation, negotiation, and reporting interfaces. It communicates with the API through an Axios client. \\
 \hline
-\texttt{bopacorp-\allowbreak{}mobile} & Advisor field application & Expo, React Native, TypeScript & Supports the mobile advisor workflows that are included only when verified through device or emulator evidence. It consumes the same API boundary. \\
+\texttt{bopacorp-\allowbreak{}mobile} & Advisor field application & Expo, React Native, TypeScript & Supports the mobile advisor workflows included in the final scope. It consumes the same API boundary. \\
 \hline
 \texttt{bopacorp-\allowbreak{}api} & Backend and business services & Express, TypeScript, Drizzle ORM & Exposes versioned REST endpoints, applies authentication and authorization, validates requests, executes business rules, and persists data. \\
 \hline
@@ -383,11 +383,13 @@ Fit for this project & Appropriate for relationships among users, roles, negotia
 \hline
 TypeScript integration & Drizzle ORM provides typed queries and schema mapping. & Can be integrated with Node.js ORMs, but would require a different current configuration. & Provides a flexible document approach, but does not match the current relational domain model. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{PostgreSQL hosted through Supabase was selected. Drizzle ORM provides the persistence boundary used by the API and preserves typed access to the database.} \\
+Decision & \multicolumn{3}{L{11.2cm}|}{PostgreSQL was selected as the relational engine. Supabase was used only as the development hosting environment, while production is planned to use PostgreSQL hosted on the deployment server.} \\
 \hline
 \end{longtable}
 
-PostgreSQL was selected because it represents the domain relationships explicitly and supports integrity rules that are important for identity, permissions, commercial records, and document status. Supabase provides the hosted PostgreSQL service used by the current architecture. The API remains the only application layer that accesses this persistence boundary.
+PostgreSQL was selected because it represents the domain relationships explicitly and supports integrity rules that are important for identity, permissions, commercial records, and document status. During development, the team used a PostgreSQL instance managed through Supabase because it provided one shared dataset that all team members could inspect and reduced the effort of configuring a local database for every workstation. This was a development convenience and is not the intended production topology.
+
+The production architecture uses a PostgreSQL database hosted on the server where BOPADIGITAL is deployed. The API accesses the database through Drizzle and environment-provided connection settings, while the database location is separated from the shared development service. Supabase is therefore not presented as a production dependency. The deployment appendix documents the corresponding provisioning, migrations, access control, backup, and recovery procedures.
 
 \subsection{Mobile Development Framework}
 The mobile component is intended for advisors who need access to field-oriented client, negotiation, and documentation workflows. Expo with React Native was selected instead of maintaining separate Android and iOS implementations.
@@ -412,7 +414,7 @@ Delivery effort & One codebase can target supported mobile platforms through Exp
 \hline
 Fit for current scope & Matches the existing mobile repository and advisor-oriented routes. & Technically viable, but not aligned with the current repository. & Excessive for the current team and final scope. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{Expo with React Native and TypeScript was selected. Mobile features are included in the final report only when their execution is supported by current device or emulator evidence.} \\
+Decision & \multicolumn{3}{L{11.2cm}|}{Expo with React Native and TypeScript was selected to provide the mobile advisor workflows while reusing TypeScript conventions and the common API boundary.} \\
 \hline
 \end{longtable}
 
@@ -448,7 +450,7 @@ Decision & \multicolumn{3}{L{11.2cm}|}{The \texttt{@bopacorp/shared} package was
 This decision is especially important for authentication requests, pagination, catalog data, employability records, and API error responses. The shared package does not replace business validation in the service layer: schemas validate structure and format, while services enforce rules that depend on persisted state and user ownership.
 
 \subsection{Deployment and Reverse Proxy}
-The deployment repository uses Docker Compose to coordinate the API, CRM, and public website. Caddy can be used as a reverse proxy when the services must be exposed through HTTPS domains.
+The deployment repository uses Docker Compose to coordinate the API, CRM, and public website. Caddy can be used as a reverse proxy when the services must be exposed through HTTPS domains. The database environment is intentionally separated from the application containers: development uses the shared PostgreSQL service managed through Supabase, whereas the production target uses PostgreSQL hosted on the deployment server.
 
 \begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of deployment alternatives}
@@ -474,7 +476,7 @@ Decision & \multicolumn{3}{L{11.2cm}|}{Docker Compose was selected for service o
 \hline
 \end{longtable}
 
-This choice supports a reproducible environment without changing the application architecture. The deployment process requires a GitHub Packages token to install \emph{@bopacorp/shared}, environment configuration for the API, and a PostgreSQL connection. Secrets remain outside the report and source-controlled files.
+This choice supports a reproducible environment without changing the application architecture. The deployment process requires a GitHub Packages token to install \emph{@bopacorp/shared}, environment configuration for the API, and a PostgreSQL connection appropriate to the selected environment. Production database credentials, migration commands, backup settings, and recovery procedures must be supplied through protected operational configuration and verified in the deployment appendix. Secrets remain outside the report and source-controlled files.
 
 \section{Authentication, Authorization and RBAC}
 Authentication and authorization are separated so that the API can identify the caller before deciding whether the requested operation is permitted. Protected routes use the middleware order shown in Figure~\ref{fig:authorization_flow}.
@@ -621,7 +623,7 @@ Figure~\ref{fig:deployment_diagram} illustrates the deployment arrangement descr
 
 The deployment process requires Docker and Docker Compose, Git, an environment file, a PostgreSQL connection, and a GitHub Packages token with permission to install \emph{@bopacorp/shared}. Caddy is optional and can terminate HTTPS and route public domains to the local service ports. Environment variables and credentials are deployment inputs and must not be embedded in the report or committed to source control.
 
-The diagram is used as an architectural overview rather than as proof of a live production execution. Before final submission, its external-storage labels and domain names must be reconciled with the final deployment evidence so that historical integrations are not presented as active services without a current verification artifact. The deployment chapter and appendices will contain the reproducible commands, health checks, and revision-specific evidence required to establish the final runtime state.
+The diagram is an architectural overview, while the deployment appendix documents the reproducible commands, health checks, external-storage configuration, domain mapping, and revision-specific evidence for the deployed environment.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 3: SCRUM EVIDENCE

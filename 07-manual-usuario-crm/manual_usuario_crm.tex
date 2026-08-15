@@ -1,0 +1,197 @@
+% Plantilla de impresión para el Manual de usuario del CRM BOPACORP.
+% La fuente funcional completa se encuentra en MANUAL_USUARIO_CRM.md.
+% Este archivo define la portada y el lenguaje visual inspirado en Manual_docente.pdf.
+% No se compila automáticamente: revisar imágenes y datos antes de publicar.
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\definecolor{bopaBlue}{HTML}{145DA0}
+\definecolor{bopaLight}{HTML}{EAF3FA}
+\definecolor{bopaDark}{HTML}{12344D}
+
+\hypersetup{colorlinks=true,linkcolor=bopaBlue,urlcolor=bopaBlue}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{BOPACORP CRM}
+\rhead{Manual de usuario}
+\cfoot{\thepage}
+
+\titleformat{\section}{\Large\bfseries\color{bopaDark}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{bopaBlue}}{\thesubsection}{0.7em}{}
+
+\newcommand{\paso}[2]{
+  \begin{tcolorbox}[colback=bopaLight,colframe=bopaBlue,boxrule=0.8pt,
+    arc=2mm,title=\textbf{Paso #1}]
+    #2
+  \end{tcolorbox}
+}
+
+\newcommand{\importante}[1]{
+  \begin{tcolorbox}[colback=yellow!8,colframe=bopaDark,boxrule=0.8pt,
+    arc=2mm,title=\textbf{IMPORTANTE}]
+    #1
+  \end{tcolorbox}
+}
+
+\newcommand{\captura}[2]{
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{imagenes/#1}
+    \caption{#2}
+  \end{figure}
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{flushright}
+    \colorbox{bopaBlue}{\parbox[c][2.4cm][c]{3.1cm}{\centering\color{white}
+      \fontsize{30}{34}\selectfont\bfseries 2026}}
+  \end{flushright}
+  \vspace{2.4cm}
+  {\Huge\bfseries\color{bopaDark} MANUAL DE USUARIO\par}
+  \vspace{0.4cm}
+  {\Huge\bfseries\color{bopaBlue} BOPACORP CRM\par}
+  \vspace{1.5cm}
+  {\Large Guía de operación para clientes, negociaciones, documentación, reportes y administración\par}
+  \vfill
+  \begin{tcolorbox}[colback=bopaLight,colframe=bopaBlue,arc=2mm]
+    \textbf{Dirigido a:} asesores, supervisores, coordinadores, managers, administradores y usuarios de empleabilidad.\\[0.2cm]
+    \textbf{Versión:} 0.1 — borrador basado en el comportamiento actual del sistema.
+  \end{tcolorbox}
+  \vspace{1cm}
+  \textbf{BOPACORP S.A. — Ecuador}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Propósito}
+
+BOPACORP CRM centraliza la gestión de clientes empresariales, negociaciones, visitas, documentación, matrices comerciales, reportes, catálogo y procesos de empleabilidad. Las opciones visibles dependen del perfil y de los permisos del usuario.
+
+\section{Ingreso al sistema}
+
+\captura{crm_login.png}{Pantalla de inicio de sesión.}
+
+\paso{1}{Abra la dirección web del CRM en un navegador actualizado.}
+\paso{2}{Escriba el correo corporativo y la contraseña.}
+\paso{3}{Seleccione \textbf{Iniciar sesión} y espere la carga de la pantalla inicial.}
+\importante{No comparta sus credenciales. Si la cuenta se bloquea, solicite el desbloqueo a un manager o administrador.}
+
+\section{Clientes}
+
+\captura{crm_clients.png}{Listado de clientes.}
+\paso{1}{Abra \textbf{Clientes} desde el menú lateral.}
+\paso{2}{Use el buscador y los filtros de estado o asesor.}
+\paso{3}{Seleccione una fila para consultar el detalle o crear una actualización.}
+
+\captura{crm_client_detail.png}{Detalle de un cliente.}
+
+\importante{El RUC, la razón social, el contacto, los servicios activos y la facturación deben revisarse antes de guardar.}
+
+\section{Negociaciones}
+
+\captura{crm_negotiations_table.png}{Vista de negociaciones en tabla.}
+\captura{crm_negotiations_kanban.png}{Vista de negociaciones en kanban.}
+\paso{1}{Abra \textbf{Negociaciones} y seleccione la vista tabla o kanban.}
+\paso{2}{Filtre por estado, asesor o tier.}
+\paso{3}{Seleccione \textbf{Nueva negociación}, elija el cliente y complete fechas, asesor y observaciones.}
+\paso{4}{Abra el detalle para consultar historial, visitas, documentos y matriz.}
+\paso{5}{Use \textbf{Cambiar estado} y agregue observaciones cuando sean requeridas.}
+
+\captura{crm_negotiation_detail.png}{Detalle de una negociación.}
+\importante{Un cierre puede exigir documentos obligatorios. Complete la documentación antes de confirmar el estado final.}
+
+\section{Visitas}
+
+\captura{crm_negotiation_visits.png}{Pestaña de visitas de una negociación.}
+\paso{1}{Abra una negociación y seleccione la pestaña \textbf{Visitas}.}
+\paso{2}{Seleccione \textbf{Nueva visita}, elija el tipo e ingrese fecha, hora y observaciones.}
+\paso{3}{Permita la geolocalización si desea registrar coordenadas y precisión.}
+\paso{4}{Guarde la visita y, si corresponde, solicite su verificación.}
+
+\section{Documentación}
+
+\captura{crm_documents.png}{Cola documental.}
+\captura{crm_document_upload.png}{Carga de un documento.}
+\paso{1}{Seleccione una negociación y un tipo de documento activo.}
+\paso{2}{Cargue un PDF, JPG o PNG de hasta 50 MB.}
+\paso{3}{Confirme la carga y revise el estado pendiente.}
+\paso{4}{Los perfiles autorizados pueden aprobar o rechazar; el rechazo requiere un motivo.}
+
+\importante{Compruebe que el archivo pertenezca a la negociación correcta antes de subirlo.}
+
+\section{Matrices de oferta}
+
+\captura{crm_negotiation_matrix.png}{Matriz asociada a una negociación.}
+\paso{1}{Abra la pestaña \textbf{Matriz} y cree la matriz si no existe.}
+\paso{2}{Registre observaciones comerciales.}
+\paso{3}{Adjunte la oferta comercial y la plantilla de correo en sus espacios respectivos.}
+\paso{4}{Descargue o elimine archivos según los permisos del perfil.}
+
+\section{Reportes}
+
+\captura{crm_reports.png}{Panel de rendimiento.}
+\captura{crm_reports2.png}{Exportación de métricas.}
+\paso{1}{Abra \textbf{Reportes} y seleccione el período.}
+\paso{2}{Revise indicadores, cumplimiento y rendimiento por asesor.}
+\paso{3}{Use \textbf{Generar reporte} para descargar las métricas en CSV.}
+
+\section{Catálogo y solicitudes}
+
+\captura{crm_catalog.png}{Catálogo de productos.}
+\captura{crm_catalog_requests.png}{Solicitudes de contacto.}
+\paso{1}{Busque productos y filtre por categoría, estado o publicación.}
+\paso{2}{Abra un producto para consultar o editar sus datos.}
+\paso{3}{En solicitudes, abra el mensaje y márquelo como atendido al finalizar la gestión.}
+
+\section{Organización}
+
+\captura{crm_team.png}{Equipo de la organización.}
+\captura{crm_org_settings.png}{Configuración organizacional.}
+\paso{1}{Abra \textbf{Organización → Equipo} para buscar o crear empleados.}
+\paso{2}{Distinga el rol de acceso del rol organizacional.}
+\paso{3}{Use configuración para departamentos y roles.}
+\paso{4}{Desbloquee usuarios autorizados registrando el motivo correspondiente.}
+
+\section{Empleabilidad}
+
+\captura{crm_vacancies.png}{Administración de vacantes.}
+\captura{crm_applicants.png}{Listado de postulantes.}
+\paso{1}{Cree una vacante con título, descripción, requisitos y fechas.}
+\paso{2}{Defina si está activa y publicada.}
+\paso{3}{Abra los postulantes, revise la información y descargue el CV cuando exista autorización.}
+\paso{4}{Cambie el estado de la postulación y registre notas de revisión.}
+
+\section{Estados y recomendaciones}
+
+Los estados más frecuentes son pendiente, aprobado, rechazado, activo, inactivo, borrador, verificado y atendido. Las acciones disponibles pueden variar según el perfil.
+
+\importante{No incluya en el manual publicado contraseñas, tokens, RUC reales, teléfonos reales ni documentos personales.}
+
+\section{Pendientes antes de la entrega}
+
+\begin{itemize}[leftmargin=1.4cm]
+  \item Validar cada procedimiento con una cuenta de prueba por perfil.
+  \item Completar capturas de formularios y diálogos que no están en el inventario actual.
+  \item Anotar flechas y recuadros azules sobre las capturas principales.
+  \item Revisar el PDF renderizado página por página.
+  \item Confirmar con el responsable del sistema las diferencias entre permisos de API y rutas del frontend.
+\end{itemize}
+
+\end{document}

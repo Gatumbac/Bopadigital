@@ -1,0 +1,2632 @@
+% DOCUMENT CLASS DECLARATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Use the following options:
+% \documentclass[paper type% ("letterpaper" required)
+% , one or two sided% ("oneside" or "twoside")%
+% , font size% ("12pt" required)%
+% , document type% ("these", "memoire", "memoirepararticles", "memoireprojet" or "thesepararticles")%
+% , document language ("francais" or "english)%
+% , addition options% ("creativecommons" if the document is under the creative commons license, "hyperref", "withAlgo2e" to use algorithm2e package with proper formating)
+%]{thETS}
+
+%% Exemple with a Ph.D thesis under creative commons, using hyperref
+\documentclass[letterpaper%
+, oneside%
+, 12pt%
+, memoireprojet%
+, english%
+,creativecommons,hyperref, withAlgo2e %
+]{thETS}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{changepage}
+\usepackage{placeins}
+\usepackage{pdflscape}
+\usepackage[utf8]{inputenc}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IMPORTANT: PRINTING WITH THE PROPER MARGINS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Always set the "scaling" option to "none" in the prining options 
+%% to print the generated PDF with the proper margins.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DECLARATION OF AN ADDITION LIST OF REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Exemple of an additional list of references called "refs"
+% "refs" is used as a suffix to all bibliography related commands
+\newcites{refs}{LIST OF REFERENCES}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLE PAGE OPTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{BOPACORP S.A. Final Project Specification Document}
+
+\author{Grupo 2 BOPADIGITAL}
+\authorcopyright{Grupo 2 BOPADIGITAL}
+
+%\cotutelle{XXXX University}
+
+\datesoutenance{January 12, 2026}
+
+\datedepot{January 12, 2026}
+
+\directeur{}{Shirley Aragon}{Facultad de Ingenieria en Electricidad y Computación}
+
+%\directeur{Mrs.}{Prénom Nom}{Nom du département et institution}
+
+\codirecteur{}{Nahim Díaz}{Facultad de Ingenieria en Electricidad y Computación}
+
+%\codirecteurB{M.}{Prénom Nom}{département et institution}
+
+\president{}{Salvador Muñoz}{Facultad de Ingenieria en Electricidad y Computación}
+
+\examinexterne{}{Anthony Navarrete}{Facultad de Ingenieria en Electricidad y Computación}
+
+\jury{}{Gabriel Tumbaco}{Facultad de Ingenieria en Electricidad y Computación}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHANGING THE NAME OF THE DIPLOMA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% It is possible to change the name of the diploma to append the concentration by defining \concentration
+%\newcommand{\concentration}{ELECTRICAL ENGINEERING}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHANGING THE TITLE PAGE FOR A CO-TUTORSHIP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% It is possible to add the school name of a co-tutorship using the command \cotutelle:
+%\cotutelle{XXXX UNIVERSITY}
+
+
+\listfiles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACTUAL DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagenumbering{Roman}
+
+%%- Title page -%%
+\maketitle
+
+%%- Jury presentation -%%
+\presentjury
+
+%%- Table of contents -%%
+\tableofcontents
+
+%%- List of tables -%%
+\listoftables
+
+%%- List of figures -%%
+\listoffigures
+
+
+%%- List of abbreviations -%%
+\begin{listofabbr}[3cm]
+\item [BOPACORP S.A.] Telecommunications company and main client of the project
+\item [BOPADIGITAL] Digital platform developed for BOPACORP S.A.
+\item [B2B] Business-to-Business (commercial model between companies)
+\item [CMS] Content Management System – module for website content administration
+\item [CRM] Customer Relationship Management – module for managing business clients and negotiations
+\item [DOC] Document Management Module
+\item [EMP] Employability / Application Module
+\item [MAT] Offer Matrix Module
+\item [REP] Reporting Module
+\item [SUP] Supervision and Approvals Module
+\item [CAT] Catalog and Website Module
+\item [SEG] Basic Security Module
+\item [NOT] Notifications Module
+\item [GPS] Global Positioning System
+\item [UI] User Interface
+\item [UX] User Experience
+\item [JWT] JSON Web Token (authentication mechanism)
+\item [TLS] Transport Layer Security (encryption protocol for HTTPS)
+\item [PDF] Portable Document Format
+\item [KPI] Key Performance Indicator
+\item [RUC] Unique Taxpayer Registry
+\item [ID] Identifier (unique reference or key)
+\end{listofabbr}
+
+%%- List of symbols -%%
+\begin{listofsymbols}[3cm]
+\item [\%] Percentage (used in performance indicators such as availability or success rate)
+\item [s] Seconds (used for system response times, e.g., ≤ 3 s)
+\item [MB] Megabytes (used for file upload size limits, e.g., 50 MB)
+\item [h] Hours (used for availability and operational timeframes)
+\end{listofsymbols}
+
+
+
+\cleardoublepage
+
+\pagenumbering{arabic}
+
+% Marginpar to the left of the document
+\reversemarginpar
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THESIS EXAMPLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%- Uncomment the literature review for a thesis by articles -%%
+%\begin{literaturereview}
+
+%\end{literaturereview}
+
+\chapter {RISK MANAGEMENT, SPRINT BACKLOGS, AND PROJECT SCHEDULING}
+
+\section{Risk Management}
+In this section, we identify, quantify, and classify the various risks that may arise during the software development process of \textit{BOPADIGITAL}. Additionally, a detailed assessment of the likelihood of occurrence, the potential impact of each risk, and the corresponding protocols to be followed in the event that they materialize is provided.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{8.5cm}|p{3.5cm}|}
+\hline
+\textbf{Description} & \textbf{Probability Range} \\ \hline
+
+Not Probable: The event is highly unlikely to occur. & 0\% -- 20\% \\ \hline
+
+Low Probability: The event is unlikely but possible. & 21\% -- 40\% \\ \hline
+
+Moderate Probability: The event has an even chance of occurring. & 41\% -- 60\% \\ \hline
+
+High Probability: The event is likely to occur. & 61\% -- 80\% \\ \hline
+
+Very High Probability: The event is almost certain to occur. & 81\% -- 100\% \\ \hline
+
+\end{tabular}
+\caption{Risk Probability Classification}
+\end{table}
+
+\subsection{Identified Risks for the BOPADIGITAL Project}
+
+The following table outlines the risks identified for the \textit{BOPADIGITAL} project, specifically associated with its functional modules (CRM, MAT, DOC, SUP) and operational environment.
+
+\begingroup
+\setlength{\LTleft}{-4cm plus -1fill}
+\setlength{\LTright}{\LTleft}
+
+\begin{longtable}{|>%
+{\centering\arraybackslash}p{0.07\linewidth}|>%
+{\arraybackslash}p{0.18\linewidth}|>%
+{\arraybackslash}p{0.27\linewidth}|>%
+{\centering\arraybackslash}p{0.12\linewidth}|>%
+{\centering\arraybackslash}p{0.12\linewidth}|>%
+{\arraybackslash}p{0.24\linewidth}|}
+\hline
+\textbf{ID} &
+\textbf{Risk Name} &
+\textbf{Risk Description} &
+\textbf{Probability} &
+\textbf{Impact} &
+\textbf{Action Protocol} \\ \hline
+\endfirsthead
+
+\multicolumn{6}{l}{\textit{Table continued from previous page}} \\ \hline
+\textbf{ID} &
+\textbf{Risk Name} &
+\textbf{Risk Description} &
+\textbf{Probability} &
+\textbf{Impact} &
+\textbf{Action Protocol} \\ \hline
+\endhead
+
+001 &
+Field Connectivity Failures &
+Sales advisors may lose network connectivity when uploading visits or documents in remote areas. &
+Very High &
+Critical &
+Implement a robust \textit{offline-first} architecture that stores data locally and synchronizes automatically once connectivity is restored. \\ \hline
+
+002 &
+Geolocation Inaccuracy &
+Visit records depend on accurate GPS coordinates, which may vary across devices or environments. &
+High &
+High &
+Apply tolerance thresholds for location validation and allow supervised manual correction with system justification when GPS data is unreliable. \\ \hline
+
+003 &
+Subsidy Calculation Complexity (MAT) &
+Business rules for automatic offer and subsidy calculations may be misinterpreted or incorrectly implemented. &
+Moderate &
+High &
+Validate calculation formulas with financial stakeholders before development and implement exhaustive unit tests for the calculation engine. \\ \hline
+
+004 &
+Sales Staff Resistance to Change &
+Users accustomed to manual processes may resist adopting the mobile application. &
+High &
+Moderate &
+Design an intuitive UX/UI and implement a training plan focused on demonstrating productivity and administrative workload reduction. \\ \hline
+
+005 &
+Storage Overload (DOC Module) &
+Massive uploads of contract images and legal documents may exceed the projected storage capacity. &
+Low &
+High &
+Enable client-side image compression and use scalable storage services with defined retention policies. \\ \hline
+
+006 &
+Approval Role and Permission Changes &
+The approval hierarchy (Advisor → Supervisor → Manager) may change during development or operation. &
+Moderate &
+Moderate &
+Develop a flexible, database-driven RBAC system that supports dynamic configuration without hardcoded logic. \\ \hline
+
+\caption{Identified Risks and Mitigation Strategies for the BOPADIGITAL Project}
+\end{longtable}
+
+\endgroup
+
+\newpage
+\section{Product backlog}
+
+\begingroup
+\setlength{\LTleft}{-1.2cm plus -1fill}
+\setlength{\LTright}{\LTleft}
+\setlength{\LTcapwidth}{\textwidth}
+
+\begin{longtable}[c]{|>%
+{\centering\arraybackslash}p{0.08\linewidth}|>%
+{\centering\arraybackslash}p{0.08\linewidth}|>%
+{\centering\arraybackslash}p{0.14\linewidth}|>%
+{\arraybackslash}p{0.46\linewidth}|>%
+{\centering\arraybackslash}p{0.14\linewidth}|}
+\hline
+\textbf{ID} &
+\textbf{Priority} &
+\textbf{Dependencies} &
+\textbf{Backlog Item Description} &
+\textbf{Estimation (hours)} \\ \hline
+\endfirsthead
+
+\multicolumn{5}{l}{\textit{Table continued from previous page}} \\ \hline
+\textbf{ID} &
+\textbf{Priority} &
+\textbf{Dependencies} &
+\textbf{Backlog Item Description} &
+\textbf{Estimation (hours)} \\ \hline
+\endhead
+
+PB1 & 0 & None & Research and Environment: Investigation of the architecture (Docker, Node.js, React). Configuration of the Git repository, branch strategy, and CICD pipeline basics. Includes creation of the initial "Hello World" to verify connectivity. &
+6 \\ \hline
+
+PB2 & 0 & PB1 &
+Database Architecture: Design the complete database schema (PostgreSQL) including tables for Users, Clients, Matrices, Subsidies, and Visits. Generation of the ER Diagram and initial migration scripts. &
+6 \\ \hline
+
+PB3 & 0 & PB1 &
+Cloud Storage Setup: Configuration of the file storage service (e.g., AWS S3 or local server storage) to handle PDF and image uploads securely. Includes access key generation. &
+4 \\ \hline
+
+PB4 & 0 & PB1 &
+Backend Foundation: Setup of the Express.js server, error handling middleware, CORS configuration, and connection pooling for the database. &
+4 \\ \hline
+
+PB5 & 1 & PB2, PB4 &
+Authentication Logic (Backend): Implementation of JWT (JSON Web Token) strategy, password hashing (Bcrypt), and login/register endpoints. &
+8 \\ \hline
+
+PB6 & 1 & PB5 &
+As a System Admin, I want to create user accounts with specific roles (Advisor, Supervisor, Manager) so that I can control who accesses the platform. &
+6 \\ \hline
+
+PB7 & 1 & PB5 &
+As a Sales Advisor, I want to log in to the Web Portal using my credentials so that I can access my dashboard securely. &
+4 \\ \hline
+
+PB8 & 1 & PB5 &
+As a Sales Advisor, I want to log in to the Mobile App using my credentials so that I can work from the field. &
+6 \\ \hline
+
+PB9 & 2 & PB7 &
+As a User, I want to reset my password via email verification in case I forget it, ensuring I can recover access to my account. &
+8 \\ \hline
+
+PB10 & 2 & PB1 &
+Landing Page Structure: Implementation of the main public website layout (Header, Footer, Navigation) using React. &
+6 \\ \hline
+
+PB11 & 2 & PB10 &
+As a Visitor, I want to view the "About Us" and "Contact" sections on the public site so that I can learn about BOPACORP. &
+4 \\ \hline
+
+PB12 & 2 & PB2, PB10 &
+As a Visitor, I want to browse the Service Catalog by categories so that I can easily find the services I need. &
+8 \\ \hline
+
+PB13 & 2 & PB12 &
+As a Visitor, I want to search for specific services in the catalog using keywords so that I can find information faster. &
+4 \\ \hline
+
+PB14 & 3 & PB10 &
+As an Applicant, I want to fill out a "Work with Us" form on the public site so that I can apply for a job. &
+6 \\ \hline
+
+PB15 & 3 & PB3, PB14 &
+As an Applicant, I want to upload my CV (PDF) through the form so that HR can review my profile. &
+6 \\ \hline
+
+PB16 & 1 & PB2, PB4 &
+Client Management API: Development of backend endpoints (GET, POST, PUT, DELETE) for the Clients and Prospects table. &
+6 \\ \hline
+
+PB17 & 1 & PB7, PB16 &
+As a Sales Advisor, I want to register a new Client on the Web Dashboard, entering their RUC, name, and address. &
+6 \\ \hline
+
+PB18 & 1 & PB8, PB16 &
+As a Sales Advisor, I want to register a new Client from the Mobile App, so that I can add prospects while in the field. &
+8 \\ \hline
+
+PB19 & 1 & PB17 &
+As a Sales Advisor, I want to edit client information on the Web to correct errors or update contact details. &
+4 \\ \hline
+
+PB20 & 1 & PB16 &
+As a Sales Advisor, I want to filter my client list by status (Active/Inactive) or name, so I can find specific accounts quickly. &
+4 \\ \hline
+
+PB21 & 1 & PB2 &
+Geolocation Service: Implementation of the backend logic to store and query geospatial data (Latitude/Longitude) for visit records. &
+6 \\ \hline
+
+PB22 & 1 & PB8, PB21 &
+As a Sales Advisor, I want to view a map on the Mobile App showing my current location to verify my GPS is working. &
+6 \\ \hline
+
+PB23 & 1 & PB22 &
+As a Sales Advisor, I want to "Check-In" at a client's location using the Mobile App so that my visit start time and location are recorded. &
+8 \\ \hline
+
+PB24 & 1 & PB23 &
+As a Sales Advisor, I want to "Check-Out" adding a summary note of the visit so that the interaction is fully documented. &
+6 \\ \hline
+
+PB25 & 1 & PB24 &
+As a Supervisor, I want to view the history of visits for my team on a map or list to monitor field compliance. &
+6 \\ \hline
+
+PB26 & 1 & PB2 &
+Matrix Calculation Engine: Implementation of the backend logic to calculate base prices, apply subsidies, and compute taxes. &
+10 \\ \hline
+
+PB27 & 1 & PB7, PB26 &
+As a Sales Advisor, I want to create a new "Offer Matrix" on the Web, selecting a client to start the quoting process. &
+4 \\ \hline
+
+PB28 & 1 & PB27 &
+As a Sales Advisor, I want to add multiple services/products to the matrix so that I can build a comprehensive offer. &
+6 \\ \hline
+
+PB29 & 1 & PB26, PB28 &
+As a Sales Advisor, I want the system to automatically calculate the total cost and applicable subsidies as I add items. &
+8 \\ \hline
+
+PB30 & 2 & PB29 &
+As a Sales Advisor, I want to save the Matrix as a "Draft" so that I can continue working on it later without losing progress. &
+4 \\ \hline
+
+PB31 & 2 & PB29 &
+As a Sales Advisor, I want to generate a PDF preview of the offer so that I can show it to the client for immediate review. &
+8 \\ \hline
+
+PB32 & 2 & PB31 &
+As a Sales Advisor, I want to email the PDF offer directly to the client from the system to speed up communication. &
+4 \\ \hline
+
+PB33 & 2 & PB3 &
+Document Management API: Backend setup to handle multipart form data for uploading legal documents linked to a Matrix.&
+6 \\ \hline
+
+PB34 & 2 & PB33 &
+As a Sales Advisor, I want to upload the Client's RUC and ID scans to the specific Offer Matrix to fulfill legal requirements. &
+6 \\ \hline
+
+PB35 & 2 & PB34 &
+As a Sales Advisor, I want to validate that the uploaded files are readable and within the size limit before saving. &
+4 \\ \hline
+
+PB36 & 2 & PB30, PB34 &
+As a Sales Advisor, I want to submit a completed Matrix for approval, changing its status to "Pending". &
+2 \\ \hline
+
+PB37 & 2 & PB36 &
+As a Supervisor, I want to receive a notification (in-app or email) when an advisor submits a matrix for approval. &
+4 \\ \hline
+
+PB38 & 2 & PB37 &
+As a Supervisor, I want to view a "Pending Approvals" inbox so that I can see which offers require my attention. &
+4 \\ \hline
+
+PB39 & 2 & PB38 &
+As a Supervisor, I want to view the details and documents of a pending Matrix to decide whether to approve it. &
+4 \\ \hline
+
+PB40 & 2 & PB39 &
+As a Supervisor, I want to Approve a matrix so that the sale can be finalized and sent to billing. &
+2 \\ \hline
+
+PB41 & 2 & PB39 &
+As a Supervisor, I want to Reject a matrix with a mandatory comment explaining the reason for rejection. &
+4 \\ \hline
+
+PB42 & 3 & PB2 &
+Reporting Queries: Optimization of SQL queries to aggregate sales data by month, advisor, and region. &
+6 \\ \hline
+
+PB43 & 3 & PB42 &
+As a General Manager, I want to view a dashboard with a bar chart showing "Sales vs Targets" for the current month. &
+8 \\ \hline
+
+PB44 & 3 & PB43 &
+As a General Manager, I want to export the monthly sales report to an Excel file for further analysis. &
+6 \\ \hline
+
+PB45 & 0 & All &
+Integration Testing: Execution of end-to-end tests covering the flow from Client Creation -> Visit -> Matrix -> Approval. &
+16 \\ \hline
+
+PB46 & 0 & All &
+Production Deployment: Configuration of the production server, environment variables, and final deployment of Web and Mobile builds.&
+8 \\ \hline
+
+\caption{Product Backlog for the BOPADIGITAL Project}
+\end{longtable}
+
+\endgroup
+
+
+\clearpage
+\section{Sprint Backlog}
+
+\subsection{Sprint 1: Foundation, Auth \& Public Web (Weeks 1--4)}
+\textbf{Goal:} Establish the technical architecture, security layer, and the public-facing ecosystem (Web \& Employability).
+
+\begingroup
+\setlength{\LTleft}{-1.2cm plus -1fill}
+\setlength{\LTright}{\LTleft}
+\setlength{\LTcapwidth}{\textwidth}
+
+\begin{longtable}{|
+p{3.0cm}|
+p{4.6cm}|
+p{5.6cm}|
+p{3.0cm}|
+}
+\hline
+\textbf{Product Backlog Item} &
+\textbf{User Story / Description} &
+\textbf{Tasks} &
+\textbf{Assigned To} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{Product Backlog Item} &
+\textbf{User Story / Description} &
+\textbf{Tasks} &
+\textbf{Assigned To} \\ \hline
+\endhead
+
+PB1 -- PB4 (Infrastructure) &
+Technical setup of the core infrastructure including containers, database, cloud storage, and backend services. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Repository and Docker environment setup
+\item Database schema creation
+\item S3 bucket configuration
+\item Express.js base configuration
+\end{itemize} &
+Gabriel Tumbaco \newline
+Nahim Díaz \\ \hline
+
+PB5 -- PB9 (Auth \& Roles) &
+Implementation of authentication and authorization using JWT and role-based access control. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Login and registration endpoints
+\item Definition of Admin, Advisor, and User roles
+\item Password recovery logic
+\end{itemize} &
+Anthony Navarrete \newline
+Salvador Muñoz \\ \hline
+
+PB10 -- PB13 (Public Web) &
+Development of the public-facing website including landing page and service catalog. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item React layout (Header and Footer)
+\item Dynamic service catalog
+\item Search functionality
+\end{itemize} &
+Gabriel Tumbaco \newline
+Shirley Aragon \\ \hline
+
+PB14 -- PB15 (Employability) &
+Implementation of the employability module for applicant registration and CV submission. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item ``Work with Us'' form
+\item CV file validation
+\item Secure CV storage
+\end{itemize} &
+Shirley Aragon \\ \hline
+
+\caption{Sprint 1 Backlog — Foundation, Authentication and Public Web}
+\end{longtable}
+
+\endgroup
+
+\clearpage
+\subsection{Sprint 2: CRM Core \& Geolocation (Weeks 5--8)}
+\textbf{Goal:} Enable the management of the client portfolio and tracking of field operations (Visits).
+
+\begingroup
+\setlength{\LTleft}{-1.2cm plus -1fill}
+\setlength{\LTright}{\LTleft}
+\setlength{\LTcapwidth}{\textwidth}
+
+\begin{longtable}{|
+p{3.0cm}|
+p{4.6cm}|
+p{5.6cm}|
+p{3.0cm}|
+}
+\hline
+\textbf{Product Backlog Item} &
+\textbf{User Story / Description} &
+\textbf{Tasks} &
+\textbf{Assigned To} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{Product Backlog Item} &
+\textbf{User Story / Description} &
+\textbf{Tasks} &
+\textbf{Assigned To} \\ \hline
+\endhead
+
+PB16 -- PB20 (Client Mgmt) &
+Client CRUD operations and filtering for effective portfolio management. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Client API (PostgreSQL)
+\item Web forms for client management
+\item Mobile ``Add Client'' view
+\item Search and status filters
+\end{itemize} &
+Salvador Muñoz \newline
+Nahim Díaz \newline
+Anthony Navarrete \\ \hline
+
+PB21 -- PB22 (Geo Services) &
+Backend geolocation services and mobile map visualization. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Spatial data setup (PostGIS / Geometry)
+\item Mobile map integration
+\end{itemize} &
+Anthony Navarrete \newline
+Shirley Aragon \\ \hline
+
+PB23 -- PB25 (Visit Logic) &
+Visit tracking through check-in and check-out processes. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Visit timer logic
+\item Coordinate capture on check-in
+\item Supervisor visit map view
+\end{itemize} &
+Anthony Navarrete \newline
+Nahim Díaz \\ \hline
+
+PB26, PB29 (Calc Engine) &
+Implementation of pricing, subsidy, and calculation logic. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Subsidy calculation algorithm
+\item Total cost computation
+\end{itemize} &
+Shirley Aragon \newline
+Salvador Muñoz \\ \hline
+
+PB27 -- PB28 (Matrix UI) &
+User interface for building offer matrices. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Product/service selection UI
+\item Cart state management
+\end{itemize} &
+Gabriel Tumbaco \newline
+Salvador Muñoz \\ \hline
+
+PB30 (Drafts) &
+Save partially completed matrices for later continuation. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item ``Save as Draft'' functionality
+\end{itemize} &
+Salvador Muñoz \\ \hline
+
+PB31 -- PB32 (PDF \& Email) &
+Generation and delivery of offer documents. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item PDF library integration (e.g., PDFKit)
+\item Email service configuration (SMTP)
+\end{itemize} &
+Nahim Díaz \newline
+Gabriel Tumbaco \\ \hline
+
+PB33 -- PB35 (Doc Upload) &
+Legal document upload and validation. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Multipart upload API
+\item ID / RUC scanning UI
+\item File validation
+\end{itemize} &
+Shirley Aragon \newline
+Anthony Navarrete \\ \hline
+
+PB36 -- PB41 (Approvals) &
+Supervisor approval workflow for offer matrices. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item State machine (Pending → Approved / Rejected)
+\item Notification system
+\item Approval inbox UI
+\end{itemize} &
+Anthony Navarrete \newline
+Salvador Muñoz \\ \hline
+
+PB42 -- PB44 (Reporting) &
+Business intelligence dashboards and report exports. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Aggregation queries (sales by month)
+\item Chart components (Recharts)
+\item Excel export logic
+\end{itemize} &
+Shirley Aragon \newline
+Nahim Díaz \\ \hline
+
+PB45 (QA) &
+End-to-end validation of the system. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Integration testing (Cypress / Selenium)
+\item Bug fixing sprint
+\end{itemize} &
+All Team Members \\ \hline
+
+PB46 (Deploy) &
+Final production deployment and documentation. &
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Server configuration
+\item Domain setup and SSL
+\item Final user manual
+\end{itemize} &
+Nahim Díaz \newline
+Gabriel Tumbaco \\ \hline
+
+\caption{Sprint 2 Backlog — CRM Core, Geolocation, and Business Logic}
+\end{longtable}
+
+\endgroup
+
+\clearpage
+\section{Scheduling}
+
+\begingroup
+\setlength{\LTleft}{-1.2cm plus -1fill}
+\setlength{\LTright}{\LTleft}
+\setlength{\LTcapwidth}{\textwidth}
+
+\begin{longtable}{|
+p{1cm}|
+p{3cm}|
+p{3cm}|
+p{3cm}|
+p{0.9cm}|
+p{1cm}|
+p{1cm}|
+p{1cm}|
+}
+\hline
+\textbf{ID} &
+\textbf{Description} &
+\textbf{Details} &
+\textbf{Product Backlog Items} &
+\textbf{Hours} &
+\textbf{Earliest Start} &
+\textbf{Latest Finish} &
+\textbf{Float} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{ID} &
+\textbf{Description} &
+\textbf{Details} &
+\textbf{Product Backlog Items} &
+\textbf{Hours} &
+\textbf{Earliest Start} &
+\textbf{Latest Finish} &
+\textbf{Float} \\ \hline
+\endhead
+
+A &
+System Foundation \& DB &
+Docker setup, PostgreSQL schema, and backend base architecture. &
+PB1, PB2, PB3, PB4 &
+20 & 0 & 20 & 0 \\ \hline
+
+B &
+Auth \& Security Core &
+JWT, roles, and user management implementation. &
+PB5, PB6, PB7, PB8, PB9 &
+32 & 20 & 52 & 0 \\ \hline
+
+C &
+Public Ecosystem &
+Landing page, catalog, and employability modules. &
+PB10--PB15 &
+34 & 20 & 192 & 138 \\ \hline
+
+D &
+CRM \& Field Operations &
+Client management, geolocation, and visit tracking. &
+PB16--PB25 &
+60 & 52 & 112 & 0 \\ \hline
+
+E &
+Matrix Calculation Engine &
+Pricing, subsidies, PDF generation, and drafts. &
+PB26--PB32 &
+44 & 112 & 156 & 0 \\ \hline
+
+F &
+Docs \& Approval Workflow &
+Legal docs, validation, and approval processes. &
+PB33--PB41 &
+36 & 156 & 192 & 0 \\ \hline
+
+G &
+BI, QA \& Deployment &
+Dashboards, testing, and production release. &
+PB42--PB46 &
+44 & 192 & 236 & 0 \\ \hline
+
+\caption{Project Scheduling and Critical Path Overview}
+\end{longtable}
+
+\endgroup
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth, height=1.1\textheight,
+    keepaspectratio]{Figures/aaa.jpeg}
+    \caption{Activity on Arrow Diagram}
+    \label{fig:mi_imagen}
+\end{figure}
+
+\chapter{Static System Modeling and Architectural Design}
+\section{Use Case Diagram}
+
+
+\centering
+\includegraphics[width=\linewidth]{Figures/uml-usecases-part0.pdf}
+\captionof{figure}{BOPADIGITAL Use Case Diagram Part 1}
+
+
+
+\begin{landscape}
+\centering
+\includegraphics[width=\linewidth]{Figures/uml-use-cases-fit.pdf}
+\captionof{figure}{BOPADIGITAL Use Case Diagram Part 2}
+\end{landscape}
+
+\section{Use Case Documentation}
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=2,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Contact an Advisor from the Catalog}
+\label{tab:usecasedoc1} % <--- He cambiado 'fig' por 'tab' para consistencia
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=3,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc1} (continued)} %
+\end{table}
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=4,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - View Job Vacancies}
+\label{tab:usecasedoc4} % 
+\end{table}
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=6,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Apply for a Job Vacancy}
+\label{tab:usecasedoc6} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=7,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc6} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=8,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Access Control Panel with Credentials}
+\label{tab:usecasedoc8} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=9,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc8} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=10,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Manage Product Catalog}
+\label{tab:usecasedoc10} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=11,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc10} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=12,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Register New Client}
+\label{tab:usecasedoc12} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=13,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc12} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=14,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Update Existing Client}
+\label{tab:usecasedoc14} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=15,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc14} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=16,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation -Edit Negotiations}
+\label{tab:usecasedoc16} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=17,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc16} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=18,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Register Visit}
+\label{tab:usecasedoc18} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=19,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc18} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+\FloatBarrier
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=20,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - View Visit History}
+\label{tab:usecasedoc20} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=21,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc20} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=22,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Update negotiation status}
+\label{tab:usecasedoc22} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=23,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc22} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=24,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Assign client to advisor}
+\label{tab:usecasedoc24} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=25,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc24} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=26,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Unassign or remove client from an advisor}
+\label{tab:usecasedoc26} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=27,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc26} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=28,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Disable closed negotiations}
+\label{tab:usecasedoc28} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=29,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc28} (continued)} % <--- Ahora coinciden
+\end{table}
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=30,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - View recent advisor activity}
+\label{tab:usecasedoc30} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=31,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc30} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=32,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - View costs per advisor}
+\label{tab:usecasedoc32} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=33,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc32} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=34,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc_cropped.pdf}
+\caption{Use Case Documentation - Get progress report}
+\label{tab:usecasedoc34} %
+\end{table}
+
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=1,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Compare Metrics Between Advisors}
+\label{tab:usecasedoc2-1} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=2,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-1} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=3,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-1} (continued)} % <--- Ahora coinciden
+\end{table} 
+
+
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=4,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - View Advisor Metrics}
+\label{tab:usecasedoc2-4} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=5,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-4} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=6,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-4} (continued)} % <--- Ahora coinciden
+\end{table} 
+
+\FloatBarrier
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=7,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Filter Reports}
+\label{tab:usecasedoc2-7} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=8,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-7} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=9,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-7} (continued)} % <--- Ahora coinciden
+\end{table} 
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=10,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Generate Sales and Closing Reports}
+\label{tab:usecasedoc2-10} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=11,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-10} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=12,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-10} (continued)} % <--- Ahora coinciden
+\end{table} 
+
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=13,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Filter Client Lists by Metrics}
+\label{tab:usecasedoc2-13} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=14,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-13} (continued)} % <--- Ahora coinciden
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=15,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-13} (continued)} % <--- Ahora coinciden
+\end{table} 
+\FloatBarrier
+% compilo hasta aqui
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=16,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Reject Matrices }
+\label{tab:usecasedoc2-16} %
+\end{table}
+\FloatBarrier
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=17,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-16} (continued)} % 
+\end{table}
+
+\FloatBarrier
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=18,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation -  Review Operator Availability}
+\label{tab:usecasedoc2-18} 
+\end{table}
+
+\FloatBarrier
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=19,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-18} (continued)} 
+\end{table}
+
+\FloatBarrier
+
+\begin{table}[p]
+\centering
+\ContinuedFloat
+\hspace*{-2.5cm}
+\includegraphics[
+  page=20,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-18} (continued)} 
+\end{table}
+\FloatBarrier
+
+%------------------------------
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=21,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Check Matrix Approval Status}
+\label{tab:usecasedoc2-21} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=22,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-21} (continued)} %
+\end{table}
+\FloatBarrier
+%------------------------------
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=23,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Consult Clients and Their Documentation Status}
+\label{tab:usecasedoc2-23} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=24,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-23} (continued)} % 
+\end{table}
+
+\FloatBarrier
+%------------------------------
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=25,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Download Documentation}
+\label{tab:usecasedoc2-25} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=26,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-25} (continued)} % 
+\end{table}
+\FloatBarrier
+%------------------------------
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=28,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Tag Documentation}
+\label{tab:usecasedoc2-28} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=29,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-28} (continued)} %
+\end{table}
+\FloatBarrier
+%------------------------------
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=30,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Review Documentation Uploaded to Profile}
+\label{tab:usecasedoc2-30} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=31,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-30} (continued)} % 
+\end{table}
+\FloatBarrier
+%------------------------------
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=32,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Add Client Documentation}
+\label{tab:usecasedoc2-32} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=33,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-32} (continued)} % 
+\end{table}
+\FloatBarrier
+%------------------------------
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=34,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Review and Approve New Matrices}
+\label{tab:usecasedoc2-34} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=35,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-34} (continued)} % 
+\end{table}
+
+\FloatBarrier
+%------------------------------
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=36,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Request Supervisor Approval}
+\label{tab:usecasedoc2-36} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=37,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-36} (continued)} %
+\end{table}
+
+\FloatBarrier
+%------------------------------
+
+\begin{table}[p]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=38,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption{Use Case Documentation - Create Offer Matrix for Specific Clients}
+\label{tab:usecasedoc2-38} %
+\end{table}
+
+\begin{table}[p]
+\ContinuedFloat
+\centering
+\hspace*{-1.5cm}
+\includegraphics[
+  page=39,
+  height=0.9\textheight,
+  keepaspectratio
+]{Figures/uml-use-cases-doc-2_cropped.pdf}
+\caption*{Table \ref{tab:usecasedoc2-38} (continued)} % 
+\end{table}
+
+\FloatBarrier
+
+\section{Class Diagrams}
+
+\begin{landscape}
+\centering
+
+\includegraphics[page=1, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL Class Diagram Overview}
+\clearpage
+
+\includegraphics[page=2, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL Auth Module Class Diagram}
+\clearpage
+
+\includegraphics[page=3, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL CoreUsers Module Class Diagram}
+\clearpage
+
+\includegraphics[page=4, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL CRM Module Class Diagram}
+\clearpage
+
+\includegraphics[page=5, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL Documents Module Class Diagram}
+\clearpage
+
+\includegraphics[page=6, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL Employability Module Class Diagram}
+\clearpage
+
+\includegraphics[page=7, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL OfferMatrices Module Class Diagram}
+\clearpage
+
+\includegraphics[page=8, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL Reports Module Class Diagram}
+\clearpage
+
+\includegraphics[page=9, width=\linewidth]{Figures/uml-class-diagram.pdf}
+\captionof{figure}{BOPADIGITAL ServiceCatalogCMS Module Class Diagram}
+\clearpage
+
+\end{landscape}
+
+\section{Object Diagrams}
+
+\begin{landscape}
+\centering
+\includegraphics[page=1, height=0.9\textheight, width=\linewidth]{Figures/uml-objects.pdf}
+\captionof{figure}{BOPADIGITAL CRM Object Diagram Overview}
+\clearpage
+
+
+\includegraphics[page=2, height=0.9\textheight, width=\linewidth]{Figures/uml-objects.pdf}
+\captionof{figure}{BOPADIGITAL OfferMatrix Object Diagram Overview}
+\clearpage
+
+\includegraphics[page=3, height=0.9\textheight, width=\linewidth]{Figures/uml-objects.pdf}
+\captionof{figure}{BOPADIGITAL Catalog Object Diagram Overview}
+\clearpage
+
+\includegraphics[page=4, height=0.9\textheight, width=\linewidth]{Figures/uml-objects.pdf}
+\captionof{figure}{BOPADIGITAL Auth Object Diagram Overview}
+\clearpage
+
+\includegraphics[page=5, height=0.9\textheight, width=\linewidth]{Figures/uml-objects.pdf}
+\captionof{figure}{BOPADIGITAL Documents Object Diagram Overview}
+\clearpage
+
+\end{landscape}
+
+\section{Components Diagram}
+\begin{landscape}
+\centering
+\includegraphics[page=1, height=0.9\textheight]{Figures/uml-components_cropped.pdf}
+\captionof{figure}{BOPADIGITAL Components Object Diagram}
+\clearpage
+\end{landscape}
+
+\section{Deployment Diagram}
+\begin{landscape}
+\centering
+\includegraphics[page=1, height=0.9\textheight]{Figures/uml-deploy.pdf}
+\captionof{figure}{BOPADIGITAL Deployment Diagram}
+\clearpage
+\end{landscape}
+
+\chapter{System Behavioral Modeling}
+
+\section{Activity Diagrams }
+
+\includegraphics[page=1, height=0.9\textheight]{Figures/uml-activity.pdf}
+\captionof{figure}{BOPADIGITAL Activity Diagram – Negotiation Life Cycle}
+\clearpage
+
+\includegraphics[page=2, height=0.9\textheight]{Figures/uml-activity.pdf}
+\captionof{figure}{BOPADIGITAL Activity Diagram – Offer Matrices}
+\clearpage
+
+\includegraphics[page=3, height=0.9\textheight]{Figures/uml-activity.pdf}
+\captionof{figure}{BOPADIGITAL Activity Diagram – Visit Management}
+\clearpage
+
+\includegraphics[page=4, height=0.9\textheight]{Figures/uml-activity.pdf}
+\captionof{figure}{BOPADIGITAL Activity Diagram – Auth}
+\clearpage
+
+\includegraphics[page=5, height=0.9\textheight]{Figures/uml-activity.pdf}
+\captionof{figure}{BOPADIGITAL Activity Diagram – Document Management}
+\clearpage
+
+
+
+\section{Sequence Diagrams}
+
+\begin{landscape}
+\centering
+
+\includegraphics[page=1, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - registerVisit } \clearpage
+
+\includegraphics[page=2, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - reviewVisit } \clearpage
+
+\includegraphics[page=3, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - updateNegotiationStatus } \clearpage
+
+\includegraphics[page=4, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - checkVisitHistory } \clearpage
+
+\includegraphics[page=5, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - deactivateClient } \clearpage
+
+\includegraphics[page=6, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - createOfferMatrix } \clearpage
+
+\includegraphics[page=7, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - addItemToMatrix } \clearpage
+
+\includegraphics[page=8, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - recalculateTotals } \clearpage
+
+\includegraphics[page=9, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - saveDraft } \clearpage
+
+\includegraphics[page=10, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - sendToSupervisor } \clearpage
+
+\includegraphics[page=11, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - Login } \clearpage
+
+\includegraphics[page=12, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - listPendingMatrices } \clearpage
+
+\includegraphics[page=13, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - approveMatrix } \clearpage
+
+\includegraphics[page=14, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - rejectMatrix } \clearpage
+
+\includegraphics[page=15, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - uploadDocument } \clearpage
+
+\includegraphics[page=16, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - approveDocument } \clearpage
+
+\includegraphics[page=17, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - rejectDocument } \clearpage
+
+\includegraphics[page=18, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - downloadDocument } \clearpage
+
+\includegraphics[page=19, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - searchCatalog } \clearpage
+
+\includegraphics[page=20, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - filterCatalog } \clearpage
+
+\includegraphics[page=21, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram - createCatalogItem } \clearpage
+
+\includegraphics[page=22, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – checkPermission } \clearpage
+
+\includegraphics[page=23, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – editWebContents } \clearpage
+
+\includegraphics[page=24, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – generateReport } \clearpage
+
+\includegraphics[page=25, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – exportReport } \clearpage
+
+\includegraphics[page=26, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – activeVacancies } \clearpage
+
+\includegraphics[page=27, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – applyToVacancy } \clearpage
+
+\includegraphics[page=28, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – evaluateApplication } \clearpage
+
+\includegraphics[page=29, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – submitApplication } \clearpage
+
+\includegraphics[page=30, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – registrateClient } \clearpage
+
+\includegraphics[page=31, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – assignClient } \clearpage
+
+\includegraphics[page=32, height=0.9\textheight]{Figures/uml-sequence.pdf} \captionof{figure}{BOPADIGITAL Sequence Diagram – scheduleVisit } \clearpage
+
+\end{landscape}
+
+\section{Collaboration–Communication Diagrams}
+\begin{landscape}
+\centering
+
+\includegraphics[page=1, height=0.9\textheight]{Figures/uml-comunication.pdf} \captionof{figure}{BOPADIGITAL Communication Diagram – Auth } \clearpage
+
+\includegraphics[page=2, height=0.9\textheight]{Figures/uml-comunication.pdf} \captionof{figure}{BOPADIGITAL Communication Diagram – Approve Offer Matrix } \clearpage
+
+\includegraphics[page=3, height=0.9\textheight]{Figures/uml-comunication.pdf} \captionof{figure}{BOPADIGITAL Communication Diagram – uploadDocument } \clearpage
+
+\end{landscape}
+
+\section{State Diagrams}
+
+\includegraphics[page=1, height=0.9\textheight]{Figures/uml-states.pdf} \captionof{figure}{BOPADIGITAL State Diagram – Negotiation} \clearpage
+
+\includegraphics[page=2, height=0.9\textheight]{Figures/uml-states.pdf} \captionof{figure}{BOPADIGITAL State Diagram – Offer Matrix} \clearpage
+
+\includegraphics[page=3, height=0.9\textheight]{Figures/uml-states.pdf} \captionof{figure}{BOPADIGITAL State Diagram – Negotiation Document} \clearpage
+
+\includegraphics[page=4, height=0.9\textheight]{Figures/uml-states.pdf} \captionof{figure}{BOPADIGITAL State Diagram – Job Application} \clearpage
+
+
+
+
+\chapter {INDIVIDUAL CONTRIBUTIONS}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4.5cm}|p{9cm}|}
+\hline
+\textbf{Name} & \textbf{Contributions} \\ \hline
+Aragon Intriago Shirley Yamel &
+Documentation of sprint backlogs and project schedule, development of activity diagrams for system processes, and support in the modeling of collaboration and state diagrams. \\ \hline
+Diaz Osorio Fernando Nahim &
+Identification and documentation of project risks, participation in sprint planning activities, and contribution to the definition and documentation of use case diagrams. \\ \hline
+Muñoz Sanchez Salvador Gabriel &
+Design and documentation of class diagrams aligned with SOLID principles, modeling of object diagrams for key system aspects, and contribution to the system component and deployment diagrams. \\ \hline
+Navarrete Castillo Anthony Josue &
+Development of the system prototype, modeling of sequence diagrams for transactional algorithms, and participation in the documentation of system behavior diagrams. \\ \hline
+Tumbaco Santana Gabriel Alejandro &
+Integration and consistency of project documentation, coordination of static and behavioral UML modeling (use case, component, deployment, and activity diagrams), and consolidation of the system prototype. \\ \hline
+\end{tabular}
+\caption{Individual Contributions of the Project}
+\end{table}
+
+
+\chapter{AUTHORSHIP DECLARATION}
+
+We, the undersigned members of the \textbf{BOPADIGITAL} development team, hereby declare that the present document titled \textbf{“BOPACORP S.A. Requirements Specification Document”} has been entirely prepared by us as part of the course \textbf{Software Engineering I} at the \textbf{Escuela Superior Politécnica del Litoral (ESPOL)}.
+
+We affirm that all sections, analyses, and specifications contained in this document represent our own work and understanding, based on information gathered from the client and the methodologies applied during the software requirements engineering process.  
+
+No part of this document has been copied, plagiarized, or taken from other sources without proper acknowledgment. Any external reference used has been duly cited in the bibliography according to academic integrity standards.
+
+Each member of the team assumes full responsibility for the authenticity, accuracy, and originality of the content herein.
+
+\vspace{1cm}
+
+\noindent\textbf{Digital Confirmation:} All members of the team confirm authorship through their electronic submission of this document.
+
+\vspace{1cm}
+
+\noindent\textbf{Team Members:}
+
+\vspace{0.3cm}
+\noindent Aragon Intriago Shirley Yamel \\
+Diaz Osorio Fernando Nahim \\
+Muñoz Sanchez Salvador Gabriel \\
+Navarrete Castillo Anthony Josue \\
+Tumbaco Santana Gabriel Alejandro
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Appendix example:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+
+%% To use more than one appendix
+\multiannexe
+
+%% Appendix from an external file
+% \include{extApp}
+\captionsetup[figure]{list=yes}
+
+\chapter{PROTOTYPE}
+\section{Prototype's Screenshots}
+\subsubsection{Sales Advisor's flow}
+% flow1
+\includegraphics[width=\textwidth]{Figures/flujo1.png} 
+\captionof{figure}{BOPADIGITAL Prototype - Main view of the Sales Dashboard displaying the Kanban board with customer distribution by stages.} 
+
+% flow2
+\includegraphics[width=\textwidth]{Figures/flujo2.png} 
+\captionof{figure}{BOPADIGITAL Prototype - Visualization of the ability to move clients across stages within the Kanban board.} 
+\clearpage
+
+% flow3
+\includegraphics[width=\textwidth]{Figures/flujo3-vercliente.png} 
+\captionof{figure}{BOPADIGITAL Prototype - Detailed view of the client , showing contact information, interaction history, and visit planning panel.} 
+
+% flow4
+\includegraphics[width=\textwidth]{Figures/flujo4-modificar.png} 
+\captionof{figure}{BOPADIGITAL Prototype - ``Edit Client'' modal window allowing the modification of tax information (RUC, Legal Name) and contact details.} 
+\clearpage
+
+% flow-4 (save changes)
+\includegraphics[width=\textwidth]{Figures/flujo-4-guardar-cambios.png} 
+\captionof{figure}{BOPADIGITAL Prototype - System notification displayed in the upper-right corner confirming the successful update of client data.} 
+
+% flow-5
+\includegraphics[width=\textwidth]{Figures/flujo-5.png} 
+\captionof{figure}{BOPADIGITAL Prototype - ``My Performance'' screen displaying key KPI cards and the monthly revenue goal progress bar.} 
+\clearpage
+
+% flow-5 (charts)
+\includegraphics[width=\textwidth]{Figures/flujo-5-graficos.png} 
+\captionof{figure}{BOPADIGITAL Prototype - Graphical analysis section within ``My Performance'', detailing the client pipeline by stage and sales distribution by service.} 
+
+% flow-6
+\includegraphics[width=\textwidth]{Figures/flujo-6.png} 
+\captionof{figure}{BOPADIGITAL Prototype - ``Weekly Activity'' area chart and commercial efficiency metrics (Average per Sale and Visit Rate).} 
+\clearpage
+
+% flow7
+\includegraphics[width=\textwidth]{Figures/flujo7-clientes.png} 
+\captionof{figure}{BOPADIGITAL Prototype - ``Client Management'' module presenting the complete tabular listing of the client portfolio with a global search bar.} 
+
+% flow8
+\includegraphics[width=\textwidth]{Figures/flujo8-filtro-clientes.png} 
+\captionof{figure}{BOPADIGITAL Prototype - Demonstration of the client list filtering functionality, isolating only those in the ``Negotiation'' stage.} 
+\clearpage
+
+% flow-9
+\includegraphics[width=\textwidth]{Figures/flujo-9-añadirclientes.png} 
+\captionof{figure}{BOPADIGITAL Prototype - ``Add New Client'' modal form for registering new prospects, capturing tax data (RUC), contact information, and initial stage.} 
+
+% flow-10
+\includegraphics[width=\textwidth]{Figures/flujo-10.png} 
+\captionof{figure}{BOPADIGITAL Prototype - ``Visit Calendar'' module (January 2026 view) with status summary (Completed vs. Overdue) and monthly schedule visualization.} 
+\clearpage
+
+% flow11
+\includegraphics[width=\textwidth]{Figures/flujo11.png} 
+\captionof{figure}{BOPADIGITAL Prototype - Client management panel: visit history displayed on the left and mandatory document upload section on the right.} 
+
+% flow-12
+\includegraphics[width=\textwidth]{Figures/flujo-12-otro-mes.png} 
+\captionof{figure}{BOPADIGITAL Prototype - Calendar navigation to future months (February 2026), enabling long-term visit planning and scheduling.} 
+\clearpage
+
+% --- MODULE 9: OFFER MATRICES (PROPOSALS) ---
+
+% 1. Offer Matrix Dashboard
+\includegraphics[width=\textwidth]{Figures/flujo-matriz-1.png} 
+\captionof{figure}{BOPADIGITAL Advisor - "Offer Matrices" dashboard managing commercial proposals, displaying status counters (Drafts, Pending, Approved) and a list of client proposals with subsidy details.} 
+\vspace{0.5cm}
+
+% 2. Create New Matrix
+\includegraphics[width=\textwidth]{Figures/flujo-matriz-3.png} 
+\captionof{figure}{BOPADIGITAL Advisor - "New Offer Matrix" modal allowing the creation of a commercial proposal by selecting a client, adding products, and uploading necessary attachments.} 
+\clearpage
+
+% 3. Edit Matrix Details
+\includegraphics[width=\textwidth]{Figures/flujo-matriz-4.png} 
+\captionof{figure}{BOPADIGITAL Advisor - "Edit Offer Matrix" interface for modifying specific line items within a proposal, such as adjusting quantities, unit prices, and adding item-specific notes.} 
+\vspace{0.5cm}
+
+% 4. Matrix Approval View
+\includegraphics[width=\textwidth]{Figures/flujo-matriz-2.png} 
+\captionof{figure}{BOPADIGITAL Advisor - Detailed view of an "Approved" Offer Matrix, highlighting the automatic subsidy calculation, final total, and supervisor approval comments.} 
+\clearpage
+
+\subsubsection{CMS screenshots}
+
+
+% 1. CMS Dashboard - Main View
+\includegraphics[width=\textwidth]{Figures/cms.png} 
+\captionof{figure}{BOPADIGITAL CMS - Product and Services Catalog dashboard displaying inventory statistics (Total, Active, Discontinued) and the product grid.} 
+
+
+% 2. Catalog Filtering - Category
+\includegraphics[width=\textwidth]{Figures/cms-1filtro.png} 
+\captionof{figure}{BOPADIGITAL CMS - Catalog filtering functionality, demonstrating the isolation of products within the "Telephony" category.} 
+\clearpage
+
+% 3. Catalog Filtering - Status
+\includegraphics[width=\textwidth]{Figures/cms-2filtros-descontinuado.png} 
+\captionof{figure}{BOPADIGITAL CMS - Catalog view filtered by "Discontinued" status, highlighting legacy services with distinct visual tags.} 
+
+
+% 4. Catalog Search
+\includegraphics[width=\textwidth]{Figures/cms-3busqueda.png} 
+\captionof{figure}{BOPADIGITAL CMS - Search bar functionality enabling quick retrieval of specific services (e.g., "Internet Fibra Óptica") by name.} 
+\clearpage
+
+% 5. Create New Product
+\includegraphics[width=\textwidth]{Figures/cms-6crearproducto.png} 
+\captionof{figure}{BOPADIGITAL CMS - "New Product" modal interface allowing administrators to register new services with defined categories, pricing, and status.} 
+
+% 6. Edit Product
+\includegraphics[width=\textwidth]{Figures/cms-4editarproducto.png} 
+\captionof{figure}{BOPADIGITAL CMS - "Edit Product" modal for modifying existing service details, including descriptions, pricing attributes, and image URLs.} 
+\clearpage
+
+% 7. Delete Product Confirmation
+\includegraphics[width=\textwidth]{Figures/cms-5eliminarproducti.png} 
+\captionof{figure}{BOPADIGITAL CMS - Security confirmation dialog ensuring administrative verification before permanently removing a product from the catalog.} 
+
+
+% 8. Web Content Editor - Main View
+\includegraphics[width=\textwidth]{Figures/cms-7contenidoweb-home.png} 
+\captionof{figure}{BOPADIGITAL CMS - Web Content Editor dashboard used to manage public-facing website elements, showing content status and preview cards.} 
+\clearpage
+
+% 9. Web Content Filtering
+\includegraphics[width=\textwidth]{Figures/cms-8contenidoweb-filtrarparte.png} 
+\captionof{figure}{BOPADIGITAL CMS - Section filtering mechanism in the Web Content Editor, allowing focused management of specific page areas (e.g., Main Banner).} 
+
+% 10. Edit Web Content
+\includegraphics[width=\textwidth]{Figures/cms-9contenidoweb-editarcontenido.png} 
+\captionof{figure}{BOPADIGITAL CMS - Content modification modal for updating website assets, including visibility toggles, display order, titles, and subtitles.} 
+\clearpage
+
+\subsubsection{Administrator's flow}
+% --- MODULE 1: DASHBOARD & NOTIFICATIONS ---
+
+% 1. Admin Dashboard - Overview
+\includegraphics[width=\textwidth]{Figures/admin-0-home.png} 
+\captionof{figure}{BOPADIGITAL Admin - General Metrics Dashboard providing a consolidated view of commercial performance, including sales totals, conversion rates, and active team members.} 
+
+% 2. Dashboard - Top Performers
+\includegraphics[width=\textwidth]{Figures/admin-4-vendedores.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Top Performers" section ranking sales advisors based on closed sales value and visit volume.} 
+\clearpage
+
+% 3. Notification Center
+\includegraphics[width=\textwidth]{Figures/admin-1-notificacion.png} 
+\captionof{figure}{BOPADIGITAL Admin - Notification dropdown displaying real-time alerts regarding document approvals and rejections for specific clients.} 
+
+% 4. Notification Action - Read
+\includegraphics[width=\textwidth]{Figures/admin-2-marcar-como-leido.png} 
+\captionof{figure}{BOPADIGITAL Admin - System feedback (toast notification) confirming that all alerts have been marked as read.} 
+\clearpage
+
+% 5. Notification Action - Clear
+\includegraphics[width=\textwidth]{Figures/admin-3-eliminar-notificaciones.png} 
+\captionof{figure}{BOPADIGITAL Admin - System feedback confirming the successful deletion of notifications from the user's history.} 
+
+
+% --- MODULE 2: ADVISOR MANAGEMENT (TEAM) ---
+
+% 6. Advisor List - Main View
+\includegraphics[width=\textwidth]{Figures/admin-5-asesores.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Advisor Management" screen showing the team roster, status indicators, and alerts for pending document reviews.} 
+\clearpage
+
+% 7. Create New Advisor
+\includegraphics[width=\textwidth]{Figures/admin-10-crearasesor.png} 
+\captionof{figure}{BOPADIGITAL Admin - "New Advisor" modal form used to register a new sales representative in the system.} 
+
+
+% 8. Advisor Filtering
+\includegraphics[width=\textwidth]{Figures/admin-11-filtrarasesores.png} 
+\captionof{figure}{BOPADIGITAL Admin - List view demonstrating the filtering capability to isolate "Inactive" advisors.} 
+\clearpage
+
+% 9. Advisor Detail - Change History
+\includegraphics[width=\textwidth]{Figures/admin-5-asesores-detalles.png} 
+\captionof{figure}{BOPADIGITAL Admin - Advisor Profile Modal: "Change History" tab tracking specific actions and updates made by the advisor.} 
+
+% 10. Advisor Detail - Assigned Clients
+\includegraphics[width=\textwidth]{Figures/admin-6-asesores-clientes.png} 
+\captionof{figure}{BOPADIGITAL Admin - Advisor Profile Modal: "Assigned Clients" tab displaying the advisor's current portfolio and account status.} 
+\clearpage
+
+% 11. Advisor Detail - Document Status
+\includegraphics[width=\textwidth]{Figures/admin-7-asesores-documentos.png} 
+\captionof{figure}{BOPADIGITAL Admin - Advisor Profile Modal: "Documents" tab summarizing the approval status of files uploaded by the advisor.} 
+
+
+% 12. Advisor Detail - Performance Metrics
+\includegraphics[width=\textwidth]{Figures/admin-8-asesores-metricas.png} 
+\captionof{figure}{BOPADIGITAL Admin - Advisor Profile Modal: "Performance Metrics" tab showing KPIs like total invoicing and sales conversion rates.} 
+\clearpage
+
+% 13. Advisor Detail - Activity Log
+\includegraphics[width=\textwidth]{Figures/admin-9-asesores-logs.png} 
+\captionof{figure}{BOPADIGITAL Admin - Advisor Profile Modal: "Recent Activities" timeline logging the advisor's latest interactions and system events.} 
+
+% --- MODULE 3: CONTACT ALLOCATION ---
+
+% 14. Unassigned Contacts Pool
+\includegraphics[width=\textwidth]{Figures/admin-12-contactossinasignar.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Contact Management" screen showing the "Unassigned Contacts" tab, a pool of leads waiting for distribution.} 
+\clearpage
+
+% 15. Contact Filtering
+\includegraphics[width=\textwidth]{Figures/admin-13-contactos-filtro.png} 
+\captionof{figure}{BOPADIGITAL Admin - Unassigned contacts filtered by the "Prospecting" stage to prioritize early-stage lead distribution.} 
+
+
+% 16. Bulk Assignment Selection
+\includegraphics[width=\textwidth]{Figures/admin-14-contactossinasignar-seleccionar.png} 
+\captionof{figure}{BOPADIGITAL Admin - Bulk selection of unassigned contacts to be transferred to a specific advisor (e.g., Patricia Vargas).} 
+\clearpage
+
+% 17. Assignment Confirmation
+\includegraphics[width=\textwidth]{Figures/admin-15-contactossin-asignando.png} 
+\captionof{figure}{BOPADIGITAL Admin - Toast notification confirming the successful assignment of selected contacts to the target advisor.} 
+
+
+% 18. Assigned Contacts List
+\includegraphics[width=\textwidth]{Figures/admin-16-asignados.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Assigned Contacts" tab displaying the master list of clients that are currently managed by an advisor.} 
+\clearpage
+
+% 19. Manual Contact Creation
+\includegraphics[width=\textwidth]{Figures/admin-16-contactosin-crear.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Add New Client" modal allowing administrators to manually inject new leads into the system.} 
+
+
+% 20. Document Management Hub
+\includegraphics[width=\textwidth]{Figures/admin-17-documentos.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Document Management" module for centralized bulk processing (approve/reject) of client documentation.} 
+\clearpage
+
+% --- MODULE 5: ADVANCED DOCUMENT MANAGEMENT ---
+
+% 1. Document Filtering
+\includegraphics[width=\textwidth]{Figures/admin-18-documentos-filtros.png} 
+\captionof{figure}{BOPADIGITAL Admin - Document filtering functionality, showing the list filtered by "Pending" status to prioritize urgent reviews.} 
+\vspace{0.5cm}
+
+% 2. Bulk Selection
+\includegraphics[width=\textwidth]{Figures/admin-18-documentos-seleccionar.png} 
+\captionof{figure}{BOPADIGITAL Admin - Selection mechanism allowing administrators to choose specific documents (or all) to perform bulk actions like approval or rejection.} 
+\clearpage
+
+% 3. Reject Document
+\includegraphics[width=\textwidth]{Figures/admin-20-rechazar.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Reject Document" modal requiring the administrator to provide a mandatory reason for the rejection before processing.} 
+\vspace{0.5cm}
+
+% 4. Download Confirmation
+\includegraphics[width=\textwidth]{Figures/admin-21-descargar.png} 
+\captionof{figure}{BOPADIGITAL Admin - System notification confirming the initiation of a secure bulk download for the selected client documentation.} 
+\clearpage
+
+% --- MODULE 6: REPORTS & ANALYTICS ---
+
+% 5. Reports Dashboard
+\includegraphics[width=\textwidth]{Figures/admin-22-reporteshome.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Commercial Performance Reports" dashboard offering a high-level overview of sales productivity and team metrics.} 
+\vspace{0.5cm}
+
+% 6. Report Filtering
+\includegraphics[width=\textwidth]{Figures/admin-23-reportesfiltros.png} 
+\captionof{figure}{BOPADIGITAL Admin - Advanced reporting filters applied to analyze a specific advisor's performance (e.g., Roberto Mendoza) over the last semester.} 
+\clearpage
+
+% 7. Export Report
+\includegraphics[width=\textwidth]{Figures/admin-24-reporteexportar.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Export Report" function allowing data to be generated and downloaded as a PDF file for external presentation.} 
+\vspace{0.5cm}
+
+% --- MODULE 7: AUDIT & CONFIGURATION ---
+
+% 8. Activity Logs
+\includegraphics[width=\textwidth]{Figures/admin-25-logs.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Recent Activity" audit log tracking system-wide events such as closed sales, document uploads, and login sessions.} 
+\clearpage
+
+% 9. Document Configuration
+\includegraphics[width=\textwidth]{Figures/admin-26-configuracion.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Document Configuration" panel used to define mandatory or optional file requirements for different sales stages.} 
+\vspace{0.5cm}
+
+% 10. Edit Configuration
+\includegraphics[width=\textwidth]{Figures/admin-27-configuracion-editar.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Edit Document Type" modal allowing adjustments to validation rules, such as making a document mandatory for all services.} 
+\clearpage
+
+% --- MODULE 7 (CONTINUED): CONFIGURATION ACTIONS ---
+
+% 11. Delete Configuration
+\includegraphics[width=\textwidth]{Figures/admin-28-configuracion-eliminar.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Delete Document Type" confirmation modal ensuring the administrator intends to permanently remove a configuration (e.g., "RUC") from the system.} 
+\vspace{0.5cm}
+
+% 12. Create New Configuration
+\includegraphics[width=\textwidth]{Figures/admin-29-crearconfig.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Add New Document Type" form allowing the definition of new mandatory or optional requirements, specifying applicable sales stages and service scope.} 
+\clearpage
+
+% --- MODULE 8: SALES REPORTING ---
+
+% 1. Sales Report Dashboard
+\includegraphics[width=\textwidth]{Figures/admin-30-reporteventas.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Sales & Closings Report" dashboard providing detailed transaction analysis, including total revenue, sales count, and visual breakdowns by service type and geographic zone.} 
+\vspace{0.5cm}
+
+% 2. Sales Report Filtering
+\includegraphics[width=\textwidth]{Figures/admin-31-filtrado.png} 
+\captionof{figure}{BOPADIGITAL Admin - Sales Report demonstrating filtering capabilities, isolating performance data for a specific advisor (e.g., Roberto Mendoza) over the "Last Semester" period.} 
+\clearpage
+
+% 3. Sales Report Export
+\includegraphics[width=\textwidth]{Figures/admin-32-exportacion.png} 
+\captionof{figure}{BOPADIGITAL Admin - "Export Report" functionality showing system feedback (modal alert) confirming the generation of a PDF file containing the current sales data visualization.} 
+\clearpage
+
+\subsubsection{Mobile app}
+% --- GROUP 1: ACCESS & HOME DASHBOARD ---
+\begin{figure}[H]
+    \centering
+    % Top: Login
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-0-login.png}
+        \caption{Secure Login Screen: Entry point for advisors offering role-based access (Advisor/Admin) and credential input.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Home
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-1-vista-principal.png}
+        \caption{Mobile Home Dashboard: Personalized welcome screen displaying "Next Activity" alerts and pending documentation tasks.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Authentication and Main Dashboard views.}
+    \label{fig:mobile-login-home}
+\end{figure}
+
+
+% --- GROUP 2: ACTIVITY MANAGEMENT ---
+\begin{figure}[H]
+    \centering
+    % Top: Recent Activity
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-2-act-reciente.png}
+        \caption{Recent Activity Feed: Timeline view showing completed visits and status updates for assigned clients.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Create Activity (Part 1)
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-3-crear-act.png}
+        \caption{Create Activity (Step 1): Interface to log new interactions, selecting activity type (e.g., Quotation Visit) and date.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Activity tracking and creation workflow.}
+    \label{fig:mobile-activities}
+\end{figure}
+
+
+% --- GROUP 3: ACTIVITY DETAILS & CLIENT PORTFOLIO ---
+\begin{figure}[H]
+    \centering
+    % Top: Create Activity (Part 2)
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=9cm, keepaspectratio]{Figures/app-4-crear-act-2.png}
+        \caption{Create Activity (Step 2): Advanced details form for setting priority levels, adding notes, and quick action shortcuts.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Client Portfolio
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=9cm, keepaspectratio]{Figures/app-10-cartera-clientes.png}
+        \caption{My Clients Portfolio: Searchable list of all assigned accounts with filtering options for "New Users" or "Active" clients.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Detailed activity logging and client portfolio navigation.}
+    \label{fig:mobile-activity-details}
+\end{figure}
+
+
+% --- GROUP 4: CLIENT MANAGEMENT ---
+\begin{figure}[H]
+    \centering
+    % Top: Client Actions
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-5-clientes.png}
+        \caption{Client Management Cards: Quick-action view allowing advisors to edit details or delete client records directly from the list.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Create Client (Part 1)
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-7-crear-cliente.png}
+        \caption{New Client Registration (Part 1): Form to input essential business information, contact name, and profile photo.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Client administration and registration interface.}
+    \label{fig:mobile-client-mgmt}
+\end{figure}
+
+
+% --- GROUP 5: CLIENT CREATION (END) ---
+\begin{figure}[H]
+    \centering
+    % Top: Create Client (Part 2)
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-8-crear-cliente.png}
+        \caption{New Client Registration (Part 2): Finalizing the record with contact details (email, phone, address) and assigning a status (e.g., Lucrative Client).}
+    \end{subfigure}
+    % Only one image in this group, so no bottom subfigure is needed.
+    
+    \caption{BOPACORP Mobile App - Final step of the new client registration process.}
+    \label{fig:mobile-client-finish}
+\end{figure}
+
+
+% --- GROUP 6: CLIENT DETAIL VIEW ---
+\begin{figure}[H]
+    \centering
+    % Top: Client Info
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-11-detalle-cliente.png}
+        \caption{Client Profile Header: Detailed contact information view featuring quick-action buttons (Call, Email) and address details.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Client History
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-12-detalle-cliente.png}
+        \caption{Client Business Overview: Display of current subscription plan (Business Gold) and a timeline of recent interactions.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Comprehensive client profile and history view.}
+    \label{fig:mobile-client-detail}
+\end{figure}
+
+
+% --- GROUP 7: OPERATIONAL LISTS ---
+\begin{figure}[H]
+    \centering
+    % Top: Activity List
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=9cm, keepaspectratio]{Figures/app-13-actividades.png}
+        \caption{My Activities: Task management list filtered by status (All, Upcoming, Recent) with priority indicators.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Client List (Context for Admin/User)
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=9cm, keepaspectratio]{Figures/app-10-cartera-clientes.png}
+        \caption{Client Portfolio: Searchable directory of assigned accounts, providing a quick overview of the advisor's book of business.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Operational lists for daily task and portfolio management.}
+    \label{fig:mobile-lists}
+\end{figure}
+
+
+% --- GROUP 8: ADVISOR PROFILE & SETTINGS ---
+\begin{figure}[H]
+    \centering
+    % Top: Profile Stats
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-14-perfilasesor.png}
+        \caption{Advisor Profile: User dashboard summarizing key performance statistics (Total Clients, Activities, Year).}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Profile Options
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-15-perfilasesorpociones.png}
+        \caption{Profile Settings: Configuration menu for account management, including password changes and app preferences.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - User profile and application settings.}
+    \label{fig:mobile-profile}
+\end{figure}
+
+
+% --- GROUP 9: ADMIN DASHBOARD ---
+\begin{figure}[H]
+    \centering
+    % Top: Admin Home
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-16-admin-view.jpeg}
+        \caption{Admin Dashboard: Executive overview showing high-level metrics such as Total Clients, Monthly Revenue, and Active Projects.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Admin Actions
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=10cm, keepaspectratio]{Figures/app-17-adminview2.png}
+        \caption{Administrative Actions: Quick access menu for User Management, Reports, Service Configuration, and Database tools.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Administrative control panel and statistics.}
+    \label{fig:mobile-admin-dash}
+\end{figure}
+
+
+% --- GROUP 10: ADMIN MANAGEMENT TOOLS ---
+\begin{figure}[H]
+    \centering
+    % Top: User Management
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=9cm, keepaspectratio]{Figures/app-19-admin-users-view.png}
+        \caption{User Management: Interface to view, edit, or remove system users (Advisors/Admins) and monitor their last access.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: System Status
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=9cm, keepaspectratio]{Figures/app-18-adminview3.jpeg}
+        \caption{System Status: Health check monitor displaying operating system status, backup timestamps, and software version.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Advanced system management and user administration.}
+    \label{fig:mobile-admin-tools}
+\end{figure}
+
+
+% --- GROUP 11: ADMIN UTILITIES (FINAL) ---
+\begin{figure}[H]
+    \centering
+    % Top: Create User
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=9cm, keepaspectratio]{Figures/app-20-create-user.png}
+        \caption{New User Registration: Administrative form to onboard new staff, allowing the definition of roles (Advisor/Admin) and initial credentials.}
+    \end{subfigure}\hfill
+    \vspace{0.5em} 
+    % Bottom: Service Catalog
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[height=9cm, keepaspectratio]{Figures/app-21-services-admin.png}
+        \caption{Service Management: Mobile catalog administration view permitting real-time updates to service listings, pricing, and active status.}
+    \end{subfigure}
+    \caption{BOPACORP Mobile App - Administrative tools for user onboarding and service catalog maintenance.}
+    \label{fig:mobile-admin-utils}
+\end{figure}
+
+
+
+\subsubsection{BOPACORP Landing Page}
+
+% --- PUBLIC WEBSITE: LANDING & ABOUT ---
+
+% 1. Landing Page
+\includegraphics[width=\textwidth]{Figures/page-01-home.png} 
+\captionof{figure}{BOPACORP Website - Homepage featuring the main value proposition, navigation menu, and quick access to services and company information.} 
+\vspace{0.5cm}
+
+% 2. About Us
+\includegraphics[width=\textwidth]{Figures/page-2-about.png} 
+\captionof{figure}{BOPACORP Website - "About Us" section detailing the company's history, mission, and vision statements to establish corporate identity.} 
+\clearpage
+
+% --- PUBLIC WEBSITE: SERVICES CATALOG ---
+
+% 3. Service Catalog
+\includegraphics[width=\textwidth]{Figures/page-3-catalog.png} 
+\captionof{figure}{BOPACORP Website - complete Service Catalog displaying available corporate plans with filtering options by category, zone, and price.} 
+\vspace{0.5cm}
+
+% 4. Service Detail
+\includegraphics[width=\textwidth]{Figures/page-4-detail.png} 
+\captionof{figure}{BOPACORP Website - Service Detail Modal for "Plan Corporativo 100", showing specific costs, coverage zones, and included benefits.} 
+\clearpage
+
+% --- PUBLIC WEBSITE: SEARCH & CAREERS ---
+
+% 5. Filter Results
+\includegraphics[width=\textwidth]{Figures/page-5-filter.png} 
+\captionof{figure}{BOPACORP Website - Search results view demonstrating active filters (Cloud, Digital Services, National Coverage) applied to the catalog.} 
+\vspace{0.5cm}
+
+% 6. Careers Page
+\includegraphics[width=\textwidth]{Figures/page-6-jobs.png} 
+\captionof{figure}{BOPACORP Website - "Work with Us" (Careers) page highlighting employee benefits and listing current job openings.} 
+\clearpage
+
+% --- PUBLIC WEBSITE: JOB APPLICATION ---
+
+% 7. Application Form
+\includegraphics[width=\textwidth]{Figures/page-7-resume.png} 
+\captionof{figure}{BOPACORP Website - Job Application Modal allowing candidates to submit personal details and upload their CV for a specific position.} 
+\vspace{0.5cm}
+
+% 8. Submission Confirmation
+\includegraphics[width=\textwidth]{Figures/page-8-confirmation.png} 
+\captionof{figure}{BOPACORP Website - Success confirmation modal providing feedback to the user that their job application has been successfully sent.} 
+\clearpage
+
+
+\chapter{CLIENT ACCEPTANCE LETTER}
+
+\section{Signed Approval Document}
+This appendix includes the official approval letter signed by the stakeholder representative of \textbf{BOPACORP S.A.}, which formally validates the Project Specification Document. The signed document confirms the stakeholder’s agreement with the documented project scope, including the risk management artifacts, sprint backlogs, project schedule, UML-based static and behavioral system models, and the system prototype, as defined during the requirements elicitation and analysis phases.
+
+%TODO
+\includepdf[pages=-,scale=0.95,pagecommand={}]{Figures/aceptacion.pdf}
+
+
+\chapter{REQUIREMENTS SPECIFICATION DOCUMENT}
+\includepdf[pages=-,scale=0.95,pagecommand={}]{Figures/doc-reqs.pdf}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY AND REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%- Other list of references, "refs" example --%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IMPORTANT: HOW TO COMPILE AND PRINT ADDITIONAL REFERENCES (replace "refs" by the chosen name)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Follow these three steps:
+%   1. Compile the document once, to save the used references in refs.aux
+%   2. Compile the references
+% 		- On Linux: Use the "bibtex refs" command in the document folder
+%		- On MacOSX (MacTex distribution): Use the "/usr/texbin/bibtex refs" command in the document folder
+%		- On Windows: Edit the "update_refs.bat" script to put the right suffix ("refs" here), and launch the script
+%   3. Recompile the document TWICE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

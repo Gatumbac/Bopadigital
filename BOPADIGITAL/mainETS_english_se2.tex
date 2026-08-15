@@ -36,14 +36,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TITLE PAGE OPTIONS (ESPOL - FIEC)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{[BOPACORP S.A]
-Midterm Project Specification and Report}
+\title{BOPACORP S.A.\\
+Final Project Report}
 
 \author{Grupo 2 BOPADIGITAL}
 \authorcopyright{Grupo 2 BOPADIGITAL}
 
-\datesoutenance{June 2026}
-\datedepot{June 2026}
+\datesoutenance{August 2026}
+\datedepot{August 2026}
 
 \directeur{}{Shirley Aragon}{Facultad de Ingenieria en Electricidad y Computación}
 
@@ -116,2183 +116,646 @@ Midterm Project Specification and Report}
 \reversemarginpar
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FINAL REPORT SCAFFOLD - ADDITIVE ROADMAP ONLY
-% The existing report content remains unchanged below.
-% Replace each TODO with verified evidence during final editing.
+% FINAL REPORT SCAFFOLD
+% This phase defines the final report structure only.
+% Content, evidence, figures and tables will be added later.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO 1: PROJECT INFORMATION AND SCOPE
-% - Client, problem, objectives, stakeholders, final scope, exclusions.
-% - Final number of user stories, sprints, roles, and demonstration scenarios.
-% - Current repository, deployment, tool, video, and acceptance links.
-%
-% TODO 2: RELEVANT ARCHITECTURAL DECISIONS
-% - Current client/API/shared-contract/data architecture.
-% - Technology comparisons, security/RBAC decisions, component diagram,
-%   and deployment diagram.
-%
-% TODO 3: SCRUM EVIDENCE AND PROJECT MANAGEMENT
-% - Roles, product backlog, sprint backlogs, sprint reviews, retrospectives,
-%   client feedback, schedule, and progress charts.
-%
-% TODO 4: CODING STANDARDS AND PREEMPTIVE ERROR DETECTION
-% - Biome, TypeScript, Husky, lint-staged, Commitlint, CI checks, and a
-%   concrete SOLID/design-pattern/refactoring example.
-%
-% TODO 5: TEST MANAGEMENT AND RISK-BASED TESTING
-% - Test levels, Software I risk mapping, API test/coverage evidence,
-%   frontend gaps, acceptance testing, test data, environments, incidents,
-%   retests, SHA, execution date, and artifacts.
-%
-% TODO 6: CI/CD AND DEPLOYMENT QUALITY DATA
-% - Pipeline stages, successful CI runs, coverage/build artifacts, deployed
-%   revision, URLs, health checks, installation, and rollback evidence.
-%
-% TODO 7: SYSTEM DESCRIPTION AND DEMONSTRATION SCOPE
-% - Current public website, CMS, CRM, API-supported workflows, mobile scope
-%   only when verified, and the 13-minute role-based demo runbook.
-%
-% TODO 8: INDIVIDUAL CONTRIBUTIONS
-% - Map every member's contribution to commits, artifacts, and rubric items.
-%
-% TODO 9: CLIENT EVIDENCE AND COMMUNICATIONS
-% - Communication index, sprint acceptance, final client acceptance, and
-%   anonymized meeting/demo evidence.
-%
-% TODO 10: APPENDICES
-% - Insert the final user manual, installation guide, acceptance evidence,
-%   test execution log, communications evidence, and signed acceptance form.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CHAPTER 1: PROJECT ACCESS AND DELIVERABLES
+% CHAPTER 1: INTRODUCTION AND PROJECT CONTEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{PROJECT ACCESS AND DELIVERABLES}
+\chapter{INTRODUCTION AND PROJECT CONTEXT}
 
-This chapter compiles the access URLs to the external resources and deliverables requested in the midterm project specification to support the evaluation of the grading scheme elements.
+\section{Project Context}
+BOHORQUEZ \& PAUTA CORP. BOPACORP S.A. is a business-to-business (B2B) company that provides telecommunications products and services to corporate clients. Its commercial operation depends on sales advisors who prospect for clients, schedule visits, manage negotiations, collect supporting documentation, and follow up on service activation. Supervisors and managers also need updated information about the sales pipeline, field activity, documentation status, and commercial performance.
 
-\section{Deliverable Reference Links}
-The team has configured access permissions for all repositories and evaluation tools as specified.
+Before BOPADIGITAL, many activities relied on spreadsheets, shared folders, messaging applications, and email. These disconnected tools made it difficult to maintain a timely and unified view of each client and negotiation. The project was therefore defined as a digital platform to centralize the commercial lifecycle and support all users involved in the process.
 
-\subsection{Git Repositories (Deliverable 1.b)}
-The project is organized as a multi-repository architecture under the \url{https://github.com/Bopacorp} GitHub organization. Each repository is public and contains complete code, resource folders, and development history:
+The project context and initial requirements were established during Software Engineering I. The requirements document identified the business problem, stakeholders, functional and non-functional requirements, use cases, prototypes, and initial risks. The client accepted that requirements baseline on November 4, 2025. During Software Engineering II, the team continued the implementation through successive Scrum iterations and delivered the final documentation and deployment evidence.
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{3.5cm}|p{6.5cm}|p{4cm}|}
-\hline
-\textbf{Repository} & \textbf{Description} & \textbf{URL} \\ \hline
-\texttt{bopacorp-web} & Public website and CMS portal & \url{https://github.com/Bopacorp/bopacorp-web} \\ \hline
-\texttt{bopacorp-crm} & Internal CRM platform (React 19 + Vite) & \url{https://github.com/Bopacorp/bopacorp-crm} \\ \hline
-\texttt{bopacorp-api} & REST API backend (Express + Drizzle + PostgreSQL) & \url{https://github.com/Bopacorp/bopacorp-api} \\ \hline
-\texttt{bopacorp-shared} & Shared TypeScript types and Zod schemas & \url{https://github.com/Bopacorp/bopacorp-shared} \\ \hline
-\texttt{bopacorp-mobile} & Mobile application (React Native + Expo) & \url{https://github.com/Bopacorp/bopacorp-mobile} \\ \hline
-\texttt{deploy} & Deployment scripts, Docker Compose, Caddyfile & \url{https://github.com/Bopacorp/deploy} \\ \hline
-\texttt{communications} & Client communications evidence and acceptance letters & \url{https://github.com/Bopacorp/communications} \\ \hline
-\end{tabular}
-\caption{Project Repository Index}
-\label{tab:repo_index}
-\end{table}
-
-\subsection{Production Deployment URLs (Deliverable 2)}
-All system components are deployed and accessible over HTTPS:
-\begin{itemize}
-    \item \textbf{CRM System:} \url{https://bopacorp-crm.jointrymyride.com/}
-    \item \textbf{Public Website:} \url{https://bopacorp-web.jointrymyride.com/}
-    \item \textbf{CMS Portal:} \url{https://bopacorp-web.jointrymyride.com/login}
-    \item \textbf{REST API:} \url{https://api-bopacorp.jointrymyride.com/}
-\end{itemize}
-
-\subsection{Test Accounts}
-The following credentials are available for evaluating the system across all user roles:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Role} & \textbf{Email} & \textbf{Password} \\ \hline
-Admin & admin@bopacorp.com & admin \\ \hline
-Manager & cpauta@bopacorp.com & Bopa2026! \\ \hline
-Supervisor & jmendoza@bopacorp.com & Bopa2026! \\ \hline
-Advisor & lreyes@bopacorp.com & Bopa2026! \\ \hline
-Coordinator & dsanchez@bopacorp.com & Bopa2026! \\ \hline
-\end{tabular}
-\caption{System Test Accounts}
-\label{tab:test_accounts}
-\end{table}
-
-\subsection{Additional Deliverables}
-\begin{itemize}
-    \item \textbf{Teamwork Management Tool (Deliverable 1.c):} \url{https://sharing.clickup.com/90171310184/l/h/5-90179341245-1/26ab9e034992a64} (ClickUp workspace tracking tasks, sprints, and progress).
-    \item \textbf{Recorded Presentation Video (Deliverable 1.e):} \url{https://youtu.be/bKS1ZHdQ9hc} (10-minute presentation demonstrating the running application).
-    \item \textbf{Slide Presentation:} \url{https://canva.link/alyprj19gbzaavg}
-\end{itemize}
-
-\section{Repository Architecture and Branching Workflow}
-To support parallel team development and maintain high decoupling, the BOPACORP platform utilizes a modular repository structure hosted on GitHub. This layout isolates components while maintaining contract synchronization through a centralized types package.
-
-\subsection{Modular Repository Structure}
-The system is divided into six specialized repositories (see Table~\ref{tab:repo_index} for URLs):
-\begin{itemize}
-    \item \textbf{\texttt{bopacorp-web}:} Public-facing website with company information, services catalog, employability portal, and an integrated Content Management System (CMS) for administrators to update website content.
-    \item \textbf{\texttt{bopacorp-crm}:} Internal management platform built with React 19, TypeScript, and Tailwind CSS v4. Provides role-based access for administrators, supervisors, coordinators, and advisors to manage clients, negotiations, documents, reports, catalog, employability, and organization.
-    \item \textbf{\texttt{bopacorp-api}:} Core backend RESTful API built with Express and TypeScript. Manages business logic, JWT authentication, RBAC authorization, database access via Drizzle ORM, document encryption, and file storage.
-    \item \textbf{\texttt{bopacorp-mobile}:} Mobile application for sales advisors built with React Native and Expo. Supports client management, negotiation tracking, document upload, and GPS-enabled visit registration.
-    \item \textbf{\texttt{bopacorp-shared}:} Centralized npm package (\texttt{@bopacorp/shared}) published to GitHub Packages. Exports TypeScript types, Zod validation schemas, and API contracts consumed by all other repositories to ensure type safety across the stack.
-    \item \textbf{\texttt{deploy}:} Deployment infrastructure containing \texttt{deploy.sh}, \texttt{docker-compose.yaml}, Dockerfiles, Caddyfile configuration, and environment variable templates.
-\end{itemize}
-
-\subsection{Branching and Integration Workflow (GitHub Flow)}
-The development team enforces a structured, branch-based git workflow to protect the integrity of the compilation code on the \texttt{main} production branch:
+\section{Problem Statement}
+The initial analysis identified three operational bottlenecks in BOPACORP's commercial process:
 
 \begin{enumerate}
-    \item \textbf{Branch Isolation:} Directly committing to the \texttt{main} branch is blocked. Developers must isolate their tasks under dedicated branches following standard prefixes:
-    \newline
-    \begin{itemize}
-        \item \texttt{feature/[backlog-item-id]}: For new functional capabilities defined in the sprint backlog.
-        \item \texttt{bugfix/[issue-description]}: For resolving anomalies found during unit or integration testing.
-    \end{itemize}
-
-    \item \textbf{Conventional Commits:} Commits are validated locally via Husky to ensure messages follow conventional formats (e.g., \texttt{feat: add auth filter}, \texttt{fix: patch db connection leak}).
-
-    \item \textbf{Integrity and CI Check Gates:} To merge code into \texttt{main}, developers must open a Pull Request (PR) on GitHub. Opening a PR automatically triggers the GitHub Actions Continuous Integration (CI) pipeline, which compiles the application and runs type check gates (\texttt{tsc --noEmit}) and linter evaluations. If the automated gates fail, the PR is locked and cannot be merged.
-
-    \item \textbf{Peer Review Sign-off:} Beyond automated checks, every PR requires at least one approving review from a development team peer to cross-check business logic and compliance with architectural principles.
+    \item \textbf{Document delivery and operational delay:} After closing or advancing a sale, advisors may need to collect contracts, identification documents, taxpayer information, and other files from the client. When these documents are handled physically or through separate channels, the advisor may need to return to the office, creating avoidable dead time and delaying the operational review.
+    \item \textbf{Limited visibility of field activity:} Supervisors and management do not have a centralized view of the visits, negotiation progress, and activities performed by each advisor. Monitoring therefore depends on individual messages and manual status updates.
+    \item \textbf{Manual sales tracking and reporting:} Client portfolios, negotiations, and performance indicators were previously consolidated through spreadsheets and manual reports. This increases the effort required for follow-up meetings and makes it more difficult to use current information for decision-making.
 \end{enumerate}
 
-\subsection{Traceability and Documentation Storage}
-In addition to application code, the repository structure incorporates a dedicated \texttt{docs} directory in each project to host software design artifacts, sequence models, UML Diagrams, and client communication evidence. This ensures that all design decisions, API contracts, and requirements diagrams remain under git version control alongside their corresponding implementation modules.
+BOPADIGITAL addresses these bottlenecks by connecting public information, internal commercial management, document workflows, and reporting capabilities through a shared software platform.
 
+\section{Project Description and Evolution}
+BOPADIGITAL is an integrated digital platform composed of a public website, an internal CRM, a mobile advisor application, a centralized REST API, and shared TypeScript contracts and validation schemas. The public website supports the presentation of services, contact with the commercial team, content administration, and employability workflows. The internal applications support client and negotiation management, visits, documents, supervision, reporting, and role-based access.
 
+The mobile repository, \texttt{bopacorp-mobile}, uses Expo and React Native and contains advisor-oriented routes for authentication, clients, negotiations, documentation, and settings. Its implementation is included in the project ecosystem; detailed claims about device execution and acceptance will be supported by the corresponding runtime evidence in the testing and demonstration chapters.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CHAPTER 2: SCRUM ADHERENCE & PROJECT MANAGEMENT
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{SCRUM ADHERENCE AND PROJECT MANAGEMENT}
+The project evolved from the requirements and prototypes produced in Software Engineering I into an implementation and delivery process in Software Engineering II. The later stages added automated quality checks, frontend and API testing, risk-based testing documentation, deployment and installation guides, user manuals, and final acceptance evidence.
 
-\section{SCRUM Roles Definition}
-Define the roles and core responsibilities of each team member under the Scrum framework.
+\section{Project Objectives}
+The general objective is \textbf{to digitize and centralize} BOPACORP's B2B commercial lifecycle in order to improve operational efficiency, information availability, and managerial visibility.
+
+The specific objectives are:
+
+\begin{enumerate}
+    \item \textbf{To support} the registration and management of corporate clients and commercial prospects.
+    \item \textbf{To track} negotiations, visits, statuses, and relevant commercial observations.
+    \item \textbf{To enable} advisors to manage field information and supporting documentation through the available web and mobile workflows.
+    \item \textbf{To centralize} the review and approval status of documents required by the commercial process.
+    \item \textbf{To provide} supervisors and managers with consolidated information for monitoring and decision-making.
+    \item \textbf{To offer} a public service catalog, a content management interface, and an employability workflow for external users and candidates.
+    \item \textbf{To enforce} authentication, authorization, shared data contracts, automated quality checks, and reproducible deployment practices.
+\end{enumerate}
+
+\section{Project Scope and Exclusions}
+The final scope is organized around the following components:
+
 \begin{itemize}
-    \item \textbf{Product Owner:} Diaz Osorio Fernando Nahim - Manages the product backlog, prioritizes user stories, and acts as the liaison to the client.
-    \item \textbf{Scrum Master:} Muñoz Sanchez Salvador Gabriel - Protects the team, facilitates Scrum ceremonies, and removes impediments.
-    \item \textbf{Development Team:} Aragon Intriago Shirley Yamel, Diaz Osorio Fernando Nahim, Muñoz Sanchez Salvador Gabriel, Navarrete Castillo Anthony Josue, Tumbaco Santana Gabriel Alejandro - Design, implement, test, and deploy the system modules.
+    \item \textbf{Public Website:} public company information, service catalog, service details, contact with the commercial team, and employability workflows.
+    \item \textbf{Content Management System:} authorized management of public content, catalog information, and related media.
+    \item \textbf{CRM:} role-based management of clients, negotiations, visits, documents, supervision, reports, organization, and employability information.
+    \item \textbf{Mobile Advisor Application:} mobile access to advisor-oriented client, negotiation, and documentation workflows implemented in the Expo/React Native repository.
+    \item \textbf{REST API and Shared Contracts:} authentication, authorization, business services, persistence integration, request validation, and shared TypeScript/Zod contracts.
+    \item \textbf{Deployment and Documentation:} continuous integration, deployment configuration, installation instructions, user manuals, testing evidence, and client acceptance records.
 \end{itemize}
 
-\section{Teamwork Management Tool Evidence}
-The team used \textbf{ClickUp} as the primary agile project management tool throughout all four sprints. ClickUp was configured with a dedicated BOPADIGITAL workspace containing the full product backlog, sprint boards, and task assignments. Each task was linked to its corresponding user story and sprint goal, enabling real-time tracking of progress and blockers..
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{clickup_sprint1.png}
-    \caption{ClickUp --- Sprint 1 Board Overview}
-    \label{fig:clickup_sprint1}
+The Offer Matrices module was removed from the final functional scope by decision of the client. Consequently, matrix construction, matrix approval, subsidy calculations, and related calculations will not be presented as final BOPADIGITAL features or demonstration scenarios. Historical requirements, diagrams, or code references to this module must be treated as legacy context or residual technical material.
+
+Other planned capabilities will only be presented as implemented when the final repositories and execution evidence support them. Features without current code, reproducible execution, or valid evidence will be described as limitations or future work.
+
+\section{Stakeholders, Roles and Target Users}
+The main stakeholders and target users are:
+
+\begin{itemize}
+    \item \textbf{Business Client:} explores the public service catalog and contacts BOPACORP to start a commercial conversation.
+    \item \textbf{Sales Advisor:} manages assigned clients, negotiations, visits, observations, and supporting documents during the commercial process.
+    \item \textbf{Supervisor or Sales Manager:} monitors the work of advisors, reviews commercial progress, and supervises pending activities and documents.
+    \item \textbf{Documentation Coordinator:} reviews the documentation associated with negotiations and updates its status for operational processing.
+    \item \textbf{Management or Executive Board:} consults consolidated reports and performance information for strategic decisions.
+    \item \textbf{Sales Advisor Candidate:} reviews job vacancies and submits an application through the public website.
+    \item \textbf{Web Administrator:} maintains public website content, catalog data, and related CMS information.
+    \item \textbf{Client Representative:} reviews sprint increments, provides feedback, and signs the corresponding acceptance records.
+\end{itemize}
+
+\section{Development Timeline and Client Acceptance}
+The project was developed through seven accepted Scrum sprints followed by a final acceptance process. The acceptance records provide the project chronology shown in Table~\ref{tab:project_timeline}.
+
+\begin{longtable}{|p{1.8cm}|p{3.0cm}|p{8.8cm}|}
+\caption{BOPADIGITAL Development and Acceptance Timeline}
+\label{tab:project_timeline}\\
+\hline
+\textbf{Iteration} & \textbf{Date} & \textbf{Main context} \\ \hline
+\endfirsthead
+\multicolumn{3}{l}{\textit{Table continued from previous page}} \\ \hline
+\textbf{Iteration} & \textbf{Date} & \textbf{Main context} \\ \hline
+\endhead
+Sprint 1 & May 24, 2026 & Initial development increment: repositories, quality tools, database, Express server, JWT authentication, RBAC, login, and Scrum planning. \\ \hline
+Sprint 2 & June 7, 2026 & Catalog, CMS, employability, organization, user modules, public web work, and the beginning of CRM implementation. \\ \hline
+Sprint 3 & June 21, 2026 & Backend consolidation and integration work between the public website, CRM, and backend services. \\ \hline
+Sprint 4 & July 5, 2026 & Frontend automated tests and compilation of Scrum evidence, including sprint reviews and retrospectives. \\ \hline
+Sprint 5 & July 14, 2026 & Acceptance-testing activities, risk-based testing documentation, integration testing, quality metrics, and defect tracking. \\ \hline
+Sprint 6 & July 21, 2026 & SOLID and design-pattern review, refactoring, preventive error detection, coding standards, CI quality data, security, cross-browser checks, and accessibility adjustments. \\ \hline
+Sprint 7 & July 28, 2026 & Final production deployment, installation guide, role-based user manual, final report, functional and non-functional validation, video preparation, and project closure coordination. \\ \hline
+Final acceptance & August 7, 2026 & Final review and formal acceptance of the project deliverables by the client representative. \\ \hline
+\end{longtable}
+
+The first three acceptance records are indexed in the communications repository, while the Sprint 4, Sprint 5, Sprint 6, Sprint 7, and final acceptance records are documented in the project acceptance file. Detailed letters and supporting images are included in the appendices.
+
+\section{Project Dimensions and Demonstration Scope}
+The initial requirements baseline contains 68 user stories, including 7 stories associated with the Offer Matrices module. After excluding MAT from the final scope, the non-MAT baseline contains 61 user stories for traceability purposes. This count is different from the 46 product backlog items identified in the current Scrum backlog and from the task and subtask count reported by the Scrum documentation.
+
+The demonstration scope will focus on the following scenarios:
+
+\begin{enumerate}
+    \item A public visitor filters the service catalog, reviews service information, and submits a contact request.
+    \item A candidate reviews a vacancy, triggers validation feedback, and submits a valid application with a PDF resume.
+    \item An administrator authenticates, edits CMS or catalog information, and verifies the public result.
+    \item A sales advisor registers a client, creates or updates a negotiation, registers a visit, and manages a supporting document.
+    \item A supervisor or coordinator reviews assigned work and approves or rejects documentation with an appropriate reason.
+    \item A manager consults reports, applies filters, and exports a result when the workflow is available in the final environment.
+    \item An advisor uses the mobile client to access the verified client, negotiation, and documentation workflows.
+\end{enumerate}
+
+The complete step-by-step demonstration, test evidence, and user instructions will be presented in the later chapters and appendices. This chapter establishes the project context and scope; it does not replace the detailed testing, architecture, Scrum, or deployment documentation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHAPTER 2: RELEVANT ARCHITECTURAL DECISIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{RELEVANT ARCHITECTURAL DECISIONS}
+
+\section{Repository Ecosystem and System Boundaries}
+The final BOPADIGITAL solution is organized as a coordinated ecosystem of repositories instead of a single application. This organization separates public communication, internal commercial management, field work, backend services, shared contracts, and deployment operations. The separation also allows each part of the system to be developed and validated according to its own technical responsibilities while preserving a common integration boundary through the REST API.
+
+Table~\ref{tab:repository_ecosystem} summarizes the repositories considered in the final architecture. The communications repository is part of the project evidence package, while the other repositories contain executable software or deployment resources.
+
+\begin{longtable}{|p{2.6cm}|p{3.0cm}|p{3.2cm}|p{4.8cm}|}
+\caption{BOPADIGITAL repository ecosystem and responsibilities}
+\label{tab:repository_ecosystem}\\
+\hline
+\textbf{Repository} & \textbf{Main responsibility} & \textbf{Principal technology} & \textbf{Architectural boundary} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Repository} & \textbf{Main responsibility} & \textbf{Principal technology} & \textbf{Architectural boundary} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+\texttt{bopacorp-web} & Public website and CMS & React, TypeScript, Vite & Presents public catalog, contact, vacancy, and content-management workflows. It does not access the database directly. \\
+\hline
+\texttt{bopacorp-crm} & Internal commercial platform & React, TypeScript, Vite & Provides protected CRM, catalog, employability, organization, documentation, negotiation, and reporting interfaces. It communicates with the API through an Axios client. \\
+\hline
+\texttt{bopacorp-mobile} & Advisor field application & Expo, React Native, TypeScript & Supports the mobile advisor workflows that are included only when verified through device or emulator evidence. It consumes the same API boundary. \\
+\hline
+\texttt{bopacorp-api} & Backend and business services & Express, TypeScript, Drizzle ORM & Exposes versioned REST endpoints, applies authentication and authorization, validates requests, executes business rules, and persists data. \\
+\hline
+\texttt{bopacorp-shared} & Shared contracts and schemas & TypeScript and Zod & Publishes request, response, enumeration, and validation contracts consumed by the API and clients. \\
+\hline
+\texttt{deploy} & Local and server deployment & Docker Compose and Caddy & Builds and runs the API, CRM, and public website containers and optionally exposes them through a reverse proxy. \\
+\hline
+\texttt{communications} & Client and project evidence & Markdown and captured evidence & Indexes sprint communications, acceptance forms, and final client evidence; it is not part of the runtime system. \\
+\end{longtable}
+
+The system boundary is therefore defined by the clients, the API, the shared contract package, and the persistence and external-service layer. The clients do not contain database credentials and do not issue SQL queries. They communicate with the API through the versioned path \texttt{/api/v1}. The API is responsible for enforcing the rules that must remain consistent across web, CRM, and mobile clients.
+
+The architecture follows a client--server boundary with a modular-monolith backend. This choice avoids duplicating business rules across several frontends while preserving independent user interfaces for public users, administrators, sales advisors, supervisors, coordinators, and managers. The resulting structure is simpler to deploy than a group of independent backend services, but it still provides internal separation through domain modules and one-way dependencies.
+
+\section{Technology Selection}
+The technology decisions were evaluated according to the nature of the project, the existing team skills, the need for rapid iteration during Scrum sprints, the number of client applications, and the requirement to demonstrate a complete and maintainable product. The following comparisons document the engineering rationale for the final stack. They are retrospective justifications of the implemented architecture and do not claim that every alternative was formally prototyped.
+
+\subsection{Frontend Framework}
+BOPADIGITAL requires more than one user interface: the public website, the internal CRM, and the advisor mobile client. For the web applications, the team selected React with TypeScript and Vite.
+
+\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\caption{Comparison of web frontend alternatives}
+\label{tab:frontend_selection}\\
+\hline
+\textbf{Criterion} & \textbf{React/Vite} & \textbf{Angular} & \textbf{Vue.js} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{React/Vite} & \textbf{Angular} & \textbf{Vue.js} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+Language and typing & TypeScript support and a large ecosystem of typed libraries. & TypeScript is integrated into the framework. & TypeScript is supported with a progressive framework model. \\
+\hline
+Application model & Component library that allows the team to select routing, forms, data fetching, and UI tools according to each application. & More prescriptive framework with integrated conventions. & Component-based framework with an intermediate level of prescription. \\
+\hline
+Fit for this project & Supports a shared visual approach across the public website and CRM while allowing feature-oriented organization. & Provides more built-in structure, but introduces a larger framework surface for the current team and scope. & Provides a productive alternative, but would require changing the selected ecosystem and current implementation. \\
+\hline
+Build and development & Vite provides fast development feedback and efficient production builds. & Angular CLI offers an integrated build workflow. & Vite is also available, but the existing repositories are already implemented with React. \\
+\hline
+Decision & \multicolumn{3}{p{11.2cm}|}{React with TypeScript and Vite was selected for the public website and CRM. React Native through Expo extends the same language and component-oriented approach to the mobile application.} \\
+\hline
+\end{longtable}
+
+React was selected because it provides component reuse, TypeScript integration, a mature ecosystem, and a lower migration cost for the existing implementation. Vite supports rapid feedback during development, while Tailwind CSS and shadcn/ui provide a reusable interface foundation. The selection also enables the team to share frontend conventions without forcing the public website and CRM to have identical navigation or business responsibilities.
+
+\subsection{Backend Framework}
+The backend must expose REST endpoints, enforce permissions, validate input, execute business rules, and integrate with a relational database. Express with TypeScript was selected for the API.
+
+\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\caption{Comparison of backend alternatives}
+\label{tab:backend_selection}\\
+\hline
+\textbf{Criterion} & \textbf{Express/TypeScript} & \textbf{Django/DRF} & \textbf{Laravel} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{Express/TypeScript} & \textbf{Django/DRF} & \textbf{Laravel} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+Language and ecosystem & TypeScript aligns the API with the web, CRM, mobile, and shared-contract repositories. & Python provides a mature full-stack ecosystem. & PHP provides a mature framework with strong conventions. \\
+\hline
+API flexibility & Lightweight middleware and routing allow the team to define explicit layers and module boundaries. & Includes many conventions and features through Django and Django REST Framework. & Includes conventions and framework services for common web tasks. \\
+\hline
+Integration fit & Directly reuses TypeScript types and Zod contracts from \texttt{@bopacorp/shared}. & Would require a separate type and schema integration strategy. & Would require a separate type and schema integration strategy. \\
+\hline
+Decision & \multicolumn{3}{p{11.2cm}|}{Express with TypeScript was selected because it provides the required REST and middleware capabilities while keeping one typed language across the project ecosystem.} \\
+\hline
+\end{longtable}
+
+The API is implemented as a modular monolith. Each business domain is represented by routes, controllers, and services. Routes configure endpoints and middleware, controllers translate HTTP requests and responses, and services contain business logic and database operations. This structure was selected because it provides clear responsibilities without the operational overhead of independently deployed microservices.
+
+\subsection{Relational Database and Persistence}
+The commercial lifecycle contains users, roles, permissions, organizations, catalog records, vacancies, applications, negotiations, documents, and reporting data. These entities have relationships, constraints, and state changes, which make a relational database appropriate.
+
+\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\caption{Comparison of database alternatives}
+\label{tab:database_selection}\\
+\hline
+\textbf{Criterion} & \textbf{PostgreSQL} & \textbf{MySQL} & \textbf{MongoDB} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{PostgreSQL} & \textbf{MySQL} & \textbf{MongoDB} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+Data model & Relational model with constraints, joins, and transactional operations. & Relational model with constraints and transactions. & Document model with flexible schemas and denormalized data. \\
+\hline
+Fit for BOPADIGITAL & Appropriate for relationships among users, roles, negotiations, documents, and organizational entities. & Also appropriate for relational workloads, but not the database selected by the current implementation. & Would require additional modeling decisions for highly related commercial data. \\
+\hline
+TypeScript integration & Drizzle ORM provides typed queries and schema mapping. & Can be integrated with Node.js ORMs, but would require a different current configuration. & Provides a flexible document approach, but does not match the current relational domain model. \\
+\hline
+Decision & \multicolumn{3}{p{11.2cm}|}{PostgreSQL hosted through Supabase was selected. Drizzle ORM provides the persistence boundary used by the API and preserves typed access to the database.} \\
+\hline
+\end{longtable}
+
+PostgreSQL was selected because it represents the domain relationships explicitly and supports integrity rules that are important for identity, permissions, commercial records, and document status. Supabase provides the hosted PostgreSQL service used by the current architecture. The API remains the only application layer that accesses this persistence boundary.
+
+\subsection{Mobile Development Framework}
+The mobile component is intended for advisors who need access to field-oriented client, negotiation, and documentation workflows. Expo with React Native was selected instead of maintaining separate Android and iOS implementations.
+
+\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\caption{Comparison of mobile development alternatives}
+\label{tab:mobile_selection}\\
+\hline
+\textbf{Criterion} & \textbf{Expo/React Native} & \textbf{Flutter} & \textbf{Native applications} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{Expo/React Native} & \textbf{Flutter} & \textbf{Native applications} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+Language and reuse & TypeScript and React conventions can be reused from the web ecosystem. & Uses Dart and a separate widget ecosystem. & Requires Kotlin/Java and Swift/Objective-C implementations. \\
+\hline
+Delivery effort & One codebase can target supported mobile platforms through Expo. & One codebase can also target multiple platforms, but requires a different language and tooling stack. & Provides platform-specific control with higher implementation and maintenance cost. \\
+\hline
+Fit for current scope & Matches the existing mobile repository and advisor-oriented routes. & Technically viable, but not aligned with the current repository. & Excessive for the current team and final scope. \\
+\hline
+Decision & \multicolumn{3}{p{11.2cm}|}{Expo with React Native and TypeScript was selected. Mobile features are included in the final report only when their execution is supported by current device or emulator evidence.} \\
+\hline
+\end{longtable}
+
+The mobile decision reduces duplication and keeps the data boundary consistent with the web and CRM applications. It does not imply that every mobile route is accepted as a final demonstrated feature; runtime verification remains the acceptance condition for the workflows described in the demonstration and manuals.
+
+\subsection{Shared Contracts and Validation}
+The applications exchange structured data through the API, so duplicated request and response definitions would create a risk of drift. The team selected a shared package based on TypeScript and Zod.
+
+\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\caption{Comparison of contract-management alternatives}
+\label{tab:contracts_selection}\\
+\hline
+\textbf{Criterion} & \textbf{Shared TypeScript/Zod package} & \textbf{Duplicated frontend types} & \textbf{Unvalidated JSON contracts} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{Shared TypeScript/Zod package} & \textbf{Duplicated frontend types} & \textbf{Unvalidated JSON contracts} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+Consistency & One package provides common schemas, types, enums, and response structures. & Each client may evolve a different representation of the same resource. & Compatibility depends on informal conventions. \\
+\hline
+Runtime protection & Zod validates request data at runtime and TypeScript supports compile-time feedback. & TypeScript types alone do not validate external runtime input. & Invalid data can reach business logic without an explicit boundary. \\
+\hline
+Maintenance & Changes can be published and consumed as a versioned package. & Changes must be synchronized manually in multiple repositories. & Changes are difficult to detect before execution. \\
+\hline
+Decision & \multicolumn{3}{p{11.2cm}|}{The \texttt{@bopacorp/shared} package was selected as the common contract boundary for the API and client applications.} \\
+\hline
+\end{longtable}
+
+This decision is especially important for authentication requests, pagination, catalog data, employability records, and API error responses. The shared package does not replace business validation in the service layer: schemas validate structure and format, while services enforce rules that depend on persisted state and user ownership.
+
+\subsection{Deployment and Reverse Proxy}
+The deployment repository uses Docker Compose to coordinate the API, CRM, and public website. Caddy can be used as a reverse proxy when the services must be exposed through HTTPS domains.
+
+\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\caption{Comparison of deployment alternatives}
+\label{tab:deployment_selection}\\
+\hline
+\textbf{Criterion} & \textbf{Docker Compose and Caddy} & \textbf{Manual process management} & \textbf{Independent service deployment} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{Docker Compose and Caddy} & \textbf{Manual process management} & \textbf{Independent service deployment} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+Reproducibility & Service definitions, ports, environment interfaces, and dependencies are described as code. & Depends on machine-specific commands and manual configuration. & Can be reproducible, but requires more infrastructure and service coordination. \\
+\hline
+Local development & The API, CRM, and website can be built and started using a common orchestration file. & Developers must configure every process separately. & Separate deployment targets increase setup and operational cost. \\
+\hline
+Network boundary & Caddy can terminate HTTPS and route domains to local container ports. & TLS and routing must be configured independently for each process. & Managed platforms may provide routing, but introduce provider-specific configuration. \\
+\hline
+Decision & \multicolumn{3}{p{11.2cm}|}{Docker Compose was selected for service orchestration, with Caddy as an optional reverse proxy for HTTPS exposure.} \\
+\hline
+\end{longtable}
+
+This choice supports a reproducible environment without changing the application architecture. The deployment process requires a GitHub Packages token to install \texttt{@bopacorp/shared}, environment configuration for the API, and a PostgreSQL connection. Secrets remain outside the report and source-controlled files.
+
+\section{Authentication, Authorization and RBAC}
+Authentication and authorization are separated so that the API can identify the caller before deciding whether the requested operation is permitted. Protected routes use the middleware order shown in Figure~\ref{fig:authorization_flow}.
+
+\begin{figure}[htbp]
+\centering
+\fbox{\begin{minipage}{0.88\textwidth}
+\centering
+\texttt{Request} $\rightarrow$ \texttt{authenticate} $\rightarrow$ \texttt{authorize} $\rightarrow$ \texttt{validate} $\rightarrow$ \texttt{controller} $\rightarrow$ \texttt{service} $\rightarrow$ \texttt{database}
+\end{minipage}}
+\caption{Protected request processing order}
+\label{fig:authorization_flow}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{clickup_sprint2.png}
-    \caption{ClickUp --- Sprint 2 Board Overview}
-    \label{fig:clickup_sprint2}
-\end{figure}
+During login, the API normalizes the email, applies rate limiting, retrieves the active user, compares the password using bcrypt, records the login result, and issues an access token together with an opaque refresh token. The access token is a short-lived JWT, while the refresh token is stored as a SHA-256 hash in the database. This limits the exposure period of the access token and allows refresh sessions to be revoked during logout, password changes, user deactivation, or token-rotation replay detection.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{clickup_sprint3.png}
-    \caption{ClickUp --- Sprint 3 Board Overview}
-    \label{fig:clickup_sprint3}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{clickup_sprint4.png}
-    \caption{ClickUp --- Sprint 4 Board Overview}
-    \label{fig:clickup_sprint4}
-\end{figure}
-
-\section{Risk Management}
-Below is the classification of probability ranges and the identified risks for the project.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{8.5cm}|p{3.5cm}|}
+\begin{longtable}{|p{2.8cm}|p{3.1cm}|p{3.2cm}|p{4.5cm}|}
+\caption{Authentication token responsibilities}
+\label{tab:token_responsibilities}\\
 \hline
-\textbf{Description} & \textbf{Probability Range} \\ \hline
-Highly Unlikely: Extremely low chance of occurrence. & 0\% -- 20\% \\ \hline
-Low Probability: Unlikely but possible. & 21\% -- 40\% \\ \hline
-Moderate Probability: Even chance of occurrence. & 41\% -- 60\% \\ \hline
-High Probability: Likely to occur. & 61\% -- 80\% \\ \hline
-Very High Probability: Almost certain to occur. & 81\% -- 100\% \\ \hline
-\end{tabular}
-\caption{Risk Probability Classification}
-\label{tab:risk_classification}
-\end{table}
-
-\subsection{Identified Risks and Mitigation Protocols}
-\begingroup
-\setlength{\LTleft}{-1.5cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\begin{longtable}{|>{\centering\arraybackslash}p{0.07\linewidth}|>{\arraybackslash}p{0.18\linewidth}|>{\arraybackslash}p{0.27\linewidth}|>{\centering\arraybackslash}p{0.12\linewidth}|>{\centering\arraybackslash}p{0.12\linewidth}|>{\arraybackslash}p{0.24\linewidth}|}
+\textbf{Token} & \textbf{Representation} & \textbf{Lifetime} & \textbf{Purpose and protection} \\
 \hline
-\textbf{ID} & \textbf{Risk Name} & \textbf{Risk Description} & \textbf{Probability} & \textbf{Impact} & \textbf{Action / Mitigation Protocol} \\ \hline
-\endfirsthead
-\multicolumn{6}{l}{\textit{Table continued from previous page}} \\ \hline
-\textbf{ID} & \textbf{Risk Name} & \textbf{Risk Description} & \textbf{Probability} & \textbf{Impact} & \textbf{Action / Mitigation Protocol} \\ \hline
-\endhead
-R01 & Deployment failures & Infrastructure or Docker configuration error during production deployment. & Low & Critical & Conduct dry runs in local Docker Compose environment before pushing to production. Script all release steps in CI/CD pipeline. \\ \hline
-R02 & Code quality degradation & Lack of compliance with Biome linting and TypeScript strict mode rules. & Moderate & Moderate & Enforce automated Biome checks and \texttt{tsc --noEmit} in Husky pre-commit hooks and GitHub Actions CI gates. \\ \hline
-R03 & API integration delay & Type mismatches or contract violations between frontend clients and backend API. & Moderate & High & Establish shared Zod schemas in \texttt{@bopacorp/shared} early; enforce schema validation on both client and server sides. \\ \hline
-R04 & Sprint scope overrun & More tasks than capacity due to underestimation of module complexity. & High & Moderate & Apply story point estimation in ClickUp; re-prioritize backlog during sprint planning if capacity is exceeded. \\ \hline
-R05 & Client availability & Inability to obtain timely client feedback or acceptance signatures due to scheduling conflicts. & Moderate & High & Schedule meetings proactively at sprint boundaries; keep WhatsApp channel open for async communication with Mgtr. Christian Pauta. \\ \hline
-R06 & Database service interruption & Temporary loss of connectivity with the Supabase PostgreSQL database affecting CRM, Web, and Mobile operations. & Low & High & Maintain regular backups, monitor database availability, and implement retry and recovery mechanisms.  \\ \hline
-\caption{Identified Risks and Mitigation Strategies}
-\label{tab:identified_risks}
-\end{longtable}
-\endgroup
-
-\section{Product Backlog}
-Product backlog items, priorities, dependencies, and estimations in hours.
-
-\begingroup
-\setlength{\LTleft}{-1.2cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\setlength{\LTcapwidth}{\textwidth}
-\begin{longtable}[c]{|%
->{\centering\arraybackslash}p{0.08\linewidth}|%
->{\centering\arraybackslash}p{0.08\linewidth}|%
->{\centering\arraybackslash}p{0.14\linewidth}|%
->{\arraybackslash}p{0.46\linewidth}|%
->{\centering\arraybackslash}p{0.14\linewidth}|}
-\hline
-\textbf{ID} & \textbf{Priority} & \textbf{Dependencies} & \textbf{Backlog Item Description} & \textbf{Estimation (Hours)} \\ \hline
-\endfirsthead
-\multicolumn{5}{l}{\textit{Table continued from previous page}} \\ \hline
-\textbf{ID} & \textbf{Priority} & \textbf{Dependencies} & \textbf{Backlog Item Description} & \textbf{Estimation (Hours)} \\ \hline
-\endhead
-
-PB1 & High & None & Configure project repositories, TypeScript, Biome, Husky, commitlint, shared package configuration, and GitHub workflow standards for all project components. & 10 \ \hline
-
-PB2 & High & PB1 & Design and implement the PostgreSQL/Supabase database schema, including authentication, CRM, documentation, supervision, CMS, and public website modules. & 10 \ \hline
-
-PB3 & High & PB2 & Implement JWT-based authentication, password encryption, session management, and secure API access control mechanisms. & 10 \ \hline
-
-PB4 & High & PB3 & Implement Role-Based Access Control (RBAC) including roles, permissions, protected routes, and module-level authorization. & 8 \ \hline
-
-PB5 & High & PB1 & Develop the public BOPACORP website, including company information, services catalog, employment opportunities, and contact features. & 12 \ \hline
-
-PB6 & High & PB5 & Develop the Content Management System (CMS) for managing services, website content, images, links, and public information. & 10 \ \hline
-
-PB7 & High & PB4 & Implement Organization Management functionalities including departments, employees, organizational roles, and advisor-supervisor relationships. & 8 \ \hline
-
-PB8 & High & PB4 & Develop the CRM Web platform including client management, negotiation tracking, business opportunities, visit management, and commercial processes. & 20 \ \hline
-
-PB9 & Medium & PB8 & Implement document management functionalities, including document upload, storage, retrieval, review, and approval workflows. & 12 \ \hline
-
-PB10 & Medium & PB8 & Implement supervision functionalities for monitoring advisor activities, reviewing commercial processes, and tracking operational performance. & 8 \ \hline
-
-PB11 & Medium & PB8 & Develop reporting and analytics functionalities including commercial metrics, performance indicators, and operational dashboards. & 10 \ \hline
-
-PB12 & High & PB8 & Develop the mobile application for sales advisors, including authentication, client management, negotiation tracking, document consultation, and visit registration. & 16 \ \hline
-
-PB13 & Medium & PB12 & Implement geolocation features for visit registration and field activity tracking within the mobile application. & 8 \ \hline
-
-PB14 & High & PB1 & Integrate all system components (Web, CMS, CRM, Mobile, and API) through shared services, common validation schemas, and centralized authentication. & 10 \ \hline
-
-PB15 & High & All & Configure Docker environments, deployment pipelines, environment variables, HTTPS configuration, and production infrastructure. & 10 \ \hline
-
-PB16 & Medium & PB15 & Design and execute functional, integration, and user acceptance tests for all major system modules. & 8 \ \hline
-
-PB17 & Medium & PB15 & Prepare technical documentation, deployment guides, installation manuals, user manuals, and project deliverables. & 6 \ \hline
-
-\caption{Product Backlog}
-
-\label{tab:product_backlog}
-\end{longtable}
-\endgroup
-
-\newpage
-\section{Sprint Backlogs}
-Sprints breakdown, tasks description, and developer assignments.
-
-\subsection{Sprint 1: Technical Foundation \& Security Layer}
-\textbf{Sprint Goal:} Establish the multi-repository skeleton, implement JWT-based RBAC authentication, configure the shared types library, set up ClickUp workspace, and scaffold the public website base structure.
- \\
-\textbf{Total tasks completed: 21.}
-
-\begingroup
-\setlength{\LTleft}{-1.2cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\setlength{\LTcapwidth}{\textwidth}
-\begin{longtable}{|p{3.0cm}|p{4.6cm}|p{5.6cm}|p{3.0cm}|}
-\hline
-\textbf{Product Backlog Item} & \textbf{User Story / Description} & \textbf{Tasks} & \textbf{Assigned To} \\ \hline
 \endfirsthead
 \hline
-\textbf{Product Backlog Item} & \textbf{User Story / Description} & \textbf{Tasks} & \textbf{Assigned To} \\ \hline
-
-
-\endhead
-Repository Creation and Configuration & As a team, we need all five repositories created and configured with branch protection and CI foundations. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Create \texttt{bopacorp-api}, \texttt{bopacorp-web}, \texttt{bopacorp-crm}, \texttt{bopacorp-shared}, \texttt{bopacorp-mobile} repos
-    \item Configure branch protection on \texttt{main}
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-Code Quality Tooling Configuration & As a team, we need linting, formatting, and commit enforcement configured uniformly. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Configure Biome (\texttt{biome.json})
-    \item Setup Husky + lint-staged
-    \item Configure commitlint
-    \item Define \texttt{npm run check} script
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-Database Design and Modeling & As a developer, I need the full relational schema defined before any module implementation begins. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Design schema for all modules (CRM, MAT, DOC, ORG, Auth, CAT, EMP)
-    \item Write Drizzle ORM migration scripts
-\end{itemize} & Gabriel Tumbaco, Nahim Díaz \\ \hline
-
-Express Server Foundations & As a developer, I need a base Express + TypeScript server with error handling and routing structure. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Initialize Node.js + Express + TypeScript
-    \item Configure middleware pipeline
-    \item Setup base routing structure
-\end{itemize} & Salvador Muñoz, Gabriel Tumbaco \\ \hline
-
-JWT Authentication System & As a system user, I want secure login using email and password with JWT token rotation. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Implement POST /auth/login
-    \item Access token + refresh token rotation
-    \item bcrypt password hashing (12+ chars)
-\end{itemize} & Nahim Díaz \\ \hline
-
-RBAC — Global Roles and Permissions & As a system, I need module-level permissions embedded in JWT to protect every endpoint by role. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item CRUD roles, modules, permissions (admin)
-    \item Embed permissions in JWT payload
-    \item Create \texttt{requirePermission()} middleware
-    \item Seed base roles and permissions
-\end{itemize} & Gabriel Tumbaco, Nahim Díaz \\ \hline
-
-Web Login Portal (Frontend) & As a user, I want to log in via a web interface and have my session managed securely. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Login page with email/password form
-    \item AuthContext with login(), logout(), hasPermission()
-    \item RequireAuth wrapper + PermissionRoute
-    \item Axios interceptor with token refresh
-    \item Auth storage (localStorage tokens)
-\end{itemize} & Salvador Muñoz, Anthony Navarrete \\ \hline
-
-Shared Types Library — Base Modules & As a developer, I need shared Zod schemas to enforce API contracts across all repositories. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Common: UUID, Email, Pagination, API envelope schemas
-    \item Auth: Login, User, Role, Permission schemas
-    \item Core: Employee, Department, OrgRole schemas
-    \item Configure exports map + subpath imports
-    \item Publishing pipeline (npm version + npm publish)
-\end{itemize} & Salvador Muñoz, Gabriel Tumbaco \\ \hline
-
-ClickUp Configuration and SCRUM Planning & As a team, we need the agile workspace configured and Sprint 1 tasks assigned. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Create ClickUp workspace and invite members
-    \item Define Product Backlog with user stories
-    \item Sprint 1 planning and task assignment
-\end{itemize} & Gabriel Tumbaco, Nahim Díaz \\ \hline
-
-Landing Page Structure and Public Views & As a business client, I want to browse the public website and navigate to key sections. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Base layout + routing (React Router v7)
-    \item Landing page: hero, services grid, about, CTA
-    \item ServicesPage, AboutPage, JobsPage stubs
-\end{itemize} & Anthony Navarrete, Shirley Aragón \\ \hline
-\caption{Sprint 1 Backlog}
-\label{tab:sprint1_backlog}
-\end{longtable}
-\endgroup
-
-\subsection{Sprint 2: Backend Core Modules, CMS, EMP, ORG \& CRM Initialization}
-\textbf{Sprint Goal:} Implement Catalog, CMS, Employability, Organization, and Users backend modules; integrate CMS with the public website; initialize the CRM web app; complete the public website with real data. \\
-\textbf{Total tasks completed: 37.}
-
-\begingroup
-\setlength{\LTleft}{-1.2cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\begin{longtable}{|p{3.2cm}|p{4.4cm}|p{5.4cm}|p{3.0cm}|}
+\textbf{Token} & \textbf{Representation} & \textbf{Lifetime} & \textbf{Purpose and protection} \\
 \hline
-\textbf{Backlog Item} & \textbf{User Story / Description} & \textbf{Tasks} & \textbf{Assigned To} \\ \hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+Access token & JWT & 15 minutes in the current configuration & Sent with protected API requests. Its short lifetime limits the exposure window because it is not directly revoked through the database. \\
+\hline
+Refresh token & Opaque random value stored through a SHA-256 hash & 7 days in the current configuration & Used to obtain a new token pair. The database record can be revoked and the token is rotated after use. \\
+\hline
+\end{longtable}
+
+The \texttt{authenticate} middleware extracts the bearer token, verifies the JWT signature, loads the active user and roles, and attaches the authenticated identity to the request. The \texttt{authorize} middleware then checks the permission codes required by the route. Permissions use the \texttt{module.action} convention, such as \texttt{users.read}, \texttt{catalog_items.create}, or \texttt{content_blocks.update}. A valid identity without the required permission receives a forbidden response; a missing or invalid identity receives an unauthorized response.
+
+The authorization design is role-based, but the route checks are expressed as permissions. This allows a role to group several capabilities while keeping the endpoint declaration explicit. Validation occurs after the authorization decision, preventing unauthorized requests from receiving unnecessary detailed validation feedback. Services remain responsible for ownership and state-dependent rules, such as whether a user may view or modify a record associated with a particular organization or workflow.
+
+\begin{longtable}{|p{3.0cm}|p{4.0cm}|p{5.0cm}|}
+\caption{Authorization responsibilities by layer}
+\label{tab:authorization_layers}\\
+\hline
+\textbf{Layer} & \textbf{Responsibility} & \textbf{Example of enforced concern} \\
+\hline
 \endfirsthead
 \hline
-\textbf{Backlog Item} & \textbf{User Story / Description} & \textbf{Tasks} & \textbf{Assigned To} \\ \hline
-\endhead
-Catalog Module API (Backend) & As a web admin, I want to manage a hierarchical catalog of services and receive contact requests. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item CRUD categories with hierarchical tree
-    \item CRUD catalog items with details
-    \item Lookup tables (segments, tiers, benefit types)
-    \item Contact requests endpoint
-    \item Shared types: catalog schemas (20+ types)
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-CMS Module (Backend + Frontend) & As a web administrator, I want to edit public website content through a paginated admin panel. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item CMS API: content blocks CRUD + landing endpoint
-    \item Seed CMS landing content
-    \item CMS admin page with pagination + search
-    \item CMS edit dialog (inline text update)
-    \item CMS landing integration on public website
-\end{itemize} & Salvador Muñoz \\ \hline
-
-Employability Module API (Backend) & As a sales advisor candidate, I want to apply for a vacancy and upload my CV online. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item CRUD job vacancies and candidates
-    \item Job applications (create, update, list)
-    \item Upload CVs to S3
-    \item Public endpoint to apply for a vacancy
-    \item Shared types: employability schemas
-\end{itemize} & Salvador Muñoz, Gabriel Tumbaco \\ \hline
-
-Organization Module (Backend) & As an admin, I want to manage departments, employees, and advisor-supervisor relationships. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item CRUD departments
-    \item CRUD employees with soft delete and pagination
-    \item CRUD org-roles
-    \item Advisor-supervisor relationship endpoints
-    \item Shared types: core schemas
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-Users Module (Backend) & As an admin, I want to manage users and assign roles dynamically. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item CRUD users (create, update, list, get)
-    \item Assign/remove roles to users
-    \item Centralize audit logging in \texttt{lib/audit.ts}
-    \item GET /auth/me endpoint
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-Web Frontend — Auth + UI Components & As a developer, I need shared UI primitives and RBAC protection in the public web app. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item RBAC with real permissions from JWT
-    \item Shared UI primitives (PageLoader, ErrorState)
-    \item Restructure admin module into modular layout
-    \item DOMPurify sanitizer for XSS prevention
-\end{itemize} & Salvador Muñoz, Gabriel Tumbaco \\ \hline
-
-CRM Web Project Init & As a developer, I need the CRM app configured and ready for feature development. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Initialize React 19 + Vite + TS + Tailwind v4
-    \item Configure Biome + Husky + commitlint
-    \item Setup Radix UI + shadcn components
-\end{itemize} & Anthony Navarrete, Gabriel Tumbaco \\ \hline
-
-Web Frontend — Employability UI & As a candidate, I want to browse vacancies and submit my application form online. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Job application form
-    \item Employability module UI (vacancies listing)
-    \item Update landing page with real Bopacorp data
-\end{itemize} & Anthony Navarrete, Shirley Aragón \\ \hline
-\caption{Sprint 2 Backlog}
-\label{tab:sprint2_backlog}
-\end{longtable}
-\endgroup
-
-\subsection{Sprint 3: CRM, MAT, DOC, REP, NOT Modules, CI/CD \& Production Deployment}
-\textbf{Sprint Goal:} Implement all remaining backend modules (CRM, MAT, DOC, REP, NOT), complete CRM web UI with real API integration, configure CI/CD pipelines for all repositories, deploy to production, and initialize the mobile application. \\
-\textbf{Total tasks completed: 52.}
-
-\begingroup
-\setlength{\LTleft}{-1.2cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\begin{longtable}{|p{3.2cm}|p{4.4cm}|p{5.4cm}|p{3.0cm}|}
+\textbf{Layer} & \textbf{Responsibility} & \textbf{Example of enforced concern} \\
 \hline
-\textbf{Backlog Item} & \textbf{User Story / Description} & \textbf{Tasks} & \textbf{Assigned To} \\ \hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+Authentication middleware & Establish the identity of the caller. & Verify the JWT and confirm that the user remains active. \\
+\hline
+Authorization middleware & Check the permissions declared by a route. & Require \texttt{users.read} before listing users. \\
+\hline
+Validation middleware & Check the structure and format of request data. & Validate body, path parameters, and query parameters with a shared Zod schema. \\
+\hline
+Service layer & Enforce business rules and persisted-state constraints. & Confirm resource existence, ownership, permitted transitions, and uniqueness. \\
+\hline
+Database & Enforce persistence constraints. & Apply relational constraints and retain token/session records. \\
+\hline
+\end{longtable}
+
+\section{Shared Contracts and Data Architecture}
+The shared contract package is the integration boundary between the API and its clients. It provides common primitives, request schemas, response schemas, enumerations, and API response wrappers. The package is published as \texttt{@bopacorp/shared} and is consumed by the API, public website, CRM, and mobile repository.
+
+The request path is divided into four responsibilities. First, the route selects the endpoint and attaches middleware. Second, the controller reads already-validated request data and delegates the operation. Third, the service applies business rules and performs Drizzle queries. Finally, the database persists or retrieves the data. This one-way dependency flow is represented as:
+
+\begin{center}
+\texttt{routes -> controller -> service -> database}
+\end{center}
+
+The API uses a common response envelope. A successful operation returns \texttt{success: true} and its data; a paginated operation also returns metadata; and an error returns \texttt{success: false} with a stable error code and message. The convention makes error handling predictable for all clients and prevents each frontend from implementing a different interpretation of HTTP responses.
+
+\begin{longtable}{|p{2.6cm}|p{3.5cm}|p{3.1cm}|p{4.3cm}|}
+\caption{Shared API contract categories}
+\label{tab:shared_contracts}\\
+\hline
+\textbf{Contract category} & \textbf{Provided by} & \textbf{Consumed by} & \textbf{Architectural purpose} \\
+\hline
 \endfirsthead
 \hline
-\textbf{Backlog Item} & \textbf{User Story / Description} & \textbf{Tasks} & \textbf{Assigned To} \\ \hline
+\textbf{Contract category} & \textbf{Provided by} & \textbf{Consumed by} & \textbf{Architectural purpose} \\
+\hline
 \endhead
-CRM Module API (Backend) & As a sales advisor, I want to register clients, log GPS visits, and manage negotiation stages via API. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item CRM schema: 6 tables + relationships
-    \item CRUD business clients with pagination
-    \item CRUD negotiations + statuses + history
-    \item CRUD visits + visit types + GPS
-    \item Shared types: CRM schemas
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-Matrices Module API (Backend) & As a sales advisor, I want to create offer matrices and submit them for supervisor approval. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Matrices schema: 4 tables + MatrixState enum
-    \item CRUD offer matrices + line items + attachments
-    \item State transitions + history
-    \item Shared types: matrices schemas
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-Documents Module API (Backend) & As an advisor, I want to upload negotiation documents and track their approval status. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Documents schema: 3 tables + DocumentState enum
-    \item CRUD document types (mandatory/optional)
-    \item CRUD negotiation documents + state changes
-    \item Shared types: documents schemas
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-Reports \& Notifications Modules API (Backend) & As management, I want sales performance reports. As a user, I want internal notifications for approvals and reviews. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Reports + notifications schema
-    \item Reports API: exports + sales objectives
-    \item Notifications API: CRUD + list
-    \item RBAC seeds for new modules
-    \item Shared types: reports + notifications schemas
-\end{itemize} & Gabriel Tumbaco, Nahim Díaz \\ \hline
-
-CRM Web — Scaffolding and Structure & As a developer, I need the CRM web application's layout, navigation, and shared components built before feature integration. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item MainLayout (sidebar + header + content)
-    \item Collapsible navigation sidebar
-    \item Automatic route-based AppBreadcrumb
-    \item 11 scaffolded pages (empty state)
-    \item Shared UI: KpiCard, FilterBar, EntityTable, StateBadge, TimelinePanel
-\end{itemize} & Anthony Navarrete, Shirley Aragón \\ \hline
-
-Advisors Overview — Bopacorp Visibility & As a supervisor/management user, I want to see a real-time overview of all advisors' activity. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Advisor overview page with real data
-    \item KPI leaderboard + pipeline stats
-\end{itemize} & Nahim Díaz \\ \hline
-
-Correct Documents UI / UX & As a coordinator, I want the document management interface to clearly reflect approval states. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Fix document state display and transitions in UI
-    \item Correct UX flow for coordinator actions
-\end{itemize} & Nahim Díaz \\ \hline
-
-CI/CD Pipelines (All Repos) & As a team, we need automated CI checks on every pull request for all repositories. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item CI pipeline for bopacorp-api
-    \item CI pipeline for bopacorp-web
-    \item CI pipeline for bopacorp-crm
-    \item CI pipeline for bopacorp-shared
-    \item Configure NPM\_TOKEN secret for GitHub Packages
-\end{itemize} & Gabriel Tumbaco, Nahim Díaz \\ \hline
-
-Dockerization and Production Deployment & As a team, we need all services containerized and running on a live production server with HTTPS. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Dockerfile for bopacorp-api
-    \item Dockerfile for bopacorp-web (nginx + static)
-    \item Dockerfile for bopacorp-crm (nginx + static)
-    \item Docker Compose for local development
-    \item Deploy to production server
-    \item Configure domain + HTTPS/TLS (RNF-005)
-\end{itemize} & Gabriel Tumbaco, Nahim Díaz \\ \hline
-
-Organization Management — CRM Module & As a supervisor, I want to manage advisor-supervisor assignments from within the CRM interface. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Organization management page in CRM
-    \item Advisor/employee table + assignment controls
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-Public Website — Complete Stub Pages & As a business client, I want fully functional public pages with real catalog content and vacancy listings. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item ServicesPage: catalog with category filters
-    \item AboutPage: history, mission, vision, values
-    \item JobsPage: vacancies listing + application form
-\end{itemize} & Anthony Navarrete, Shirley Aragón \\ \hline
-
-Initialize Mobile App (React Native / Expo) & As a sales advisor, I want a mobile app to manage clients and log visits in the field. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Initialize Expo + TypeScript repository
-    \item JWT login (reuse auth service)
-    \item Base navigation (tab navigator + stack)
-    \item Assigned clients list
-    \item Client + negotiation details
-\end{itemize} & Anthony Navarrete, Shirley Aragón \\ \hline
-
-CRM Web — Real API Integration & As a CRM user, I want every page to display live data from the backend API instead of mock data. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Real login (replace mock auth)
-    \item Overview: real KPIs + leaderboard
-    \item Negotiations: list with filters + pagination
-    \item /negociaciones/:id detail with timeline + visits + docs
-    \item Catalog: matrices list + detail
-\end{itemize} & Salvador Muñoz, Anthony Navarrete \\ \hline
-
-Connect Catalog Items with Bopacorp Web & As a business client, I want the public website catalog to display real items from the API. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Integrate catalog API with ServicesPage
-    \item Connect category filters to backend
-\end{itemize} & Salvador Muñoz \\ \hline
-
-Contact Form — Bopacorp Web & As a business client, I want to submit a contact request through the public website. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Build and integrate contact form
-    \item Connect to contact requests API endpoint
-\end{itemize} & Gabriel Tumbaco \\ \hline
-
-CMS Blocks — Correct UI Details & As a web admin, I want the CMS admin panel to display and edit content blocks correctly. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Fix CMS block rendering issues
-    \item Correct inline edit dialog UI details
-\end{itemize} & Salvador Muñoz \\ \hline
-\caption{Sprint 3 Backlog}
-\label{tab:sprint3_backlog}
+\hline
+\endfoot
+\hline
+\endlastfoot
+Common primitives & \texttt{@bopacorp/shared/common} & API and all clients & UUIDs, emails, timestamps, pagination, and response wrappers. \\
+\hline
+Authentication contracts & \texttt{@bopacorp/shared/auth} & API, CRM, web, and mobile & Login, refresh, user, role, and permission request/response structures. \\
+\hline
+Domain contracts & Shared domain subpaths & API and relevant clients & Catalog, organization, employability, CRM, document, and notification data structures. \\
+\hline
+Validation schemas & Zod schemas in the shared package & API middleware and client forms & Runtime validation and consistent field-level error reporting. \\
+\hline
 \end{longtable}
-\endgroup
 
-\subsection{Sprint 4: Testing, Profiling, Documentation \& Final Delivery}
-\textbf{Sprint Goal:} Configure and execute frontend test suites, compile all Scrum evidence, generate the final project report, obtain the client acceptance letter, produce the deployment guide, perform application profiling, and record the demonstration video. \\
-\textbf{Total Sprint 4 Tasks: 25.}
+The persistence architecture uses PostgreSQL schemas and tables accessed through Drizzle ORM. The API modules represent business concerns rather than reproducing the database schema one-to-one. For example, authentication, users, and roles use related identity and permission tables, while catalog operations may span catalog and CMS data. This distinction keeps the public API organized around user-facing responsibilities rather than exposing internal storage details.
 
-\begingroup
-\setlength{\LTleft}{-1.2cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\begin{longtable}{|p{3.2cm}|p{4.4cm}|p{5.4cm}|p{3.0cm}|}
-\hline
-\textbf{Backlog Item} & \textbf{User Story / Description} & \textbf{Tasks} & \textbf{Assigned To} \\ \hline
-\endfirsthead
-\hline
-\textbf{Backlog Item} & \textbf{User Story / Description} & \textbf{Tasks} & \textbf{Assigned To} \\ \hline
-\endhead
-Test Suite — Frontend (React Testing Library) & As a team, we need automated test coverage for critical frontend flows in both web apps. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Configure Vitest + RTL in bopacorp-web
-    \item Landing page and auth flow tests
-    \item CMS admin page tests
-    \item Configure Vitest + RTL in bopacorp-crm
-\end{itemize} & Anthony Navarrete, Shirley Aragón \\ \hline
-
-SCRUM Evidence Compilation & As a team, we need all Scrum artifacts compiled and indexed for the academic deliverable. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item ClickUp screenshots for each sprint
-    \item Communication evidence (WhatsApp, meetings)
-    \item Evidence index (table with files, dates, participants)
-    \item Sprint review notes + retrospective
-\end{itemize} & Shirley Aragón, Nahim Díaz \\ \hline
-
-Final Project Report (PDF) & As a team, we need a self-contained project report covering all grading scheme elements. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Sections: introduction, scope, stakeholders, constraints
-    \item Sections: architecture, technical decisions, diagrams
-    \item Sections: Scrum process, sprints, evidence
-    \item Sections: testing, results, deployment guide
-    \item Individual contributions + acceptance letter
-\end{itemize} & Shirley Aragón, Nahim Díaz \\ \hline
-
-Client Acceptance Letter & As a team, we need the client's signed acceptance form to validate the deployed system. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Coordinate sprint review meeting with Mgtr. Christian Pauta
-    \item Obtain signed acceptance letter
-\end{itemize} & Gabriel Tumbaco, Nahim Díaz \\ \hline
-
-Deployment and Installation Guide & As a system administrator, I want step-by-step instructions to install and launch the system. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Installation guide (Docker, env vars, DB setup)
-    \item User manual by role (Advisor, Supervisor, Admin)
-    \item API endpoints documentation
-\end{itemize} & Shirley Aragón, Nahim Díaz \\ \hline
-
-Presentation and Demo Video (10 min) & As a team, we need a 10-minute recorded demonstration showing the system and all roles. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Prepare slides using ESPOL template
-    \item Demo: introduction + scope + user stories
-    \item Demo: architecture + technical decisions
-    \item Demo: features by role (Advisor, Supervisor, Admin, Candidate)
-    \item Demo: test cases + results
-    \item Record 10-minute video (equal participation)
-\end{itemize} & Salvador Muñoz, Anthony Navarrete, Shirley Aragón, Gabriel Tumbaco, Nahim Díaz \\ \hline
-
-Application Profiling & As a team, we want to profile the Node.js API to identify and report performance bottlenecks. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Configure clinic.js / 0x profiler for Node.js
-    \item Generate flamegraph and report bottlenecks
-\end{itemize} & Nahim Díaz \\ \hline
-
-Final Polish and QA & As a team, we need to verify responsiveness, cross-browser compatibility, security, and session behavior before final delivery. & \begin{itemize}\setlength{\itemsep}{2pt}
-    \item Responsive check 360px--1440px (RNF-007)
-    \item Cross-browser testing: Chrome, Firefox, Edge (RNF-006)
-    \item Security review: OWASP Top 10 (RNF-011)
-    \item Session timeout after 15 min of inactivity (RNF-024)
-\end{itemize} & Salvador Muñoz, Shirley Aragón \\ \hline
-\caption{Sprint 4 Backlog}
-\label{tab:sprint4_backlog}
-\end{longtable}
-\endgroup
-
-
-
-
-
-
-
-\newpage
-\section{Project Scheduling and Critical Path}
-Project scheduling timelines, estimations, early/late starts, and float hours.
-
-\begingroup
-\setlength{\LTleft}{-1.2cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\setlength{\LTcapwidth}{\textwidth}
-\begin{longtable}{|p{1cm}|p{3.0cm}|p{3.0cm}|p{3.0cm}|p{0.9cm}|p{1.0cm}|p{1.0cm}|p{1.0cm}|}
-\hline
-\textbf{ID} & \textbf{Description} & \textbf{Details} & \textbf{Backlog Items} & \textbf{Hours} & \textbf{Earliest Start} & \textbf{Latest Finish} & \textbf{Float} \\ \hline
-\endfirsthead
-\hline
-\textbf{ID} & \textbf{Description} & \textbf{Details} & \textbf{Backlog Items} & \textbf{Hours} & \textbf{Earliest Start} & \textbf{Latest Finish} & \textbf{Float} \\ \hline
-\endhead
-A & Project Foundation & Repositories, quality tools, shared types, Scrum setup & Sprint 1 & 10 & 0 & 10 & 0 \\ \hline
-
-B & Authentication and Security & JWT authentication, RBAC, login infrastructure & Sprint 1 & 18 & 10 & 28 & 0 \\ \hline
-
-C & Database Design & Database schema and migrations & Sprint 1 & 8 & 10 & 18 & 10 \\ \hline
-
-D & Public Website and CMS & Public website, catalog, CMS and employability modules & Sprint 2 & 30 & 28 & 58 & 0 \\ \hline
-
-E & CRM Platform Development & CRM backend and frontend modules, negotiations, visits and clients & Sprint 3 & 52 & 58 & 110 & 0 \\ \hline
-
-F & Mobile Application & Mobile application, authentication, clients, negotiations and visits & Sprint 3 & 16 & 58 & 110 & 18 \\ \hline
-
-G & Deployment Infrastructure & Docker, CI/CD pipelines and production deployment & Sprint 3 & 10 & 110 & 120 & 0 \\ \hline
-
-H & Testing and Quality Assurance & Functional testing, Vitest, RTL and validation activities & Sprint 4 & 12 & 120 & 132 & 0 \\ \hline
-
-I & Documentation and Acceptance & User manuals, installation guide, project report, acceptance letter and presentation & Sprint 4 & 16 & 132 & 148 & 0 \\ \hline
-\caption{Project Scheduling and Critical Path Overview}
-\label{tab:project_scheduling}
-\end{longtable}
-\endgroup
-
-\section{Sprint Reviews}
-At the end of each sprint, the team conducted a review session to demonstrate completed functionality to the client and gather feedback.
-
-\subsection{Sprint 1 Review}
-\textbf{Date:} May 24, 2026 \\
-\textbf{Demonstrated:} Multi-repository setup, JWT authentication flow, login screen, role-based access control, shared types package, public website base structure. \\
-\textbf{Client Feedback:} Approved authentication approach and repository structure. Requested adjustments to website color scheme to match corporate branding.
-
-\subsection{Sprint 2 Review}
-\textbf{Date:} June 7, 2026 \\
-\textbf{Demonstrated:} Public website with all pages (Home, Services, About Us, Employability), CMS content management, organization module (employees, departments, roles), initial CRM client management. \\
-\textbf{Client Feedback:} Approved website content structure. Requested simplification of the offer matrix module --- replaced line-item calculations with file attachments and observations only.
-
-\subsection{Sprint 3 Review}
-\textbf{Date:} June 21, 2026 \\
-\textbf{Demonstrated:} Full CRM platform (negotiations with Kanban view, document management with approval workflow, reporting dashboards, catalog management), mobile application (client management, negotiation tracking, visit registration with GPS, document upload), production deployment with Docker and Caddy. \\
-\textbf{Client Feedback:} Approved core CRM functionality. Confirmed offer matrix scope reduction was correct. Requested minor UI adjustments to report filters.
-
-\subsection{Sprint 4 Review}
-\textbf{Date:} June 24, 2026 \\
-\textbf{Demonstrated:} Unit test suite execution, CI/CD pipeline results, deployment guide walkthrough, complete system demo across all platforms (web, CRM, mobile). \\
-\textbf{Client Feedback:} System accepted for production use. Client signed acceptance form.
-
-\section{Sprint Retrospectives}
-After each review, the team reflected on the development process to identify improvements.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{1.5cm}|p{4cm}|p{4cm}|p{4cm}|}
-\hline
-\textbf{Sprint} & \textbf{What went well} & \textbf{What went wrong} & \textbf{Action items} \\ \hline
-Sprint 1 & Repository structure and shared package enabled parallel development from day one. Biome + Husky caught issues early. & Initial database schema required two revisions due to missing relations. & Define all entity relations before migration. Review schema as a team. \\ \hline
-Sprint 2 & CMS module delivered ahead of schedule. Website design approved on first review. & Underestimated complexity of organization module role hierarchy. & Allocate extra capacity for RBAC-dependent modules. \\ \hline
-Sprint 3 & Kanban board and document approval workflow delivered complete. Mobile app integrated smoothly with shared API. & Production deployment took longer than expected due to environment variable configuration. & Create deployment checklist. Document all env vars in .env.example. \\ \hline
-Sprint 4 & Testing and documentation completed within timeline. All platforms deployed and verified. & Limited time for comprehensive test coverage. & Plan broader test suite for second evaluation period. \\ \hline
-\end{tabular}
-\caption{Sprint Retrospective Summary}
-\label{tab:retrospectives}
-\end{table}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CHAPTER 3: ARCHITECTURAL DESIGN & IMPLEMENTATION DECISIONS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{ARCHITECTURAL DESIGN AND IMPLEMENTATION DECISIONS}
-
-\section{Justification of Architectural Decisions}
-The BOPACORP software system utilizes a decoupled Client-Server architecture designed to optimize frontend responsiveness, ensure backend database consistency, and facilitate strict data security across multiple access points (web, CRM, and mobile). The architectural decisions are justified below:
-
-\begin{itemize}
-    \item \textbf{Frontend Decoupling (React \& Vite):} The frontend is split into two specialized SPA clients: \texttt{bopacorp-web} (public portal) and \texttt{bopacorp-crm} (internal admin tool). By selecting React on Vite, the team achieved instantaneous Hot Module Replacement (HMR) and minimized static bundle footprints, satisfying usability and load-time requirements.
-        \item \textbf{Mobile Application (React Native \& Expo):} The mobile application was developed using React Native and Expo, allowing a single codebase to target multiple mobile platforms while maintaining integration with the backend services. Expo simplifies development, testing, and deployment of mobile features such as geolocation and document management.
-    \item \textbf{Backend REST API (Node.js \& Express):} The backend is constructed using Node.js and Express. It serves as a stateless RESTful service that processes business workflows and acts as the gatekeeper for PostgreSQL transactions. Express was chosen for its lightweight request lifecycle management, simplicity in configuring middleware, and high development agility.
-    \item \textbf{Centralized Contract Sharing (@bopacorp/shared):} A custom local package compiles common TypeScript types and Zod validation schemas. Both frontends and the backend consume this package, ensuring that API data payloads are validated consistently on the client and server sides before processing.
-    \item \textbf{Database Access Layer (Drizzle ORM):} Drizzle ORM provides static TypeScript type-safety while mapping database tables directly to memory objects. Unlike traditional fat ORMs, Drizzle translates code to raw SQL structures with virtually zero performance overhead, facilitating direct query control.
-    \item \textbf{Security and Access Controls (JWT \& bcrypt):} Custom Express middlewares manage authentication and Role-Based Access Control (RBAC). Passwords are encrypted using \texttt{bcrypt} (with 12 salt rounds), and sessions are authenticated via stateless JSON Web Tokens (JWT) with a short 15-minute expiration, maximizing security against brute-force attacks and session hijacking.
-    \item \textbf{Code Quality and Static Analysis (Biome, Husky and Commitlint):}
-    Biome was selected to enforce coding standards, formatting rules, and static analysis. Husky and Commitlint were integrated to automate code quality checks and commit validation before code is pushed to the repository.
-    \item \textbf{Containerization and Deployment (Docker):}
-    Docker was adopted to standardize application environments and simplify deployment. Containerization ensures consistency between development, testing, and production environments while facilitating service integration.
-    \item \textbf{Reverse Proxy and Automatic HTTPS (Caddy):}
-    Caddy was chosen as the edge server and reverse proxy for the containerized services. It handles incoming request routing to the appropriate web, CRM, and API containers while automatically provisioning and renewing SSL/TLS certificates via Let's Encrypt. This ensures secure HTTPS communication with zero manual overhead.
-    \item \textbf{Document Security and Storage:}
-    Business documents uploaded through the platform are securely stored and managed through the backend infrastructure. Sensitive information is protected using encryption mechanisms and controlled access policies to ensure confidentiality and integrity.
-\end{itemize}
-
-\section{Role-Based Access Control Matrix}
-The system enforces granular RBAC through 139 permissions distributed across 6 roles. Permissions are embedded in the JWT at login and checked by Express middleware on every request. Table~\ref{tab:rbac_summary} summarizes module-level access by role.
-
-\begin{table}[H]
-\centering
-\footnotesize
-\begin{tabular}{|l|c|c|c|c|c|}
-\hline
-\textbf{Module} & \textbf{Manager} & \textbf{Supervisor} & \textbf{Advisor} & \textbf{Coordinator} & \textbf{Web Admin} \\ \hline
-Clients         & CRUD & CRUD & CRU  & R    & ---  \\ \hline
-Negotiations    & CRUD & CRUD & CRU  & R    & ---  \\ \hline
-Documentation   & CRX  & ---  & CR   & CRUDX & ---  \\ \hline
-Reports         & CR   & CR   & R    & ---  & ---  \\ \hline
-Catalog         & CRUD & ---  & ---  & ---  & CRUD \\ \hline
-Employability   & CRUD & ---  & ---  & ---  & CRUD \\ \hline
-Organization    & R    & ---  & ---  & ---  & ---  \\ \hline
-\end{tabular}
-\caption{RBAC Module Access Summary (C=Create, R=Read, U=Update, D=Delete, X=Change State)}
-\label{tab:rbac_summary}
-\end{table}
-
-Data scoping restricts visibility further: advisors see only own records, supervisors see only their supervised advisors' data, and managers see all records without restriction.
-
-\section{Technology Comparison}
-To guarantee that the BOPACORP platform meets its usability, reliability, and security requirements while maintaining high development velocity, the team conducted a detailed evaluation of candidate technologies. Each layer of the stack (frontend, backend, and database access) was assessed against three specific criteria, leading to the selection of the final stack.
-
-\subsection{Frontend Technologies}
-The frontend layer is responsible for rendering the public website (\texttt{bopacorp-web}) and the internal panel (\texttt{bopacorp-crm}). The candidate frameworks evaluated were \textbf{React} (Selected), \textbf{Vue.js}, and \textbf{Angular}. The criteria chosen for comparison were:
-\begin{enumerate}
-    \item \textbf{Learning Curve \& Developer Velocity:} The simplicity of the framework's core syntax and how quickly the team can autonomously learn, develop, and compose views.
-    \item \textbf{Ecosystem \& Reusability:} The availability of stable UI design component libraries (such as Radix UI, Tailwind CSS, and shadcn) and routing utilities.
-    \item \textbf{Performance \& Bundle Size:} The efficiency of DOM updates and the resulting static assets bundle size when compiled for production.
-\end{enumerate}
-
-The comparison of frontend frameworks is summarized in Table~\ref{tab:frontend_comparison}.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2.5cm}|p{4.2cm}|p{4.2cm}|p{4.2cm}|}
-\hline
-\textbf{Criterion} & \textbf{React (Selected)} & \textbf{Vue.js} & \textbf{Angular} \\ \hline
-Learning Curve & \textbf{Moderate:} Focuses on simple JavaScript functions, JSX templates, and hooks. Facilitated rapid team adoption. & \textbf{Gentle:} Easy template separation, but custom directives add abstraction. & \textbf{Steep:} Requires learning TypeScript decorators, RxJS, and a rigid, opinionated module system. \\ \hline
-Ecosystem / Reusability & \textbf{Vast:} Largest library of ready-to-use components. Allowed the integration of Tailwind v4, Radix, and shadcn. & \textbf{Moderate:} Good ecosystem, but fewer enterprise-grade UI packages available. & \textbf{Rich:} Built-in features, but harder to integrate lightweight custom third-party UI components. \\ \hline
-Performance & \textbf{High:} Efficient Virtual DOM rendering. When paired with Vite, it yields instant loads and minimal payloads. & \textbf{High:} Reactive reactivity model, but slightly smaller tooling community than React. & \textbf{Moderate-High:} Heavy framework overhead results in larger initial bundle sizes. \\ \hline
-\end{tabular}
-\caption{Comparison of Frontend Framework Candidates}
-\label{tab:frontend_comparison}
-\end{table}
-
-\textbf{Justification for Selecting React:} React was selected because of its extensive ecosystem and community support, which allowed us to leverage modern component architectures like shadcn/ui and Radix UI. This significantly accelerated the creation of high-fidelity layouts. Additionally, Vite's build tooling integration minimized compilation and loading latencies, aligning directly with our performance constraints.
-
-\subsection{Mobile Technologies}
-The mobile application (\texttt{bopacorp-mobile}) supports field advisors logging negotiations, customer visits, and document uploads. The candidate frameworks evaluated were \textbf{React Native with Expo} (Selected), \textbf{Flutter}, and \textbf{Native Development} (Swift and Kotlin). The evaluation criteria chosen were:
-\begin{enumerate}
-    \item \textbf{Codebase Portability \& Reusability:} The capability to compile for both iOS and Android from a single source, and reuse types and schemas from the `@bopacorp/shared` TypeScript package.
-    \item \textbf{Developer Velocity \& Fast Iteration:} Support for Hot Reloading, over-the-air updates (EAS Update), and instant testing tools like Expo Go.
-    \item \textbf{Native APIs \& Sensor Integration:} The simplicity of integrating device functionalities (like geolocation and files) without writing bridge code.
-\end{enumerate}
-
-The comparison of mobile frameworks is summarized in Table~\ref{tab:mobile_comparison}.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2.5cm}|p{4.2cm}|p{4.2cm}|p{4.2cm}|}
-\hline
-\textbf{Criterion} & \textbf{React Native (Selected)} & \textbf{Flutter} & \textbf{Native (Swift/Kotlin)} \\ \hline
-Codebase Reusability & \textbf{High:} Single codebase targets iOS/Android. Integrates directly with the `@bopacorp/shared` TypeScript library to reuse schemas. & \textbf{High:} Single codebase for both platforms, but requires rewriting models in Dart, preventing direct type sharing with web repos. & \textbf{None:} Requires two independent codebases, forcing duplicate business logic, UI code, and API contract sync. \\ \hline
-Developer Velocity & \textbf{High:} Powered by Expo Go and instant Hot Reloading. EAS Update allows rapid distribution without app store reviews. & \textbf{High:} Hot Reloading support, but build cycles and environment setup are traditionally heavier than Expo. & \textbf{Low:} Heavy compilation times in Xcode/Android Studio, and requires store submission for every minor fix. \\ \hline
-Native Integration & \textbf{Excellent:} Expo provides unified, robust modules (e.g., `expo-location`, `expo-document-picker`) with no native configuration. & \textbf{Good:} Plug-in architecture is mature, but native configuration can be complex for custom hardware modules. & \textbf{Maximum:} Direct access to underlying APIs, but requires separate implementation of features on iOS and Android. \\ \hline
-\end{tabular}
-\caption{Comparison of Mobile Development Candidates}
-\label{tab:mobile_comparison}
-\end{table}
-
-
-\subsection{Backend Technologies}
-The backend application (\texttt{bopacorp-api}) processes business operations, enforces access control filters, and coordinates database updates. The candidate frameworks evaluated were \textbf{Express.js} (Selected), \textbf{NestJS}, and \textbf{Spring Boot}. The evaluation criteria were:
-\begin{enumerate}
-    \item \textbf{Development Agility:} The time and effort required to configure routes, endpoints, middlewares, and server startup scripts.
-    \item \textbf{Language Uniformity:} The capability to share type definitions and validation schemas directly between frontend and backend.
-    \item \textbf{Resource Footprint:} The runtime memory overhead, CPU consumption, and environment startup latency under production environments.
-\end{enumerate}
-
-The comparison of backend frameworks is summarized in Table~\ref{tab:backend_comparison}.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2.5cm}|p{4.2cm}|p{4.2cm}|p{4.2cm}|}
-\hline
-\textbf{Criterion} & \textbf{Express.js (Selected)} & \textbf{NestJS} & \textbf{Spring Boot} \\ \hline
-Development Agility & \textbf{High:} Minimalist design, allows routing and basic controllers to be built with very little boilerplate. & \textbf{Moderate:} Highly structured, but requires writing extensive decorators and dependency injections. & \textbf{Moderate-Low:} Heavy configuration, verbosity in code writing, and slower compilation cycles. \\ \hline
-Language Uniformity & \textbf{Full:} Enables full-stack TypeScript. The team shares models directly via the \texttt{@bopacorp/shared} library. & \textbf{Full:} TypeScript-based, but mandates strict architectural paradigms that complicate direct schema imports. & \textbf{None:} Written in Java, forcing type redundancy and manual synchronization with JavaScript clients. \\ \hline
-Resource Footprint & \textbf{Low:} Extremely low memory consumption and instant warm startup times in containers. & \textbf{Moderate:} Layered architecture introduces extra runtime abstractions on top of Node. & \textbf{High:} High JVM startup overhead and larger RAM allocation requirements. \\ \hline
-\end{tabular}
-\caption{Comparison of Backend Framework Candidates}
-\label{tab:backend_comparison}
-\end{table}
-
-\textbf{Justification for Selecting Express.js:} Express.js was chosen due to its minimalist footprint, ease of routing customization, and perfect integration within a pure TypeScript workflow. By keeping the backend in Node.js, we were able to create the centralized \texttt{bopacorp-shared} package, allowing the same validation schemas (e.g., Zod schemas) to run on both the frontend forms and backend controllers, eliminating type discrepancies.
-
-\subsection{Database Access Layer}
-To persist data safely while avoiding runtime query overhead, we evaluated candidates for database interaction with PostgreSQL: \textbf{Drizzle ORM} (Selected), \textbf{Prisma}, and \textbf{TypeORM}. The evaluation criteria were:
-\begin{enumerate}
-    \item \textbf{Type Safety \& Autocomplete:} The capacity of the library to infer TypeScript types directly from relational schemas without code generation steps.
-    \item \textbf{Execution Overhead:} The query latency, translation overhead, and direct database performance.
-    \item \textbf{Migration Flexibility:} The ability to automatically generate, modify, and apply SQL migration files when schemas change.
-\end{enumerate}
-
-The comparison of database access tools is summarized in Table~\ref{tab:orm_comparison}.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2.5cm}|p{4.2cm}|p{4.2cm}|p{4.2cm}|}
-\hline
-\textbf{Criterion} & \textbf{Drizzle ORM (Selected)} & \textbf{Prisma} & \textbf{TypeORM} \\ \hline
-Type Safety & \textbf{High:} Schema variables act directly as TS interfaces. No complex runtime code generation needed. & \textbf{High:} Generates client types using a proprietary DSL, adding external dependencies to the build pipeline. & \textbf{Moderate:} Relies on class decorators. Inferring complex relations can be verbose and prone to type drift. \\ \hline
-Query Overhead & \textbf{Extremely Low:} SQL-like syntax translates to plain SQL. Zero engine abstraction latency. & \textbf{Moderate:} Query engine runs as a separate binary, introducing serialization and runtime overhead. & \textbf{Moderate-High:} Traditional fat ORM mapping introduces execution delays and complex SQL queries. \\ \hline
-Migration System & \textbf{Flexible:} \texttt{drizzle-kit} generates raw SQL files instantly. Safe to review and edit before execution. & \textbf{Proprietary:} Handled entirely by Prisma's engine, which can block manual modifications of SQL schemas. & \textbf{Active:} Supported, but manual configuration of migrations is verbose and prone to merge conflicts. \\ \hline
-\end{tabular}
-\caption{Comparison of Database Access Candidates}
-\label{tab:orm_comparison}
-\end{table}
-
-\textbf{Justification for Selecting Drizzle ORM:} Drizzle ORM was chosen because it combines full TypeScript type safety with the performance of raw SQL. Since the relational database mapping is direct and lightweight, it avoids the engine overhead introduced by Prisma. Furthermore, the migration files generated are simple SQL scripts, making schema version control and database updates highly transparent and easily reviewable.
-
-\subsection{Database Engine}
-For data storage, the team evaluated database management systems (DBMS) to select the engine that best balances strict consistency with metadata flexibility. The candidate databases evaluated were \textbf{PostgreSQL} (Selected), \textbf{MySQL}, and \textbf{MongoDB}. The evaluation criteria were:
-\begin{enumerate}
-    \item \textbf{Relational Integrity \& ACID Compliance:} The enforcement of strict constraints, relational foreign keys, and transaction guarantees to prevent data corruption.
-    \item \textbf{Semi-Structured Data Support (JSON):} The native capability to store, query, and index dynamic JSON documents inside the tables.
-    \item \textbf{Query Capabilities \& Features:} The availability of advanced query constructs (window functions, CTEs) and indexing methods (like GIN/GiST).
-\end{enumerate}
-
-The comparison of database engine candidates is summarized in Table~\ref{tab:db_comparison}.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2.5cm}|p{4.2cm}|p{4.2cm}|p{4.2cm}|}
-\hline
-\textbf{Criterion} & \textbf{PostgreSQL (Selected)} & \textbf{MySQL} & \textbf{MongoDB} \\ \hline
-ACID \& Integrity & \textbf{Excellent:} Strict ACID compliance by default, robust foreign keys, and complex check constraints. & \textbf{Good:} Strong ACID compliance (under InnoDB), but traditionally more forgiving of type coercion and constraint bypasses. & \textbf{Limited:} Document-level atomicity, but lacks relational constraints and foreign key enforcement at the database level. \\ \hline
-JSON Support & \textbf{Excellent:} High-performance binary JSON format (\texttt{JSONB}) with full indexing (GIN) support for fast lookups. & \textbf{Moderate:} Supports JSON columns, but indexing and nested query capabilities are less mature than PostgreSQL. & \textbf{Inherent:} Native BSON format designed for unstructured documents, but loses all benefits of relational schemas. \\ \hline
-Query Features & \textbf{Advanced:} Full support for CTEs, window functions, and rich extensions. Ideal for complex reporting queries. & \textbf{Standard:} Supports window functions and basic CTEs, but lacks advanced indexing types like GIN or GiST. & \textbf{NoSQL-specific:} Flexible aggregation pipeline, but does not support SQL window functions or multi-table joins natively. \\ \hline
-\end{tabular}
-\caption{Comparison of Database Engine Candidates}
-\label{tab:db_comparison}
-\end{table}
-
-\textbf{Justification for Selecting PostgreSQL:} PostgreSQL was selected because it combines the safety and reliability of a strictly typed relational database with the document flexibility of NoSQL databases through its native \texttt{JSONB} support. This dual capability is essential for BOPACORP, where core features (such as user roles, catalog structure, and negotiations) require strict referential integrity and transactions, while candidate profiles and supplementary metadata benefit from flexible, semi-structured document storage.
-\subsection{Reverse Proxy and Edge Server}
-To expose the containerized applications securely to the network and manage routing under a unified domain setup, the team compared reverse proxy candidates: \textbf{Caddy} (Selected), \textbf{NGINX}, and \textbf{Apache HTTP Server}. The comparison criteria were:
-\begin{enumerate}
-    \item \textbf{Configuration Simplicity:} How easy it is to write, read, and maintain routing and reverse proxy rules (e.g., Caddyfile vs NGINX configuration).
-    \item \textbf{Automatic HTTPS/SSL Management:} Out-of-the-box, zero-configuration support for obtaining and renewing TLS certificates via Let's Encrypt or ZeroSSL.
-    \item \textbf{Performance and Modern Protocol Support:} The efficiency in handling high concurrent loads, memory footprint, and native support for HTTP/2 and HTTP/3.
-\end{enumerate}
-
-The comparison of reverse proxy and edge server candidates is summarized in Table~\ref{tab:proxy_comparison}.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2.5cm}|p{4.2cm}|p{4.2cm}|p{4.2cm}|}
-\hline
-\textbf{Criterion} & \textbf{Caddy (Selected)} & \textbf{NGINX} & \textbf{Apache} \\ \hline
-Configuration Simplicity & \textbf{Excellent:} Simple, human-readable Caddyfile syntax. A reverse proxy requires only a single line. & \textbf{Moderate:} Verbose configuration blocks. Prone to syntax errors and requires deep knowledge to tune. & \textbf{Complex:} Verbose XML-like configuration file structure (\texttt{httpd.conf}), difficult to maintain for dynamic routes. \\ \hline
-Automatic HTTPS & \textbf{Inherent:} Automatic provisioning, renewal, and configuration of SSL/TLS certificates via Let's Encrypt/ZeroSSL by default. & \textbf{External:} Requires installing and configuring external tools like Certbot and managing cron jobs for renewals. & \textbf{External:} Requires manual SSL certificate configuration or integration with third-party automation scripts. \\ \hline
-Performance \& Protocols & \textbf{High:} Written in Go, memory-safe, supports HTTP/2 and HTTP/3 (QUIC) out of the box with zero configuration. & \textbf{High:} Highly performant event-driven architecture, but HTTP/3 requires custom builds or advanced config. & \textbf{Moderate:} Process-based model (unless using MPM event), higher memory footprint, and slower TLS handshakes. \\ \hline
-\end{tabular}
-\caption{Comparison of Reverse Proxy and Web Server Candidates}
-\label{tab:proxy_comparison}
-\end{table}
-
-\textbf{Justification for Selecting Caddy:} Caddy was chosen primarily for its ease of use, automatic security, and developer velocity. Unlike NGINX and Apache, which require manual certificate provisioning, verification, and crontab automation (typically via Certbot), Caddy manages the entire SSL/TLS certificate lifecycle automatically. The minimalistic Caddyfile syntax dramatically reduces human configuration errors, and its native HTTP/3 support ensures high-speed, modern connections to web and mobile clients.
-
-
+The final scope deliberately excludes the matrix-construction and matrix-approval module. Although historical requirements and some shared-package exports may mention matrices, they are not part of the final demonstrated architecture or acceptance scenarios. The report therefore treats them as excluded or future work instead of using them to justify current system behavior.
 
 \section{Components Diagram}
+Figure~\ref{fig:components_diagram} presents the component view of BOPADIGITAL. The public website and CRM are React single-page applications that use their own routing, pages, forms, data-fetching, and UI layers. They communicate with the API through REST requests and do not access the database directly. The shared package provides types and validation schemas across the application boundary.
 
-The BOPADIGITAL platform is composed of five main software components that work together to support customer relationship management, public information services, document management, and field operations.
-
-\begin{itemize}
-
-\item \textbf{\texttt{@bopacorp/shared} (Shared Library):}
-A centralized package containing shared TypeScript types, validation schemas, and common contracts used across all project repositories. This component ensures consistency between frontend and backend applications.
-
-\item \textbf{\texttt{bopacorp-api} (REST API):}
-The core backend service developed with Node.js, Express, and TypeScript. It manages business logic, authentication, authorization, database access, document management, reporting, and communication between all client applications.
-
-\item \textbf{\texttt{bopacorp-crm} (CRM Platform):}
-A web-based management platform used by administrators, supervisors, and commercial personnel. It provides functionality for client management, negotiation tracking, visit monitoring, document administration, reporting, and operational supervision.
-
-\item \textbf{\texttt{bopacorp-web} (Public Website and CMS):}
-The public-facing website that allows visitors to access company information, services, employment opportunities, and corporate content. Content is managed through an integrated CMS module.
-
-\item \textbf{\texttt{bopacorp-mobile} (Mobile Application):}
-A mobile application developed for sales advisors. It allows users to manage clients, monitor negotiations, consult documentation, and register field visits using geolocation services.
-
-\end{itemize}
-
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\linewidth, keepaspectratio]{s.png}
-\caption{Components Diagram showing the interaction between the API, CRM Platform, Public Website, Mobile Application, Shared Library, and Database Services}
+\includegraphics[width=0.92\textwidth,height=0.62\textheight,keepaspectratio]{components_diagram}
+\caption{BOPADIGITAL component architecture}
 \label{fig:components_diagram}
 \end{figure}
 
+Inside the API boundary, Express receives the request and applies cross-cutting middleware before routing it to a domain module. The service layer owns business operations and uses Drizzle to reach PostgreSQL. Logging and typed errors remain cross-cutting concerns, while the shared validation package prevents clients and the API from silently diverging in their data expectations.
+
+The mobile client follows the same API boundary, but its final feature claims must be tied to device or emulator evidence. This distinction is important because the presence of a route or component in a repository proves implementation structure, but not necessarily successful runtime acceptance.
+
 \section{Deployment Diagram}
+Figure~\ref{fig:deployment_diagram} illustrates the deployment arrangement described by the deployment repository. Docker Compose builds and runs the API, CRM, and public website. The API is exposed internally on container port 3000 and mapped to host port 3001; the CRM uses container port 5173 and host port 3002; and the public website uses container port 5173 and host port 3003. The clients use the configured API public URL and the \texttt{/api/v1} prefix.
 
-The BOPADIGITAL platform is deployed using a containerized architecture designed to improve maintainability, scalability, and environment consistency across development and production environments.
-
-\begin{itemize}
-
-\item \textbf{Reverse Proxy Layer:}
-Caddy acts as the entry point of the platform, handling incoming HTTPS requests and routing traffic to the appropriate application services.
-
-\item \textbf{Backend Service:}
-The \texttt{bopacorp-api} application is deployed as a Docker container running Node.js, Express, and TypeScript. This service centralizes business logic, authentication, authorization, document management, reporting, and communication with the database.
-
-\item \textbf{CRM Platform:}
-The \texttt{bopacorp-crm} application is deployed as a web application that communicates directly with the REST API to manage clients, negotiations, visits, documents, reports, and supervision activities.
-
-\item \textbf{Public Website and CMS:}
-The \texttt{bopacorp-web} application provides access to public information, services, employment opportunities, and content managed through the CMS. It consumes data exposed by the API.
-
-\item \textbf{Mobile Application:}
-The \texttt{bopacorp-mobile} application communicates securely with the API to support field operations such as client management, negotiation tracking, document consultation, and geolocated visit registration.
-
-\item \textbf{Database and Storage Services:}
-The platform uses Supabase services built on PostgreSQL for data persistence and document storage. This centralized infrastructure supports all system modules while maintaining data consistency and security.
-
-\end{itemize}
-
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\linewidth, keepaspectratio]{deploy.png}
-\caption{Deployment Diagram showing the interaction between Caddy, Dockerized services, Supabase infrastructure, and the different client applications}
+\includegraphics[width=0.96\textwidth,height=0.48\textheight,keepaspectratio]{deploy}
+\caption{BOPADIGITAL deployment architecture}
 \label{fig:deployment_diagram}
 \end{figure}
 
+The deployment process requires Docker and Docker Compose, Git, an environment file, a PostgreSQL connection, and a GitHub Packages token with permission to install \texttt{@bopacorp/shared}. Caddy is optional and can terminate HTTPS and route public domains to the local service ports. Environment variables and credentials are deployment inputs and must not be embedded in the report or committed to source control.
+
+The diagram is used as an architectural overview rather than as proof of a live production execution. Before final submission, its external-storage labels and domain names must be reconciled with the final deployment evidence so that historical integrations are not presented as active services without a current verification artifact. The deployment chapter and appendices will contain the reproducible commands, health checks, and revision-specific evidence required to establish the final runtime state.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CHAPTER 4: CODE QUALITY, TESTING, & DIAGNOSTICS
+% CHAPTER 3: SCRUM EVIDENCE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{CODE QUALITY, TESTING, AND DIAGNOSTICS}
+\chapter{SCRUM EVIDENCE}
+
+\section{Scrum Roles}
+% TODO: Document Product Owner, Scrum Master and Development Team responsibilities.
+
+\section{Teamwork Management Tool}
+% TODO: Add the project-management tool and its current evidence.
+
+\section{Product Backlog}
+% TODO: Add the final product backlog and prioritization.
+
+\section{Sprint Backlogs}
+% TODO: Add the backlog and scope for each sprint.
+
+\section{Sprint Reviews}
+% TODO: Document sprint increments, client feedback and acceptance.
+
+\section{Sprint Retrospectives}
+% TODO: Document retrospective findings and improvement actions.
+
+\section{Project Schedule and Critical Path}
+% TODO: Add the final schedule, progress charts and critical path.
+
+\section{Project Risk Management}
+% TODO: Describe project-management risks separately from risk-based testing.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHAPTER 4: CODING STANDARDS DOCUMENTATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{CODING STANDARDS DOCUMENTATION}
 
 \section{Build Automation Configuration}
-Instead of a traditional Java-based Maven configuration, the BOPACORP platform is built using a modern TypeScript/Node.js stack. Build automation, dependency management, compilation, linting, and security audits are defined inside the package configurations (\texttt{package.json}) and orchestrated in a Continuous Integration (CI) pipeline.
+% TODO: Document build, package and repository automation.
 
-The pipeline is defined as a GitHub Actions workflow in \texttt{.github/workflows/ci.yml}. It triggers automatically on every push or pull request to the \texttt{main} branch, ensuring that only syntactically sound, type-safe, and styled code is merged.
+\section{Coding Standards and Enforcers}
+% TODO: Document Biome, TypeScript, naming, formatting and organization rules.
 
-Below is the configuration of the automated CI build script:
+\section{Git Hooks and Commit Validation}
+% TODO: Document Husky, lint-staged, Commitlint and pre-commit validation.
 
-\begin{verbatim}
-name: CI
+\section{SOLID Principles and Design Patterns}
+% TODO: Add concrete examples from the current codebase.
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+\section{Refactoring Example}
+% TODO: Document one verified before/after refactoring example.
 
-jobs:
-  ci:
-    runs-on: ubuntu-latest
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHAPTER 5: PREEMPTIVE ERROR DETECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{PREEMPTIVE ERROR DETECTION}
 
-    steps:
-      - uses: actions/checkout@v4
+\section{TypeScript Compiler Diagnostics}
+% TODO: Explain strict typing, type checking and compile-time protections.
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          registry-url: https://npm.pkg.github.com
-          scope: '@bopacorp'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+\section{Biome Static Analysis}
+% TODO: Explain linting, formatting and static diagnostics.
 
-      - name: Install dependencies
-        run: npm ci
+\section{Hooks and Continuous Integration Gates}
+% TODO: Describe how preventive checks run before merge and deployment.
 
-      - name: Lint, format & typecheck
-        run: npm run check
+\section{Observed Preventive-Quality Results}
+% TODO: Add current command results and identify their SHA, date and environment.
 
-      - name: Security audit
-        run: npm audit --audit-level=high || true
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHAPTER 6: TEST CASES AND TEST MANAGEMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{TEST CASES AND TEST MANAGEMENT}
 
-      - name: Build
-        run: npm run build
-\end{verbatim}
+\section{Testing Strategy and Test Levels}
+% TODO: Define unit, integration, API, frontend, acceptance and manual testing levels.
 
-\subsection{Pipeline Execution Stages}
-The automated build pipeline executes the following sequential steps on a clean Ubuntu runner:
-\begin{itemize}
-    \item \textbf{Checkout Source Code:} Pulls the repository code using the \texttt{actions/checkout@v4} action.
-    \item \textbf{Setup Node.js Environment:} Initializes Node.js (version 22) using \texttt{actions/setup-node@v4}. It enables npm caching to speed up subsequent builds, configures the GitHub Packages registry URL for private package scopes under the \texttt{@bopacorp} registry, and injects the authentication token securely via secrets.
-    \item \textbf{Install Dependencies:} Runs \texttt{npm ci} (Clean Install) to install the project dependencies based strictly on the lockfile, preventing version mismatch issues.
-    \item \textbf{Lint, Format \& Typecheck:} Runs the verification gate (\texttt{npm run check}), which performs static code analysis, formatting checks using Biome, and static type validation using TypeScript's compiler (\texttt{tsc --noEmit}).
-    \item \textbf{Security Audit:} Scans the installed packages for known vulnerabilities via \texttt{npm audit}. An audit level threshold of \texttt{high} is set, letting minor issues pass to prevent blocking builds while flagging critical security risks.
-    \item \textbf{Build Compilation:} Executes the compilation command (\texttt{npm run build}) to transpile TypeScript source files into production-ready JavaScript binaries.
-\end{itemize}
+\section{Test Management}
+% TODO: Document responsibilities, test calendar, environments, data and entry/exit criteria.
 
+\section{Risk-Based Testing}
+% TODO: Map risks to requirements, test cases, results, defects and retests.
 
-\section{Coding Standards Documentation and Enforcers}
+\section{API Unit and Integration Testing}
+% TODO: Add current API test evidence, commands, coverage, SHA, date and artifacts.
 
-To maintain a high level of code quality, readability, and consistency across all components of the software solution developed for BOPACORP S.A., the development team established a set of coding standards and automated enforcement mechanisms. Since the project is primarily developed using TypeScript, static type checking is used as the first layer of quality assurance. Additional controls are implemented through automated linting, formatting, validation, and Git workflow enforcement.
+\section{Frontend and Acceptance Testing}
+% TODO: Document CRM/Web testing status and the Playwright acceptance scenarios.
 
-\subsection{Toolchain Consolidation with Biome}
-
-Traditional web development projects commonly rely on multiple tools such as ESLint for linting, Prettier for code formatting, and additional plugins for import organization. Managing several independent tools may introduce configuration complexity and increase execution time during development.
-
-For the BOPADIGITAL repositories (\texttt{bopacorp-api}, \texttt{bopacorp-crm}, \texttt{bopacorp-web}, and \texttt{bopacorp-mobile}), the team adopted \textbf{Biome} (\texttt{v2.4.16}) as a unified solution for linting, formatting, and code consistency. Biome was selected because it provides significantly faster execution times than traditional JavaScript toolchains while maintaining consistent coding standards across all repositories.
-
-The main responsibilities covered by Biome include:
-
-\begin{itemize}
-\item Source code formatting.
-\item Static code analysis and linting.
-\item Detection of common programming mistakes.
-\item Import organization and cleanup.
-\item Enforcement of coding style conventions.
-\end{itemize}
-
-\subsection{Type Safety Standards}
-
-All project repositories are configured to use TypeScript with strict type checking enabled. This approach allows many programming errors to be detected during compilation rather than at runtime. The use of shared types and validation schemas through the \texttt{@bopacorp/shared} package further improves consistency between the API, CRM platform, public website, and mobile application.
-
-The TypeScript compiler (\texttt{tsc}) is executed as part of the validation pipeline to ensure that all code complies with the project's type definitions before deployment.
-
-\subsection{Automated Enforcement}
-
-To ensure compliance with coding standards, the project incorporates automated verification mechanisms through Git hooks and repository-level checks.
-
-\begin{itemize}
-\item \textbf{Husky} is used to execute validation scripts before commits are accepted.
-\item \textbf{Commitlint} validates commit messages according to the team's defined conventions.
-\item \textbf{Biome} automatically validates formatting and linting rules.
-\item \textbf{TypeScript} compilation checks verify type correctness across the codebase.
-\end{itemize}
-
-These controls help prevent inconsistent code styles, reduce avoidable defects, and maintain code quality throughout the development lifecycle.
-
-\subsection{Benefits Achieved}
-
-The adoption of these coding standards and automated enforcement tools provides several advantages:
-
-\begin{itemize}
-\item Improved code readability and maintainability.
-\item Early detection of defects during development.
-\item Consistent coding practices across all team members.
-\item Reduced integration issues between project repositories.
-\item Increased reliability of the CI/CD and deployment processes.
-\end{itemize}
-
-
-\subsection{Static Analysis and Code Styling Configurations}
-
-To ensure consistency across all repositories of the BOPADIGITAL platform, the development team adopted a centralized code quality configuration based on Biome and TypeScript. These tools provide automated validation of coding standards, formatting rules, and static analysis checks during development.
-
-The project repositories share a common configuration that defines standards for source code formatting, import organization, and code quality verification. This approach guarantees that developers follow the same conventions regardless of whether they are working on the API, CRM platform, public website, mobile application, or shared libraries.
-
-The configuration focuses on the following quality objectives:
-
-\begin{itemize}
-\item Consistent code formatting across all repositories.
-\item Automatic organization of imports and dependencies.
-\item Detection of unused variables and imports.
-\item Enforcement of TypeScript best practices and type safety.
-\item Identification of common programming mistakes during development.
-\item Standardized code style conventions among all team members.
-\item Reduction of technical debt through automated validation.
-\end{itemize}
-
-Static analysis is executed automatically through Biome and TypeScript validation scripts, while Git hooks managed by Husky enforce these checks before code is committed to the repository. This process helps prevent formatting inconsistencies, code quality violations, and avoidable defects from entering the main codebase.
-
-By combining static analysis, automated formatting, and commit-time validation, the project maintains a consistent and maintainable codebase throughout the development lifecycle.
-
-
-\subsection{Commit Message and Pre-Commit Enforcement (Git Hooks)}
-
-To ensure that only validated code is committed to the repository, the project uses automated Git hooks through \textbf{Husky} and \textbf{lint-staged}. These tools integrate code quality checks directly into the development workflow, preventing code that violates project standards from being committed.
-
-\begin{enumerate}
-
-\item \textbf{Pre-Commit Validation}
-
-Before a commit is completed, Husky executes a pre-commit hook that triggers the project's validation pipeline. Through lint-staged, only the files included in the current commit are analyzed, reducing execution time and improving developer productivity.
-
-The validation process includes:
-
-\begin{itemize}
-\item Code formatting verification.
-\item Static analysis and linting checks.
-\item Import organization.
-\item Detection of code quality violations.
-\item TypeScript validation rules.
-\end{itemize}
-
-If any critical issue is detected, the commit process is automatically aborted until the problem is corrected.
-
-\item \textbf{Commit Message Validation}
-
-To maintain a consistent and understandable project history, commit messages are validated using \textbf{Commitlint}. The tool enforces a standardized commit message structure based on conventional commit practices.
-
-Examples of accepted commit types include:
-
-\begin{itemize}
-\item \texttt{feat:} for new functionality.
-\item \texttt{fix:} for bug fixes.
-\item \texttt{refactor:} for code improvements.
-\item \texttt{docs:} for documentation updates.
-\item \texttt{chore:} for maintenance tasks.
-\end{itemize}
-
-This approach improves repository traceability, facilitates project maintenance, and provides a clearer history of development activities.
-
-\end{enumerate}
-
-The combination of Husky, lint-staged, Commitlint, Biome, and TypeScript creates an automated quality gate that helps ensure compliance with the project's coding standards before code reaches the shared repository.
-
-
-\subsection{Development Script Integration}
-
-To simplify development activities and ensure consistent validation procedures across all repositories, the project defines a set of standardized npm scripts within the \texttt{package.json} configuration files. These scripts provide a unified interface for executing code quality checks, formatting, static analysis, and compilation validation.
-
-Common development scripts include:
-
-\begin{itemize}
-\item \texttt{npm run lint}: Executes static analysis and code quality validation rules.
-\item \texttt{npm run lint:fix}: Automatically applies formatting and linting corrections where possible.
-\item \texttt{npm run check}: Executes the complete validation pipeline, including code quality checks and TypeScript compilation verification.
-\item \texttt{npm run build}: Generates production-ready application artifacts.
-\end{itemize}
-
-The validation workflow combines automated formatting, static analysis, and type checking to detect issues before code is merged into the main branches. By integrating these scripts into the development process and continuous integration pipelines, the team ensures that all project components maintain consistent quality standards.
-
-This approach reduces manual verification effort, improves development efficiency, and helps maintain a reliable and maintainable codebase throughout the project lifecycle.
-
-
-\section{Preemptive Error Detection}
-
-The BOPADIGITAL project incorporates several automated mechanisms for detecting defects before deployment. Since the platform is developed primarily using TypeScript, the team relies on a combination of the TypeScript compiler, static analysis tools, and automated validation pipelines to identify potential issues during development.
-
-TypeScript provides compile-time verification through strict type checking, allowing many common programming errors to be detected before execution. In addition, Biome performs static code analysis to identify code smells, unused variables, import inconsistencies, formatting violations, and other quality-related issues.
-
-These tools are integrated into the development workflow through automated scripts, Git hooks, and continuous integration processes, ensuring that code is validated before being committed or merged into the main branches.
-
-By combining static analysis, type safety verification, and automated quality checks, the project reduces the likelihood of runtime failures, improves maintainability, and promotes early detection of defects throughout the software development lifecycle.
-
-
-\subsection{TypeScript Compiler Preemptive Protections}
-
-TypeScript serves as the project's primary compile-time error detection mechanism. By enforcing static type checking throughout the codebase, many defects can be identified before the application is executed.
-
-The project uses strict type validation rules that provide several layers of protection against common programming errors:
-
-\begin{itemize}
-
-\item \textbf{Type Safety Verification:}
-The compiler validates variable types, function parameters, return values, and object structures, reducing the likelihood of type-related runtime failures.
-
-\item \textbf{Null and Undefined Protection:}
-Strict null checking helps detect situations where values may be \texttt{null} or \texttt{undefined}, preventing common runtime exceptions caused by invalid property access.
-
-\item \textbf{Control Flow Analysis:}
-TypeScript analyzes execution paths to ensure that functions return appropriate values and that conditional logic remains consistent throughout the application.
-
-\item \textbf{Index and Property Access Validation:}
-The compiler verifies access to arrays, objects, and interfaces, helping developers identify potential boundary and property access errors before deployment.
-
-\item \textbf{Unused Code Detection:}
-Compilation warnings and validation rules help identify unused variables, parameters, and code fragments that may indicate incomplete implementations or maintenance issues.
-
-\end{itemize}
-
-By enforcing these protections during development, TypeScript significantly reduces the probability of runtime errors and contributes to the overall reliability and maintainability of the BOPADIGITAL platform.
-
-
-\subsection{Biome Linter Static Analysis}
-
-While TypeScript focuses on type safety and compile-time validation, Biome complements this process by performing static code analysis and enforcing coding standards throughout the project repositories.
-
-The tool is configured to detect common programming issues and maintain code quality through automated inspections, including:
-
-\begin{itemize}
-
-\item \textbf{Code Quality Validation:} Detection of potential programming mistakes, suspicious patterns, and violations of established coding standards.
-
-\item \textbf{Unused Code Detection:} Identification of unused variables, imports, and code fragments that may increase technical debt or indicate incomplete implementations.
-
-\item \textbf{Import and Dependency Management:} Automatic organization of imports and validation of dependency usage to improve maintainability and readability.
-
-\item \textbf{Code Style Enforcement:} Verification of formatting, naming conventions, and structural consistency across all repositories.
-
-\item \textbf{Maintainability Improvements:} Early identification of code patterns that may negatively affect readability, maintainability, or long-term project evolution.
-
-\end{itemize}
-
-Biome validations are executed automatically during local development, Git hook execution, and continuous integration workflows. Any critical violation detected by the validation pipeline prevents code from being merged until the issue is resolved.
-
-Together, TypeScript, Biome, Husky, and the CI/CD validation process establish an automated quality gate that enables early detection of defects, reduces the likelihood of runtime failures, and improves overall software reliability.
-
-\subsection{Benefits of Preemptive Error Detection}
-
-The adoption of automated error detection mechanisms provides several advantages throughout the software development lifecycle:
-
-\begin{itemize}
-\item Early identification of defects before deployment.
-\item Reduced debugging and maintenance effort.
-\item Improved code reliability and consistency.
-\item Better adherence to coding standards.
-\item Lower risk of introducing regressions into production environments.
-\end{itemize}
-
-
-
-\section{Testing Strategy and Test Case Execution}
-
-The project team performed functional and integration testing on the main modules of the BOPADIGITAL platform. The objective was to validate that the API, CRM web application, public website, and mobile application correctly implement the specified requirements and business rules.
-
-\begingroup
-\setlength{\LTleft}{-0.5cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\begin{longtable}{|p{1.0cm}|p{4.8cm}|p{3.3cm}|p{2.8cm}|p{1.3cm}|}
-\hline
-\textbf{ID} & \textbf{Scenario} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Status} \\ \hline
-\endfirsthead
-\multicolumn{5}{l}{\textit{Table continued from previous page}} \\ \hline
-\textbf{ID} & \textbf{Scenario} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Status} \\ \hline
-\endhead
-
-TC01 & User login with valid credentials & Access granted and dashboard displayed & Login completed successfully & Passed \\ \hline
-
-TC02 & User login with invalid credentials & Access denied and error message displayed & Authentication rejected & Passed \\ \hline
-
-TC03 & Register a business client with valid information & New client stored in database & Client created successfully & Passed \\ \hline
-
-TC04 & Register a business client with duplicate RUC & System rejects duplicated record & Validation error returned & Passed \\ \hline
-
-TC05 & Create a negotiation associated with a client & Negotiation saved and displayed in CRM & Negotiation created successfully & Passed \\ \hline
-
-TC06 & Upload a document linked to a negotiation & Document stored and associated correctly & Upload completed successfully & Passed \\ \hline
-
-TC07 & Register a client visit from the mobile application & Visit stored with GPS coordinates & Visit recorded successfully & Passed \\ \hline
-
-TC08 & Display advisor metrics and reports in CRM & Metrics shown correctly & Reports generated successfully & Passed \\ \hline
-
-TC09 & Search clients in CRM & Matching records displayed & Search results returned correctly & Passed \\ \hline
-
-TC10 & Public website loads services and company information & Information displayed correctly & Website rendered successfully & Passed \\ \hline
-
-TC11 & Change negotiation state via Kanban drag-and-drop & State updated and history record created & State changed, history entry logged & Passed \\ \hline
-
-TC12 & Attempt to change negotiation to its current state & System returns negotiation unchanged (no-op) & No duplicate history entry created & Passed \\ \hline
-
-TC13 & Upload document exceeding 50 MB limit & System rejects file with validation error & Upload blocked with size error message & Passed \\ \hline
-
-TC14 & Approve a pending document as coordinator & Document state changes to ACCEPTED & State updated, notification sent & Passed \\ \hline
-
-TC15 & Reject a document with rejection reason & Document state changes to REJECTED with notes & State updated, reason stored & Passed \\ \hline
-
-TC16 & Create a job vacancy with required fields & Vacancy saved and displayed in list & Vacancy created successfully & Passed \\ \hline
-
-TC17 & Submit job application from public website & Application stored with candidate data and resume & Application received and visible in CRM & Passed \\ \hline
-
-TC18 & Access restricted route without proper role & System redirects to authorized default page & Access denied, redirect executed & Passed \\ \hline
-
-TC19 & Export report data as CSV & CSV file generated with correct metrics & File downloaded with expected data & Passed \\ \hline
-
-TC20 & Register field visit with GPS coordinates from mobile & Visit stored with geolocation data & GPS coordinates recorded correctly & Passed \\ \hline
-
-\caption{Test Cases Specification and Execution Results}
-\label{tab:test_cases}
-\end{longtable}
-\endgroup
-
-
-
-
-\section{Automated Unit Testing}
-
-In addition to functional test cases, the project implements automated unit tests using \textbf{Vitest}, a modern testing framework optimized for TypeScript and Vite-based projects. Unit tests validate the correctness of individual service functions and business logic components in isolation.
-
-The initial test suite targets the negotiation state change service (\texttt{changeNegotiationState}), which is a transactional operation that updates the negotiation record and inserts a state history entry. The test cases verify:
-
-\begin{itemize}
-\item Successful state transitions with correct history logging.
-\item No-op behavior when the target state matches the current state.
-\item Proper error handling for non-existent negotiations and invalid state IDs.
-\end{itemize}
-
-Tests are executed via \texttt{npm test} and integrated into the CI pipeline. The Vitest configuration uses Node environment with path aliases matching the application's module resolution.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\linewidth]{test_results.png}
-\caption{Vitest Unit Test Execution Results}
-\label{fig:test_results}
-\end{figure}
+\section{Test Execution Results and Incidents}
+% TODO: Add observed results, blocked cases, defects, fixes and retests.
 
 \section{Application Profiling}
-
-To identify potential performance bottlenecks and optimize the user experience, the team conducted application profiling using browser-based developer tools. Two complementary profiling approaches were applied to the CRM platform:
-
-\subsection{Runtime Performance Profiling}
-
-Using the Chrome DevTools Performance panel, the team recorded and analyzed the runtime behavior of key user workflows (dashboard loading, negotiation list rendering, Kanban board interaction). The profiling trace captures JavaScript execution time, layout recalculations, paint operations, and idle periods, allowing the team to identify long-running tasks and rendering bottlenecks.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\linewidth]{profiling_performance.png}
-\caption{Chrome DevTools --- Performance Profiling Trace of CRM Dashboard Load}
-\label{fig:profiling_performance}
-\end{figure}
-
-\subsection{React Component Profiling}
-
-Using the React Developer Tools Profiler, the team analyzed component render times and re-render frequency across the CRM application. The flamegraph visualization identifies which components consume the most rendering time and highlights unnecessary re-renders that could degrade responsiveness.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\linewidth]{profiling_react.png}
-\caption{React DevTools --- Profiler Flamegraph of CRM Component Render Performance}
-\label{fig:profiling_react}
-\end{figure}
-
-The profiling results confirmed that the application maintains responsive interaction times under normal usage conditions. No critical performance degradation was identified during the analysis.
-
-\section{System Deployment Guide}
-
-This section describes the installation, configuration, and automated deployment process required to run the BOPADIGITAL platform using the centralized deployment repository.
-
-\subsection{Prerequisites}
-Before deploying the system, ensure the host server meets the following requirements:
-\begin{itemize}
-\item \textbf{Docker \& Docker Compose:} Required to build and run containerized services.
-\item \textbf{Git:} For cloning the repositories.
-\item \textbf{GitHub Packages Access Token (\texttt{NPM\_TOKEN}):} A Personal Access Token (PAT) with at least \texttt{read:packages} permissions, required to install the private \texttt{@bopacorp/shared} dependency from GitHub Packages during container build.
-\item \textbf{Caddy Server:} Installed on the host operating system to manage routing and SSL/TLS termination automatically.
-\end{itemize}
-
-\subsection{Environment Configuration}
-The deployment configuration is centralized in a single \texttt{.env} file within the deployment folder.
-\begin{enumerate}
-\item Copy the provided template file to create your active environment file:
-\begin{verbatim}
-cp .env.docker.example .env
-\end{verbatim}
-\item Edit the newly created \texttt{.env} file and configure the variables:
-\newline
-\begin{itemize}
-\item \textbf{Global Settings:} Set \texttt{NPM\_TOKEN} with your GitHub access token.
-\item \textbf{API Database (Supabase):} Configure the PostgreSQL connection strings:
-\begin{verbatim}
-DATABASE_URL="postgresql://user:password@host:6543/postgres?pgbouncer=true"
-DIRECT_URL="postgresql://user:password@host:5432/postgres"
-\end{verbatim}
-\item \textbf{JWT Security:} Define the \texttt{JWT\_SECRET} (minimum 32 characters) and token lifespans.
-\item \textbf{URL Routing:} Set \texttt{API\_PUBLIC\_URL} (e.g., \texttt{https://api-bopacorp.example.com}) and configure the frontend endpoints (\texttt{VITE\_API\_URL}).
-\item \textbf{Storage Integrations:} Provide Supabase S3 credentials for resumes and encrypted documents, alongside Cloudflare R2 bucket keys for public CMS assets.
-\end{itemize}
-\end{enumerate}
-
-\subsection{Automated Service Deployment}
-The deployment repository provides an automated script that streamlines setup by fetching the codebase and managing container builds.
-\begin{enumerate}
-\item Run the deployment script:
-\begin{verbatim}
-./deploy.sh
-\end{verbatim}
-\item This automated workflow performs the following actions:
-\newline
-\begin{itemize}
-\item Clones or pulls the latest updates for the service repositories: \texttt{bopacorp-api}, \texttt{bopacorp-web}, and \texttt{bopacorp-crm}.
-\item Runs Docker Compose build to compile the Dockerfiles using the configured \texttt{NPM\_TOKEN} build argument.
-\item Launches the containers in detached (background) mode.
-\end{itemize}
-\item Verify local port routing is active:
-\newline
-
-\begin{itemize}
-\item API: \texttt{http://localhost:3001}
-\item CRM Platform: \texttt{http://localhost:3002}
-\item Public Website: \texttt{http://localhost:3003}
-\end{itemize}
-\end{enumerate}
-
-\subsection{Reverse Proxy and HTTPS (Caddy)}
-To expose the services using clean domains and automatic SSL/TLS, Caddy acts as the system's gateway.
-\begin{enumerate}
-\item Open the host Caddyfile:
-\begin{verbatim}
-sudo nano /etc/caddy/Caddyfile
-\end{verbatim}
-\item Configure domain mappings as shown in \texttt{Caddyfile.example}:
-\begin{verbatim}
-api-bopacorp.example.com {
-    reverse_proxy localhost:3001
-}
-
-bopacorp-crm.example.com {
-    reverse_proxy localhost:3002
-}
-
-bopacorp-web.example.com {
-    reverse_proxy localhost:3003
-}
-\end{verbatim}
-\item Apply changes by reloading the Caddy service:
-\begin{verbatim}
-sudo systemctl reload caddy
-\end{verbatim}
-\end{enumerate}
-
-\subsection{Deployment Validation}
-To ensure that the system has been successfully and securely deployed, verify the following points:
-\begin{itemize}
-\item Run \texttt{docker compose ps} to ensure that all service containers are running.
-\item Make a request to the API health endpoint to confirm operations:
-\begin{verbatim}
-curl -I https://api-bopacorp.example.com/api/v1/health
-\end{verbatim}
-\item Verify that the public website and the CRM dashboard load correctly over HTTPS.
-\item Ensure that the mobile application is pointing to the HTTPS API URL and can successfully log field visits.
-\end{itemize}
-
+% TODO: Add profiling evidence only if the optional criterion is pursued.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CHAPTER 5: PROTOTYPE & SYSTEM DESCRIPTION
+% CHAPTER 7: SYSTEM DESCRIPTION AND DEMONSTRATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{PROTOTYPE AND SYSTEM DESCRIPTION}
+\chapter{SYSTEM DESCRIPTION AND DEMONSTRATION}
 
-\section{Software System General Description}
+\section{General System Description}
+% TODO: Describe the final verified BOPADIGITAL platform.
 
-BOPADIGITAL is a digital commercial management platform developed for BOPACORP S.A. The solution integrates a public website, an internal CRM web platform, a mobile application for sales advisors, and a centralized REST API. The system was designed to digitalize commercial processes, improve customer relationship management, facilitate field operations, and provide management with real-time visibility of business performance.
+\section{Public Website}
+% TODO: Document verified public website workflows and screenshots.
 
-The platform replaces manual and decentralized processes by centralizing customer information, negotiations, visits, documents, reports, and commercial activities within a single integrated ecosystem.
+\section{Content Management System}
+% TODO: Document verified CMS workflows and screenshots.
 
-\subsection{Public Website}
+\section{Customer Relationship Management}
+% TODO: Document verified CRM roles and workflows.
 
-The public website serves as the corporate digital presence of BOPACORP. Visitors can access company information, available services, and contact channels. The website also integrates the Employability module, enabling prospective candidates to view job openings and submit applications.
+\section{Mobile Application}
+% TODO: Include mobile only after the repository and workflow are verified.
 
-\subsubsection{Home Page}
-The Home page presents the corporate identity, core values, and overall message of BOPACORP. It features dynamic hero sections, statistics, and shortcuts to the company's main services.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{home4.png}
-    \caption{Public Website --- Home Page Header and Hero Section}
-    \label{fig:web_home_hero}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{home2.png}
-    \caption{Public Website --- Home Page Services Categories Block}
-    \label{fig:web_home_why_bopacorp}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{home3.png}
-    \caption{Public Website --- Home Page ``Why BOPACORP'' Section}
-    \label{fig:web_home_services_categories}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{home1.png}
-    \caption{Public Website --- Home Page Footer and Call-to-Action}
-    \label{fig:web_home_footer}
-\end{figure}
-
-\subsubsection{Services Page}
-The Services page presents a comprehensive catalog of BOPACORP's offerings. It categorizes services, provides detailed descriptions, and includes an interactive contact form for service requests.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{services1.png}
-    \caption{Public Website --- Services Catalog Overview}
-    \label{fig:web_services_catalog}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{services2.png}
-    \caption{Public Website --- Services Detailed Descriptions}
-    \label{fig:web_services_details}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{services3.png}
-    \caption{Public Website --- Service Request Form}
-    \label{fig:web_services_form}
-\end{figure}
-
-\subsubsection{About Us Page}
-The About Us page details BOPACORP's history, mission, vision, organizational structure, and leadership guidelines, providing transparency and corporate information to visitors.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{about1.png}
-    \caption{Public Website --- About Us Mission, Vision, and History}
-    \label{fig:web_about_history}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{about2.png}
-    \caption{Public Website --- About Us Corporate Values and Structure}
-    \label{fig:web_about_structure}
-\end{figure}
-
-\subsubsection{Employability Portal}
-The Employability module allows job seekers to review active vacancies at BOPACORP, read detailed role descriptions, and submit applications directly by filling in their contact details and uploading their CV.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{employabilty.png}
-    \caption{Public Website --- Careers and Job Postings Page}
-    \label{fig:web_employability_list}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{employabilty_selected.png}
-    \caption{Public Website --- Detailed Vacancy View}
-    \label{fig:web_employability_selected}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{employabilty_modal.png}
-    \caption{Public Website --- Job Application Submission Modal}
-    \label{fig:web_employability_modal}
-\end{figure}
-
-\subsection{Content Management System (CMS)}
-
-The CMS provides administrators with an intuitive interface to manage the public website's dynamic content. Authorized users can modify text strings and replace media assets across different sections of the portal in real time, ensuring that corporate information remains up to date without requiring source code modifications.
-
-\subsubsection{Content Blocks Dashboard}
-The main dashboard organizes all editable components into logical categories using a tabbed navigation bar. Individual content elements are displayed as grid cards indicating their field key, content type (Text or Image), a live preview, and an action button to initiate modifications.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\linewidth]{cms.png}
-    \caption{CMS --- Content Blocks Dashboard}
-    \label{fig:cms_dashboard}
-\end{figure}
-
-\subsubsection{Text Content Edition}
-When updating a text element, the system triggers a dedicated modal window displaying the database key being modified, a text area with the current string, a real-time character counter, and standard control actions.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{cms_modal_text.png}
-    \caption{CMS --- Text Element Edition Modal}
-    \label{fig:cms_modal_text}
-\end{figure}
-
-\subsubsection{Media Asset Management}
-For visual elements, the CMS incorporates a specialized image upload modal with drag-and-drop support. Validation constraints restrict files to JPG, PNG, WebP, or AVIF formats with a maximum size of 5 MB.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{cms_modal.png}
-    \caption{CMS --- Image Replacement and Validation Modal}
-    \label{fig:cms_modal_image}
-\end{figure}
-
-\subsection{CRM System (Internal Management Platform)}
-
-The CRM is the core internal platform used by BOPACORP's commercial team. It provides role-based access control, with differentiated interfaces for administrators, managers, supervisors, coordinators, and advisors. The system is built with React 19, TypeScript, and Tailwind CSS v4, and communicates with the centralized REST API. All UI strings are internationalized via react-i18next.
-
-\subsubsection{Authentication and Access Control}
-
-The system provides secure JWT-based authentication with role-based permissions. Access to modules and actions is controlled through a combination of role gates and granular permission checks. The platform supports four primary roles: administrator, supervisor, coordinator, and advisor, each with distinct access levels.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_login.png}
-    \caption{CRM --- Login Screen}
-    \label{fig:crm_login}
-\end{figure}
-
-\subsubsection{Executive Overview Dashboard}
-
-The overview dashboard provides management with a real-time summary of commercial activity. It includes KPI cards, activity feeds, funnel charts, and per-advisor performance breakdowns. Advisors see their own metrics; supervisors see their team's aggregated data.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_overview.png}
-    \caption{CRM --- Executive Overview Dashboard (KPIs and Activity Feed)}
-    \label{fig:crm_overview}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_overview2.png}
-    \caption{CRM --- Executive Overview Dashboard (Charts and Advisor Breakdown)}
-    \label{fig:crm_overview2}
-\end{figure}
-
-\subsubsection{Client Management}
-
-The client module enables advisors and supervisors to maintain a centralized registry of business clients. Each record includes business name, RUC (tax ID), contact information, assigned advisor, billing data, and active/inactive status. Client details are accessible through a side panel displaying associated negotiations, visit history, and commercial metrics.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_clients.png}
-    \caption{CRM --- Client Registry with Search and Filters}
-    \label{fig:crm_clients}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_client_detail.png}
-    \caption{CRM --- Client Detail Side Panel}
-    \label{fig:crm_client_detail}
-\end{figure}
-
-\subsubsection{Negotiation Management}
-
-The negotiation module tracks commercial opportunities throughout their lifecycle. It provides two views: a data table with sorting, filtering, and pagination, and a Kanban board with drag-and-drop state transitions. Each negotiation detail page includes tabbed access to state history, registered visits, attached documents, and the offer matrix.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_negotiations_table.png}
-    \caption{CRM --- Negotiations Table View with Filters}
-    \label{fig:crm_negotiations_table}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_negotiations_kanban.png}
-    \caption{CRM --- Negotiations Kanban Board with Drag-and-Drop}
-    \label{fig:crm_negotiations_kanban}
-\end{figure}
-
-The negotiation detail page displays the negotiation header with client and advisor information, followed by four tabs: state history, visits, documents, and offer matrix.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_negotiation_detail.png}
-    \caption{CRM --- Negotiation Detail with State Change History Tab}
-    \label{fig:crm_negotiation_detail}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_negotiation_visits.png}
-    \caption{CRM --- Negotiation Detail: Visits Tab with GPS Records}
-    \label{fig:crm_visits}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_negotiation_documents.png}
-    \caption{CRM --- Negotiation Detail: Documents Tab}
-    \label{fig:crm_negotiation_documents}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_negotiation_matrix.png}
-    \caption{CRM --- Negotiation Detail: Offer Matrix Tab}
-    \label{fig:crm_negotiation_matrix}
-\end{figure}
-
-\subsubsection{Document Management}
-
-The document management module provides a centralized interface for uploading, reviewing, and approving documentation associated with negotiations. Coordinators and managers can filter by status (pending, accepted, rejected) and perform individual or bulk downloads. The system enforces mandatory document types and supports approval workflows with rejection reasons. File uploads are validated for type (PDF, JPG, PNG) and size (50 MB maximum), with server-side encryption.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_documents.png}
-    \caption{CRM --- Document Management Dashboard}
-    \label{fig:crm_documents}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_document_upload.png}
-    \caption{CRM --- Document Upload Dialog with Type Selection}
-    \label{fig:crm_document_upload}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_document_types.png}
-    \caption{CRM --- Document Types Configuration}
-    \label{fig:crm_document_types}
-\end{figure}
-
-\subsubsection{Reporting and Supervision}
-
-The reporting module provides KPI cards (total negotiations, visits, average days to close, billing), performance charts, funnel visualizations, and per-advisor breakdowns. Reports can be filtered by date range and advisor scope. Tier-based sales targets display progress bars with met/not-met status. Data can be exported in CSV format.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_reports.png}
-    \caption{CRM --- Performance Reports (KPIs and Funnel Chart)}
-    \label{fig:crm_reports}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_reports2.png}
-    \caption{CRM --- Performance Reports (Advisor Breakdown and Tier Targets)}
-    \label{fig:crm_reports2}
-\end{figure}
-
-\subsubsection{Product Catalog Management}
-
-The catalog module allows administrators to manage product and service offerings for the public website. Products include detailed descriptions, categories, pricing, benefit types, and media. The system manages incoming contact requests and provides settings for configuring categories, segments, item types, and other lookup tables.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_catalog.png}
-    \caption{CRM --- Product Catalog List}
-    \label{fig:crm_catalog}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_catalog_requests.png}
-    \caption{CRM --- Contact Requests from Public Website}
-    \label{fig:crm_catalog_requests}
-\end{figure}
-
-\subsubsection{Employability Management}
-
-Within the CRM, administrators manage job vacancies and review incoming applications. The module provides CRUD operations for vacancies and a dedicated applicants view where managers can review candidate profiles, change application states (received, in review, accepted, rejected), and download submitted resumes.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_vacancies.png}
-    \caption{CRM --- Job Vacancies Management}
-    \label{fig:crm_vacancies}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_applicants.png}
-    \caption{CRM --- Job Applications Review}
-    \label{fig:crm_applicants}
-\end{figure}
-
-\subsubsection{Organization and Team Management}
-
-The organization module provides tools for managing internal team structure. Administrators can register employees, assign roles and permissions, configure supervisor-advisor relationships, and manage departments.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_team.png}
-    \caption{CRM --- Team Members Management}
-    \label{fig:crm_team}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{crm_org_settings.png}
-    \caption{CRM --- Organization Settings and Departments}
-    \label{fig:crm_org_settings}
-\end{figure}
-
-\subsection{Mobile Application}
-
-The mobile application allows sales advisors to perform key commercial activities while working in the field. Through the mobile interface, advisors can access assigned clients, consult negotiation information, register visits, upload documentation, and maintain synchronization with the central CRM platform.
-
-\subsubsection{Login Screen}
-
-The login screen provides secure access to the mobile application. Sales advisors authenticate using their corporate credentials, allowing the system to validate their identity and load the corresponding permissions and assigned commercial information.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{mloginscreen.png}
-    \caption{Mobile Login Screen}
-    \label{fig:mobile_login}
-\end{figure}
-
-\subsubsection{Clients List}
-
-The Clients screen displays the portfolio assigned to the authenticated sales advisor. Users can search, filter, and browse client records, as well as access detailed information or register new corporate clients directly from the mobile application.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{mclients.png}
-    \caption{Clients List}
-    \label{fig:mobile_clients}
-\end{figure}
-
-
-
-\subsubsection{Create Client}
-
-This screen allows sales advisors to register new corporate clients by entering business information such as RUC, company name, contact details, phone number, email, and address. All information is validated before being submitted to the backend API.
-
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.35\linewidth]{mcreateclient.png}
-        \caption{Create Client Screen}
-    \label{fig:mobile_create_client}
-    \end{figure}
-
-\subsubsection{Client Details}
-
-The Client Details screen provides complete information about a selected customer, including business information, contact details, assigned sales advisor, and current status. From this screen users can also edit client information.
-
-\begin{figure}[H]
-    \centering
-        \includegraphics[width=0.35\linewidth]{mclientdetail.png}
-          \caption{Client Details Screen}
-    \label{fig:mobile_client_details}
-    \end{figure}
-
-
-\subsubsection{Edit Client}
-
-The Edit Client screen enables advisors to update customer information while preserving the unique business identifier. Changes are synchronized with the backend to keep client records up to date.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{meditclient.png}
-        \caption{Edit Client Screen}
-    \label{fig:mobile_edit_client}
-\end{figure}
-
-
-\subsubsection{Negotiations List}
-
-The Negotiations screen presents all commercial negotiations assigned to the advisor. Users can search, filter, review negotiation status, and create new negotiations for existing clients.
-
-\begin{figure}[H]
-    \centering
-   \includegraphics[width=0.35\linewidth]{mnegotiations.png}
-        \caption{Negotiations List}
-    \label{fig:mobile_negotiations}
-\end{figure}
-
-\subsubsection{Create Negotiation}
-
-This screen allows advisors to create a new commercial negotiation by selecting a client, defining the initial negotiation stage, estimated closing date, and additional observations. The information is stored immediately in the CRM.
-
-\begin{figure}[H]
-    \centering
-      \includegraphics[width=0.35\linewidth]{mcreatenegotiation.png}
-        \caption{Create Negotiation Screen}
-    \label{fig:mobile_create_negotiation}
-\end{figure}
-
-
-\subsubsection{Negotiation Status Selection}
-
-The negotiation creation process includes a predefined set of commercial stages, allowing advisors to classify opportunities consistently throughout the sales pipeline.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{mstatusselection.png}
-        \caption{Negotiation Status Selection}
-    \label{fig:mobile_negotiation_status}
-\end{figure}
-
-\subsubsection{Negotiation Details}
-
-The Negotiation Details screen centralizes all information related to a commercial opportunity, including negotiation details, visits, documents, offer matrices, and comments through organized tabs.
-
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.35\linewidth]{mnegotiationdetail.png}
-        \caption{Negotiation Details Screen}
-           \label{fig:mobile_negotiation_details}
-    \end{figure}
-
-
-\subsubsection{Edit Negotiation}
-
-This screen allows advisors to update the negotiation stage, estimated closing date, observations, and active status as the commercial process progresses.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{meditnegotiation.png}
-    \caption{Edit Negotiation Screen}
-    \label{fig:mobile_edit_negotiation}
-\end{figure}
-
-
-\subsubsection{Register Visit}
-
-Sales advisors can register commercial visits by specifying the visit type, date, and observations. Each visit is associated with the corresponding negotiation, allowing supervisors to monitor field activities.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{mregistervisit.png}
-    \caption{Register Visit Screen}
-    \label{fig:mobile_register_visit}
-\end{figure}
-
-\subsubsection{Negotiation Documents}
-
-The Documents tab displays all files associated with a negotiation. Advisors can review uploaded documents directly from the mobile application, facilitating access to contractual information while working in the field.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{mdocumentsdetail.png}
-    \caption{Negotiation Documents}
-    \label{fig:mobile_negotiation_documents}
-\end{figure}
-
-\subsubsection{Offer Matrices}
-
-The Offer Matrices tab provides access to commercial proposal templates and supporting documents associated with a negotiation. Advisors can upload the required files directly from their mobile device.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{mmatrices.png}
-    \caption{Offer Matrices Screen}
-    \label{fig:mobile_offer_matrices}
-\end{figure}
-
-
-\subsubsection{Negotiation Comments}
-
-This screen displays observations and commercial notes recorded during the negotiation process, allowing advisors to maintain a complete history of customer interactions.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{mcomments.png}
-    \caption{Negotiation Comments}
-    \label{fig:mobile_comments}
-\end{figure}
-
-\subsubsection{Document Management}
-
-The Document Management module allows advisors to browse, search, upload, preview, and remove documents associated with commercial negotiations. Document status is displayed to indicate whether files are pending, approved, or rejected.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{mdocumentmanagement.png}
-    \caption{Document Management Screen}
-    \label{fig:mobile_document_management}
-\end{figure}
-
-
-
-
-
-
-\subsubsection{Settings}
-
-The Settings screen displays the authenticated user's profile information, application version, server configuration, appearance preferences, and provides the option to securely close the current session.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\linewidth]{msettings.png}
-    \caption{Settings Screen}
-    \label{fig:mobile_settings}
-\end{figure}
+\section{Feature Demonstration Runbook}
+% TODO: Define the English demonstration sequence, roles, timing and expected results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CHAPTER 6: INDIVIDUAL CONTRIBUTIONS & AUTHORSHIP
+% CHAPTER 8: INDIVIDUAL CONTRIBUTIONS AND AUTHORSHIP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{INDIVIDUAL CONTRIBUTIONS AND AUTHORSHIP}
 
-\section{Individual Contributions Table}
-Detail the specific contributions made by each member of the development team.
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9cm}|}
-\hline
-\textbf{Name} & \textbf{Contributions} \\ \hline
-Aragon Intriago Shirley Yamel &
-Development of the public website, mobile application, frontend testing activities, project documentation, deployment guide, and quality assurance tasks. \\ \hline
+\section{Individual Contributions}
+% TODO: Map each member to commits, artifacts and rubric criteria.
 
-Diaz Osorio Fernando Nahim &
-Implementation of authentication and authorization features, Scrum planning activities, project management, reporting functionalities, documentation, and application profiling. \\ \hline
-
-Muñoz Sanchez Salvador Gabriel &
-Development of backend foundations, CMS and Employability modules, frontend integrations, UI components, testing activities, and technical support tasks. \\ \hline
-
-Navarrete Castillo Anthony Josue &
-Development of CRM frontend features, login interface, mobile application components, frontend integrations, and testing support. \\ \hline
-
-Tumbaco Santana Gabriel Alejandro &
-Database design, backend development, CRM API implementation, document and matrices modules, CI/CD pipelines, Docker deployment, and technical coordination. \\ \hline
-
-\end{tabular}
-\caption{Individual Contributions of the Development Team}
-\label{tab:individual_contributions}
-\end{table}
-
-\chapter{AUTHORSHIP DECLARATION}
-
-We, the undersigned members of the \textbf{BOPADIGITAL} development team, hereby declare that the present document titled \textbf{“BOPACORP S.A. Midterm Project Specification and Report”} has been entirely prepared by us as part of the course \textbf{Software Engineering II} at the \textbf{Escuela Superior Politécnica del Litoral (ESPOL)}.
-
-We affirm that all sections, analyses, and specifications contained in this document represent our own work and understanding, based on information gathered from the client and the methodologies applied during the software requirements engineering process.
-
-No part of this document has been copied, plagiarized, or taken from other sources without proper acknowledgment. Any external reference used has been duly cited in the bibliography according to academic integrity standards.
-
-Each member of the team assumes full responsibility for the authenticity, accuracy, and originality of the content herein.
-
-\vspace{1cm}
-
-\noindent\textbf{Digital Confirmation:} All members of the team confirm authorship through their electronic submission of this document.
-
-\vspace{1cm}
-
-\noindent\textbf{Team Members:}
-
-\vspace{0.3cm}
-\noindent Aragon Intriago Shirley Yamel \\
-Diaz Osorio Fernando Nahim \\
-Muñoz Sanchez Salvador Gabriel \\
-Navarrete Castillo Anthony Josue \\
-Tumbaco Santana Gabriel Alejandro
-
-
-
-
+\section{Authorship Declaration}
+% TODO: Add the final authorship declaration.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CHAPTER 7: CLIENT EVIDENCE AND INDEX
+% APPENDICES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{CLIENT EVIDENCE AND COMMUNICATIONS INDEX}
+\appendix
 
-\section{Communications Folder Indexing Document}
-A registry of all communications and validation processes held with the project client. All evidence files are stored in the dedicated communications repository: \url{https://github.com/Bopacorp/communications}. \begingroup
-\footnotesize
-\renewcommand{\_}{\textunderscore\allowbreak}
-\begin{longtable}{|p{3.8cm}|p{3.8cm}|p{1.0cm}|p{2.5cm}|p{2.2cm}|}
-\hline
-\textbf{File Name} & \textbf{Description} & \textbf{Type} & \textbf{Participants} & \textbf{Date / Time} \\ \hline
-\endfirsthead
-\multicolumn{5}{l}{\textit{Table continued from previous page}} \\ \hline
-\textbf{File Name} & \textbf{Description} & \textbf{Type} & \textbf{Participants} & \textbf{Date / Time} \\ \hline
-\endhead
-chat\_initial\_contact.png & Initial contact requesting catalog and company resources for website & Image & Gabriel T. \& Client & 2026-05-11 07:32 \\ \hline
-chat\_catalog\_request.png & Client sends commercial guide PDF with product verticals & Image & Gabriel T. \& Client & 2026-05-11 07:54 \\ \hline
-chat\_info\_request.png & Team sends PDF with required website information; client confirms & Image & Gabriel T. \& Client & 2026-05-14 08:18 \\ \hline
-chat\_followup\_content.png & Follow-up requesting content; client busy with negotiations week & Image & Gabriel T. \& Client & 2026-05-18 14:09 \\ \hline
-chat\_client\_delivers\_info.png & Client delivers website content document (DOCX) and availability notes & Image & Gabriel T. \& Client & 2026-06-02 11:45 \\ \hline
-chat\_progress\_update.png & Progress update on website and CMS; requesting feedback meeting & Image & Gabriel T. \& Client & 2026-06-15 08:30 \\ \hline
-chat\_meeting\_coordination.png & Coordinating in-person meeting at Bopacorp office for demo and acceptance & Image & Gabriel T. \& Client & 2026-06-15 14:14 \\ \hline
-chat\_meeting\_confirmation.png & Client confirms meeting; team sends attendee list & Image & All members \& Client & 2026-06-19 11:28 \\ \hline
-prod\_deploy.png & Production deployment notification to client with system URLs and credentials & Image & Gabriel T. \& Client & 2026-06-24 08:00 \\ \hline
-audio\_meeting\_coordination.ogg & Voice message coordinating meeting logistics & Audio & Gabriel T. \& Client & 2026-06-19 12:58 \\ \hline
-email\_product\_verticals.png & Email from Bopacorp staff with product verticals catalog (Voz, Digital, Conectividad) & Image & Client staff \& Gabriel T. & 2025-10-17 12:14 \\ \hline
-acceptance\_s1.jpeg & Sprint 1 acceptance letter signed by client & Image & Team \& Client & 2026-05-24 17:00 \\ \hline
-acceptance\_s2.jpeg & Sprint 2 acceptance letter signed by client & Image & Team \& Client & 2026-06-07 17:00 \\ \hline
-acceptance\_s3.jpeg & Sprint 3 acceptance letter signed by client & Image & Team \& Client & 2026-06-21 17:00 \\ \hline
-acceptance\_final\_1.jpeg & Final project acceptance form — page 1 & Image & Team \& Client & 2026-06-24 17:00 \\ \hline
-acceptance\_final\_2.jpeg & Final project acceptance form — page 2 & Image & Team \& Client & 2026-06-24 17:00 \\ \hline
-evidence\_photo1.jpeg & Team photo at Bopacorp office with client representative & Image & Team \& Client & 2026-06-19 13:00 \\ \hline
-evidence\_photo2.jpeg & System demo on laptop at Bopacorp office showing deployed website & Image & Team \& Client & 2026-06-19 13:00 \\ \hline
-\caption{Communications Indexing Registry}
-\label{tab:communications_index}
-\end{longtable}
-\endgroup
+\chapter{REPOSITORIES, TOOLS AND PROJECT LINKS}
+% TODO: Add repository URLs, tools, video, deployment and evaluation links.
 
-\section{Sprint Acceptance Letters}
-At the end of each sprint, the client representative reviewed the delivered increment and signed an acceptance letter confirming the work met the agreed criteria.
+\chapter{SOFTWARE BUILDING AND DEPLOYMENT EVIDENCE}
+% TODO: Add build/release evidence, deployed revisions and health checks.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth, keepaspectratio]{acceptance_s1.jpeg}
-    \caption{Sprint 1 Acceptance Letter}
-    \label{fig:acceptance_s1}
-\end{figure}
+\chapter{PROJECT PRESENTATION AND DEMONSTRATION}
+% TODO: Add the presentation/video link and demonstration evidence.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth, keepaspectratio]{acceptance_s2.jpeg}
-    \caption{Sprint 2 Acceptance Letter}
-    \label{fig:acceptance_s2}
-\end{figure}
+\chapter{CLIENT COMMUNICATIONS AND ACCEPTANCE}
+% TODO: Add the communications index, sprint acceptance and final acceptance evidence.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth, keepaspectratio]{acceptance_s3.jpeg}
-    \caption{Sprint 3 Acceptance Letter}
-    \label{fig:acceptance_s3}
-\end{figure}
+\chapter{SYSTEM DEPLOYMENT GUIDE}
+% TODO: Insert or reference the verified system deployment guide.
 
-\section{Final Project Acceptance Form}
-The following page contains the final project acceptance form signed by the customer representative, confirming that the complete system has been validated and approved for production use.
+\chapter{INSTALLATION GUIDE}
+% TODO: Insert or reference the verified installation guide.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth, keepaspectratio]{acceptance_final_1.jpeg}
-    \caption{Final Project Acceptance Form — Page 1}
-    \label{fig:acceptance_final_1}
-\end{figure}
+\chapter{USER MANUALS}
+% TODO: Insert the final role-based user manual PDFs.
+% Example, once the file exists in Overleaf:
+% \includepdf[pages=-,fitpaper=true]{appendices/manuals/user-manual.pdf}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth, keepaspectratio]{acceptance_final_2.png}
-    \caption{Final Project Acceptance Form — Page 2}
-    \label{fig:acceptance_final_2}
-\end{figure}
-
-\section{Client Evidence Photos}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth, keepaspectratio]{evidence_photo1.jpeg}
-    \caption{Client Evidence Photo 1}
-    \label{fig:evidence_photo1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth, keepaspectratio]{evidence_photo2.jpeg}
-    \caption{Client Evidence Photo 2}
-    \label{fig:evidence_photo2}
-\end{figure}
+\chapter{TESTING ARTIFACTS, TRACEABILITY AND SCHEDULE}
+% TODO: Add test logs, risk traceability, coverage artifacts and final schedule.
 
 \end{document}

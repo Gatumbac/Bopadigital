@@ -35,7 +35,6 @@
 % Consistent continuation labels for all long tables.
 \newcommand{\continuedfrompreviouspage}[1]{%
     \multicolumn{#1}{r}{\textit{Continued from previous page}}\\
-    \hline
 }
 \newcommand{\continuedonnextpage}[1]{%
     \multicolumn{#1}{r}{\textit{Continued on next page}}\\
@@ -319,15 +318,15 @@ BOPADIGITAL has a public website, an internal CRM, and a mobile client. The web 
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-Language and typing & Large ecosystem of typed libraries. & Built-in TypeScript support. & Progressive TypeScript support. \\
+Language and typing & Large typed ecosystem. & Built-in TypeScript. & TypeScript support. \\
 \hline
-Application model & Flexible component ecosystem. & Prescriptive framework with conventions. & Component-based framework. \\
+Application model & Flexible component model. & Structured framework. & Component-based model. \\
 \hline
-Fit for this project & Matches the current web applications and shared UI approach. & More structure, but a larger framework for this scope. & Productive, but would require changing the current stack. \\
+Fit for this project & Matches current web apps. & Larger for this scope. & Requires changing the stack. \\
 \hline
-Build and development & Fast feedback and production builds. & Integrated CLI workflow. & Vite is available, but the repositories already use React. \\
+Build and development & Fast development and builds. & Integrated CLI. & Current stack uses React. \\
 \hline
-Decision & \multicolumn{3}{L{11.2cm}|}{React with TypeScript and Vite was selected for the public website and CRM. React Native through Expo extends the same language and component-oriented approach to the mobile application.} \tablelastrow
+Decision & \multicolumn{3}{L{11.2cm}|}{React/Vite was selected for web; Expo/React Native extends the same approach to mobile.} \tablelastrow
 \end{longtable}
 
 React was selected for component reuse, TypeScript support, mature libraries, and low migration cost. Vite, Tailwind CSS, and shadcn/ui support fast development and shared UI conventions.

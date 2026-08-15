@@ -44,29 +44,6 @@
     \\* \hline
 }
 
-% ClickUp captures for Sprints 5--7 may be imported into Overleaf after the
-% current inventory is reviewed. The placeholder keeps the source compilable
-% until the corresponding PNG is added.
-\newcommand{\clickupcapture}[3]{%
-    \IfFileExists{appendices/images/#1.png}{%
-        \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.90\textwidth,keepaspectratio]{#1}
-        \caption{#2}
-        \label{fig:#3}
-        \end{figure}%
-    }{%
-        \begin{figure}[htbp]
-        \centering
-        \fbox{\parbox{0.86\textwidth}{\centering
-            \textit{ClickUp capture pending for #2.}\\
-            Add \texttt{appendices/images/#1.png} before the final compilation.}}
-        \caption{#2 (pending capture)}
-        \label{fig:#3}
-        \end{figure}%
-    }%
-}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DECLARATION OF AN ADDITIONAL LIST OF REFERENCES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,12 +130,6 @@ BOPADIGITAL Final Project Report}
 \cleardoublepage
 \pagenumbering{arabic}
 \reversemarginpar
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FINAL REPORT SCAFFOLD
-% This phase defines the final report structure only.
-% Content, evidence, figures and tables will be added later.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 1: INTRODUCTION AND PROJECT CONTEXT
@@ -263,7 +234,11 @@ Final acceptance & August 7, 2026 & Final review and formal acceptance of the pr
 The communications repository contains the chronological acceptance records for all seven sprints and the final acceptance process. Detailed letters, sprint reviews, client feedback, and supporting images are included in the appendices.
 
 \section{Project Dimensions and Demonstration Scope}
-The initial requirements baseline contains 68 user stories. Seven belong to the excluded Offer Matrices module, leaving 61 stories for final traceability. This differs from the 46 product backlog items and the task/subtask count in the Scrum records.
+The initial requirements baseline contains 68 user stories. Seven belong to the Offer Matrices
+module and six belong to its Supervision and Approvals dependency. These 13 records are retained
+for historical traceability but are excluded from the active product scope, leaving 55 active
+stories. The remaining 61 non-MAT records are listed for traceability in the requirements appendix.
+This differs from the 46 product backlog items and the task/subtask count in the Scrum records.
 
 The demonstration scope comprises the following scenarios:
 
@@ -716,24 +691,45 @@ The acceptance records and communications index provide complementary evidence.
 \label{fig:clickup_sprint4}
 \end{figure}
 
-% Add clickup_sprint5.png, clickup_sprint6.png, and clickup_sprint7.png
-% to appendices/images/ when the ClickUp evidence is available.
-\clickupcapture{clickup_sprint5}{ClickUp board used for Sprint 5 planning}{clickup_sprint5}
-\clickupcapture{clickup_sprint6}{ClickUp board used for Sprint 6 planning}{clickup_sprint6}
-\clickupcapture{clickup_sprint7}{ClickUp board used for Sprint 7 planning}{clickup_sprint7}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth,keepaspectratio]{clickup_sprint5}
+\caption{ClickUp board used for Sprint 5 planning}
+\label{fig:clickup_sprint5}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth,keepaspectratio]{clickup_sprint6}
+\caption{ClickUp board used for Sprint 6 planning}
+\label{fig:clickup_sprint6}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth,keepaspectratio]{clickup_sprint7}
+\caption{ClickUp board used for Sprint 7 planning}
+\label{fig:clickup_sprint7}
+\end{figure}
 
 \FloatBarrier
 
 \section{Product Backlog}
 The initial requirements baseline contained 68 user stories. Seven stories related to the
-Offer Matrices module were removed from the final scope after the client decision, leaving
-61 stories for final traceability. The Scrum planning document contains 46 product backlog
-items and 138 task or subtask records. These counts describe different planning levels and
-are therefore reported separately. The complete task-level detail is available through the
-project link in the appendices. For readability,
+Offer Matrices module and six stories related to matrix supervision are retained as historical
+requirements but excluded from the active scope after the client decision. Therefore, 55 stories
+remain active, while 61 non-MAT records remain available for final traceability. The Scrum planning
+document contains 46 product backlog items and 138 task or subtask records. These counts describe
+different planning levels and are therefore reported separately. The complete task-level detail
+is available through the project link in the appendices. For readability,
 Table~\ref{tab:product_backlog_summary} summarizes the final backlog by functional area and
 delivery priority. Historical matrix construction, subsidy calculation, and matrix approval
 tasks are excluded from the final delivery summary.
+
+The normalized sprint tables contain 40 active PB identifiers: PB1--PB23 and PB30--PB46. The
+remaining six identifiers, PB24--PB29, belong to the excluded matrix scope. The detailed PB/T
+tables group the three planning tasks normally associated with each PB item; the original task
+identifiers remain visible in the Scrum source document.
 
 \begin{longtable}{|L{3.0cm}|L{4.6cm}|L{2.2cm}|L{3.8cm}|}
 \caption{Final product backlog by functional area}
@@ -763,7 +759,7 @@ Quality and testing & Unit, integration, acceptance, risk-based, and preventive-
 \hline
 Standards and delivery & Coding standards, refactoring, CI, deployment, manuals, presentation, and closure. & High & Sprints 6 and 7; deployment and communications repositories. \\
 \hline
-Excluded historical scope & Matrix construction, matrix approval, subsidy calculations, and related offer calculations. & Excluded & Removed from final stories and demonstration scenarios. \tablelastrow
+Excluded historical scope & Matrix construction, matrix approval, subsidy calculations, and related offer calculations. & Excluded & Removed from active stories and demonstration scenarios. \tablelastrow
 \end{longtable}
 
 The following table preserves the detailed baseline backlog from the legacy project report.
@@ -775,52 +771,61 @@ acceptance, risk-based testing, quality evidence, standards, documentation, and 
 \caption{Detailed baseline product backlog and dependencies}
 \label{tab:product_backlog_detailed}\\
 \hline
-\textbf{ID} & \textbf{Priority} & \textbf{Dependency} & \textbf{Backlog item description} & \textbf{Estimate (hours)} \\
+\textbf{ID} & \textbf{Priority} & \textbf{Dependency} & \textbf{Backlog item description} & \textbf{Estimate (h)} \\
 \hline
 \endfirsthead
 \continuedfrompreviouspage{5}
-\textbf{ID} & \textbf{Priority} & \textbf{Dependency} & \textbf{Backlog item description} & \textbf{Estimate (hours)} \\
+\textbf{ID} & \textbf{Priority} & \textbf{Dependency} & \textbf{Backlog item description} & \textbf{Estimate (h)} \\
 \hline
 \endhead
 \continuedonnextpage{5}
 \endfoot
 \endlastfoot
-PB1 & High & None & Configure project repositories, TypeScript, Biome, Husky, Commitlint, shared package configuration, and GitHub workflow standards for all project components. & 10 \\
+PB1 & High & None & Configure project repositories, TypeScript, Biome, Husky, Commitlint, shared package configuration, and GitHub workflow standards for all project components. & 24 \\
 \hline
-PB2 & High & PB1 & Design and implement the PostgreSQL database schema, including authentication, CRM, documents, supervision, CMS, and public website modules. & 10 \\
+PB2 & High & PB1 & Design and implement the PostgreSQL database schema, including authentication, CRM, documents, supervision, CMS, and public website modules. & 38 \\
 \hline
-PB3 & High & PB2 & Implement JWT-based authentication, password encryption, session management, and secure API access control mechanisms. & 10 \\
+PB3 & High & PB2 & Implement JWT-based authentication, password encryption, session management, and secure API access control mechanisms. & 26 \\
 \hline
-PB4 & High & PB3 & Implement role-based access control, including roles, permissions, protected routes, and module-level authorization. & 8 \\
+PB4 & High & PB3 & Implement role-based access control, including roles, permissions, protected routes, and module-level authorization. & 48 \\
 \hline
-PB5 & High & PB1 & Develop the public BOPACORP website, including company information, service catalog, employment opportunities, and contact features. & 12 \\
+PB5 & High & PB1 & Develop the public BOPACORP website, including company information, service catalog, employment opportunities, and contact features. & 20 \\
 \hline
-PB6 & High & PB5 & Develop the Content Management System for services, website content, images, links, and public information. & 10 \\
+PB6 & High & PB5 & Develop the Content Management System for services, website content, images, links, and public information. & 26 \\
 \hline
-PB7 & High & PB4 & Implement organization management, including departments, employees, organizational roles, and advisor--supervisor relationships. & 8 \\
+PB7 & High & PB4 & Implement organization management, including departments, employees, organizational roles, and advisor--supervisor relationships. & 36 \\
 \hline
-PB8 & High & PB4 & Develop the CRM web platform, including client management, negotiation tracking, business opportunities, visits, and commercial processes. & 20 \\
+PB8 & High & PB4 & Develop the CRM web platform, including client management, negotiation tracking, business opportunities, visits, and commercial processes. & 22 \\
 \hline
-PB9 & Medium & PB8 & Implement document management, including upload, storage, retrieval, review, and approval workflows. & 12 \\
+PB9 & Medium & PB8 & Implement document management, including upload, storage, retrieval, review, and approval workflows. & 32 \\
 \hline
-PB10 & Medium & PB8 & Implement supervision functions for monitoring advisor activities, reviewing commercial processes, and tracking operational performance. & 8 \\
+PB10 & Medium & PB8 & Implement supervision functions for monitoring advisor activities, reviewing commercial processes, and tracking operational performance. & 26 \\
 \hline
-PB11 & Medium & PB8 & Develop reporting and analytics functions, including commercial metrics, performance indicators, and operational dashboards. & 10 \\
+PB11 & Medium & PB8 & Develop reporting and analytics functions, including commercial metrics, performance indicators, and operational dashboards. & 28 \\
 \hline
-PB12 & High & PB8 & Develop the mobile application for sales advisors, including authentication, client management, negotiation tracking, document consultation, and visit registration. & 16 \\
+PB12 & High & PB8 & Develop the mobile application for sales advisors, including authentication, client management, negotiation tracking, document consultation, and visit registration. & 26 \\
 \hline
-PB13 & Medium & PB12 & Implement geolocation features for visit registration and field activity tracking in the mobile application. & 8 \\
+PB13 & Medium & PB12 & Implement geolocation features for visit registration and field activity tracking in the mobile application. & 48 \\
 \hline
-PB14 & High & PB1 & Integrate Web, CMS, CRM, Mobile, and API components through shared services, common validation schemas, and centralized authentication. & 10 \\
+PB14 & High & PB1 & Integrate Web, CMS, CRM, Mobile, and API components through shared services, common validation schemas, and centralized authentication. & 32 \\
 \hline
-PB15 & High & All & Configure Docker environments, deployment pipelines, environment variables, HTTPS configuration, and production infrastructure. & 10 \\
+PB15 & High & All & Configure Docker environments, deployment pipelines, environment variables, HTTPS configuration, and production infrastructure. & 42 \\
 \hline
-PB16 & Medium & PB15 & Design and execute functional, integration, and user acceptance tests for the major system modules. & 8 \\
+PB16 & Medium & PB15 & Design and execute functional, integration, and user acceptance tests for the major system modules. & 26 \\
 \hline
-PB17 & Medium & PB15 & Prepare technical documentation, deployment guides, installation manuals, user manuals, and project deliverables. & 6 \tablelastrow
+PB17 & Medium & PB15 & Prepare technical documentation, deployment guides, installation manuals, user manuals, and project deliverables. & 32 \tablelastrow
 \end{longtable}
 
-The estimate is a planning baseline; it is not a measured execution duration.
+The estimates in Table~\ref{tab:product_backlog_detailed} are normalized planning values. The
+Scrum source expressed effort in story points, so this report uses the declared conversion of
+one story point to two estimated hours. These values are not measured execution durations.
+
+The sprint tables below use the same planning fields as the Nintventario report. All effort values
+are expressed as estimated hours. For Sprints 1--4, each PB estimate is the sum of its three
+source task estimates after converting one story point to two hours. Sprints 5--7 were organized
+as final-delivery extensions in ClickUp; because ClickUp did not record effort, their hours are
+retrospective team estimates assigned with the same relative scale. ClickUp task and subtask
+counts are reported separately as evidence and are not treated as hours.
 
 \subsection{Final-sprint backlog extensions}
 The original backlog grouped final quality and delivery work under PB16 and PB17. The following
@@ -849,11 +854,15 @@ FS6 & Sprint 6 & PB1, PB15, PB17 & SOLID review, design patterns, refactoring, s
 FS7 & Sprint 7 & PB15--PB17 & Final deployment, installation guide, role-based manuals, API documentation, final report, validation, repository package, video, and formal closure. \tablelastrow
 \end{longtable}
 
+FS4 is a continuation map for the Sprint 4 scope; its effort is represented in the Sprint 4
+detailed PB/T table and is not counted twice. For Sprints 5--7, the final-delivery groups use
+relative estimates from 2 to 8 points according to their scope and are converted with the same
+two-hours-per-point rule.
+
 \section{Sprint 1}
 The sprint plan evolved from technical foundations to functional increments, integration,
-quality activities, and final delivery. Each sprint backlog table summarizes its planned and
-delivered scope. Table~\ref{tab:sprint_review_retrospective_traceability} consolidates the
-reviews, retrospectives, and acceptance references.
+quality activities, and final delivery. Each sprint subsection presents the planned backlog, the
+review result, the decisions that shaped the next iteration, and the retrospective action.
 
 \subsection{Sprint Backlog}
 Sprint 1 established the technical and organizational foundation of the project.
@@ -874,6 +883,70 @@ Sprint 1 established the technical and organizational foundation of the project.
 \endlastfoot
 May 24, 2026 & Establish the project foundation. & Repositories, quality tools, database configuration, Express server, JWT authentication, RBAC, login, and Scrum planning. \tablelastrow
 \end{longtable}
+
+The total estimated effort for Sprint 1 is 326 hours.
+
+\begin{longtable}{|L{1.0cm}|L{2.3cm}|L{1.1cm}|L{4.9cm}|L{2.4cm}|L{1.1cm}|}
+\caption{Sprint 1 detailed backlog}\label{tab:sprint1_detailed_backlog}\\
+\hline
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint tasks} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint tasks} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+PB1 & Repository foundation & Mixed & T-1 API and logic; T-2 frontend and UI; T-3 DevOps, testing, and deployment. & Gabriel Tumbaco & 24 h \\
+\hline
+PB2 & Database design and modeling & Mixed & T-4 backend and logic; T-5 frontend and UI; T-6 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 38 h \\
+\hline
+PB3 & Cloud and S3 storage & Mixed & T-7 backend and logic; T-8 frontend and UI; T-9 DevOps, testing, and deployment. & Anthony Navarrete; Shirley Aragón; Nahim Díaz & 26 h \\
+\hline
+PB4 & Express server foundation & Mixed & T-10 backend and logic; T-11 frontend and UI; T-12 DevOps, testing, and deployment. & Salvador Muñoz; Anthony Navarrete; Shirley Aragón & 48 h \\
+\hline
+PB5 & JWT authentication & Mixed & T-13 backend and logic; T-14 frontend and UI; T-15 DevOps, testing, and deployment. & Nahim Díaz; Salvador Muñoz; Anthony Navarrete & 20 h \\
+\hline
+PB6 & Global roles and permissions & Mixed & T-16 backend and logic; T-17 frontend and UI; T-18 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 26 h \\
+\hline
+PB7 & Web login portal & Mixed & T-19 backend and logic; T-20 frontend and UI; T-21 DevOps, testing, and deployment. & Gabriel Tumbaco; Anthony Navarrete; Shirley Aragón & 36 h \\
+\hline
+PB8 & Mobile login & Mixed & T-22 backend and logic; T-23 frontend and UI; T-24 DevOps, testing, and deployment. & Nahim Díaz; Salvador Muñoz; Gabriel Tumbaco & 22 h \\
+\hline
+PB9 & Password recovery & Mixed & T-25 backend and logic; T-26 frontend and UI; T-27 DevOps, testing, and deployment. & Anthony Navarrete; Shirley Aragón; Nahim Díaz & 32 h \\
+\hline
+PB10 & React landing-page structure & Mixed & T-28 backend and logic; T-29 frontend and UI; T-30 DevOps, testing, and deployment. & Salvador Muñoz; Gabriel Tumbaco; Anthony Navarrete & 26 h \\
+\hline
+PB11 & Public views and contact & Mixed & T-31 backend and logic; T-32 frontend and UI; T-33 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 28 h \\
+\tablelastrow
+\end{longtable}
+
+\subsection{Sprint Review}
+\textbf{Date:} May 24, 2026.\\
+\textbf{Participants:} Scrum team and client representative.\\
+\textbf{Reviewed increment:} The team presented the repository structure, the shared types
+package, the Express server, JWT authentication, the login flow, RBAC, and the base public website.
+
+\subsubsection{Stakeholder Feedback}
+The client accepted the authentication approach and the repository organization. The review also
+identified the need to align the public website colors with the corporate identity.
+
+\textbf{Acceptance:} The Sprint 1 acceptance record is included in the communications evidence.
+
+\subsubsection{Decisions Made}
+The team kept JWT and RBAC as the security foundation, used the shared package as the contract
+between repositories, and scheduled the visual alignment of the public website for the following
+iteration.
+
+\subsection{Sprint Retrospective}
+\textbf{Successes:} The repository structure and shared package supported parallel development.
+Biome and Husky provided early quality checks.\\
+\textbf{Improvement identified:} The database schema required revisions because some relations
+were not defined in the first design, and task coordination needed more precision.\\
+\textbf{Action taken:} The team reviewed entity relations before migrations and clarified task
+ownership at the beginning of the next sprint.
 
 \section{Sprint 2}
 \subsection{Sprint Backlog}
@@ -896,6 +969,70 @@ Sprint 2 moved from the technical foundation to the first business workflows.
 June 7, 2026 & Deliver the first business modules. & Catalog, CMS, employability, organization, users, public web workflows, and the initial CRM implementation. \tablelastrow
 \end{longtable}
 
+The total estimated effort for Sprint 2 is 314 hours.
+
+\begin{longtable}{|L{1.0cm}|L{2.3cm}|L{1.1cm}|L{4.9cm}|L{2.4cm}|L{1.1cm}|}
+\caption{Sprint 2 detailed backlog}\label{tab:sprint2_detailed_backlog}\\
+\hline
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint tasks} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint tasks} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+PB12 & Web service catalog & Mixed & T-34 backend and logic; T-35 frontend and UI; T-36 DevOps, testing, and deployment. & Gabriel Tumbaco; Anthony Navarrete; Shirley Aragón & 26 h \\
+\hline
+PB13 & Employability application form & Mixed & T-37 backend and logic; T-38 frontend and UI; T-39 DevOps, testing, and deployment. & Nahim Díaz; Salvador Muñoz; Gabriel Tumbaco & 48 h \\
+\hline
+PB14 & Resume upload module & Mixed & T-40 backend and logic; T-41 frontend and UI; T-42 DevOps, testing, and deployment. & Anthony Navarrete; Shirley Aragón; Nahim Díaz & 32 h \\
+\hline
+PB15 & CRM client API endpoints & Mixed & T-43 backend and logic; T-44 frontend and UI; T-45 DevOps, testing, and deployment. & Salvador Muñoz; Gabriel Tumbaco; Anthony Navarrete & 42 h \\
+\hline
+PB16 & New client registration & Mixed & T-46 backend and logic; T-47 frontend and UI; T-48 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 26 h \\
+\hline
+PB17 & Prospect registration in the mobile app & Mixed & T-49 backend and logic; T-50 frontend and UI; T-51 DevOps, testing, and deployment. & Gabriel Tumbaco; Anthony Navarrete; Shirley Aragón & 32 h \\
+\hline
+PB18 & Client data editing & Mixed & T-52 backend and logic; T-53 frontend and UI; T-54 DevOps, testing, and deployment. & Nahim Díaz; Salvador Muñoz; Gabriel Tumbaco & 20 h \\
+\hline
+PB19 & Client portfolio list and filters & Mixed & T-55 backend and logic; T-56 frontend and UI; T-57 DevOps, testing, and deployment. & Anthony Navarrete; Shirley Aragón; Nahim Díaz & 12 h \\
+\hline
+PB20 & Map and geolocation & Mixed & T-58 backend and logic; T-59 frontend and UI; T-60 DevOps, testing, and deployment. & Salvador Muñoz; Gabriel Tumbaco; Anthony Navarrete & 26 h \\
+\hline
+PB21 & GPS visit check-in & Mixed & T-61 backend and logic; T-62 frontend and UI; T-63 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 18 h \\
+\hline
+PB22 & Visit check-out and notes & Mixed & T-64 backend and logic; T-65 frontend and UI; T-66 DevOps, testing, and deployment. & Gabriel Tumbaco; Anthony Navarrete; Shirley Aragón & 32 h \\
+\tablelastrow
+\end{longtable}
+
+\subsection{Sprint Review}
+\textbf{Date:} June 7, 2026.\\
+\textbf{Participants:} Scrum team and client representative.\\
+\textbf{Reviewed increment:} The team presented the public website, catalog and employability
+flows, CMS content management, organization and user management, and the initial CRM workflows.
+
+\subsubsection{Stakeholder Feedback}
+The client accepted the public website content structure. The review confirmed that the Offer
+Matrices module did not belong in the final product scope.
+
+\textbf{Acceptance:} The Sprint 2 acceptance record is included in the communications evidence.
+
+\subsubsection{Decisions Made}
+The team removed matrix construction, matrix approval, subsidy calculations, and related offer
+calculations from the final backlog, architecture, and acceptance scenarios. The next iteration
+prioritized the API boundary and integration of the client applications with the business modules.
+
+\subsection{Sprint Retrospective}
+\textbf{Successes:} The CMS and public website workflows progressed as planned, and the first
+business modules were connected to the project foundation.\\
+\textbf{Improvement identified:} The organization module required more analysis because its role
+hierarchy depended on RBAC decisions.\\
+\textbf{Action taken:} The team made authorization dependencies explicit before extending the CRM
+and organization workflows.
+
 \section{Sprint 3}
 \subsection{Sprint Backlog}
 Sprint 3 focused on connecting the application repositories through the backend boundary.
@@ -917,6 +1054,65 @@ Sprint 3 focused on connecting the application repositories through the backend 
 June 21, 2026 & Consolidate the application services. & Backend modules and the initial integration between the public website, CRM, mobile client, shared contracts, and API services. \tablelastrow
 \end{longtable}
 
+The total estimated effort for Sprint 3 is 174 hours. This total excludes the historical matrix
+scope represented by PB24--PB29.
+
+\begin{longtable}{|L{1.0cm}|L{2.3cm}|L{1.1cm}|L{4.9cm}|L{2.4cm}|L{1.1cm}|}
+\caption{Sprint 3 detailed backlog}\label{tab:sprint3_detailed_backlog}\\
+\hline
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint tasks} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint tasks} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+PB23 & Visit supervision & Mixed & T-67 backend and logic; T-68 frontend and UI; T-69 DevOps, testing, and deployment. & Nahim Díaz; Salvador Muñoz; Gabriel Tumbaco & 30 h \\
+\hline
+PB30 & CMS catalog management & Mixed & T-88 backend and logic; T-89 frontend and UI; T-90 DevOps, testing, and deployment. & Salvador Muñoz; Gabriel Tumbaco; Anthony Navarrete & 42 h \\
+\hline
+PB31 & CMS image upload & Mixed & T-91 backend and logic; T-92 frontend and UI; T-93 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 36 h \\
+\hline
+PB32 & KPI analytics dashboard & Mixed & T-94 backend and logic; T-95 frontend and UI; T-96 DevOps, testing, and deployment. & Gabriel Tumbaco; Anthony Navarrete; Shirley Aragón & 36 h \\
+\hline
+PB33 & General sales reports & Mixed & T-97 backend and logic; T-98 frontend and UI; T-99 DevOps, testing, and deployment. & Nahim Díaz; Salvador Muñoz; Gabriel Tumbaco & 30 h \\
+\tablelastrow
+\end{longtable}
+
+PB24--PB29 and tasks T-70--T-87 belonged to the Offer Matrices scope. They are not included in
+the final-scope sprint table because the client decision removed matrix construction, subsidy
+calculation, approval, and related workflows from the product.
+
+\subsection{Sprint Review}
+\textbf{Date:} June 21, 2026.\\
+\textbf{Participants:} Scrum team and client representative.\\
+\textbf{Reviewed increment:} The team reviewed the consolidated backend modules and the first
+integration between the public website, CRM, mobile client, shared contracts, and API services.
+The review included client, negotiation, document, visit, catalog, and report workflows.
+
+\subsubsection{Stakeholder Feedback}
+The client accepted the core CRM direction and confirmed that excluding the matrix module was the
+correct scope decision. The review also identified small user-interface adjustments for report
+filters.
+
+\textbf{Acceptance:} The Sprint 3 acceptance record is included in the communications evidence.
+
+\subsubsection{Decisions Made}
+The team kept the API as the shared integration boundary, moved frontend quality activities into
+the next iteration, and added report-filter adjustments to the quality review. Deployment
+configuration was also documented through explicit environment variables and a repeatable checklist.
+
+\subsection{Sprint Retrospective}
+\textbf{Successes:} The CRM workflows, document approval flow, and shared API integration formed a
+usable base for the quality stage.\\
+\textbf{Improvement identified:} Deployment configuration took additional coordination because
+environment variables had to be aligned across services.\\
+\textbf{Action taken:} The team documented the required variables and used a deployment checklist
+for the following validation activities.
+
 \section{Sprint 4}
 \subsection{Sprint Backlog}
 Sprint 4 focused on frontend quality and Scrum evidence. The report, documentation, profiling,
@@ -937,6 +1133,50 @@ presentation, and remaining quality activities continued in Sprints 5--7.
 \endfoot
 \endlastfoot
 July 5, 2026 & Strengthen frontend quality and project evidence. & Vitest and React Testing Library setup for the web and CRM repositories, frontend test scenarios, ClickUp evidence, communications index, and sprint review and retrospective records. \tablelastrow
+\end{longtable}
+
+The total estimated effort for Sprint 4 is 346 hours. The FS4 continuation map is represented by
+this sprint's detailed backlog and is not added as a second estimate.
+
+\begin{longtable}{|L{1.0cm}|L{2.3cm}|L{1.1cm}|L{4.9cm}|L{2.4cm}|L{1.1cm}|}
+\caption{Sprint 4 detailed backlog}\label{tab:sprint4_detailed_backlog}\\
+\hline
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint tasks} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint tasks} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+PB34 & Advanced report filters & Mixed & T-100 backend and logic; T-101 frontend and UI; T-102 DevOps, testing, and deployment. & Anthony Navarrete; Shirley Aragón; Nahim Díaz & 32 h \\
+\hline
+PB35 & Document-type configuration & Mixed & T-103 backend and logic; T-104 frontend and UI; T-105 DevOps, testing, and deployment. & Salvador Muñoz; Gabriel Tumbaco; Anthony Navarrete & 26 h \\
+\hline
+PB36 & Client document upload & Mixed & T-106 backend and logic; T-107 frontend and UI; T-108 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 14 h \\
+\hline
+PB37 & Legal document validation & Mixed & T-109 backend and logic; T-110 frontend and UI; T-111 DevOps, testing, and deployment. & Gabriel Tumbaco; Anthony Navarrete; Shirley Aragón & 32 h \\
+\hline
+PB38 & Push-notification foundation & Mixed & T-112 backend and logic; T-113 frontend and UI; T-114 DevOps, testing, and deployment. & Nahim Díaz; Salvador Muñoz; Gabriel Tumbaco & 22 h \\
+\hline
+PB39 & Notification inbox interface & Mixed & T-115 backend and logic; T-116 frontend and UI; T-117 DevOps, testing, and deployment. & Anthony Navarrete; Shirley Aragón; Nahim Díaz & 22 h \\
+\hline
+PB40 & Bulk lead and client assignment & Mixed & T-118 backend and logic; T-119 frontend and UI; T-120 DevOps, testing, and deployment. & Salvador Muñoz; Gabriel Tumbaco; Anthony Navarrete & 36 h \\
+\hline
+PB41 & Individual advisor metrics & Mixed & T-121 backend and logic; T-122 frontend and UI; T-123 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 20 h \\
+\hline
+PB42 & Offline data synchronization & Mixed & T-124 backend and logic; T-125 frontend and UI; T-126 DevOps, testing, and deployment. & Gabriel Tumbaco; Anthony Navarrete; Shirley Aragón & 48 h \\
+\hline
+PB43 & Employee profile management & Mixed & T-127 backend and logic; T-128 frontend and UI; T-129 DevOps, testing, and deployment. & Nahim Díaz; Salvador Muñoz; Gabriel Tumbaco & 18 h \\
+\hline
+PB44 & Candidate evaluation system & Mixed & T-130 backend and logic; T-131 frontend and UI; T-132 DevOps, testing, and deployment. & Anthony Navarrete; Shirley Aragón; Nahim Díaz & 26 h \\
+\hline
+PB45 & Advisor profile and goals & Mixed & T-133 backend and logic; T-134 frontend and UI; T-135 DevOps, testing, and deployment. & Salvador Muñoz; Gabriel Tumbaco; Anthony Navarrete & 32 h \\
+\hline
+PB46 & System audit and logs & Mixed & T-136 backend and logic; T-137 frontend and UI; T-138 DevOps, testing, and deployment. & Shirley Aragón; Nahim Díaz; Salvador Muñoz & 18 h \\
+\tablelastrow
 \end{longtable}
 
 \begin{longtable}{|L{3.3cm}|L{8.2cm}|L{3.2cm}|}
@@ -965,10 +1205,36 @@ Installation and user documentation & Prepare Docker, environment, database, ins
 \hline
 Presentation and video & Prepare slides, role-based demonstration, architecture, technical decisions, and test results. & Continued in Sprint 7 as final presentation evidence. \\
 \hline
-Application profiling & Measure API performance and report bottlenecks when the optional criterion is pursued. & Include only when a current profiling artifact exists. \\
+Application profiling & Measure application performance and identify relevant bottlenecks. & Included in Sprint 5 performance analysis and quality evidence. \\
 \hline
 Final polish and QA & Review responsive behavior, browsers, security, and session behavior before closure. & Continued through Sprints 6--7 and tied to current evidence. \tablelastrow
 \end{longtable}
+
+\subsection{Sprint Review}
+\textbf{Date:} July 5, 2026.\\
+\textbf{Participants:} Scrum team and client representative.\\
+\textbf{Reviewed increment:} The team presented the web and CRM frontend test suites, the
+ClickUp evidence, the communications index, and the sprint review and retrospective records.
+
+\subsubsection{Stakeholder Feedback}
+The client accepted the frontend testing and Scrum evidence package. The review confirmed that
+the next stage had to connect acceptance testing, integration testing, risk analysis, metrics, and
+defect tracking.
+
+\textbf{Acceptance:} The Sprint 4 acceptance letter is dated July 5, 2026.
+
+\subsubsection{Decisions Made}
+The team decided to treat the remaining quality work as a risk-based testing package. Critical
+business flows would receive acceptance and integration scenarios, while the report would link
+requirements, risks, test cases, results, and defects.
+
+\subsection{Sprint Retrospective}
+\textbf{Successes:} The web and CRM test foundations and the Scrum evidence package were completed
+and accepted within the iteration.\\
+\textbf{Improvement identified:} Frontend and end-to-end evidence needed broader coverage than the
+initial unit-test work.\\
+\textbf{Action taken:} The team expanded the following iterations to include role-based acceptance,
+system and integration tests, risk traceability, and quality metrics.
 
 \section{Sprint 5}
 \subsection{Sprint Backlog}
@@ -992,6 +1258,72 @@ quality metrics, and defect tracking.
 July 14, 2026 & Organize system and acceptance testing. & Acceptance scenarios, Gherkin definitions, role-based execution records, risk-based testing, integration testing, quality metrics, and defect tracking. \tablelastrow
 \end{longtable}
 
+The total estimated effort for Sprint 5 is 110 hours.
+
+\begin{longtable}{|L{1.1cm}|L{2.4cm}|L{1.1cm}|L{4.8cm}|L{2.4cm}|L{1.0cm}|}
+\caption{Sprint 5 detailed backlog}\label{tab:sprint5_detailed_backlog}\\
+\hline
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint task group} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint task group} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+FS5-01 & Final report consolidation & High & Identify evidence for chapters, appendices, and rubric; relate tests, risks, defects, and metrics. & Shirley Aragón; Nahim Díaz & 16 h \\
+\hline
+FS5-02 & Application profiling & Normal & Register tool, scenario, environment, result, and conclusion; verify a reproducible performance measure. & Nahim Díaz & 6 h \\
+\hline
+FS5-03 & Data-flow testing & High & Select critical variables; validate input, transformation, persistence, output, limits, and invalid data. & Gabriel Tumbaco; Nahim Díaz; Salvador Muñoz & 10 h \\
+\hline
+FS5-04 & Defect tracking and retests & High & Register defect severity, steps, environment, evidence, responsible member, correction, commit, and retest. & Gabriel Tumbaco; Nahim Díaz & 10 h \\
+\hline
+FS5-05 & Quality metrics and coverage & High & Record repository and module coverage, metric definitions, CI URL, SHA, date, and artifacts. & Gabriel Tumbaco; Nahim Díaz & 10 h \\
+\hline
+FS5-06 & System and integration testing & High & Validate frontend--API--database flows and integration among CRM, Documents, Supervision, and Reports. & Gabriel Tumbaco; Salvador Muñoz; Anthony Navarrete; Nahim Díaz & 16 h \\
+\hline
+FS5-07 & Risk-based testing and IEEE 29119 & Critical & Consolidate risks, prioritize authentication, RBAC, ownership, state, documents, visits, and reports, and map evidence. & Gabriel Tumbaco; Salvador Muñoz; Nahim Díaz & 16 h \\
+\hline
+FS5-08 & Role-based acceptance execution & Critical & Execute visitor, candidate, administrator, advisor, supervisor, coordinator, and manager scenarios. & Full Scrum team & 16 h \\
+\hline
+FS5-09 & Automated acceptance and Gherkin & High & Define scenarios by story and role, confirm Web and CRM configuration, and save reports, captures, videos, or logs. & Shirley Aragón; Anthony Navarrete; Nahim Díaz & 10 h \\
+\tablelastrow
+\end{longtable}
+
+The ClickUp snapshot records 41 Sprint 5 tasks: 9 parent tasks and 32 subtasks. The effort values
+are retrospective team estimates; ClickUp did not record hours.
+
+\subsection{Sprint Review}
+\textbf{Date:} July 14, 2026.\\
+\textbf{Participants:} Scrum team and client representative.\\
+\textbf{Reviewed increment:} The team presented the automated acceptance scenarios, Gherkin
+definitions, role-based execution records, risk-based test plan, IEEE 29119 test documentation,
+system and integration tests, data-flow checks, quality metrics, and defect records.
+
+\subsubsection{Stakeholder Feedback}
+The client accepted the testing and quality package. The review established that the final report
+had to show the relationship between requirements, risks, test cases, observed results, and defect
+follow-up.
+
+\textbf{Acceptance:} The Sprint 5 acceptance letter is dated July 14, 2026.
+
+\subsubsection{Decisions Made}
+The team prioritized critical business and authorization flows, kept CRM, Documents, Supervision,
+and Reports integration in the system-test scope, and used the risk register to explain test
+priorities. Coverage and defect metrics were reported by module instead of as a single isolated
+number.
+
+\subsection{Sprint Retrospective}
+\textbf{Successes:} Acceptance, system, integration, data-flow, and risk-based testing were
+organized in one quality stage.\\
+\textbf{Improvement identified:} Several evidence types had to be synchronized across repositories
+and report sections.\\
+\textbf{Action taken:} The team used traceability tables and a common evidence index for the final
+quality and delivery stages.
+
 \section{Sprint 6}
 \subsection{Sprint Backlog}
 Sprint 6 extended PB1, PB15, and PB17 with maintainability, preventive quality, standards,
@@ -1013,6 +1345,70 @@ security, accessibility, and delivery preparation.
 \endlastfoot
 July 21, 2026 & Prepare the quality and delivery package. & SOLID review, design patterns, refactoring, static analysis, coding standards, CI quality data, security review, browser checks, and accessibility adjustments. \tablelastrow
 \end{longtable}
+
+The total estimated effort for Sprint 6 is 82 hours.
+
+\begin{longtable}{|L{1.1cm}|L{2.4cm}|L{1.1cm}|L{4.8cm}|L{2.4cm}|L{1.0cm}|}
+\caption{Sprint 6 detailed backlog}\label{tab:sprint6_detailed_backlog}\\
+\hline
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint task group} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint task group} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+FS6-01 & Documentation and presentation material & High & Verify the API documentation, installation guide, role-based manuals, and presentation material. & Shirley Aragón; Nahim Díaz & 10 h \\
+\hline
+FS6-02 & Accessibility and responsive design & Normal & Verify responsive corrections; record viewport, browser, flow, criteria, findings, and accessibility corrections. & Anthony Navarrete; Shirley Aragón & 6 h \\
+\hline
+FS6-03 & Security review & Critical & Review authentication, authorization, secrets, inputs, exposed data, risk severity, corrections, and retests. & Gabriel Tumbaco; Nahim Díaz & 10 h \\
+\hline
+FS6-04 & Cross-browser testing & Normal & Define browsers and scenarios, then execute the selected flows in Chrome, Firefox, and Edge. & Anthony Navarrete; Shirley Aragón; Salvador Muñoz & 10 h \\
+\hline
+FS6-05 & Continuous integration quality data & High & Verify installation, lint, typecheck, tests, coverage, build, commands, revision, date, and downloadable artifacts. & Gabriel Tumbaco; Nahim Díaz & 10 h \\
+\hline
+FS6-06 & Static analysis and coding standards & High & Verify configured tools, Biome, TypeScript, hooks, standards, commands, review, date, and result. & Gabriel Tumbaco; Salvador Muñoz; Nahim Díaz & 10 h \\
+\hline
+FS6-07 & Code-base refactoring & Normal & Record improvements in readability, modularity, and duplication; run tests and build after changes. & Gabriel Tumbaco; Salvador Muñoz; Nahim Díaz & 10 h \\
+\hline
+FS6-08 & Design-pattern application & Normal & Identify patterns present in the code, explain the problem solved, and validate each implementation. & Gabriel Tumbaco; Salvador Muñoz & 6 h \\
+\hline
+FS6-09 & SOLID review and refactoring & High & Select repository examples, associate them with current commits, and document the problem, change, and result. & Gabriel Tumbaco; Salvador Muñoz & 10 h \\
+\tablelastrow
+\end{longtable}
+
+The ClickUp snapshot records 38 Sprint 6 tasks: 9 parent tasks and 29 subtasks. The effort values
+are retrospective team estimates; ClickUp did not record hours.
+
+\subsection{Sprint Review}
+\textbf{Date:} July 21, 2026.\\
+\textbf{Participants:} Scrum team and client representative.\\
+\textbf{Reviewed increment:} The team presented the SOLID review, design-pattern applications,
+refactoring results, static-analysis checks, coding standards, CI quality data, security review,
+cross-browser validation, and accessibility adjustments.
+
+\subsubsection{Stakeholder Feedback}
+The client accepted the maintainability, preventive-quality, security, browser, and accessibility
+work. The review confirmed that these controls had to remain part of the final delivery package.
+
+\textbf{Acceptance:} The Sprint 6 acceptance letter is dated July 21, 2026.
+
+\subsubsection{Decisions Made}
+The team kept the same coding and validation standards across the API, web, CRM, mobile, and
+shared-contract repositories. Preventive checks and quality results were linked to the final
+documentation, and the deployment and user documentation were prepared as delivery artifacts.
+
+\subsection{Sprint Retrospective}
+\textbf{Successes:} The team converted the quality criteria into concrete refactoring, static
+analysis, security, browser, and accessibility activities.\\
+\textbf{Improvement identified:} Coordinating technical checks and documentation across several
+repositories required a common review sequence.\\
+\textbf{Action taken:} The team used a shared closing checklist for code quality, deployment,
+manuals, and report evidence.
 
 \section{Sprint 7}
 \subsection{Sprint Backlog}
@@ -1036,40 +1432,79 @@ validation, presentation, repository handoff, and project closure.
 July 28, 2026 & Complete the final delivery package. & Production deployment, installation guide, role-based user manuals, final report, functional and non-functional validation, repository delivery, demonstration video, and closure coordination. \tablelastrow
 \end{longtable}
 
-\section{Sprint Review, Retrospective, and Acceptance Traceability}
-Each iteration ended with a review of the increment and an adjustment to the next iteration.
-Table~\ref{tab:sprint_review_retrospective_traceability} summarizes that cycle for all seven
-sprints. The acceptance references demonstrate client review of the delivered package; detailed
-technical test results are reported separately in the testing chapter.
+The total estimated effort for Sprint 7 is 110 hours.
 
-\begin{longtable}{|L{1.0cm}|L{4.1cm}|L{5.2cm}|L{3.1cm}|}
-\caption{Sprint review, retrospective, and acceptance traceability}
-\label{tab:sprint_review_retrospective_traceability}\\
+\begin{longtable}{|L{1.1cm}|L{2.4cm}|L{1.1cm}|L{4.8cm}|L{2.4cm}|L{1.0cm}|}
+\caption{Sprint 7 detailed backlog}\label{tab:sprint7_detailed_backlog}\\
 \hline
-\textbf{Sprint} & \textbf{Review and accepted increment} & \textbf{Retrospective action for the next iteration} & \textbf{Acceptance reference} \\
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint task group} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
 \hline
 \endfirsthead
-\continuedfrompreviouspage{4}
-\textbf{Sprint} & \textbf{Review and accepted increment} & \textbf{Retrospective action for the next iteration} & \textbf{Acceptance reference} \\
+\continuedfrompreviouspage{6}
+\textbf{ID} & \textbf{Product backlog item} & \textbf{Priority} & \textbf{Sprint task group} & \textbf{Volunteer / responsible} & \textbf{Estimate (h)} \\
 \hline
 \endhead
-\continuedonnextpage{4}
+\continuedonnextpage{6}
 \endfoot
 \endlastfoot
-Sprint 1 & Reviewed the technical foundation and Scrum setup. & Use shared conventions for the first business modules. & Sprint 1 acceptance and communications index. \\
+FS7-01 & Final client acceptance & Critical & Register the final acceptance evidence and confirm the August 7, 2026 acceptance date. & Gabriel Tumbaco; Nahim Díaz & 4 h \\
 \hline
-Sprint 2 & Reviewed the catalog, CMS, employability, organization, users, public website, and initial CRM. & Coordinate the API and client repositories in Sprint 3. & Sprint 2 acceptance and communications index. \\
+FS7-02 & Demonstration video and closing meeting & High & Save the final link and verify duration, language, participation, and demonstrated scenarios. & Full Scrum team & 6 h \\
 \hline
-Sprint 3 & Reviewed backend modules and the first repository integration. & Add frontend tests and organize the evidence. & Sprint 3 acceptance and communications index. \\
+FS7-03 & Repository and evidence package & High & Freeze revision, date, and artifacts; consolidate communications, letters, captures, videos, manuals, and guides. & Gabriel Tumbaco; Shirley Aragón; Nahim Díaz & 10 h \\
 \hline
-Sprint 4 & Reviewed frontend tests and Scrum evidence. & Add acceptance, integration, risk, metrics, and defect evidence. & Sprint 4 letter, July 5, 2026. \\
+FS7-04 & Corrections from Sprint 6 & High & Register each correction, responsible member, commit, retest, and final acceptance criterion. & Full Scrum team & 10 h \\
 \hline
-Sprint 5 & Reviewed acceptance, integration, risk, data-flow, and quality work. & Prepare standards, CI, security, browser, and accessibility checks. & Sprint 5 letter, July 14, 2026. \\
+FS7-05 & Final requirements validation & Critical & Execute selected acceptance scenarios and confirm functional and non-functional requirements with evidence. & Gabriel Tumbaco; Nahim Díaz; Shirley Aragón & 16 h \\
 \hline
-Sprint 6 & Reviewed standards, refactoring, CI, security, browser, and accessibility work. & Prepare the final package and closing evidence. & Sprint 6 letter, July 21, 2026. \\
+FS7-06 & Final project report & High & Verify chapters, objectives, scope, architecture, sprints, testing, risks, compilation, and visual PDF review. & Shirley Aragón; Nahim Díaz & 16 h \\
 \hline
-Sprint 7 & Reviewed the final package, validation, manuals, deployment, and repository handoff. & Preserve the final artifacts and acceptance record. & Sprint 7 letter, July 28, 2026; final acceptance, August 7, 2026. \tablelastrow
+FS7-07 & Final role-based user manual & High & Verify Advisor, Supervisor, Administrator, and Candidate roles, numbered steps, click actions, results, and PDF attachments. & Shirley Aragón; Anthony Navarrete & 16 h \\
+\hline
+FS7-08 & Definitive installation and deployment guide & High & Confirm prerequisites, variables, installation, database, deployment procedure, validation, troubleshooting, and rollback. & Shirley Aragón; Nahim Díaz; Gabriel Tumbaco & 16 h \\
+\hline
+FS7-09 & Final production deployment & Critical & Verify Web, CRM, and API; record URL, date, deployed SHA, health response, and safe captures. & Gabriel Tumbaco; Nahim Díaz & 16 h \\
+\tablelastrow
 \end{longtable}
+
+The ClickUp snapshot records 33 Sprint 7 tasks: 9 parent tasks and 24 subtasks. The effort values
+are retrospective team estimates; ClickUp did not record hours. Sprint 7 closed the delivery
+package, while the final client acceptance was recorded on August 7, 2026.
+
+\subsection{Sprint Review}
+\textbf{Date:} July 28, 2026.\\
+\textbf{Participants:} Scrum team and client representative.\\
+\textbf{Reviewed increment:} The team presented the final deployment, installation guide,
+role-based user manuals, API documentation, final report, functional and non-functional
+validation, repository package, and demonstration video.
+
+\subsubsection{Stakeholder Feedback}
+The client reviewed and accepted the final delivery package. The final acceptance record confirms
+that the seven sprint increments, project documentation, repositories, tests, and deployment
+evidence were received and reviewed.
+
+\textbf{Acceptance:} The Sprint 7 acceptance letter is dated July 28, 2026, and the final project
+acceptance is dated August 7, 2026.
+
+\subsubsection{Decisions Made}
+The team froze the final scope, preserved the exclusion of the Offer Matrices module, and handed
+over the source repositories and supporting documentation as the project baseline. The final
+acceptance record became the closure reference for the project.
+
+\subsection{Sprint Retrospective}
+\textbf{Successes:} The team coordinated deployment, manuals, testing evidence, the final report,
+the demonstration video, and the acceptance package.\\
+\textbf{Improvement identified:} The closing package required synchronization between several
+repositories, documents, figures, and acceptance records.\\
+\textbf{Action taken:} The team preserved the final artifacts with their acceptance references and
+used the repository package as the handoff baseline.
+
+\section{Sprint Acceptance Summary}
+The seven sprint increments were accepted between May and July 2026, followed by the final
+acceptance on August 7, 2026. The acceptance letters for Sprints 4--7 and the final project are
+included in the communications appendix. The acceptance records for Sprints 1--3 are included in
+the same evidence package. This sequence connects the Scrum backlog with the client-approved
+delivery history.
 
 \section{Project Schedule and Critical Path}
 The project schedule followed seven accepted iterations between May and July 2026, followed by
@@ -1287,6 +1722,165 @@ with risks in application behavior.
 % APPENDICES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
+
+\chapter{FINAL USER STORY TRACEABILITY}
+\label{app:user_story_traceability}
+
+The requirements specification defines 68 user stories. Seven stories belong to the Offer
+Matrices module and six belong to its Supervision and Approvals dependency. This appendix lists
+the 55 active stories in Table~\ref{tab:final_user_story_traceability} and the 13 excluded records
+in Table~\ref{tab:excluded_user_stories}. It preserves the requirements layer separately from the
+PB/T planning layer and the ClickUp execution layer. The complete acceptance criteria for each
+identifier are maintained in the requirements specification. The remaining 61 non-MAT records are
+therefore visible through the active and excluded tables without presenting matrix functionality
+as a final feature.
+
+\begin{longtable}{|L{1.8cm}|L{2.8cm}|L{9.0cm}|}
+\caption{Active user story traceability}\label{tab:final_user_story_traceability}\\
+\hline
+\textbf{ID} & \textbf{Actor} & \textbf{User story} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{ID} & \textbf{Actor} & \textbf{User story} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+\texttt{HU-CAT-001} & Business Client & As a business client, I want to explore a catalog of products and services organized by categories such as Voice, Connectivity, and Digital Services, so that I can easily find the solutions offered by BOPACORP. \\
+\hline
+\texttt{HU-CAT-002} & Business Client & As a business client, I want to view the costs, benefits, and usage conditions of each service, so I can compare options and choose the one that best suits my company. \\
+\hline
+\texttt{HU-CAT-003} & Business Client & As a business client, I want to filter services by category, coverage, and price to quickly find the options that meet my needs. \\
+\hline
+\texttt{HU-CAT-004} & Business Client & As a business client, I want to contact a sales advisor directly from the catalog to request more information or start a negotiation. \\
+\hline
+\texttt{HU-CAT-005} & Business Client & As a business client, I want to learn about BOPACORP’s history, mission, vision, and values to better understand the company’s philosophy and reliability. \\
+\hline
+\texttt{HU-CMS-001} & Web Administrator & As a web administrator, I want to access the content management panel using credentials (username and password), so that I can control editing operations on the website. \\
+\hline
+\texttt{HU-CMS-002} & Web Administrator & As a web administrator, I want to modify texts, images, and links of the published content to keep the website’s information accurate and up to date. \\
+\hline
+\texttt{HU-CMS-003} & Web Administrator & As a web administrator, I want to register new products and services in the catalog to expand the range of offerings available to business clients. \\
+\hline
+\texttt{HU-CMS-004} & Web Administrator & As a web administrator, I want to update existing product or service information in the catalog to reflect changes in prices, benefits, or conditions. \\
+\hline
+\texttt{HU-CMS-005} & Web Administrator & As a web administrator, I want to delete outdated products or services from the catalog to ensure that only current offers are visible and avoid confusion for users. \\
+\hline
+\texttt{HU-EMP-001} & Sales Advisor Candidate & As a sales advisor candidate, I want to view the available job vacancies with their descriptions and requirements so that I can identify opportunities that fit my professional profile. \\
+\hline
+\texttt{HU-EMP-002} & Sales Advisor Candidate & As a sales advisor candidate, I want to enter my personal and contact information in an application form so that I can formally apply to an open vacancy. \\
+\hline
+\texttt{HU-EMP-003} & Sales Advisor Candidate & As a sales advisor candidate, I want to upload my resume (CV) in PDF format so that my professional information is included in the application process. \\
+\hline
+\texttt{HU-EMP-004} & Sales Advisor Candidate & As a sales advisor candidate, I want the system to validate that all required fields are complete before submission so that my application is processed correctly. \\
+\hline
+\texttt{HU-EMP-005} & Sales Advisor Candidate & As a sales advisor candidate, I want to receive visual and email confirmation when my application is submitted so that I have proof that the process was completed successfully. \\
+\hline
+\texttt{HU-EMP-006} & Sales Advisor Candidate & As a sales advisor candidate, I want to receive the result of my application by email so that I know whether I was accepted or rejected. \\
+\hline
+\texttt{HU-CRM-001} & Sales Advisor & As a sales advisor, I want to register new business clients with their RUC, name, number of services, and monthly billing, so that I can start tracking their negotiations. \\
+\hline
+\texttt{HU-CRM-002} & Sales Advisor & As a sales advisor, I want to update the data of my assigned clients to keep accurate information during the negotiation process. \\
+\hline
+\texttt{HU-CRM-003} & Sales Advisor & As a sales advisor, I want to search and filter my clients by negotiation stage or visit date so that I can prioritize my commercial follow-up. \\
+\hline
+\texttt{HU-CRM-004} & Sales Advisor & As a sales advisor, I want to plan on-site visits to my assigned clients to organize my schedule and maintain continuity in the sales process. \\
+\hline
+\texttt{HU-CRM-005} & Immediate Supervisor & As an immediate supervisor, I want to view the location recorded by advisors during each visit to verify the validity of reported activities. \\
+\hline
+\texttt{HU-CRM-006} & Sales Advisor & As a sales advisor, I want to consult the history of visits made to analyze my client follow-up over time. \\
+\hline
+\texttt{HU-CRM-007} & Sales Advisor & As a sales advisor, I want to update the negotiation status of my clients to reflect progress in the commercial process. \\
+\hline
+\texttt{HU-CRM-008} & Immediate Supervisor & As an immediate supervisor, I want to register new business clients to include them in the system and assign them to available advisors. \\
+\hline
+\texttt{HU-CRM-009} & Immediate Supervisor & As an immediate supervisor, I want to update information about business clients to correct or maintain company records up to date. \\
+\hline
+\texttt{HU-CRM-010} & Immediate Supervisor & As an immediate supervisor, I want to deactivate business clients to prevent the use of inactive or outdated records. \\
+\hline
+\texttt{HU-CRM-011} & Immediate Supervisor & As an immediate supervisor, I want to assign business clients to sales advisors to distribute the workload efficiently. \\
+\hline
+\texttt{HU-CRM-012} & Immediate Supervisor & As an immediate supervisor, I want to view the list of clients assigned to each advisor to monitor each team member’s portfolio. \\
+\hline
+\texttt{HU-CRM-013} & Immediate Supervisor & As an immediate supervisor, I want to reassign or remove clients from a sales advisor to redistribute them when necessary. \\
+\hline
+\texttt{HU-CRM-014} & Immediate Supervisor & As an immediate supervisor, I want to review recent activity from sales advisors to evaluate their compliance with visits and record keeping. \\
+\hline
+\texttt{HU-CRM-015} & Management & As management, I want to view contact, visit, and closure indicators per advisor to evaluate team performance. \\
+\hline
+\texttt{HU-CRM-016} & Management & As management, I want to view total billed amounts and averages per service for each advisor to measure commercial efficiency. \\
+\hline
+\texttt{HU-CRM-017} & Management & As management, I want to view the total terminals and equipment sold by each advisor to analyze complementary sales. \\
+\hline
+\texttt{HU-CRM-018} & Management & As management, I want to view the number of clients at each stage of the sales funnel to identify opportunities and bottlenecks. \\
+\hline
+\texttt{HU-CRM-019} & Immediate Supervisor & As an immediate supervisor, I want to search and filter clients by negotiation stage, visit date, or assigned advisor to follow up in an organized way. \\
+\hline
+\texttt{HU-CRM-020} & Sales Advisor & As a sales advisor, I want to view the clients assigned to me immediately to provide timely follow-up. \\
+\hline
+\texttt{HU-CRM-021} & Immediate Supervisor & As an immediate supervisor, I want to consult the change history made by each advisor on their clients to maintain control over modifications. \\
+\hline
+\texttt{HU-DOC-001} & Sales Advisor & As a sales advisor, I want to attach documents related to my negotiations so that I can support the commercial process and facilitate its review. \\
+\hline
+\texttt{HU-DOC-002} & Sales Advisor & As a sales advisor, I want to upload files up to 50 MB in PDF, JPG, or PNG formats to ensure that the required documentation is sent in compatible formats. \\
+\hline
+\texttt{HU-DOC-003} & Sales Advisor & As a sales advisor, I want to label each uploaded document with its corresponding type to maintain a clear organization of each client’s documentation. \\
+\hline
+\texttt{HU-DOC-004} & Coordinator & As a coordinator, I want to define which documents are mandatory or optional depending on the type of service so that negotiation requirements are standardized. \\
+\hline
+\texttt{HU-DOC-005} & Sales Advisor & As a sales advisor, I want to check the status of uploaded documents so that I know which ones have been reviewed, approved, or are still pending. \\
+\hline
+\texttt{HU-DOC-006} & Coordinator & As a coordinator, I want to review the documents uploaded by each sales advisor to verify compliance with documentation requirements. \\
+\hline
+\texttt{HU-DOC-007} & Coordinator & As a coordinator, I want to download negotiation documents individually or in bulk so that I can review and store the information more efficiently. \\
+\hline
+\texttt{HU-DOC-008} & Sales Advisor & As a sales advisor, I want to receive a notification when my documents are reviewed, approved, or rejected so that I can track the validation progress. \\
+\hline
+\texttt{HU-DOC-009} & Coordinator & As a coordinator, I want to view a list of advisors with pending document uploads or reviews so that I can prioritize cases that require follow-up. \\
+\hline
+\texttt{HU-REP-001} & Manager & As a manager, I want to generate commercial performance reports by advisor, month, or period so that I can evaluate team productivity and identify areas for improvement. \\
+\hline
+\texttt{HU-REP-002} & Immediate Supervisor & As an immediate supervisor, I want to generate sales and closure reports for the advisors under my supervision, filtering by date, service type, or zone, to conduct detailed performance tracking. \\
+\hline
+\texttt{HU-REP-003} & Manager & As a manager, I want to visualize key metrics such as sales, closures, visits, and average negotiation time to measure the overall performance of the sales force. \\
+\hline
+\texttt{HU-REP-004} & Immediate Supervisor & As an immediate supervisor, I want to view operational metrics of the advisors, including sales, closures, and visits made, to monitor their commercial performance. \\
+\hline
+\texttt{HU-REP-005} & Immediate Supervisor & As an immediate supervisor, I want to compare the performance of my advisors against the objectives defined by management so that I can identify deviations and take corrective actions. \\
+\hline
+\texttt{HU-REP-006} & Manager & As a manager, I want to export generated reports in PDF or Excel format so that I can analyze them externally or present them during meetings. \\
+\hline
+\texttt{HU-REP-007} & Immediate Supervisor & As an immediate supervisor, I want to export generated reports in PDF or Excel format so that I can back up the commercial management tracking. \\
+\hline
+\texttt{HU-REP-008} & Manager & As a manager, I want to visualize consolidated information through charts and KPI indicators to easily interpret the team’s overall results. \\
+\hline
+\texttt{HU-REP-009} & Sales Advisor & As a sales advisor, I want to view my own performance metrics, including contacted clients, active negotiations, closures, and accumulated billing, so that I can assess my personal progress. \\
+\tablelastrow
+\end{longtable}
+
+The active table contains 55 stories. The 13 excluded requirement records are listed separately
+below. They remain part of the initial requirements history but are not part of the final product.
+
+\begin{longtable}{|L{2.8cm}|L{4.0cm}|L{8.0cm}|}
+\caption{Requirement records excluded from active scope}\label{tab:excluded_user_stories}\\
+\hline
+\textbf{Identifiers} & \textbf{Requirement area} & \textbf{Scope treatment} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Identifiers} & \textbf{Requirement area} & \textbf{Scope treatment} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+\texttt{HU-MAT-001}--\texttt{HU-MAT-007} & Offer Matrices & Matrix creation, items, subsidy calculations, attachments, draft submission, approval submission, and matrix history were removed from the active product. \\
+\hline
+\texttt{HU-SUP-001}--\texttt{HU-SUP-006} & Supervision and Approvals & Matrix indicators, approval or rejection, matrix history, matrix notifications, and matrix filters depend on the removed module and are excluded from active scenarios. \\
+\tablelastrow
+\end{longtable}
 
 \chapter{REPOSITORIES, TOOLS AND PROJECT LINKS}
 \label{app:project_links}

@@ -962,7 +962,7 @@
             }
         }
         {
-            \includegraphics[width=50bp]{Figures/logocc} \@authorcopyright, \number\year
+            \includegraphics[width=50bp]{appendices/images/logocc} \@authorcopyright, \number\year
         }
     }
     \end{center}
@@ -1004,7 +1004,7 @@
                 %% Interligne de 1 et taille de 10pt pour le texte
                 \renewcommand{\baselinestretch}{1}\footnotesize\footnotesize
 
-                \includegraphics[width=50bp]{Figures/logocc}
+                \includegraphics[width=50bp]{appendices/images/logocc}
                 \newline
                 \ifthenelse{\equal{\DocLang}{french}}
                 {

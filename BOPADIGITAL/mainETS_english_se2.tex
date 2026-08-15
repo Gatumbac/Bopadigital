@@ -28,6 +28,20 @@
 \usepackage[utf8]{inputenc}
 \graphicspath{{appendices/images/}}
 
+% Left-aligned text columns improve readability in narrow tables.
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.1}
+
+% Consistent continuation labels for all long tables.
+\newcommand{\continuedfrompreviouspage}[1]{%
+    \multicolumn{#1}{r}{\textit{Continued from previous page}}\\
+    \hline
+}
+\newcommand{\continuedonnextpage}[1]{%
+    \hline
+    \multicolumn{#1}{r}{\textit{Continued on next page}}\\
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DECLARATION OF AN ADDITIONAL LIST OF REFERENCES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,7 +51,7 @@
 % TITLE PAGE OPTIONS (ESPOL - FIEC)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{BOPACORP S.A.\\
-Final Project Report}
+BOPADIGITAL Final Project Report}
 
 \author{Grupo 2 BOPADIGITAL}
 \authorcopyright{Grupo 2 BOPADIGITAL}
@@ -199,15 +213,19 @@ The main stakeholders and target users are:
 \section{Development Timeline and Client Acceptance}
 The project was developed through seven accepted Scrum sprints followed by a final acceptance process. The acceptance records provide the project chronology shown in Table~\ref{tab:project_timeline}.
 
-\begin{longtable}{|p{1.8cm}|p{3.0cm}|p{8.8cm}|}
+\begin{longtable}{|L{1.8cm}|L{3.0cm}|L{8.8cm}|}
 \caption{BOPADIGITAL Development and Acceptance Timeline}
 \label{tab:project_timeline}\\
 \hline
 \textbf{Iteration} & \textbf{Date} & \textbf{Main context} \\ \hline
 \endfirsthead
-\multicolumn{3}{l}{\textit{Table continued from previous page}} \\ \hline
+\continuedfrompreviouspage{3}
 \textbf{Iteration} & \textbf{Date} & \textbf{Main context} \\ \hline
 \endhead
+\continuedonnextpage{3}
+\endfoot
+\hline
+\endlastfoot
 Sprint 1 & May 24, 2026 & Initial development increment: repositories, quality tools, database, Express server, JWT authentication, RBAC, login, and Scrum planning. \\ \hline
 Sprint 2 & June 7, 2026 & Catalog, CMS, employability, organization, user modules, public web work, and the beginning of CRM implementation. \\ \hline
 Sprint 3 & June 21, 2026 & Backend consolidation and integration work between the public website, CRM, and backend services. \\ \hline
@@ -247,30 +265,30 @@ The final BOPADIGITAL solution is organized as a coordinated ecosystem of reposi
 
 Table~\ref{tab:repository_ecosystem} summarizes the repositories considered in the final architecture. The communications repository is part of the project evidence package, while the other repositories contain executable software or deployment resources.
 
-\begin{longtable}{|p{2.6cm}|p{3.0cm}|p{3.2cm}|p{4.8cm}|}
+\begin{longtable}{|L{3.2cm}|L{2.8cm}|L{3.0cm}|L{4.6cm}|}
 \caption{BOPADIGITAL repository ecosystem and responsibilities}
 \label{tab:repository_ecosystem}\\
 \hline
 \textbf{Repository} & \textbf{Main responsibility} & \textbf{Principal technology} & \textbf{Architectural boundary} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Repository} & \textbf{Main responsibility} & \textbf{Principal technology} & \textbf{Architectural boundary} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
-\texttt{bopacorp-web} & Public website and CMS & React, TypeScript, Vite & Presents public catalog, contact, vacancy, and content-management workflows. It does not access the database directly. \\
+\texttt{bopacorp-\allowbreak{}web} & Public website and CMS & React, TypeScript, Vite & Presents public catalog, contact, vacancy, and content-management workflows. It does not access the database directly. \\
 \hline
-\texttt{bopacorp-crm} & Internal commercial platform & React, TypeScript, Vite & Provides protected CRM, catalog, employability, organization, documentation, negotiation, and reporting interfaces. It communicates with the API through an Axios client. \\
+\texttt{bopacorp-\allowbreak{}crm} & Internal commercial platform & React, TypeScript, Vite & Provides protected CRM, catalog, employability, organization, documentation, negotiation, and reporting interfaces. It communicates with the API through an Axios client. \\
 \hline
-\texttt{bopacorp-mobile} & Advisor field application & Expo, React Native, TypeScript & Supports the mobile advisor workflows that are included only when verified through device or emulator evidence. It consumes the same API boundary. \\
+\texttt{bopacorp-\allowbreak{}mobile} & Advisor field application & Expo, React Native, TypeScript & Supports the mobile advisor workflows that are included only when verified through device or emulator evidence. It consumes the same API boundary. \\
 \hline
-\texttt{bopacorp-api} & Backend and business services & Express, TypeScript, Drizzle ORM & Exposes versioned REST endpoints, applies authentication and authorization, validates requests, executes business rules, and persists data. \\
+\texttt{bopacorp-\allowbreak{}api} & Backend and business services & Express, TypeScript, Drizzle ORM & Exposes versioned REST endpoints, applies authentication and authorization, validates requests, executes business rules, and persists data. \\
 \hline
-\texttt{bopacorp-shared} & Shared contracts and schemas & TypeScript and Zod & Publishes request, response, enumeration, and validation contracts consumed by the API and clients. \\
+\texttt{bopacorp-\allowbreak{}shared} & Shared contracts and schemas & TypeScript and Zod & Publishes request, response, enumeration, and validation contracts consumed by the API and clients. \\
 \hline
 \texttt{deploy} & Local and server deployment & Docker Compose and Caddy & Builds and runs the API, CRM, and public website containers and optionally exposes them through a reverse proxy. \\
 \hline
@@ -287,18 +305,18 @@ The technology decisions were evaluated according to the nature of the project, 
 \subsection{Frontend Framework}
 BOPADIGITAL requires more than one user interface: the public website, the internal CRM, and the advisor mobile client. For the web applications, the team selected React with TypeScript and Vite.
 
-\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of web frontend alternatives}
 \label{tab:frontend_selection}\\
 \hline
 \textbf{Criterion} & \textbf{React/Vite} & \textbf{Angular} & \textbf{Vue.js} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Criterion} & \textbf{React/Vite} & \textbf{Angular} & \textbf{Vue.js} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
@@ -310,7 +328,7 @@ Fit for this project & Supports a shared visual approach across the public websi
 \hline
 Build and development & Vite provides fast development feedback and efficient production builds. & Angular CLI offers an integrated build workflow. & Vite is also available, but the existing repositories are already implemented with React. \\
 \hline
-Decision & \multicolumn{3}{p{11.2cm}|}{React with TypeScript and Vite was selected for the public website and CRM. React Native through Expo extends the same language and component-oriented approach to the mobile application.} \\
+Decision & \multicolumn{3}{L{11.2cm}|}{React with TypeScript and Vite was selected for the public website and CRM. React Native through Expo extends the same language and component-oriented approach to the mobile application.} \\
 \hline
 \end{longtable}
 
@@ -319,18 +337,18 @@ React was selected because it provides component reuse, TypeScript integration, 
 \subsection{Backend Framework}
 The backend must expose REST endpoints, enforce permissions, validate input, execute business rules, and integrate with a relational database. Express with TypeScript was selected for the API.
 
-\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of backend alternatives}
 \label{tab:backend_selection}\\
 \hline
 \textbf{Criterion} & \textbf{Express/TypeScript} & \textbf{Django/DRF} & \textbf{Laravel} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Criterion} & \textbf{Express/TypeScript} & \textbf{Django/DRF} & \textbf{Laravel} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
@@ -338,9 +356,9 @@ Language and ecosystem & TypeScript aligns the API with the web, CRM, mobile, an
 \hline
 API flexibility & Lightweight middleware and routing allow the team to define explicit layers and module boundaries. & Includes many conventions and features through Django and Django REST Framework. & Includes conventions and framework services for common web tasks. \\
 \hline
-Integration fit & Directly reuses TypeScript types and Zod contracts from \texttt{@bopacorp/shared}. & Would require a separate type and schema integration strategy. & Would require a separate type and schema integration strategy. \\
+Integration fit & Directly reuses TypeScript types and Zod contracts from \texttt{@bopacorp/\allowbreak{}shared}. & Would require a separate type and schema integration strategy. & Would require a separate type and schema integration strategy. \\
 \hline
-Decision & \multicolumn{3}{p{11.2cm}|}{Express with TypeScript was selected because it provides the required REST and middleware capabilities while keeping one typed language across the project ecosystem.} \\
+Decision & \multicolumn{3}{L{11.2cm}|}{Express with TypeScript was selected because it provides the required REST and middleware capabilities while keeping one typed language across the project ecosystem.} \\
 \hline
 \end{longtable}
 
@@ -349,18 +367,18 @@ The API is implemented as a modular monolith. Each business domain is represente
 \subsection{Relational Database and Persistence}
 The commercial lifecycle contains users, roles, permissions, organizations, catalog records, vacancies, applications, negotiations, documents, and reporting data. These entities have relationships, constraints, and state changes, which make a relational database appropriate.
 
-\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of database alternatives}
 \label{tab:database_selection}\\
 \hline
 \textbf{Criterion} & \textbf{PostgreSQL} & \textbf{MySQL} & \textbf{MongoDB} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Criterion} & \textbf{PostgreSQL} & \textbf{MySQL} & \textbf{MongoDB} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
@@ -370,7 +388,7 @@ Fit for BOPADIGITAL & Appropriate for relationships among users, roles, negotiat
 \hline
 TypeScript integration & Drizzle ORM provides typed queries and schema mapping. & Can be integrated with Node.js ORMs, but would require a different current configuration. & Provides a flexible document approach, but does not match the current relational domain model. \\
 \hline
-Decision & \multicolumn{3}{p{11.2cm}|}{PostgreSQL hosted through Supabase was selected. Drizzle ORM provides the persistence boundary used by the API and preserves typed access to the database.} \\
+Decision & \multicolumn{3}{L{11.2cm}|}{PostgreSQL hosted through Supabase was selected. Drizzle ORM provides the persistence boundary used by the API and preserves typed access to the database.} \\
 \hline
 \end{longtable}
 
@@ -379,18 +397,18 @@ PostgreSQL was selected because it represents the domain relationships explicitl
 \subsection{Mobile Development Framework}
 The mobile component is intended for advisors who need access to field-oriented client, negotiation, and documentation workflows. Expo with React Native was selected instead of maintaining separate Android and iOS implementations.
 
-\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of mobile development alternatives}
 \label{tab:mobile_selection}\\
 \hline
 \textbf{Criterion} & \textbf{Expo/React Native} & \textbf{Flutter} & \textbf{Native applications} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Criterion} & \textbf{Expo/React Native} & \textbf{Flutter} & \textbf{Native applications} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
@@ -400,7 +418,7 @@ Delivery effort & One codebase can target supported mobile platforms through Exp
 \hline
 Fit for current scope & Matches the existing mobile repository and advisor-oriented routes. & Technically viable, but not aligned with the current repository. & Excessive for the current team and final scope. \\
 \hline
-Decision & \multicolumn{3}{p{11.2cm}|}{Expo with React Native and TypeScript was selected. Mobile features are included in the final report only when their execution is supported by current device or emulator evidence.} \\
+Decision & \multicolumn{3}{L{11.2cm}|}{Expo with React Native and TypeScript was selected. Mobile features are included in the final report only when their execution is supported by current device or emulator evidence.} \\
 \hline
 \end{longtable}
 
@@ -409,18 +427,18 @@ The mobile decision reduces duplication and keeps the data boundary consistent w
 \subsection{Shared Contracts and Validation}
 The applications exchange structured data through the API, so duplicated request and response definitions would create a risk of drift. The team selected a shared package based on TypeScript and Zod.
 
-\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of contract-management alternatives}
 \label{tab:contracts_selection}\\
 \hline
 \textbf{Criterion} & \textbf{Shared TypeScript/Zod package} & \textbf{Duplicated frontend types} & \textbf{Unvalidated JSON contracts} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Criterion} & \textbf{Shared TypeScript/Zod package} & \textbf{Duplicated frontend types} & \textbf{Unvalidated JSON contracts} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
@@ -430,7 +448,7 @@ Runtime protection & Zod validates request data at runtime and TypeScript suppor
 \hline
 Maintenance & Changes can be published and consumed as a versioned package. & Changes must be synchronized manually in multiple repositories. & Changes are difficult to detect before execution. \\
 \hline
-Decision & \multicolumn{3}{p{11.2cm}|}{The \texttt{@bopacorp/shared} package was selected as the common contract boundary for the API and client applications.} \\
+Decision & \multicolumn{3}{L{11.2cm}|}{The \texttt{@bopacorp/shared} package was selected as the common contract boundary for the API and client applications.} \\
 \hline
 \end{longtable}
 
@@ -439,18 +457,18 @@ This decision is especially important for authentication requests, pagination, c
 \subsection{Deployment and Reverse Proxy}
 The deployment repository uses Docker Compose to coordinate the API, CRM, and public website. Caddy can be used as a reverse proxy when the services must be exposed through HTTPS domains.
 
-\begin{longtable}{|p{2.4cm}|p{3.7cm}|p{3.7cm}|p{3.8cm}|}
+\begin{longtable}{|L{2.4cm}|L{3.7cm}|L{3.7cm}|L{3.8cm}|}
 \caption{Comparison of deployment alternatives}
 \label{tab:deployment_selection}\\
 \hline
 \textbf{Criterion} & \textbf{Docker Compose and Caddy} & \textbf{Manual process management} & \textbf{Independent service deployment} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Criterion} & \textbf{Docker Compose and Caddy} & \textbf{Manual process management} & \textbf{Independent service deployment} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
@@ -460,7 +478,7 @@ Local development & The API, CRM, and website can be built and started using a c
 \hline
 Network boundary & Caddy can terminate HTTPS and route domains to local container ports. & TLS and routing must be configured independently for each process. & Managed platforms may provide routing, but introduce provider-specific configuration. \\
 \hline
-Decision & \multicolumn{3}{p{11.2cm}|}{Docker Compose was selected for service orchestration, with Caddy as an optional reverse proxy for HTTPS exposure.} \\
+Decision & \multicolumn{3}{L{11.2cm}|}{Docker Compose was selected for service orchestration, with Caddy as an optional reverse proxy for HTTPS exposure.} \\
 \hline
 \end{longtable}
 
@@ -481,18 +499,18 @@ Authentication and authorization are separated so that the API can identify the 
 
 During login, the API normalizes the email, applies rate limiting, retrieves the active user, compares the password using bcrypt, records the login result, and issues an access token together with an opaque refresh token. The access token is a short-lived JWT, while the refresh token is stored as a SHA-256 hash in the database. This limits the exposure period of the access token and allows refresh sessions to be revoked during logout, password changes, user deactivation, or token-rotation replay detection.
 
-\begin{longtable}{|p{2.8cm}|p{3.1cm}|p{3.2cm}|p{4.5cm}|}
+\begin{longtable}{|L{2.8cm}|L{3.1cm}|L{3.2cm}|L{4.5cm}|}
 \caption{Authentication token responsibilities}
 \label{tab:token_responsibilities}\\
 \hline
 \textbf{Token} & \textbf{Representation} & \textbf{Lifetime} & \textbf{Purpose and protection} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Token} & \textbf{Representation} & \textbf{Lifetime} & \textbf{Purpose and protection} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
@@ -506,18 +524,18 @@ The \texttt{authenticate} middleware extracts the bearer token, verifies the JWT
 
 The authorization design is role-based, but the route checks are expressed as permissions. This allows a role to group several capabilities while keeping the endpoint declaration explicit. Validation occurs after the authorization decision, preventing unauthorized requests from receiving unnecessary detailed validation feedback. Services remain responsible for ownership and state-dependent rules, such as whether a user may view or modify a record associated with a particular organization or workflow.
 
-\begin{longtable}{|p{3.0cm}|p{4.0cm}|p{5.0cm}|}
+\begin{longtable}{|L{3.0cm}|L{4.0cm}|L{5.0cm}|}
 \caption{Authorization responsibilities by layer}
 \label{tab:authorization_layers}\\
 \hline
 \textbf{Layer} & \textbf{Responsibility} & \textbf{Example of enforced concern} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{3}
 \textbf{Layer} & \textbf{Responsibility} & \textbf{Example of enforced concern} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{3}
 \endfoot
 \hline
 \endlastfoot
@@ -544,24 +562,24 @@ The request path is divided into four responsibilities. First, the route selects
 
 The API uses a common response envelope. A successful operation returns \texttt{success: true} and its data; a paginated operation also returns metadata; and an error returns \texttt{success: false} with a stable error code and message. The convention makes error handling predictable for all clients and prevents each frontend from implementing a different interpretation of HTTP responses.
 
-\begin{longtable}{|p{2.6cm}|p{3.5cm}|p{3.1cm}|p{4.3cm}|}
+\begin{longtable}{|L{2.6cm}|L{3.5cm}|L{3.1cm}|L{4.3cm}|}
 \caption{Shared API contract categories}
 \label{tab:shared_contracts}\\
 \hline
 \textbf{Contract category} & \textbf{Provided by} & \textbf{Consumed by} & \textbf{Architectural purpose} \\
 \hline
 \endfirsthead
-\hline
+\continuedfrompreviouspage{4}
 \textbf{Contract category} & \textbf{Provided by} & \textbf{Consumed by} & \textbf{Architectural purpose} \\
 \hline
 \endhead
-\hline
+\continuedonnextpage{4}
 \endfoot
 \hline
 \endlastfoot
-Common primitives & \texttt{@bopacorp/shared/common} & API and all clients & UUIDs, emails, timestamps, pagination, and response wrappers. \\
+Common primitives & \texttt{@bopacorp/\allowbreak{}shared/\allowbreak{}common} & API and all clients & UUIDs, emails, timestamps, pagination, and response wrappers. \\
 \hline
-Authentication contracts & \texttt{@bopacorp/shared/auth} & API, CRM, web, and mobile & Login, refresh, user, role, and permission request/response structures. \\
+Authentication contracts & \texttt{@bopacorp/\allowbreak{}shared/\allowbreak{}auth} & API, CRM, web, and mobile & Login, refresh, user, role, and permission request/response structures. \\
 \hline
 Domain contracts & Shared domain subpaths & API and relevant clients & Catalog, organization, employability, CRM, document, and notification data structures. \\
 \hline

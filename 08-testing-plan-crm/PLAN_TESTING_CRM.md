@@ -210,6 +210,18 @@ El umbral se agrega en dos pasos:
 
 La suite base pasa y existe una medición reproducible, aunque el porcentaje inicial sea bajo.
 
+### Resultado de ejecución de Fase 1 — 2026-08-15
+
+- [x] Dependencias instaladas con `npm ci` sobre el SHA `57cb6a6b8fa16743984b8b2598466bb16a135ffd`.
+- [x] Suite base ejecutada: 4 archivos y 9 tests, todos exitosos.
+- [x] Reporte de cobertura generado en HTML y LCOV.
+- [x] Lint, TypeScript y build de producción exitosos.
+- [x] Alcance crítico configurado para 10 archivos de autenticación, autorización y servicios API.
+- [x] Gate porcentual final todavía no activado; la cobertura del alcance crítico queda en 40.17% de statements y 39.63% de líneas.
+- [ ] Artefacto y ejecución de CI verificados en GitHub Actions; pendiente de un run remoto.
+
+La línea base original, limitada a cuatro archivos, obtuvo 47.02% de statements y 45.80% de líneas. Al ampliar el `include` al núcleo crítico aparecen caminos aún no probados en `Can`, `usePermission`, `LoginPage`, `auth.service` y `jwt`; estos quedan como entrada prioritaria de la Fase 2.
+
 ### Fase 2 — Completar autenticación, sesión y API boundary
 
 **Objetivo:** cerrar el perímetro de seguridad y comunicación antes de probar pantallas de negocio.
@@ -697,7 +709,7 @@ Ejecutar unit/component, integración API, E2E, smoke de `/health`, validación 
 | GPS requiere dispositivo | No se demuestra geolocalización solo con jsdom. | Prueba manual en navegador/dispositivo y caso de permiso denegado. |
 | Permisos API/frontend diferentes | Manual y E2E pueden describir accesos contradictorios. | Validar cada rol en ambos repositorios y documentar la diferencia. |
 | Datos sensibles en capturas | Riesgo de exposición académica/operativa. | Fixtures anonimizadas y revisión antes de subir artifacts. |
-| Cobertura medida solo en cuatro archivos | Porcentaje engañoso. | Ampliar `coverage.include` al conjunto crítico antes del gate final. |
+| Cobertura inicial limitada a cuatro archivos | Porcentaje engañoso. | La Fase 1 dejó registrada la línea base y amplió `coverage.include` a 10 archivos críticos antes del gate final. |
 | Tests frágiles por textos o implementación | Falsos negativos en cambios visuales. | Consultas accesibles y aserciones de comportamiento. |
 
 ## 10. Criterios de terminado

@@ -84,28 +84,28 @@
 
 | ID | Capa | Caso | Prioridad | Estado |
 |---|---|---|---|---|
-| CRM-DOC-001 | Componente | Selección de negociación y tipo | P0 | Pendiente |
-| CRM-DOC-002 | Componente | PDF/JPG/PNG válidos | P0 | Pendiente |
-| CRM-DOC-003 | Componente | Extensión no permitida | P0 | Pendiente |
-| CRM-DOC-004 | Componente | Archivo mayor a 50 MB | P0 | Pendiente |
-| CRM-DOC-005 | Componente | Documento inicia pendiente | P0 | Pendiente |
-| CRM-DOC-006 | Componente | Aprobar documento autorizado | P0 | Pendiente |
-| CRM-DOC-007 | Componente | Rechazar sin motivo | P0 | Pendiente |
-| CRM-DOC-008 | Componente | Rechazar con motivo | P0 | Pendiente |
-| CRM-DOC-009 | Componente | Descargar individual y ZIP | P1 | Pendiente |
-| CRM-DOC-010 | Componente | Administrar tipos documentales | P1 | Pendiente |
+| CRM-DOC-001 | Componente | Selección de negociación y tipo | P0 | Pass — CRM-F4-2026-08-15-01; `DocumentUploadDialog.test.tsx` |
+| CRM-DOC-002 | Componente | PDF/JPG/PNG válidos | P0 | Pass — CRM-F4-2026-08-15-01; `DocumentUploadDialog.test.tsx` |
+| CRM-DOC-003 | Componente | Extensión no permitida | P0 | Pass — CRM-F4-2026-08-15-01; `DocumentUploadDialog.test.tsx` |
+| CRM-DOC-004 | Componente | Archivo mayor a 50 MB | P0 | Pass — CRM-F4-2026-08-15-01; `DocumentUploadDialog.test.tsx` |
+| CRM-DOC-005 | Componente | Documento inicia pendiente | P0 | Pass — CRM-F4-2026-08-15-01; `documentation.service.test.ts`, `ChangeStateDialog.test.tsx` |
+| CRM-DOC-006 | Componente | Aprobar documento autorizado | P0 | Pass — CRM-F4-2026-08-15-01; `DocumentActions.test.tsx` |
+| CRM-DOC-007 | Componente | Rechazar sin motivo | P0 | Pass — CRM-F4-2026-08-15-01; `RejectDocumentDialog.test.tsx` |
+| CRM-DOC-008 | Componente | Rechazar con motivo | P0 | Pass — CRM-F4-2026-08-15-01; `RejectDocumentDialog.test.tsx` |
+| CRM-DOC-009 | Componente | Descargar individual y ZIP | P1 | Pass — CRM-F4-2026-08-15-01; `documentation.service.test.ts` |
+| CRM-DOC-010 | Componente | Administrar tipos documentales | P1 | Pass — CRM-F4-2026-08-15-01; `DocumentTypeSheet.test.tsx`, `documentation.service.test.ts` |
 | CRM-DOC-011 | Integración API | Proteger endpoints con RBAC | P0 | Pendiente en API |
-| CRM-DOC-012 | Integración | Cierre con faltantes retorna error controlado | P0 | Pendiente |
+| CRM-DOC-012 | Integración | Cierre con faltantes retorna error controlado | P0 | Pass frontend — CRM-F4-2026-08-15-01; `ChangeStateDialog.test.tsx`; API real pendiente |
 
 ## 7. Matriz limitada
 
 | ID | Capa | Caso | Prioridad | Estado |
 |---|---|---|---|---|
-| CRM-MAT-001 | Componente | Crear matriz básica | P1 | Pendiente |
-| CRM-MAT-002 | Componente | Guardar observaciones | P1 | Pendiente |
-| CRM-MAT-003 | Componente | Validar extensión de oferta | P1 | Pendiente |
-| CRM-MAT-004 | Componente | Validar extensión de plantilla | P1 | Pendiente |
-| CRM-MAT-005 | Componente | Descargar/eliminar adjunto con permiso | P1 | Pendiente |
+| CRM-MAT-001 | Componente | Crear matriz básica | P1 | Pass — CRM-F4-2026-08-15-01; `MatricesTab.test.tsx`, `matrices.service.test.ts` |
+| CRM-MAT-002 | Componente | Guardar observaciones | P1 | Pass — CRM-F4-2026-08-15-01; `MatricesTab.test.tsx` |
+| CRM-MAT-003 | Componente | Validar extensión de oferta | P1 | Pass — CRM-F4-2026-08-15-01; `MatricesTab.test.tsx` |
+| CRM-MAT-004 | Componente | Validar extensión de plantilla | P1 | Pass — CRM-F4-2026-08-15-01; `MatricesTab.test.tsx` |
+| CRM-MAT-005 | Componente | Descargar/eliminar adjunto con permiso | P1 | Pass — CRM-F4-2026-08-15-01; `MatricesTab.test.tsx`, `matrices.service.test.ts` |
 | CRM-MAT-006 | Alcance | No probar subsidios/aprobación completa descoped | P0 | Declaración de alcance |
 
 ## 8. Reportes
@@ -171,6 +171,22 @@
 | Cobertura | Pass informativo; 84.48% statements, 70.15% branches, 82.72% functions, 84.97% lines |
 | Conjunto medido | 21 archivos críticos incluidos explícitamente en `vite.config.ts` |
 | Lint | Pass; 241 archivos revisados |
+| TypeScript | Pass; `npx tsc -b --noEmit` |
+| Build | Pass; Vite transformó 3820 módulos |
+| Artefactos | `coverage/index.html`, `coverage/lcov.info` |
+| CI remoto/API real/E2E | Pendiente |
+
+## 13. Ejecución de Fase 4
+
+| Campo | Valor |
+|---|---|
+| ID de ejecución | `CRM-F4-2026-08-15-01` |
+| Revisión base | `68790800a4aede85bcacf9a197445cc5a59dd12b` |
+| Estado de revisión | Working tree con cambios de Fase 4 sin commit |
+| Tests | Pass; 28 archivos y 116 tests |
+| Cobertura | Pass informativo; 80.97% statements, 64.85% branches, 76.88% functions, 82.12% lines |
+| Conjunto medido | 33 archivos críticos incluidos explícitamente en `vite.config.ts` |
+| Lint | Pass; 250 archivos revisados |
 | TypeScript | Pass; `npx tsc -b --noEmit` |
 | Build | Pass; Vite transformó 3820 módulos |
 | Artefactos | `coverage/index.html`, `coverage/lcov.info` |

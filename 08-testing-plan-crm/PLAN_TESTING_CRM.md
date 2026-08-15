@@ -5,7 +5,7 @@
 **Repositorios relacionados:** `bopacorp-api`, `bopacorp-shared`  
 **Fecha base:** 15 de agosto de 2026  
 **Responsable:** equipo de desarrollo/testing del proyecto  
-**Estado:** Fase 3 automatizada parcialmente ejecutada; casos restantes y CI remoto pendientes.
+**Estado:** Fase 4 automatizada parcialmente ejecutada; casos restantes, API real y CI remoto pendientes.
 
 ---
 
@@ -398,6 +398,21 @@ La ejecución se realizó sobre el working tree basado en `36ab4bf16a16b9d97d5d6
 ### Criterio de salida
 
 El sistema no puede aceptar silenciosamente un archivo inválido ni cerrar una negociación sin los documentos que el contrato marque como obligatorios.
+
+### Resultado de ejecución de Fase 4 — 2026-08-15
+
+- [x] Se añadieron fixtures determinísticos en inglés para tipos documentales, documentos, historial, matrices y adjuntos.
+- [x] Se cubrieron servicios de documentos, tipos documentales, upload multipart, descargas, matrices y adjuntos.
+- [x] Se cubrieron selección obligatoria, extensiones PDF/JPG/PNG, límite de 50 MB, estado pendiente, aprobación, rechazo y permisos.
+- [x] Se cubrieron creación de matriz, observaciones, formatos de adjuntos, descargas, eliminación autorizada y cierre con documentos obligatorios.
+- [x] Se agregaron validaciones explícitas de extensión documental y tamaño máximo de adjunto en el frontend.
+- [x] Suite local: 28 archivos y 116 tests exitosos.
+- [x] Cobertura del conjunto crítico medido: 80.97% statements, 64.85% branches, 76.88% functions y 82.12% lines sobre 33 archivos configurados.
+- [x] Lint, TypeScript y build de producción exitosos.
+- [ ] La protección RBAC/persistencia contra API real, el CI remoto y E2E de navegador siguen pendientes.
+- [ ] La aprobación completa de matrices y el cálculo de subsidios permanecen fuera de alcance.
+
+La ejecución se realizó sobre el working tree basado en `68790800a4aede85bcacf9a197445cc5a59dd12b`; los resultados no deben atribuirse a una revisión posterior hasta registrar el SHA del commit que incluya estos cambios.
 
 ### Fase 5 — Cubrir reportes y exportaciones
 

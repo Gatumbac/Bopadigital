@@ -52,6 +52,7 @@ Nota de entorno: la primera ejecución aislada de `npm ci` no pudo escribir los 
 | Código crítico fase 2 (10 archivos de auth/API) | 40.17% | 22.22% | 42.37% | 39.63% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
 | Código crítico fase 2 después de implementar pruebas | 92.76% | 80.34% | 98.30% | 93.11% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
 | Código crítico Fase 3 (21 archivos configurados) | 84.48% | 70.15% | 82.72% | 84.97% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
+| Código crítico Fase 4 (33 archivos configurados) | 80.97% | 64.85% | 76.88% | 82.12% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
 | Código crítico final | — | — | — | — | Pendiente | Pendiente |
 
 ## 5. Ejecución en CI
@@ -136,3 +137,33 @@ Un resultado puede aparecer como `Pass` en el informe final solamente si existe:
 | `CRM-VIS-001` a `CRM-VIS-006` | Creación, GPS concedido/denegado, observación y permisos de acciones | Pass | `CreateVisitSheet.test.tsx`; `VisitActions.test.tsx` |
 
 Los casos de edición visual, páginas de alcance por supervisor, Kanban/drag-and-drop, historial observable y estados vacíos/error que no aparecen aquí permanecen `Pendiente`. La suite usa mocks y jsdom; no demuestra todavía autorización ni persistencia de un API real.
+
+## 10. Ejecución de Fase 4
+
+| Campo | Valor |
+|---|---|
+| ID de ejecución | `CRM-F4-2026-08-15-01` |
+| Fecha/hora | `2026-08-15T17:00:50-05:00` |
+| Revisión base | `68790800a4aede85bcacf9a197445cc5a59dd12b` |
+| Estado de revisión | Working tree con cambios de Fase 4 sin commit |
+| Node/npm | `v22.22.2 / 10.9.7` |
+| Ambiente/base URL | `VITE_API_URL=http://test.local/api/v1` (solo test; sin secretos) |
+| Tests | Pass; 28 archivos y 116 tests |
+| Cobertura | Pass informativo; 80.97% statements, 64.85% branches, 76.88% functions, 82.12% lines |
+| Conjunto medido | 33 archivos críticos incluidos explícitamente en `vite.config.ts` |
+| Lint | Pass; 250 archivos revisados |
+| TypeScript | Pass; `npx tsc -b --noEmit` y `npm run build` |
+| Build | Pass; Vite transformó 3820 módulos |
+| Artefactos | `coverage/index.html`, `coverage/lcov.info` |
+| CI remoto/API real/E2E | Pendiente |
+
+### Casos Fase 4 ejecutados
+
+| Caso | Resultado observado | Estado | Evidencia |
+|---|---|---|---|
+| `CRM-DOC-001` a `CRM-DOC-005` | Selección, formatos válidos, extensión inválida, límite de tamaño y estado pendiente | Pass | `DocumentUploadDialog.test.tsx`; `documentation.service.test.ts`; `CRM-F4-2026-08-15-01` |
+| `CRM-DOC-006` a `CRM-DOC-010` | Aprobación, rechazo, permisos, descargas y administración de tipos | Pass | `DocumentActions.test.tsx`; `RejectDocumentDialog.test.tsx`; `DocumentTypeSheet.test.tsx`; `CRM-F4-2026-08-15-01` |
+| `CRM-DOC-012` | Cierre con documentos obligatorios, faltantes y error de backend controlado | Pass frontend | `ChangeStateDialog.test.tsx`; API real pendiente |
+| `CRM-MAT-001` a `CRM-MAT-005` | Creación, observaciones, extensiones, tamaño, descarga y eliminación por permiso | Pass | `MatricesTab.test.tsx`; `matrices.service.test.ts`; `CRM-F4-2026-08-15-01` |
+
+La suite utiliza mocks y jsdom; la autorización, persistencia y límites del storage contra el API real permanecen pendientes. El cálculo de subsidios y la aprobación completa de matrices están fuera de alcance según la matriz.

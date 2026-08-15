@@ -44,6 +44,29 @@
     \\* \hline
 }
 
+% ClickUp captures for Sprints 5--7 may be imported into Overleaf after the
+% current inventory is reviewed. The placeholder keeps the source compilable
+% until the corresponding PNG is added.
+\newcommand{\clickupcapture}[3]{%
+    \IfFileExists{appendices/images/#1.png}{%
+        \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.90\textwidth,keepaspectratio]{#1}
+        \caption{#2}
+        \label{fig:#3}
+        \end{figure}%
+    }{%
+        \begin{figure}[htbp]
+        \centering
+        \fbox{\parbox{0.86\textwidth}{\centering
+            \textit{ClickUp capture pending for #2.}\\
+            Add \texttt{appendices/images/#1.png} before the final compilation.}}
+        \caption{#2 (pending capture)}
+        \label{fig:#3}
+        \end{figure}%
+    }%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DECLARATION OF AN ADDITIONAL LIST OF REFERENCES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -624,28 +647,544 @@ The deployment appendix documents the reproducible commands, health checks, exte
 \chapter{SCRUM EVIDENCE}
 
 \section{Scrum Roles}
-% TODO: Document Product Owner, Scrum Master and Development Team responsibilities.
+The team used Scrum to organize the work into short iterations, review increments with the
+client, and adapt the next set of tasks. The project team included five students and a client
+representative. Table~\ref{tab:scrum_roles} summarizes the responsibilities used during the
+project.
+
+\begin{longtable}{|L{3.0cm}|L{3.5cm}|L{7.1cm}|}
+\caption{BOPADIGITAL Scrum roles and responsibilities}
+\label{tab:scrum_roles}\\
+\hline
+\textbf{Role} & \textbf{Assigned member} & \textbf{Main responsibility} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Role} & \textbf{Assigned member} & \textbf{Main responsibility} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+Product Owner & Nahim Díaz & Maintained the product vision, prioritized the backlog, and communicated business needs with the client. \\
+\hline
+Scrum Master & Salvador Muñoz & Facilitated Scrum activities, supported coordination, and helped the team remove impediments. \\
+\hline
+Development Team & Gabriel Tumbaco, Shirley Aragón, Nahim Díaz, Salvador Muñoz, and Anthony Navarrete & Designed, implemented, tested, documented, and deployed the platform components. \\
+\hline
+Client representative & Christian Pauta & Reviewed sprint increments, provided acceptance feedback, and signed the acceptance records. \tablelastrow
+\end{longtable}
+
+The roles did not prevent collaboration. Team members worked across the API, web, CRM, mobile,
+shared-contract, deployment, testing, and documentation repositories. The role assignment
+provided coordination while the implementation work remained shared.
 
 \section{Teamwork Management Tool}
-% TODO: Add the project-management tool and its current evidence.
+ClickUp was used as the project-management tool. The workspace grouped the product backlog,
+sprint tasks, priorities, assignments, and progress states. This organization made it possible
+to connect a planned task with a responsible member and a sprint objective.
+
+The report includes representative captures of the seven sprint lists and an abstraction of the
+backlog. The complete task-level detail is available through the project link in the appendices.
+The acceptance records and communications index provide complementary evidence.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth,keepaspectratio]{clickup_sprint1}
+\caption{ClickUp board used for Sprint 1 planning}
+\label{fig:clickup_sprint1}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth,keepaspectratio]{clickup_sprint2}
+\caption{ClickUp board used for Sprint 2 planning}
+\label{fig:clickup_sprint2}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth,keepaspectratio]{clickup_sprint3}
+\caption{ClickUp board used for Sprint 3 planning}
+\label{fig:clickup_sprint3}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth,keepaspectratio]{clickup_sprint4}
+\caption{ClickUp board used for Sprint 4 planning}
+\label{fig:clickup_sprint4}
+\end{figure}
+
+% Add clickup_sprint5.png, clickup_sprint6.png, and clickup_sprint7.png
+% to appendices/images/ when the ClickUp evidence is available.
+\clickupcapture{clickup_sprint5}{ClickUp board used for Sprint 5 planning}{clickup_sprint5}
+\clickupcapture{clickup_sprint6}{ClickUp board used for Sprint 6 planning}{clickup_sprint6}
+\clickupcapture{clickup_sprint7}{ClickUp board used for Sprint 7 planning}{clickup_sprint7}
+
+\FloatBarrier
 
 \section{Product Backlog}
-% TODO: Add the final product backlog and prioritization.
+The initial requirements baseline contained 68 user stories. Seven stories related to the
+Offer Matrices module were removed from the final scope after the client decision, leaving
+61 stories for final traceability. The Scrum planning document contains 46 product backlog
+items and 138 task or subtask records. These counts describe different planning levels and
+are therefore reported separately. The complete task-level detail is available through the
+project link in the appendices. For readability,
+Table~\ref{tab:product_backlog_summary} summarizes the final backlog by functional area and
+delivery priority. Historical matrix construction, subsidy calculation, and matrix approval
+tasks are excluded from the final delivery summary.
 
-\section{Sprint Backlogs}
-% TODO: Add the backlog and scope for each sprint.
+\begin{longtable}{|L{3.0cm}|L{4.6cm}|L{2.2cm}|L{3.8cm}|}
+\caption{Final product backlog by functional area}
+\label{tab:product_backlog_summary}\\
+\hline
+\textbf{Backlog area} & \textbf{Final purpose} & \textbf{Priority} & \textbf{Traceability} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{4}
+\textbf{Backlog area} & \textbf{Final purpose} & \textbf{Priority} & \textbf{Traceability} \\
+\hline
+\endhead
+\continuedonnextpage{4}
+\endfoot
+\endlastfoot
+Platform foundation & Repositories, database, API foundation, authentication, RBAC, and shared contracts. & Critical & Sprints 1 and 2; architecture and source repositories. \\
+\hline
+Public website & Public information, service catalog, contact, and external navigation. & High & Sprints 1 and 2; public website repository. \\
+\hline
+Employability and CMS & Vacancy publication, job applications, content management, catalog administration, and media. & High & Sprints 2 and 3; web and API repositories. \\
+\hline
+CRM and field operations & Clients, negotiations, visits, supervision, organization, and role-based workflows. & Critical & Sprints 2 and 3; CRM, mobile, and API repositories. \\
+\hline
+Documents and reports & Document workflows, review status, reports, filters, and commercial information. & High & Sprints 3 and 4; CRM and API repositories. \\
+\hline
+Quality and testing & Unit, integration, acceptance, risk-based, and preventive-quality evidence. & Critical & Sprints 4 and 5; test repositories and reports. \\
+\hline
+Standards and delivery & Coding standards, refactoring, CI, deployment, manuals, presentation, and closure. & High & Sprints 6 and 7; deployment and communications repositories. \\
+\hline
+Excluded historical scope & Matrix construction, matrix approval, subsidy calculations, and related offer calculations. & Excluded & Removed from final stories and demonstration scenarios. \tablelastrow
+\end{longtable}
 
-\section{Sprint Reviews}
-% TODO: Document sprint increments, client feedback and acceptance.
+The following table preserves the detailed baseline backlog from the legacy project report.
+It is included because it records dependencies, priorities, and effort estimates that are not
+visible in the functional-area summary. The final sprint activities extend PB16 and PB17 with
+acceptance, risk-based testing, quality evidence, standards, documentation, and closure work.
 
-\section{Sprint Retrospectives}
-% TODO: Document retrospective findings and improvement actions.
+\begin{longtable}{|L{1.0cm}|L{1.3cm}|L{1.8cm}|L{9.0cm}|L{1.8cm}|}
+\caption{Detailed baseline product backlog and dependencies}
+\label{tab:product_backlog_detailed}\\
+\hline
+\textbf{ID} & \textbf{Priority} & \textbf{Dependency} & \textbf{Backlog item description} & \textbf{Estimate (hours)} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{5}
+\textbf{ID} & \textbf{Priority} & \textbf{Dependency} & \textbf{Backlog item description} & \textbf{Estimate (hours)} \\
+\hline
+\endhead
+\continuedonnextpage{5}
+\endfoot
+\endlastfoot
+PB1 & High & None & Configure project repositories, TypeScript, Biome, Husky, Commitlint, shared package configuration, and GitHub workflow standards for all project components. & 10 \\
+\hline
+PB2 & High & PB1 & Design and implement the PostgreSQL database schema, including authentication, CRM, documents, supervision, CMS, and public website modules. & 10 \\
+\hline
+PB3 & High & PB2 & Implement JWT-based authentication, password encryption, session management, and secure API access control mechanisms. & 10 \\
+\hline
+PB4 & High & PB3 & Implement role-based access control, including roles, permissions, protected routes, and module-level authorization. & 8 \\
+\hline
+PB5 & High & PB1 & Develop the public BOPACORP website, including company information, service catalog, employment opportunities, and contact features. & 12 \\
+\hline
+PB6 & High & PB5 & Develop the Content Management System for services, website content, images, links, and public information. & 10 \\
+\hline
+PB7 & High & PB4 & Implement organization management, including departments, employees, organizational roles, and advisor--supervisor relationships. & 8 \\
+\hline
+PB8 & High & PB4 & Develop the CRM web platform, including client management, negotiation tracking, business opportunities, visits, and commercial processes. & 20 \\
+\hline
+PB9 & Medium & PB8 & Implement document management, including upload, storage, retrieval, review, and approval workflows. & 12 \\
+\hline
+PB10 & Medium & PB8 & Implement supervision functions for monitoring advisor activities, reviewing commercial processes, and tracking operational performance. & 8 \\
+\hline
+PB11 & Medium & PB8 & Develop reporting and analytics functions, including commercial metrics, performance indicators, and operational dashboards. & 10 \\
+\hline
+PB12 & High & PB8 & Develop the mobile application for sales advisors, including authentication, client management, negotiation tracking, document consultation, and visit registration. & 16 \\
+\hline
+PB13 & Medium & PB12 & Implement geolocation features for visit registration and field activity tracking in the mobile application. & 8 \\
+\hline
+PB14 & High & PB1 & Integrate Web, CMS, CRM, Mobile, and API components through shared services, common validation schemas, and centralized authentication. & 10 \\
+\hline
+PB15 & High & All & Configure Docker environments, deployment pipelines, environment variables, HTTPS configuration, and production infrastructure. & 10 \\
+\hline
+PB16 & Medium & PB15 & Design and execute functional, integration, and user acceptance tests for the major system modules. & 8 \\
+\hline
+PB17 & Medium & PB15 & Prepare technical documentation, deployment guides, installation manuals, user manuals, and project deliverables. & 6 \tablelastrow
+\end{longtable}
+
+The estimate is a planning baseline; it is not a measured execution duration.
+
+\subsection{Final-sprint backlog extensions}
+The original backlog grouped final quality and delivery work under PB16 and PB17. The following
+extensions make the accepted Sprints 4--7 explicit without changing the baseline PB identifiers.
+
+\begin{longtable}{|L{2.0cm}|L{2.3cm}|L{3.5cm}|L{6.6cm}|}
+\caption{Final-sprint backlog extensions}
+\label{tab:final_sprint_backlog_extensions}\\
+\hline
+\textbf{Extension} & \textbf{Sprint} & \textbf{Related baseline} & \textbf{Final-scope activity} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{4}
+\textbf{Extension} & \textbf{Sprint} & \textbf{Related baseline} & \textbf{Final-scope activity} \\
+\hline
+\endhead
+\continuedonnextpage{4}
+\endfoot
+\endlastfoot
+FS4 & Sprint 4 & PB16--PB17 & Frontend testing, Scrum evidence, communications index, Sprint 4 acceptance, and the initial consolidation of the final delivery package. \\
+\hline
+FS5 & Sprint 5 & PB16 & Acceptance scenarios, Gherkin definitions, role-based execution, risk-based testing, system/integration testing, data-flow checks, quality metrics, and defect tracking. \\
+\hline
+FS6 & Sprint 6 & PB1, PB15, PB17 & SOLID review, design patterns, refactoring, static analysis, coding standards, CI quality data, security, browser compatibility, accessibility, and delivery documentation. \\
+\hline
+FS7 & Sprint 7 & PB15--PB17 & Final deployment, installation guide, role-based manuals, API documentation, final report, validation, repository package, video, and formal closure. \tablelastrow
+\end{longtable}
+
+\section{Sprint 1}
+The sprint plan evolved from technical foundations to functional increments, integration,
+quality activities, and final delivery. Each sprint backlog table summarizes its planned and
+delivered scope. Table~\ref{tab:sprint_review_retrospective_traceability} consolidates the
+reviews, retrospectives, and acceptance references.
+
+\subsection{Sprint Backlog}
+Sprint 1 established the technical and organizational foundation of the project.
+
+\begin{longtable}{|L{2.2cm}|L{3.2cm}|L{8.0cm}|}
+\caption{Sprint 1 backlog summary}
+\label{tab:sprint1_backlog}\\
+\hline
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+May 24, 2026 & Establish the project foundation. & Repositories, quality tools, database configuration, Express server, JWT authentication, RBAC, login, and Scrum planning. \tablelastrow
+\end{longtable}
+
+\section{Sprint 2}
+\subsection{Sprint Backlog}
+Sprint 2 moved from the technical foundation to the first business workflows.
+
+\begin{longtable}{|L{2.2cm}|L{3.2cm}|L{8.0cm}|}
+\caption{Sprint 2 backlog summary}
+\label{tab:sprint2_backlog}\\
+\hline
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+June 7, 2026 & Deliver the first business modules. & Catalog, CMS, employability, organization, users, public web workflows, and the initial CRM implementation. \tablelastrow
+\end{longtable}
+
+\section{Sprint 3}
+\subsection{Sprint Backlog}
+Sprint 3 focused on connecting the application repositories through the backend boundary.
+
+\begin{longtable}{|L{2.2cm}|L{3.2cm}|L{8.0cm}|}
+\caption{Sprint 3 backlog summary}
+\label{tab:sprint3_backlog}\\
+\hline
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+June 21, 2026 & Consolidate the application services. & Backend modules and the initial integration between the public website, CRM, mobile client, shared contracts, and API services. \tablelastrow
+\end{longtable}
+
+\section{Sprint 4}
+\subsection{Sprint Backlog}
+Sprint 4 focused on frontend quality and Scrum evidence. The report, documentation, profiling,
+presentation, and remaining quality activities continued in Sprints 5--7.
+
+\begin{longtable}{|L{2.2cm}|L{3.2cm}|L{8.0cm}|}
+\caption{Sprint 4 backlog summary}
+\label{tab:sprint4_backlog}\\
+\hline
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+July 5, 2026 & Strengthen frontend quality and project evidence. & Vitest and React Testing Library setup for the web and CRM repositories, frontend test scenarios, ClickUp evidence, communications index, and sprint review and retrospective records. \tablelastrow
+\end{longtable}
+
+\begin{longtable}{|L{3.3cm}|L{8.2cm}|L{3.2cm}|}
+\caption{Sprint 4 extended backlog and continuation map}
+\label{tab:sprint4_extended_backlog}\\
+\hline
+\textbf{Backlog group} & \textbf{Scope from the legacy plan} & \textbf{Final report treatment} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Backlog group} & \textbf{Scope from the legacy plan} & \textbf{Final report treatment} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+Frontend test suite & Configure Vitest and React Testing Library for Web and CRM; test the landing page, authentication, and CMS flows. & Accepted in Sprint 4; technical results move to Chapter 6. \\
+\hline
+SCRUM evidence & Capture ClickUp boards, organize communications, index evidence, and record sprint reviews and retrospectives. & Accepted in Sprint 4; captures and communications remain supporting evidence. \\
+\hline
+Final report initiation & Consolidate the introduction, scope, architecture, Scrum, testing, deployment, contributions, and acceptance content. & Started in Sprint 4; completed across Sprints 5--7. \\
+\hline
+Client acceptance & Coordinate the sprint review and obtain the Sprint 4 acceptance record. & Sprint 4 letter is separate from final acceptance. \\
+\hline
+Installation and user documentation & Prepare Docker, environment, database, installation, role-based manual, and API documentation. & Continued in Sprints 6--7 as final documentation. \\
+\hline
+Presentation and video & Prepare slides, role-based demonstration, architecture, technical decisions, and test results. & Continued in Sprint 7 as final presentation evidence. \\
+\hline
+Application profiling & Measure API performance and report bottlenecks when the optional criterion is pursued. & Include only when a current profiling artifact exists. \\
+\hline
+Final polish and QA & Review responsive behavior, browsers, security, and session behavior before closure. & Continued through Sprints 6--7 and tied to current evidence. \tablelastrow
+\end{longtable}
+
+\section{Sprint 5}
+\subsection{Sprint Backlog}
+Sprint 5 expanded PB16 with acceptance, integration, risk-based testing, data-flow checks,
+quality metrics, and defect tracking.
+
+\begin{longtable}{|L{2.2cm}|L{3.2cm}|L{8.0cm}|}
+\caption{Sprint 5 backlog summary}
+\label{tab:sprint5_backlog}\\
+\hline
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+July 14, 2026 & Organize system and acceptance testing. & Acceptance scenarios, Gherkin definitions, role-based execution records, risk-based testing, integration testing, quality metrics, and defect tracking. \tablelastrow
+\end{longtable}
+
+\section{Sprint 6}
+\subsection{Sprint Backlog}
+Sprint 6 extended PB1, PB15, and PB17 with maintainability, preventive quality, standards,
+security, accessibility, and delivery preparation.
+
+\begin{longtable}{|L{2.2cm}|L{3.2cm}|L{8.0cm}|}
+\caption{Sprint 6 backlog summary}
+\label{tab:sprint6_backlog}\\
+\hline
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+July 21, 2026 & Prepare the quality and delivery package. & SOLID review, design patterns, refactoring, static analysis, coding standards, CI quality data, security review, browser checks, and accessibility adjustments. \tablelastrow
+\end{longtable}
+
+\section{Sprint 7}
+\subsection{Sprint Backlog}
+Sprint 7 completed the PB15--PB17 delivery package, including deployment, manuals, the report,
+validation, presentation, repository handoff, and project closure.
+
+\begin{longtable}{|L{2.2cm}|L{3.2cm}|L{8.0cm}|}
+\caption{Sprint 7 backlog summary}
+\label{tab:sprint7_backlog}\\
+\hline
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Date} & \textbf{Sprint goal} & \textbf{Main planned and delivered scope} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+July 28, 2026 & Complete the final delivery package. & Production deployment, installation guide, role-based user manuals, final report, functional and non-functional validation, repository delivery, demonstration video, and closure coordination. \tablelastrow
+\end{longtable}
+
+\section{Sprint Review, Retrospective, and Acceptance Traceability}
+Each iteration ended with a review of the increment and an adjustment to the next iteration.
+Table~\ref{tab:sprint_review_retrospective_traceability} summarizes that cycle for all seven
+sprints. The acceptance references demonstrate client review of the delivered package; detailed
+technical test results are reported separately in the testing chapter.
+
+\begin{longtable}{|L{1.0cm}|L{4.1cm}|L{5.2cm}|L{3.1cm}|}
+\caption{Sprint review, retrospective, and acceptance traceability}
+\label{tab:sprint_review_retrospective_traceability}\\
+\hline
+\textbf{Sprint} & \textbf{Review and accepted increment} & \textbf{Retrospective action for the next iteration} & \textbf{Acceptance reference} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{4}
+\textbf{Sprint} & \textbf{Review and accepted increment} & \textbf{Retrospective action for the next iteration} & \textbf{Acceptance reference} \\
+\hline
+\endhead
+\continuedonnextpage{4}
+\endfoot
+\endlastfoot
+Sprint 1 & Reviewed the technical foundation and Scrum setup. & Use shared conventions for the first business modules. & Sprint 1 acceptance and communications index. \\
+\hline
+Sprint 2 & Reviewed the catalog, CMS, employability, organization, users, public website, and initial CRM. & Coordinate the API and client repositories in Sprint 3. & Sprint 2 acceptance and communications index. \\
+\hline
+Sprint 3 & Reviewed backend modules and the first repository integration. & Add frontend tests and organize the evidence. & Sprint 3 acceptance and communications index. \\
+\hline
+Sprint 4 & Reviewed frontend tests and Scrum evidence. & Add acceptance, integration, risk, metrics, and defect evidence. & Sprint 4 letter, July 5, 2026. \\
+\hline
+Sprint 5 & Reviewed acceptance, integration, risk, data-flow, and quality work. & Prepare standards, CI, security, browser, and accessibility checks. & Sprint 5 letter, July 14, 2026. \\
+\hline
+Sprint 6 & Reviewed standards, refactoring, CI, security, browser, and accessibility work. & Prepare the final package and closing evidence. & Sprint 6 letter, July 21, 2026. \\
+\hline
+Sprint 7 & Reviewed the final package, validation, manuals, deployment, and repository handoff. & Preserve the final artifacts and acceptance record. & Sprint 7 letter, July 28, 2026; final acceptance, August 7, 2026. \tablelastrow
+\end{longtable}
 
 \section{Project Schedule and Critical Path}
-% TODO: Add the final schedule, progress charts and critical path.
+The project schedule followed seven accepted iterations between May and July 2026, followed by
+the final acceptance in August. Chapter 1 provides the complete date chronology in
+Table~\ref{tab:project_timeline}. This section focuses on the dependency chain that determined
+the order of delivery.
+
+\begin{longtable}{|L{3.0cm}|L{4.2cm}|L{5.9cm}|}
+\caption{BOPADIGITAL project dependency chain}
+\label{tab:project_critical_path}\\
+\hline
+\textbf{Stage} & \textbf{Required predecessor} & \textbf{Effect on the project} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{3}
+\textbf{Stage} & \textbf{Required predecessor} & \textbf{Effect on the project} \\
+\hline
+\endhead
+\continuedonnextpage{3}
+\endfoot
+\endlastfoot
+Requirements and scope & Software Engineering I baseline and client decisions & Defined the stakeholders, stories, constraints, and exclusion of the matrix module. \\
+\hline
+Technical foundation & Requirements and repository responsibilities & Enabled the API, clients, shared package, database, authentication, and Scrum tracking. \\
+\hline
+Functional increments & Technical foundation and shared contracts & Allowed the public website, CRM, mobile workflows, and API modules to progress in parallel. \\
+\hline
+Integration & Functional increments and API boundary & Connected the clients with the backend and exposed cross-repository compatibility issues. \\
+\hline
+Quality and evidence & Integrated increments & Enabled frontend, API, acceptance, risk-based, and preventive-quality validation. \\
+\hline
+Delivery package & Quality results and stable scope & Enabled deployment, installation, manuals, presentation, and final report preparation. \\
+\hline
+Acceptance and closure & Complete delivery package & Allowed the client to review the seven increments and accept the project formally. \tablelastrow
+\end{longtable}
+
+The critical path was therefore:
+\begin{center}
+\emph{requirements} $\rightarrow$ \emph{technical foundation} $\rightarrow$ \emph{functional increments}\\
+$\rightarrow$ \emph{integration} $\rightarrow$ \emph{quality evidence} $\rightarrow$ \emph{delivery package}\\
+$\rightarrow$ \emph{final acceptance}
+\end{center}
+This sequence is an analysis of the project dependencies. It does not claim that the
+project-management tool calculated an automated critical-path value.
 
 \section{Project Risk Management}
-% TODO: Describe project-management risks separately from risk-based testing.
+Project-management risks were tracked separately from the technical risks used to prioritize
+testing. The purpose of this section is to explain risks that could affect scope, schedule,
+coordination, evidence, or delivery.
+
+The legacy project report classified probability using the following ranges. The classification
+is retained as a planning convention, while the risk descriptions are updated to represent the
+final BOPADIGITAL scope.
+
+\begin{longtable}{|L{9.0cm}|L{3.2cm}|}
+\caption{Risk probability classification}
+\label{tab:risk_probability_classification}\\
+\hline
+\textbf{Description} & \textbf{Probability range} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{2}
+\textbf{Description} & \textbf{Probability range} \\
+\hline
+\endhead
+\continuedonnextpage{2}
+\endfoot
+\endlastfoot
+Highly unlikely: extremely low chance of occurrence. & 0\%--20\% \\
+\hline
+Low probability: unlikely but possible. & 21\%--40\% \\
+\hline
+Moderate probability: an even chance of occurrence. & 41\%--60\% \\
+\hline
+High probability: likely to occur. & 61\%--80\% \\
+\hline
+Very high probability: almost certain to occur. & 81\%--100\% \tablelastrow
+\end{longtable}
+
+\begin{longtable}{|L{3.0cm}|L{1.7cm}|L{1.7cm}|L{8.5cm}|}
+\caption{Project risk analysis and mitigation}
+\label{tab:project_management_risks}\\
+\hline
+\textbf{Risk} & \textbf{Probability} & \textbf{Impact} & \textbf{Mitigation and current treatment} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{4}
+\textbf{Risk} & \textbf{Probability} & \textbf{Impact} & \textbf{Mitigation and current treatment} \\
+\hline
+\endhead
+\continuedonnextpage{4}
+\endfoot
+\endlastfoot
+R01 Deployment failure & Low & Critical & Run deployment checks in the local orchestration environment, document environment variables and health checks, and associate the final deployment claim with a revision-specific artifact. \\
+\hline
+R02 Code quality degradation & Moderate & Moderate & Enforce Biome, TypeScript checks, hooks, and CI quality gates. Record the exact command and result in the coding-standards and preventive-quality chapters. \\
+\hline
+R03 API integration delay & Moderate & High & Keep the API, shared-contract, and client boundaries explicit. Validate request and response schemas before acceptance and integration testing. \\
+\hline
+R04 Sprint scope overrun & High & Moderate & Confirm scope decisions with the client and reprioritize the backlog. The matrix construction, approval, and subsidy-calculation scope was removed from the final product. \\
+\hline
+R05 Client availability & Moderate & High & Schedule sprint reviews at the iteration boundaries, preserve the communications index, and request acceptance records after each accepted increment. \\
+\hline
+R06 Database service interruption & Low & High & Use Supabase as a development-only PostgreSQL convenience and target PostgreSQL hosted on the production deployment server. Document backups, recovery, and environment-specific connection settings. \\
+\hline
+R07 Testing and evidence delay & High & High & Reserve Sprints 4--7 for frontend, acceptance, risk-based, integration, metrics, defect, standards, and delivery evidence. \\
+\hline
+R08 Acceptance evidence risk & Moderate & Critical & Keep the sprint letters, final acceptance, communications index, ClickUp captures, and report references synchronized before submission. \\
+\hline
+R09 Team coordination & Moderate & Moderate & Assign Scrum roles, track responsibilities in ClickUp, and use sprint reviews and retrospectives to identify coordination issues. \tablelastrow
+\end{longtable}
+
+Risk-based test priorities, test cases, execution results, and retests are documented in
+Chapter 6. Keeping the two views separate prevents project-schedule risks from being confused
+with risks in application behavior.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 4: CODING STANDARDS DOCUMENTATION
@@ -750,7 +1289,18 @@ The deployment appendix documents the reproducible commands, health checks, exte
 \appendix
 
 \chapter{REPOSITORIES, TOOLS AND PROJECT LINKS}
-% TODO: Add repository URLs, tools, video, deployment and evaluation links.
+\label{app:project_links}
+
+\section{Project-Management Tool}
+The complete BOPADIGITAL task lists, sprint organization, assignments, and progress states can
+be reviewed through the following read-only ClickUp workspace link:
+
+\begin{center}
+\href{https://sharing.clickup.com/90171310184/l/h/5-90179341245-1/26ab9e034992a64}{\texttt{BOPADIGITAL ClickUp workspace}}
+\end{center}
+
+The report includes representative captures and a summarized backlog so that the main chapters
+remain focused on the project results.
 
 \chapter{SOFTWARE BUILDING AND DEPLOYMENT EVIDENCE}
 % TODO: Add build/release evidence, deployed revisions and health checks.

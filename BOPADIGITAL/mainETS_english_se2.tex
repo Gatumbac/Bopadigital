@@ -224,7 +224,6 @@ The project was developed through seven accepted Scrum sprints followed by a fin
 \endhead
 \continuedonnextpage{3}
 \endfoot
-\hline
 \endlastfoot
 Sprint 1 & May 24, 2026 & Initial development increment: repositories, quality tools, database, Express server, JWT authentication, RBAC, login, and Scrum planning. \\ \hline
 Sprint 2 & June 7, 2026 & Catalog, CMS, employability, organization, user modules, public web work, and the beginning of CRM implementation. \\ \hline
@@ -278,7 +277,6 @@ Table~\ref{tab:repository_ecosystem} summarizes the repositories considered in t
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 \texttt{bopacorp-\allowbreak{}web} & Public website and CMS & React, TypeScript, Vite & Presents public catalog, contact, vacancy, and content-management workflows. It does not access the database directly. \\
 \hline
@@ -295,7 +293,7 @@ Table~\ref{tab:repository_ecosystem} summarizes the repositories considered in t
 \texttt{communications} & Client and project evidence & Markdown and captured evidence & Indexes sprint communications, acceptance forms, and final client evidence; it is not part of the runtime system. \\
 \end{longtable}
 
-The system boundary is therefore defined by the clients, the API, the shared contract package, and the persistence and external-service layer. The clients do not contain database credentials and do not issue SQL queries. They communicate with the API through the versioned path \texttt{/api/v1}. The API is responsible for enforcing the rules that must remain consistent across web, CRM, and mobile clients.
+The system boundary is therefore defined by the clients, the API, the shared contract package, and the persistence and external-service layer. The clients do not contain database credentials and do not issue SQL queries. They communicate with the API through the versioned path \emph{/api/v1}. The API is responsible for enforcing the rules that must remain consistent across web, CRM, and mobile clients.
 
 The architecture follows a client--server boundary with a modular-monolith backend. This choice avoids duplicating business rules across several frontends while preserving independent user interfaces for public users, administrators, sales advisors, supervisors, coordinators, and managers. The resulting structure is simpler to deploy than a group of independent backend services, but it still provides internal separation through domain modules and one-way dependencies.
 
@@ -318,7 +316,6 @@ BOPADIGITAL requires more than one user interface: the public website, the inter
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 Language and typing & TypeScript support and a large ecosystem of typed libraries. & TypeScript is integrated into the framework. & TypeScript is supported with a progressive framework model. \\
 \hline
@@ -350,7 +347,6 @@ The backend must expose REST endpoints, enforce permissions, validate input, exe
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 Language and ecosystem & TypeScript aligns the API with the web, CRM, mobile, and shared-contract repositories. & Python provides a mature full-stack ecosystem. & PHP provides a mature framework with strong conventions. \\
 \hline
@@ -380,11 +376,10 @@ The commercial lifecycle contains users, roles, permissions, organizations, cata
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 Data model & Relational model with constraints, joins, and transactional operations. & Relational model with constraints and transactions. & Document model with flexible schemas and denormalized data. \\
 \hline
-Fit for BOPADIGITAL & Appropriate for relationships among users, roles, negotiations, documents, and organizational entities. & Also appropriate for relational workloads, but not the database selected by the current implementation. & Would require additional modeling decisions for highly related commercial data. \\
+Fit for this project & Appropriate for relationships among users, roles, negotiations, documents, and organizational entities. & Also appropriate for relational workloads, but not the database selected by the current implementation. & Would require additional modeling decisions for highly related commercial data. \\
 \hline
 TypeScript integration & Drizzle ORM provides typed queries and schema mapping. & Can be integrated with Node.js ORMs, but would require a different current configuration. & Provides a flexible document approach, but does not match the current relational domain model. \\
 \hline
@@ -410,7 +405,6 @@ The mobile component is intended for advisors who need access to field-oriented 
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 Language and reuse & TypeScript and React conventions can be reused from the web ecosystem. & Uses Dart and a separate widget ecosystem. & Requires Kotlin/Java and Swift/Objective-C implementations. \\
 \hline
@@ -440,7 +434,6 @@ The applications exchange structured data through the API, so duplicated request
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 Consistency & One package provides common schemas, types, enums, and response structures. & Each client may evolve a different representation of the same resource. & Compatibility depends on informal conventions. \\
 \hline
@@ -470,7 +463,6 @@ The deployment repository uses Docker Compose to coordinate the API, CRM, and pu
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 Reproducibility & Service definitions, ports, environment interfaces, and dependencies are described as code. & Depends on machine-specific commands and manual configuration. & Can be reproducible, but requires more infrastructure and service coordination. \\
 \hline
@@ -482,7 +474,7 @@ Decision & \multicolumn{3}{L{11.2cm}|}{Docker Compose was selected for service o
 \hline
 \end{longtable}
 
-This choice supports a reproducible environment without changing the application architecture. The deployment process requires a GitHub Packages token to install \texttt{@bopacorp/shared}, environment configuration for the API, and a PostgreSQL connection. Secrets remain outside the report and source-controlled files.
+This choice supports a reproducible environment without changing the application architecture. The deployment process requires a GitHub Packages token to install \emph{@bopacorp/shared}, environment configuration for the API, and a PostgreSQL connection. Secrets remain outside the report and source-controlled files.
 
 \section{Authentication, Authorization and RBAC}
 Authentication and authorization are separated so that the API can identify the caller before deciding whether the requested operation is permitted. Protected routes use the middleware order shown in Figure~\ref{fig:authorization_flow}.
@@ -491,12 +483,23 @@ Authentication and authorization are separated so that the API can identify the 
 \centering
 \fbox{\begin{minipage}{0.88\textwidth}
 \centering
-\texttt{Request} $\rightarrow$ \texttt{authenticate} $\rightarrow$ \texttt{authorize} $\rightarrow$ \texttt{validate} $\rightarrow$ \texttt{controller} $\rightarrow$ \texttt{service} $\rightarrow$ \texttt{database}
+\small
+\textbf{Security boundary}\\[0.4em]
+\begin{tabular}{c@{\hspace{0.15cm}}c@{\hspace{0.15cm}}c@{\hspace{0.15cm}}c@{\hspace{0.15cm}}c}
+\fbox{\strut\textbf{Request}} & $\longrightarrow$ & \fbox{\strut\textbf{Authenticate}} & $\longrightarrow$ & \fbox{\strut\textbf{Authorize}}
+\end{tabular}\\[0.5em]
+$\downarrow$\\[-0.1em]
+\textit{Authorized request continues}\\[0.4em]
+\textbf{Application boundary}\\[0.4em]
+\begin{tabular}{c@{\hspace{0.12cm}}c@{\hspace{0.12cm}}c@{\hspace{0.12cm}}c@{\hspace{0.12cm}}c@{\hspace{0.12cm}}c@{\hspace{0.12cm}}c}
+\fbox{\strut\textbf{Validate}} & $\longrightarrow$ & \fbox{\strut\textbf{Controller}} & $\longrightarrow$ & \fbox{\strut\textbf{Service}} & $\longrightarrow$ & \fbox{\strut\textbf{Database}}
+\end{tabular}
 \end{minipage}}
 \caption{Protected request processing order}
 \label{fig:authorization_flow}
 \end{figure}
 
+\subsection{Token-Based Authentication}
 During login, the API normalizes the email, applies rate limiting, retrieves the active user, compares the password using bcrypt, records the login result, and issues an access token together with an opaque refresh token. The access token is a short-lived JWT, while the refresh token is stored as a SHA-256 hash in the database. This limits the exposure period of the access token and allows refresh sessions to be revoked during logout, password changes, user deactivation, or token-rotation replay detection.
 
 \begin{longtable}{|L{2.8cm}|L{3.1cm}|L{3.2cm}|L{4.5cm}|}
@@ -512,7 +515,6 @@ During login, the API normalizes the email, applies rate limiting, retrieves the
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 Access token & JWT & 15 minutes in the current configuration & Sent with protected API requests. Its short lifetime limits the exposure window because it is not directly revoked through the database. \\
 \hline
@@ -520,8 +522,12 @@ Refresh token & Opaque random value stored through a SHA-256 hash & 7 days in th
 \hline
 \end{longtable}
 
-The \texttt{authenticate} middleware extracts the bearer token, verifies the JWT signature, loads the active user and roles, and attaches the authenticated identity to the request. The \texttt{authorize} middleware then checks the permission codes required by the route. Permissions use the \texttt{module.action} convention, such as \texttt{users.read}, \texttt{catalog_items.create}, or \texttt{content_blocks.update}. A valid identity without the required permission receives a forbidden response; a missing or invalid identity receives an unauthorized response.
+\subsection{Permission Enforcement}
+The \emph{authenticate} middleware extracts the bearer token, verifies the JWT signature, loads the active user and roles, and attaches the authenticated identity to the request. The \emph{authorize} middleware then checks the permission codes required by the route.
 
+Permissions use the \emph{module.action} convention. Examples include \emph{users.read}, \emph{catalog\_items.create}, and \emph{content\_blocks.update}. A valid identity without the required permission receives a forbidden response, while a missing or invalid identity receives an unauthorized response.
+
+\subsection{Layered Protection}
 The authorization design is role-based, but the route checks are expressed as permissions. This allows a role to group several capabilities while keeping the endpoint declaration explicit. Validation occurs after the authorization decision, preventing unauthorized requests from receiving unnecessary detailed validation feedback. Services remain responsible for ownership and state-dependent rules, such as whether a user may view or modify a record associated with a particular organization or workflow.
 
 \begin{longtable}{|L{3.0cm}|L{4.0cm}|L{5.0cm}|}
@@ -537,7 +543,6 @@ The authorization design is role-based, but the route checks are expressed as pe
 \endhead
 \continuedonnextpage{3}
 \endfoot
-\hline
 \endlastfoot
 Authentication middleware & Establish the identity of the caller. & Verify the JWT and confirm that the user remains active. \\
 \hline
@@ -552,15 +557,15 @@ Database & Enforce persistence constraints. & Apply relational constraints and r
 \end{longtable}
 
 \section{Shared Contracts and Data Architecture}
-The shared contract package is the integration boundary between the API and its clients. It provides common primitives, request schemas, response schemas, enumerations, and API response wrappers. The package is published as \texttt{@bopacorp/shared} and is consumed by the API, public website, CRM, and mobile repository.
+The shared contract package is the integration boundary between the API and its clients. It provides common primitives, request schemas, response schemas, enumerations, and API response wrappers. The package is published as \emph{@bopacorp/shared} and is consumed by the API, public website, CRM, and mobile repository.
 
 The request path is divided into four responsibilities. First, the route selects the endpoint and attaches middleware. Second, the controller reads already-validated request data and delegates the operation. Third, the service applies business rules and performs Drizzle queries. Finally, the database persists or retrieves the data. This one-way dependency flow is represented as:
 
 \begin{center}
-\texttt{routes -> controller -> service -> database}
+\emph{routes} $\rightarrow$ \emph{controller} $\rightarrow$ \emph{service} $\rightarrow$ \emph{database}
 \end{center}
 
-The API uses a common response envelope. A successful operation returns \texttt{success: true} and its data; a paginated operation also returns metadata; and an error returns \texttt{success: false} with a stable error code and message. The convention makes error handling predictable for all clients and prevents each frontend from implementing a different interpretation of HTTP responses.
+The API uses a common response envelope. A successful operation returns \emph{success: true} and its data; a paginated operation also returns metadata; and an error returns \emph{success: false} with a stable error code and message. The convention makes error handling predictable for all clients and prevents each frontend from implementing a different interpretation of HTTP responses.
 
 \begin{longtable}{|L{2.6cm}|L{3.5cm}|L{3.1cm}|L{4.3cm}|}
 \caption{Shared API contract categories}
@@ -575,7 +580,6 @@ The API uses a common response envelope. A successful operation returns \texttt{
 \endhead
 \continuedonnextpage{4}
 \endfoot
-\hline
 \endlastfoot
 Common primitives & \texttt{@bopacorp/\allowbreak{}shared/\allowbreak{}common} & API and all clients & UUIDs, emails, timestamps, pagination, and response wrappers. \\
 \hline
@@ -606,7 +610,7 @@ Inside the API boundary, Express receives the request and applies cross-cutting 
 The mobile client follows the same API boundary, but its final feature claims must be tied to device or emulator evidence. This distinction is important because the presence of a route or component in a repository proves implementation structure, but not necessarily successful runtime acceptance.
 
 \section{Deployment Diagram}
-Figure~\ref{fig:deployment_diagram} illustrates the deployment arrangement described by the deployment repository. Docker Compose builds and runs the API, CRM, and public website. The API is exposed internally on container port 3000 and mapped to host port 3001; the CRM uses container port 5173 and host port 3002; and the public website uses container port 5173 and host port 3003. The clients use the configured API public URL and the \texttt{/api/v1} prefix.
+Figure~\ref{fig:deployment_diagram} illustrates the deployment arrangement described by the deployment repository. Docker Compose builds and runs the API, CRM, and public website. The API is exposed internally on container port 3000 and mapped to host port 3001; the CRM uses container port 5173 and host port 3002; and the public website uses container port 5173 and host port 3003. The clients use the configured API public URL and the \emph{/api/v1} prefix.
 
 \begin{figure}[htbp]
 \centering
@@ -615,7 +619,7 @@ Figure~\ref{fig:deployment_diagram} illustrates the deployment arrangement descr
 \label{fig:deployment_diagram}
 \end{figure}
 
-The deployment process requires Docker and Docker Compose, Git, an environment file, a PostgreSQL connection, and a GitHub Packages token with permission to install \texttt{@bopacorp/shared}. Caddy is optional and can terminate HTTPS and route public domains to the local service ports. Environment variables and credentials are deployment inputs and must not be embedded in the report or committed to source control.
+The deployment process requires Docker and Docker Compose, Git, an environment file, a PostgreSQL connection, and a GitHub Packages token with permission to install \emph{@bopacorp/shared}. Caddy is optional and can terminate HTTPS and route public domains to the local service ports. Environment variables and credentials are deployment inputs and must not be embedded in the report or committed to source control.
 
 The diagram is used as an architectural overview rather than as proof of a live production execution. Before final submission, its external-storage labels and domain names must be reconciled with the final deployment evidence so that historical integrations are not presented as active services without a current verification artifact. The deployment chapter and appendices will contain the reproducible commands, health checks, and revision-specific evidence required to establish the final runtime state.
 

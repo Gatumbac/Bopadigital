@@ -51,6 +51,7 @@ Nota de entorno: la primera ejecución aislada de `npm ci` no pudo escribir los 
 | Archivos actuales de baseline (4 archivos configurados originalmente) | 47.02% | 34.72% | 50.00% | 45.80% | 2026-08-15 | Resumen de consola; reemplazado localmente por el reporte crítico |
 | Código crítico fase 2 (10 archivos de auth/API) | 40.17% | 22.22% | 42.37% | 39.63% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
 | Código crítico fase 2 después de implementar pruebas | 92.76% | 80.34% | 98.30% | 93.11% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
+| Código crítico Fase 3 (21 archivos configurados) | 84.48% | 70.15% | 82.72% | 84.97% | 2026-08-15 | `coverage/index.html`, `coverage/lcov.info` |
 | Código crítico final | — | — | — | — | Pendiente | Pendiente |
 
 ## 5. Ejecución en CI
@@ -104,3 +105,34 @@ Un resultado puede aparecer como `Pass` en el informe final solamente si existe:
 |---|---|---|---|
 | `CRM-AUTH-006` a `CRM-AUTH-016` | Login, sesión, permisos, roles, storage y JWT exitosos | Pass | `CRM-F2-2026-08-15-01`; reporte de cobertura |
 | `CRM-API-004` a `CRM-API-007` | Bearer, errores, paginación, refresh y servicios auth exitosos | Pass | `CRM-F2-2026-08-15-01`; reporte de cobertura |
+
+## 9. Ejecución de Fase 3
+
+| Campo | Valor |
+|---|---|
+| ID de ejecución | `CRM-F3-2026-08-15-01` |
+| Fecha/hora | `2026-08-15T16:10:00-05:00` |
+| Revisión base | `36ab4bf16a16b9d97d5d668e5ec7542c7b0a75ee` |
+| Estado de revisión | Working tree con cambios de Fase 3 sin commit |
+| Node/npm | `v22.22.2 / 10.9.7` |
+| Ambiente/base URL | `VITE_API_URL=http://test.local/api/v1` (solo test; sin secretos) |
+| Tests | Pass; 20 archivos y 84 tests |
+| Cobertura | Pass informativo; 84.48% statements, 70.15% branches, 82.72% functions, 84.97% lines |
+| Conjunto medido | 21 archivos críticos incluidos explícitamente en `vite.config.ts` |
+| Lint | Pass; 241 archivos revisados |
+| TypeScript | Pass; `npx tsc -b --noEmit` |
+| Build | Pass; Vite transformó 3820 módulos |
+| Artefactos | `coverage/index.html`, `coverage/lcov.info` |
+| CI remoto/API real/E2E | Pendiente |
+
+### Casos Fase 3 ejecutados
+
+| Caso | Resultado observado | Estado | Evidencia |
+|---|---|---|---|
+| `CRM-CLI-001` a `CRM-CLI-004` | Formulario de cliente válido, RUC inválido, obligatorios y valores negativos | Pass | `BusinessClientForm.test.tsx`; `CRM-F3-2026-08-15-01` |
+| `CRM-CLI-008` | Hook envía búsqueda, advisor, estado, orden y paginación | Pass | `useBusinessClients.test.tsx`; `CRM-F3-2026-08-15-01` |
+| `CRM-NEG-001`, `CRM-NEG-003`, `CRM-NEG-004` | Creación, ownership del asesor y filtros | Pass | `CreateNegotiationDialog.test.tsx`; `crm-hooks.test.tsx` |
+| `CRM-NEG-006`, `CRM-NEG-007`, `CRM-NEG-010`, `CRM-NEG-011` | Cambio válido, nota obligatoria, fallo controlado y documentos obligatorios | Pass | `ChangeStateDialog.test.tsx`; `negotiations.service.test.ts` |
+| `CRM-VIS-001` a `CRM-VIS-006` | Creación, GPS concedido/denegado, observación y permisos de acciones | Pass | `CreateVisitSheet.test.tsx`; `VisitActions.test.tsx` |
+
+Los casos de edición visual, páginas de alcance por supervisor, Kanban/drag-and-drop, historial observable y estados vacíos/error que no aparecen aquí permanecen `Pendiente`. La suite usa mocks y jsdom; no demuestra todavía autorización ni persistencia de un API real.

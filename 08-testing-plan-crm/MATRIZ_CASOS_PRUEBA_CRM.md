@@ -1,6 +1,6 @@
 # Matriz de casos de prueba del CRM
 
-**Última ejecución:** `CRM-F2-2026-08-15-01` sobre el working tree basado en `3c4dd51`.
+**Última ejecución:** `CRM-F3-2026-08-15-01` sobre el working tree basado en `36ab4bf`.
 **Leyenda:** `Existente` significa que el caso aparece en el código actual; `Pendiente` significa que aún debe implementarse o ejecutarse.
 
 ## 1. Casos existentes
@@ -42,42 +42,42 @@
 
 | ID | Capa | Caso | Prioridad | Estado |
 |---|---|---|---|---|
-| CRM-CLI-001 | Componente | Crear cliente con datos válidos | P0 | Pendiente |
-| CRM-CLI-002 | Componente | Rechazar RUC inválido | P0 | Pendiente |
-| CRM-CLI-003 | Componente | Rechazar campos obligatorios vacíos | P0 | Pendiente |
-| CRM-CLI-004 | Componente | Rechazar servicios/facturación negativos | P0 | Pendiente |
+| CRM-CLI-001 | Componente | Crear cliente con datos válidos | P0 | Pass — CRM-F3-2026-08-15-01; `BusinessClientForm.test.tsx` |
+| CRM-CLI-002 | Componente | Rechazar RUC inválido | P0 | Pass — CRM-F3-2026-08-15-01; `BusinessClientForm.test.tsx` |
+| CRM-CLI-003 | Componente | Rechazar campos obligatorios vacíos | P0 | Pass — CRM-F3-2026-08-15-01; `BusinessClientForm.test.tsx` |
+| CRM-CLI-004 | Componente | Rechazar servicios/facturación negativos | P0 | Pass — CRM-F3-2026-08-15-01; `BusinessClientForm.test.tsx` |
 | CRM-CLI-005 | Componente | Editar y desactivar cliente | P1 | Pendiente |
 | CRM-CLI-006 | Integración frontend | Asesor queda limitado a sus clientes | P0 | Pendiente |
 | CRM-CLI-007 | Integración frontend | Supervisor ve alcance supervisado | P0 | Pendiente |
-| CRM-CLI-008 | Componente | Búsqueda, filtro y paginación | P1 | Pendiente |
+| CRM-CLI-008 | Componente | Búsqueda, filtro y paginación | P1 | Pass — CRM-F3-2026-08-15-01; `useBusinessClients.test.tsx` |
 | CRM-CLI-009 | Componente | Estado vacío y error de carga | P1 | Pendiente |
 
 ## 4. Negociaciones
 
 | ID | Capa | Caso | Prioridad | Estado |
 |---|---|---|---|---|
-| CRM-NEG-001 | Componente | Crear negociación válida | P0 | Pendiente |
+| CRM-NEG-001 | Componente | Crear negociación válida | P0 | Pass — CRM-F3-2026-08-15-01; `CreateNegotiationDialog.test.tsx`, `NegotiationForm.test.tsx` |
 | CRM-NEG-002 | Componente | Editar fechas y observaciones | P1 | Pendiente |
-| CRM-NEG-003 | Componente | Asesor no puede seleccionar otro asesor | P0 | Pendiente |
-| CRM-NEG-004 | Componente | Tabla filtra por estado/asesor/tier | P1 | Pendiente |
+| CRM-NEG-003 | Componente | Asesor no puede seleccionar otro asesor | P0 | Pass — CRM-F3-2026-08-15-01; `CreateNegotiationDialog.test.tsx` |
+| CRM-NEG-004 | Componente | Tabla filtra por estado/asesor/tier | P1 | Pass — CRM-F3-2026-08-15-01; `crm-hooks.test.tsx` |
 | CRM-NEG-005 | Componente | Kanban agrupa por estado | P1 | Pendiente |
-| CRM-NEG-006 | Componente | Cambio de estado válido | P0 | Pendiente |
-| CRM-NEG-007 | Componente | Estado que requiere nota rechaza nota vacía | P0 | Pendiente |
+| CRM-NEG-006 | Componente | Cambio de estado válido | P0 | Pass — CRM-F3-2026-08-15-01; `ChangeStateDialog.test.tsx` |
+| CRM-NEG-007 | Componente | Estado que requiere nota rechaza nota vacía | P0 | Pass — CRM-F3-2026-08-15-01; `ChangeStateDialog.test.tsx` |
 | CRM-NEG-008 | Componente | Drag-and-drop abre cambio bloqueado al destino | P1 | Pendiente |
 | CRM-NEG-009 | Integración frontend | Historial refleja transición | P0 | Pendiente |
-| CRM-NEG-010 | Componente | Falla de cambio no deja estado falso | P0 | Pendiente |
-| CRM-NEG-011 | Componente | Cierre exige documentos obligatorios | P0 | Pendiente |
+| CRM-NEG-010 | Componente | Falla de cambio no deja estado falso | P0 | Pass — CRM-F3-2026-08-15-01; `ChangeStateDialog.test.tsx` |
+| CRM-NEG-011 | Componente | Cierre exige documentos obligatorios | P0 | Pass — CRM-F3-2026-08-15-01; `ChangeStateDialog.test.tsx`, `negotiations.service.test.ts` |
 
 ## 5. Visitas
 
 | ID | Capa | Caso | Prioridad | Estado |
 |---|---|---|---|---|
-| CRM-VIS-001 | Componente | Crear visita con campos válidos | P0 | Pendiente |
-| CRM-VIS-002 | Unitario | Geolocalización concedida se transforma correctamente | P1 | Pendiente |
-| CRM-VIS-003 | Unitario | Permiso GPS denegado no rompe el flujo | P1 | Pendiente |
-| CRM-VIS-004 | Componente | Observación obligatoria | P0 | Pendiente |
-| CRM-VIS-005 | Componente | Supervisor verifica visita | P0 | Pendiente |
-| CRM-VIS-006 | Componente | Asesor no ve botón de verificación | P0 | Pendiente |
+| CRM-VIS-001 | Componente | Crear visita con campos válidos | P0 | Pass — CRM-F3-2026-08-15-01; `CreateVisitSheet.test.tsx` |
+| CRM-VIS-002 | Unitario | Geolocalización concedida se transforma correctamente | P1 | Pass — CRM-F3-2026-08-15-01; `CreateVisitSheet.test.tsx` |
+| CRM-VIS-003 | Unitario | Permiso GPS denegado no rompe el flujo | P1 | Pass — CRM-F3-2026-08-15-01; `CreateVisitSheet.test.tsx` |
+| CRM-VIS-004 | Componente | Observación obligatoria | P0 | Pass — CRM-F3-2026-08-15-01; `CreateVisitSheet.test.tsx` |
+| CRM-VIS-005 | Componente | Supervisor verifica visita | P0 | Pass — CRM-F3-2026-08-15-01; `VisitActions.test.tsx` |
+| CRM-VIS-006 | Componente | Asesor no ve botón de verificación | P0 | Pass — CRM-F3-2026-08-15-01; `VisitActions.test.tsx` permission gate |
 | CRM-VIS-007 | Componente | Error y paginación de visitas | P1 | Pendiente |
 
 ## 6. Documentos y archivos
@@ -159,3 +159,19 @@
 - `Fail`: el comportamiento observado no cumple el resultado esperado.
 - `Blocked`: falta ambiente, cuenta, dato o dependencia externa; debe incluir motivo.
 - `Descoped`: fuera del producto actual por una decisión de alcance documentada.
+
+## 12. Ejecución de Fase 3
+
+| Campo | Valor |
+|---|---|
+| ID de ejecución | `CRM-F3-2026-08-15-01` |
+| Revisión base | `36ab4bf16a16b9d97d5d668e5ec7542c7b0a75ee` |
+| Estado de revisión | Working tree con cambios de Fase 3 sin commit |
+| Tests | Pass; 20 archivos y 84 tests |
+| Cobertura | Pass informativo; 84.48% statements, 70.15% branches, 82.72% functions, 84.97% lines |
+| Conjunto medido | 21 archivos críticos incluidos explícitamente en `vite.config.ts` |
+| Lint | Pass; 241 archivos revisados |
+| TypeScript | Pass; `npx tsc -b --noEmit` |
+| Build | Pass; Vite transformó 3820 módulos |
+| Artefactos | `coverage/index.html`, `coverage/lcov.info` |
+| CI remoto/API real/E2E | Pendiente |

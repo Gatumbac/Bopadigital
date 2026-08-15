@@ -5,7 +5,7 @@
 **Repositorios relacionados:** `bopacorp-api`, `bopacorp-shared`  
 **Fecha base:** 15 de agosto de 2026  
 **Responsable:** equipo de desarrollo/testing del proyecto  
-**Estado:** plan definido; ejecución pendiente de registrar.
+**Estado:** Fase 3 automatizada parcialmente ejecutada; casos restantes y CI remoto pendientes.
 
 ---
 
@@ -332,6 +332,21 @@ La corrida `CRM-F2-2026-08-15-01` se realizó sobre el working tree basado en `3
 ### Criterio de salida
 
 El flujo cliente → negociación → visita tiene pruebas de camino feliz, validación, permisos y errores.
+
+### Resultado de ejecución de Fase 3 — 2026-08-15
+
+- [x] Se añadieron fixtures determinísticos en inglés para asesores, clientes, negociaciones, estados y visitas.
+- [x] Se cubrieron contratos de servicios para clientes, negociaciones, cambios de estado, cierre multipart y visitas.
+- [x] Se cubrieron formularios de clientes, negociaciones y visitas con validación, errores de servidor y permisos visibles.
+- [x] Se cubrieron ownership del asesor al crear negociaciones, filtros paginados, notas obligatorias, documentos faltantes y fallos de transición.
+- [x] Se cubrieron GPS concedido y denegado, verificación/eliminación por permiso y observación obligatoria.
+- [x] Suite local: 20 archivos y 84 tests exitosos.
+- [x] Cobertura del conjunto crítico medido: 84.48% statements, 70.15% branches, 82.72% functions y 84.97% lines sobre 21 archivos configurados.
+- [x] Lint, TypeScript y build de producción exitosos.
+- [ ] Quedan pendientes pruebas directas de páginas de alcance por supervisor, edición visual de cliente, Kanban/drag-and-drop, historial de transición y estados vacíos/error de algunas listas.
+- [ ] CI remoto, API real y E2E de navegador siguen pendientes.
+
+La ejecución se realizó sobre el working tree basado en `36ab4bf16a16b9d97d5d668e5ec7542c7b0a75ee`; los resultados no deben atribuirse a una revisión posterior hasta registrar el SHA del commit que incluya estos cambios.
 
 ### Fase 4 — Cubrir documentación, archivos y matriz limitada
 

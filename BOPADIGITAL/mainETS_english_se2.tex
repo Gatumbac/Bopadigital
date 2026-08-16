@@ -2227,10 +2227,9 @@ its Jest/Expo fixtures and keeps device validation separate from the unit gate. 
 records identify the repository revision, command, environment, and artifact for every selected
 result.
 
-The test environment uses synthetic accounts and data. Credentials are injected through the
-environment and are not stored in source files. Mutation journeys use isolated records with a
-unique run marker and a reset or cleanup step. Uploaded documents and résumés are synthetic
-fixtures. Production data and production credentials are outside the testing boundary.
+The test environment uses synthetic accounts, records, and files. Credentials are injected through
+the environment and are not stored in source files. Mutation journeys use isolated records with a
+cleanup step. Production data and production credentials are outside the testing boundary.
 
 Entry criteria are a known repository revision, installed lockfile dependencies, an available test
 environment, deterministic fixtures, and an identified test owner. Exit criteria are a recorded
@@ -2321,12 +2320,12 @@ $\rightarrow$ \emph{observed result} $\rightarrow$ \emph{artifact} $\rightarrow$
 browser journey and keeps a browser result from replacing coverage of service-level edge cases.
 
 \section{API Unit and Integration Testing}
-The API test suite covers the modular service and controller boundaries for authentication, users,
-roles, CRM, documents, uploads, reports, catalog, CMS, employability, notifications, matrices,
-and organizational operations. The recorded API run at revision \texttt{4018bd5} contains 61 test
-files and 415 passing tests. Its global measurement is 94.39\% statements, 86.91\% branches,
-83.04\% functions, and 94.84\% lines. These values describe the configured API measurement; they
-do not imply that every route, shared middleware, helper, or schema has direct integration coverage.
+The API test suite covers authentication, authorization, CRM, documents, uploads, catalog, CMS,
+employability, reporting, and organizational services. The recorded API run contains 61 test files
+and 415 passing tests. Its global measurement is 94.39\% statements, 86.91\% branches, 83.04\%
+functions, and 94.84\% lines. These values describe the
+configured API measurement and do not imply direct integration coverage for every implementation
+detail.
 
 The API suite is complemented by client-side contract runs. CRM records 12 API/RBAC integration
 tests together with its unit/component suite. Web records seven public-contract checks, four
@@ -2334,12 +2333,11 @@ authentication/RBAC checks, and four mutation checks for contact, application, C
 flows. These tests verify the response envelope, status codes, validation details, ownership, and
 role boundaries from the consumer perspective.
 
-The Shared package adds a contract-specific gate: request and response schemas, type-level valid
-and invalid consumers, package exports, tarball contents, and compatibility checks for API, Web,
-CRM, and Mobile. This evidence is intentionally separated from application coverage because a
-schema can be exported correctly while a consumer still sends an incorrect request.
+The Shared package adds contract tests for schemas, package exports, and consumer compatibility
+across API, Web, CRM, and Mobile. This evidence is reported separately from application coverage
+because contract correctness and consumer behavior are distinct checks.
 
-\begin{longtable}{|L{2.3cm}|L{3.8cm}|L{3.9cm}|L{3.0cm}|}
+\begin{longtable}{|L{1.8cm}|L{3.8cm}|L{3.8cm}|L{2.8cm}|}
 \caption{API and contract testing evidence}
 \label{tab:chapter6_api_evidence}\\
 \hline
@@ -2355,11 +2353,11 @@ schema can be exported correctly while a consumer still sends an incorrect reque
 \endlastfoot
 API & Module service/controller tests and critical-code coverage. & 61 files and 415 tests pass; coverage is recorded by statements, branches, functions, and lines. & Vitest output and coverage report \\
 \hline
-CRM & HTTP authentication, RBAC, role scope, refresh/logout, and client-facing envelopes. & 12 integration cases pass alongside the unit/component suite. & Integration log and test report \\
+CRM & Authentication, permissions, role scope, and response contracts. & 12 integration cases pass alongside the unit/component suite. & Integration log and test report \\
 \hline
 Web & Public contracts, auth/RBAC errors, contact, application, CMS, and storage mutations. & Public 7/7, auth/RBAC 4/4, and mutation 4/4 pass in the recorded integration package. & Vitest integration log \\
 \hline
-Shared & Schema tests, type-level consumers, package exports, tarball, and compatibility. & The phase gate validates the published contract and its four consumers. & Quality-gate and evidence JSON \\
+Shared & Schema tests, package exports, and consumer compatibility. & Published contracts and their four consumers are validated. & Quality-gate and evidence record \\
 \hline
 Deploy & Compose and Caddy configuration. & Service names, ports, variables, and routing are checked before runtime use. & Compose and Caddy validation output \tablelastrow
 \end{longtable}
@@ -2379,29 +2377,22 @@ failure artifacts. It records the CRM/API revisions, browser, environment, seed,
 and selected screenshots. The following acceptance register keeps the final demonstration aligned
 with the requirements-to-test traceability document.
 
-The Web Playwright implementation and its evidence package are versioned in
-\href{https://github.com/Bopacorp/bopacorp-web/commit/32ea028a4c42f729bac5220438a30c13619c33c8}{\texttt{32ea028}}.
-The selected Chromium smoke execution records three passing journeys out of three: a visitor
+The selected Web Chromium smoke execution records three passing journeys out of three: a visitor
 submitting a contact request, a candidate correcting invalid application feedback before uploading
-a synthetic PDF, and an administrator editing, verifying, and restoring a CMS text block. The Web
-runner uses the configurable \texttt{E2E\_BASE\_URL} (\texttt{http://localhost:5174} by default),
-and the HTML result is retained in the \texttt{playwright-report/} artifact. Image upload,
-browser-level unauthorized access, and retry recovery were outside this reduced demonstration run;
-they remain separate from the three browser journeys reported here.
+a synthetic PDF, and an administrator editing, verifying, and restoring a CMS text block. The run
+used local Web and API services and retained an HTML report. Image upload, browser-level
+unauthorized access, and retry recovery were outside this reduced demonstration run; they remain
+separate from the three browser journeys reported here.
 
-The CRM mutation package is preserved in
-\href{https://github.com/Bopacorp/bopacorp-crm/commit/49e0733ac3cb983962ffc029c099974b134b2854}{\texttt{49e0733}}.
-The execution record identifies \texttt{493caba} as the starting revision because the Phase 9 files
-were uncommitted during the run; the final commit preserves that implementation and its evidence.
-The recorded local execution passed five of five mutable journeys: client, negotiation, state, and
+The recorded CRM execution passed five of five mutable journeys: client, negotiation, state, and
 visit creation; document approval and rejection; catalog and synthetic-image lifecycle;
 employability vacancy lifecycle; and sales-target edit with restoration. The complete CRM browser
 run passed sixteen of sixteen tests, combining the eleven read-only baseline cases with these five
-mutable cases. Each journey used unique markers, synthetic files, reverse cleanup, and missing-record
-verification through HTTP 404 responses. Document cleanup verifies the logical record; the current
-API uses soft-delete, so physical storage-object deletion is not claimed.
+mutable cases. Each journey used isolated data, synthetic files, cleanup, and missing-record
+verification. Document cleanup verifies the logical record; physical storage cleanup is outside the
+current API test boundary.
 
-\begin{longtable}{|L{1.7cm}|L{2.4cm}|L{5.1cm}|L{3.7cm}|}
+\begin{longtable}{|L{1.5cm}|L{2.2cm}|L{4.9cm}|L{3.2cm}|}
 \caption{Acceptance scenario register}
 \label{tab:chapter6_acceptance_scenarios}\\
 \hline
@@ -2448,7 +2439,7 @@ The execution package distinguishes local deterministic results, API-backed inte
 browser acceptance, and operational validation. This distinction prevents a test count from being
 interpreted as a deployment or user-acceptance claim.
 
-\begin{longtable}{|L{2.2cm}|L{3.8cm}|L{4.0cm}|L{3.0cm}|}
+\begin{longtable}{|L{2.0cm}|L{3.5cm}|L{3.8cm}|L{3.0cm}|}
 \caption{Repository testing execution summary}
 \label{tab:chapter6_execution_summary}\\
 \hline
@@ -2466,7 +2457,7 @@ API & \texttt{test:run}, \texttt{test:coverage}, lint, typecheck, and build. & M
 \hline
 CRM & Unit/component, API integration, and read-only/mutable Playwright acceptance. & 16/16 browser tests pass: 11 read-only baseline cases and 5 mutable journeys, with cleanup and 404 verification recorded. & Vitest, Playwright report, and mutation matrix \\
 \hline
-Web & Unit/component, HTTP integration, manual UI review, and Playwright smoke acceptance. & Three of three selected Chromium journeys pass: contact, PDF application, and CMS edit/verification/restoration. & Vitest, integration, and \texttt{playwright-report/} artifacts \\
+Web & Unit/component, HTTP integration, manual UI review, and Playwright smoke acceptance. & Three of three selected Chromium journeys pass: contact, PDF application, and CMS edit/verification/restoration. & Vitest, integration, and browser artifacts \\
 \hline
 Mobile & \texttt{test:run}, \texttt{test:coverage}, lint, TypeScript, and critical-code gate. & 15 suites and 98 tests pass; lines and statements exceed the configured critical-code threshold. & Jest and coverage artifact \\
 \hline
@@ -2475,17 +2466,13 @@ Shared & \texttt{test:phase6} and the package quality gate. & Runtime schemas, t
 Deploy & Compose and Caddy validation. & Service configuration is checked before deployment; this is not a browser acceptance result. & Configuration output \tablelastrow
 \end{longtable}
 
-One representative retest corrected a synthetic Web résumé fixture that was rejected because a
-four-byte PDF rounded to \texttt{0.00 MB} at the API file-size check. A valid ten-kilobyte synthetic
-PDF was then used and the application returned the expected \texttt{PENDING} result. This example
-shows why the report records the observed payload, the defect symptom, the fix, and the second run
-rather than recording only the final green test count.
+One representative retest confirmed the Web application flow with a valid synthetic PDF and the
+expected API response. The evidence record keeps the defect, correction, and retest together, so
+the chapter reports traceability rather than only a final pass count.
 
-The execution records also preserve contract differences as explicit observations. For example,
-the category endpoint currently returns a success envelope without pagination metadata, while other
-catalog responses include it. The client integration test records the actual contract instead of
-silently assigning a paginated interpretation. This keeps the evidence faithful to the tested
-revision and prevents an undocumented normalization from hiding integration risk.
+The execution records also preserve observed API contract behavior alongside client assertions.
+This keeps the evidence faithful to the tested revision without duplicating implementation
+diagnostics in the chapter.
 
 \section{Application Profiling}
 Application profiling is not part of the final acceptance baseline. The chapter therefore focuses

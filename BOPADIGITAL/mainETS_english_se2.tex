@@ -44,6 +44,16 @@
     \\* \hline
 }
 
+% Manuals are kept at the Overleaf project root; the fallback supports local compilation
+% from the BOPADIGITAL source directory in this repository.
+\newcommand{\insertmanual}[1]{%
+    \IfFileExists{#1}{%
+        \includepdf[pages=-,fitpaper=true,pagecommand={\thispagestyle{plain}}]{#1}%
+    }{%
+        \includepdf[pages=-,fitpaper=true,pagecommand={\thispagestyle{plain}}]{../#1}%
+    }%
+}
+
 % Styled, compact code excerpts used as technical evidence in the report.
 \definecolor{codebackground}{RGB}{248,249,251}
 \definecolor{codeframe}{RGB}{190,198,208}
@@ -700,7 +710,7 @@ Figure~\ref{fig:deployment_diagram} shows the deployment arrangement. Docker Com
 
 Deployment requires Docker Compose, Git, an environment file, a PostgreSQL connection, and a GitHub Packages token for \emph{@bopacorp/shared}. Caddy can provide HTTPS and route public domains to the service ports. Credentials must stay in protected configuration.
 
-The deployment appendix documents the reproducible commands, health checks, external-storage configuration, domain mapping, and revision-specific evidence.
+The deployment appendix documents the reproducible commands, health checks, external-storage configuration, domain mapping, and validation evidence.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 3: SCRUM EVIDENCE
@@ -1673,7 +1683,7 @@ Very high probability: almost certain to occur. & 81\%--100\% \tablelastrow
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-R01 Deployment failure & Low & Critical & Run deployment checks in the local orchestration environment, document environment variables and health checks, and associate the final deployment claim with a revision-specific artifact. \\
+R01 Deployment failure & Low & Critical & Run deployment checks in the local orchestration environment, document environment variables and health checks, and associate the final deployment claim with a validation artifact. \\
 \hline
 R02 Code quality degradation & Moderate & Moderate & Enforce Biome, TypeScript checks, hooks, and CI quality gates. Record the exact command and result in the coding-standards and preventive-quality chapters. \\
 \hline
@@ -1732,40 +1742,38 @@ Docker Compose, Caddy, service names, ports, required variables, and image refer
 exposing credential values. It is therefore reported as operational automation, not as a TypeScript
 code-quality repository.
 
-\begin{longtable}{|L{2.9cm}|L{2.4cm}|L{2.6cm}|L{2.7cm}|L{3.2cm}|}
+\begin{longtable}{|L{2.8cm}|L{3.5cm}|L{3.8cm}|L{4.0cm}|}
 \caption{Repository automation and final evidence baseline}
 \label{tab:chapter4_repository_automation}\\
 \hline
-\textbf{Repository} & \textbf{Revision} & \textbf{Build or validation} & \textbf{Quality sequence} & \textbf{Evidence role} \\
+\textbf{Repository} & \textbf{Build or validation} & \textbf{Quality sequence} & \textbf{Evidence role} \\
 \hline
 \endfirsthead
-\continuedfrompreviouspage{5}
-\textbf{Repository} & \textbf{Revision} & \textbf{Build or validation} & \textbf{Quality sequence} & \textbf{Evidence role} \\
+\continuedfrompreviouspage{4}
+\textbf{Repository} & \textbf{Build or validation} & \textbf{Quality sequence} & \textbf{Evidence role} \\
 \hline
 \endhead
-\continuedonnextpage{5}
+\continuedonnextpage{4}
 \endfoot
 \endlastfoot
-API & \href{https://github.com/Bopacorp/bopacorp-api/commit/4018bd58c6856e9258b7e79b0b91eeaa852a5459}{\texttt{4018bd5}} & TypeScript and alias build & Lint, typecheck, tests, coverage & Backend implementation \\
+API & TypeScript and alias build & Lint, typecheck, tests, coverage & Backend implementation \\
 \hline
-CRM & \href{https://github.com/Bopacorp/bopacorp-crm/commit/5011dc46ceb81d39ca8b890fe122a014bd678370}{\texttt{5011dc4}} & Vite production build & Lint, typecheck, tests, coverage & Internal operations client \\
+CRM & Vite production build & Lint, typecheck, tests, coverage & Internal operations client \\
 \hline
-Web & \href{https://github.com/Bopacorp/bopacorp-web/commit/f5276792a4e7275603e39f228ee4d8490351d3cc}{\texttt{f527679}} & Vite production build & Lint, typecheck, tests, coverage & Public website and CMS \\
+Web & Vite production build & Lint, typecheck, tests, coverage & Public website and CMS \\
 \hline
-Mobile & \href{https://github.com/Bopacorp/bopacorp-mobile/commit/4638ea10464bb23650fef0b502d451e1a810e6cd}{\texttt{4638ea1}} & Expo web/application build & Lint, typecheck, tests, coverage & Mobile client \\
+Mobile & Expo web/application build & Lint, typecheck, tests, coverage & Mobile client \\
 \hline
-Shared & \href{https://github.com/Bopacorp/bopacorp-shared/commit/4cbf3d41a1c413fe2b93e2a64c117a0c024c8c91}{\texttt{4cbf3d4}} & TypeScript declaration build & Lint, typecheck, schema tests, coverage & Shared contracts \\
+Shared & TypeScript declaration build & Lint, typecheck, schema tests, coverage & Shared contracts \\
 \hline
-Deploy & \href{https://github.com/Bopacorp/deploy/commit/b6f2f6f5339be87fbc92bec37b632f0849ce1b27}{\texttt{b6f2f6f}} & Compose and Caddy validation & Compose and Caddy validation & Runtime orchestration \tablelastrow
+Deploy & Compose and Caddy validation & Compose and Caddy validation & Runtime orchestration \tablelastrow
 \end{longtable}
 
-The revision identifiers in Table~\ref{tab:chapter4_repository_automation} identify the repository
-state associated with the final evidence package. Each result is associated with its tested SHA,
-environment, command, and artifact reference. Chapter~5 expands the compiler, Biome, hook,
-and CI diagnostics; this chapter focuses on the automation design that makes those diagnostics
-repeatable.
-The complete API workflow is reproduced from the pinned
-\href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/.github/workflows/ci.yml}{\texttt{ci.yml}} file.
+Table~\ref{tab:chapter4_repository_automation} summarizes the validation sequence and evidence
+role of each repository. Each result is associated with its environment, command, and validation
+artifact. Chapter~5 expands the compiler, Biome, hook, and CI diagnostics; this chapter focuses on
+the automation design that makes those diagnostics repeatable.
+The API workflow used by the quality gate is summarized below.
 \begin{chaptercodeblock}
 \begin{lstlisting}[style=chaptercode,language=chapteryaml,basicstyle=\ttfamily\scriptsize,framesep=3pt,aboveskip=0.3\baselineskip,belowskip=0.3\baselineskip,caption={Complete API continuous-integration workflow},label={lst:chapter4_ci_pipeline}]
 name: CI
@@ -1857,9 +1865,7 @@ The API demonstrates the rule through modules such as
 and validation middleware; the controller coordinates the request and response envelope; and the
 service contains the domain operation. This organization makes responsibilities visible during
 review and gives the quality tools a predictable source tree.
-The representative rules below come from the pinned
-\href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/biome.json}{\texttt{biome.json}}
-configuration.
+The representative rules below summarize the formatter and linter configuration used by the API.
 
 The client repositories apply the same idea at a different level. CRM centralizes pagination,
 unsaved-form protection, and common list controls in reusable hooks and UI components. Web isolates
@@ -1870,8 +1876,7 @@ preserving the boundaries required by each user interface.
 The Shared repository completes the boundary by exporting request and response schemas from each
 domain. For example, the CRM and document domains expose explicit barrel files and Zod definitions.
 Consumers therefore validate data at the API boundary and infer compatible TypeScript types from the
-same source of truth. The strict compiler options are taken from the pinned
-\href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/tsconfig.json}{\texttt{tsconfig.json}}.
+same source of truth. The strict compiler options are summarized in the listing below.
 \begin{chaptercodeblock}
 \begin{lstlisting}[style=chaptercode,language=chapterjson,caption={Representative Biome quality rules from the API configuration},label={lst:chapter4_biome}]
 {
@@ -1921,13 +1926,10 @@ same source of truth. The strict compiler options are taken from the pinned
 
 \section{Git Hooks and Commit Validation}
 The repository workflow applies quality checks before code reaches the shared branch. Husky owns the
-Git hook lifecycle through the pinned \href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/.husky/pre-commit}{\texttt{pre-commit}}
-and \href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/.husky/commit-msg}{\texttt{commit-msg}}
-files. lint-staged limits local formatting and linting to staged source files, and
-\href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/commitlint.config.js}{\texttt{commitlint.config.js}}
-validates the commit message against the Conventional Commits format. The pre-commit hook
-therefore protects the smallest relevant change set, while CI repeats the full repository checks on
-the complete revision.
+Git hook lifecycle, lint-staged limits local formatting and linting to staged source files, and the
+commit-message validator checks the Conventional Commits format. The pre-commit hook therefore
+protects the smallest relevant change set, while CI repeats the full repository checks on the
+complete submission.
 
 The standardized commit flow is:
 
@@ -2039,23 +2041,15 @@ Schema contract & Shared & Zod request/response schemas and inferred types & Com
 \end{longtable}
 
 \section{Refactoring Example}
-The principal refactoring example is recorded in revision
-\href{https://github.com/Bopacorp/bopacorp-api/commit/ed79e6b99dc8341766fe34e21af3466745a861bb}{\texttt{ed79e6b}}, titled
-\emph{refactor(shared): extract duplicated utilities to shared modules}. Before this change,
+The principal refactoring example extracted duplicated utilities into shared modules. Before this change,
 several modules contained similar authentication constants, request helpers, query handling, and
 formatting logic. That structure increased the number of locations that required modification when
 the shared behavior changed.
 
-The refactoring extracted the duplicated behavior into explicit shared modules, including
-\path{src/shared/constants/auth.ts}, \path{src/shared/utils/format.ts},
-\path{src/shared/utils/query.ts}, and \path{src/shared/utils/request.ts}. The affected modules
-then imported the shared implementation instead of maintaining local copies. The change touched 16
-files and removed repeated utility code while adding a smaller, reusable shared surface.
-The extracted files are also available at the pinned revision as
-\href{https://github.com/Bopacorp/bopacorp-api/blob/ed79e6b99dc8341766fe34e21af3466745a861bb/src/shared/constants/auth.ts}{\texttt{auth.ts}},
-\href{https://github.com/Bopacorp/bopacorp-api/blob/ed79e6b99dc8341766fe34e21af3466745a861bb/src/shared/utils/format.ts}{\texttt{format.ts}},
-\href{https://github.com/Bopacorp/bopacorp-api/blob/ed79e6b99dc8341766fe34e21af3466745a861bb/src/shared/utils/query.ts}{\texttt{query.ts}},
-and \href{https://github.com/Bopacorp/bopacorp-api/blob/ed79e6b99dc8341766fe34e21af3466745a861bb/src/shared/utils/request.ts}{\texttt{request.ts}}.
+The refactoring centralized authentication constants, request helpers, query handling, and formatting
+logic in a reusable shared surface. The affected modules then imported the shared implementation
+instead of maintaining local copies. The change touched 16 files and removed repeated utility code
+while improving maintainability and consistency.
 
 \begin{longtable}{|L{3.1cm}|L{3.7cm}|L{3.8cm}|L{3.4cm}|}
 \caption{Before-and-after analysis of the API utility refactoring}
@@ -2081,15 +2075,14 @@ Maintenance & Several update points & One update point & Lower maintenance cost 
 \hline
 Quality impact & Duplication could diverge & Shared code is checked once and reused & More predictable changes \tablelastrow
 \end{longtable}
-\chaptercapture{chapter4_refactor_diff}{Before-and-after API refactor output for revision ed79e6b}{fig:chapter4_refactor_diff}
+\chaptercapture{chapter4_refactor_diff}{Before-and-after API utility refactoring output}{fig:chapter4_refactor_diff}
 
 \FloatBarrier
 
-The same refactoring principle appears in the client repositories. Revision \texttt{be8aa54} in CRM
-extracted reusable CRUD primitives for pagination, form protection, and shared UI. Revision
-\texttt{b30c779} in Web separated the CMS page into a service, a content-loading hook, and a
-presentation component. Revision \texttt{f31ecf9} reorganized the administrative area into feature
-modules and explicit route protection. These changes demonstrate that refactoring was used to
+The same refactoring principle appears in the client repositories. CRM extracted reusable CRUD
+primitives for pagination, form protection, and shared UI. Web separated the CMS page into a service,
+a content-loading hook, and a presentation component. The administrative area was reorganized into
+feature modules and explicit route protection. These changes demonstrate that refactoring was used to
 reduce duplication and clarify responsibility boundaries, not only to change file locations.
 
 The result is a coherent standard across the platform: shared rules protect the source code,
@@ -2132,7 +2125,7 @@ complete type information. The complete Biome configuration is available in
 Biome is used through two different purposes: the formatting command applies an intentional local
 correction, while \texttt{format:check} and \texttt{lint} verify the result without rewriting the
 workspace. This distinction is important in continuous integration because a successful validation
-must describe the submitted revision, not silently modify it.
+must describe the submitted source, not silently modify it.
 
 The result is a single feedback mechanism for formatting defects, import inconsistencies, unused
 code, and suspicious patterns. These diagnostics are intentionally complementary to TypeScript:
@@ -2156,12 +2149,12 @@ the quality results. Chapter~6 uses the resulting test artifacts to analyze test
 coverage.
 
 \section{Observed Preventive-Quality Results}
-The final evidence package records the preventive checks against revision-specific repository states.
-For the API, revision \texttt{4018bd5} produced successful lint, TypeScript validation, security
-audit, coverage-enabled test execution, production build, and coverage artifact upload. The same
-standardized sequence is applied to CRM, Web, Mobile, and Shared, with the Shared package adding
+The final evidence package records the preventive checks applied to the repository quality gates.
+The API passed lint, TypeScript validation, the security audit, coverage-enabled test execution,
+the production build, and coverage artifact upload. The same standardized sequence is applied to
+CRM, Web, Mobile, and Shared, with the Shared package adding
 declaration, type-level, package, and compatibility checks for its consumer boundary. The repository
-revisions and evidence roles are summarized in
+evidence roles are summarized in
 \hyperref[tab:chapter4_repository_automation]{Table~\ref*{tab:chapter4_repository_automation}}.
 
 The observed result is a layered quality gate rather than a single tool result. A source change must
@@ -2792,19 +2785,62 @@ completing the advisor's basic account and session-management flow.
 \chapter{INDIVIDUAL CONTRIBUTIONS AND AUTHORSHIP}
 
 \section{Individual Contributions}
-% TODO: Map each member to commits, artifacts and rubric criteria.
+The project was developed collaboratively across the application, infrastructure, testing, and
+documentation repositories. Table~\ref{tab:individual_contributions} summarizes the principal
+responsibilities assigned to each member and connects them with the delivered system areas. The
+summary describes the contribution areas rather than repeating the repository revision history
+already documented in the project evidence.
+
+\begingroup
+\small
+\begin{longtable}{|L{4.1cm}|L{9.2cm}|}
+\caption{Individual contributions of the development team}
+\label{tab:individual_contributions}\\
+\hline
+\textbf{Name} & \textbf{Principal contribution areas} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{2}
+\textbf{Name} & \textbf{Principal contribution areas} \\
+\hline
+\endhead
+\continuedonnextpage{2}
+\endfoot
+\endlastfoot
+Shirley Yamel Aragón Intriago &
+Public website and advisor client development, frontend acceptance testing, project
+documentation, deployment-guide preparation, and quality-assurance activities. \\
+\hline
+Fernando Nahim Díaz Osorio &
+Authentication and authorization, Scrum planning, project-management activities, reporting
+features, technical documentation, and application-profiling work. \\
+\hline
+Salvador Gabriel Muñoz Sánchez &
+Backend foundations, CMS and Employability modules, frontend integrations, user-interface
+components, testing activities, and technical support. \\
+\hline
+Anthony Josué Navarrete Castillo &
+CRM frontend features, login interface, mobile-client components, frontend integrations, and
+testing support. \\
+\hline
+Gabriel Alejandro Tumbaco Santana &
+Database design, backend and CRM API development, document-management services, CI/CD pipelines,
+Docker deployment, and technical coordination. \tablelastrow
+\end{longtable}
+\endgroup
 
 \section{Authorship Declaration}
 The project was developed by five students of the Computer Engineering program at ESPOL. The
-signed authorship declaration confirms the participation and authorship of Shirley Yamel Aragón
-Intriago, Fernando Nahim Díaz Osorio, Anthony Josué Navarrete Castillo, Salvador Gabriel Muñoz
-Sánchez, and Gabriel Alejandro Tumbaco Santana.
+signed declaration confirms the participation and authorship of Shirley Yamel Aragón Intriago,
+Fernando Nahim Díaz Osorio, Anthony Josué Navarrete Castillo, Salvador Gabriel Muñoz Sánchez, and
+Gabriel Alejandro Tumbaco Santana.
 
 The declaration is presented separately from the client acceptance evidence because it confirms
 the authorship of the academic project, while the acceptance letters confirm the client's review and
 approval of the delivered increments.
 
-\includepdf[pages=-,fitpaper=true]{appendices/authorship/autorship.pdf}
+\clearpage
+\includepdf[pages=-,fitpaper=true,pagecommand={\thispagestyle{plain}}]{appendices/authorship/authorship.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % APPENDICES
@@ -2972,28 +3008,101 @@ below. They remain part of the initial requirements history but are not part of 
 \chapter{REPOSITORIES, TOOLS AND PROJECT LINKS}
 \label{app:project_links}
 
-\section{Project-Management Tool}
-The complete BOPADIGITAL task lists, sprint organization, assignments, and progress states can
-be reviewed through the following read-only ClickUp workspace link:
+\section{Git Repositories}
+The project is organized as a multi-repository architecture under the public
+\href{https://github.com/Bopacorp}{\texttt{Bopacorp}} GitHub organization. The following index
+provides the access links and responsibilities required for project evaluation.
 
-\begin{center}
-\href{https://sharing.clickup.com/90171310184/l/h/5-90179341245-1/26ab9e034992a64}{\texttt{BOPADIGITAL ClickUp workspace}}
-\end{center}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|p{3.2cm}|p{6.0cm}|p{4.8cm}|}
+\hline
+\textbf{Repository} & \textbf{Description} & \textbf{URL} \\
+\hline
+\texttt{bopacorp-web} & Public website and CMS portal & \url{https://github.com/Bopacorp/bopacorp-web} \\
+\hline
+\texttt{bopacorp-crm} & Internal CRM platform & \url{https://github.com/Bopacorp/bopacorp-crm} \\
+\hline
+\texttt{bopacorp-api} & REST API backend & \url{https://github.com/Bopacorp/bopacorp-api} \\
+\hline
+\texttt{bopacorp-shared} & Shared TypeScript types and Zod schemas & \url{https://github.com/Bopacorp/bopacorp-shared} \\
+\hline
+\texttt{bopacorp-mobile} & Mobile application for sales advisors & \url{https://github.com/Bopacorp/bopacorp-mobile} \\
+\hline
+\texttt{deploy} & Deployment scripts, Docker Compose, and Caddy configuration & \url{https://github.com/Bopacorp/deploy} \\
+\hline
+\texttt{communications} & Client communications evidence and acceptance letters & \url{https://github.com/Bopacorp/communications} \\
+\hline
+\end{tabular}
+\caption{Project repository index}
+\label{tab:appendix_repository_index}
+\end{table}
 
-The report includes representative captures and a summarized backlog so that the main chapters
-remain focused on the project results.
+\section{Production Deployment URLs}
+The following endpoints were included for evaluation of the deployed BOPADIGITAL components.
 
-\section{Source Organization}
-The source repositories and the project-evidence repository are centrally administered through the public
-\href{https://github.com/Bopacorp}{\texttt{Bopacorp} GitHub organization}. Repository responsibilities are defined in
-Table~\ref{tab:repository_ecosystem}; Chapter~4 links the revision-specific commits and the representative
-configuration files used as evidence.
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|p{4.2cm}|p{9.8cm}|}
+\hline
+\textbf{Component} & \textbf{URL} \\
+\hline
+CRM system & \url{https://bopacorp-crm.jointrymyride.com/} \\
+\hline
+Public website & \url{https://bopacorp-web.jointrymyride.com/} \\
+\hline
+CMS portal & \url{https://bopacorp-web.jointrymyride.com/login} \\
+\hline
+REST API & \url{https://api-bopacorp.jointrymyride.com/} \\
+\hline
+\end{tabular}
+\caption{Production deployment URLs}
+\label{tab:appendix_deployment_urls}
+\end{table}
+
+\section{Test Accounts}
+The following accounts were included for academic evaluation of the role-based workflows.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|p{3.0cm}|p{6.2cm}|p{3.0cm}|}
+\hline
+\textbf{Role} & \textbf{Email} & \textbf{Password} \\
+\hline
+Admin & \texttt{admin@bopacorp.com} & \texttt{admin} \\
+\hline
+Manager & \texttt{cpauta@bopacorp.com} & \texttt{Bopa2026!} \\
+\hline
+Supervisor & \texttt{jmendoza@bopacorp.com} & \texttt{Bopa2026!} \\
+\hline
+Advisor & \texttt{lreyes@bopacorp.com} & \texttt{Bopa2026!} \\
+\hline
+Coordinator & \texttt{dsanchez@bopacorp.com} & \texttt{Bopa2026!} \\
+\hline
+\end{tabular}
+\caption{Test accounts for project evaluation}
+\label{tab:appendix_test_accounts}
+\end{table}
+
+These accounts are intended only for academic evaluation and must not be used with production data.
+
+\section{Additional Deliverables}
+\begin{itemize}
+    \item \textbf{ClickUp workspace:} \url{https://sharing.clickup.com/90171310184/l/h/5-90179341245-1/26ab9e034992a64}
+    (task, sprint, assignment, and progress tracking).
+    \item \textbf{Recorded presentation video:} \url{https://youtu.be/bKS1ZHdQ9hc}
+    (10-minute presentation of the running application).
+    \item \textbf{Slide presentation:} \url{https://canva.link/alyprj19gbzaavg}
+\end{itemize}
 
 \chapter{SOFTWARE BUILDING AND DEPLOYMENT EVIDENCE}
 % TODO: Add build/release evidence, deployed revisions and health checks.
 
 \chapter{PROJECT PRESENTATION AND DEMONSTRATION}
-% TODO: Add the presentation/video link and demonstration evidence.
+The recorded presentation video and slide deck are listed in Appendix~\ref{app:project_links}.
 
 \chapter{CLIENT EVIDENCE AND COMMUNICATIONS INDEX}
 \label{chap:client_communications}
@@ -3002,7 +3111,7 @@ configuration files used as evidence.
 A registry of the communications and validation activities held with the project client. The
 evidence includes messages, meetings, sprint acceptance letters, the final acceptance form, and
 photographs of the review and closing activities. The complete evidence package is preserved in the
-dedicated communications repository.
+dedicated communications repository: \url{https://github.com/Bopacorp/communications}.
 
 \begingroup
 \footnotesize
@@ -3131,9 +3240,25 @@ the formal validation of each increment and the final project.
 % TODO: Insert or reference the verified installation guide.
 
 \chapter{USER MANUALS}
-% TODO: Insert the final role-based user manual PDFs.
-% Example, once the file exists in Overleaf:
-% \includepdf[pages=-,fitpaper=true]{appendices/manuals/user-manual.pdf}
+The following role-based manuals provide the operational instructions for the final BOPADIGITAL
+components. Each manual is included in full as part of the final delivery package.
+
+\section{CRM User Manual}
+The CRM manual documents the internal commercial workflows, role-based access, clients,
+negotiations, documents, and reports.
+\insertmanual{manual_crm.pdf}
+
+\section{Mobile User Manual}
+The mobile manual documents the advisor workflows for clients, negotiations, visits, and documents.
+\insertmanual{manual_movil.pdf}
+
+\section{Public Website and CMS User Manual --- Part I}
+This manual documents the public website, catalog, company information, and initial CMS workflows.
+\insertmanual{manual_web_1.pdf}
+
+\section{Public Website and CMS User Manual --- Part II}
+This manual completes the public website and CMS operational instructions.
+\insertmanual{manual_web_2.pdf}
 
 \chapter{TESTING ARTIFACTS, TRACEABILITY AND SCHEDULE}
 % TODO: Add test logs, risk traceability, coverage artifacts and final schedule.

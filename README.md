@@ -43,6 +43,10 @@ Context and reference documents for the **BOPADIGITAL** project. Used by agents 
 - `T2BOPADIGITAL.pdf` — final project deliverable report.
 - `InformeFinalPracticasEmpresariales.docx` — final internship report.
 
+### 08-testing-plan-shared/
+- `PLAN_TESTING_SHARED.md` — shared package testing strategy and execution by phase.
+- `PHASE6_CONSUMER_COMPATIBILITY.md` — package exports, artifact and consumer compatibility evidence.
+
 ### 99-reference-nintventario/
 - `Development_Report___Nintventario.md` / `.pdf` — **different project (Nintventario)**, kept as reference/example only. Not part of BOPADIGITAL scope.
 

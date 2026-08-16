@@ -341,6 +341,7 @@ Later chapters and appendices contain the detailed demonstration, tests, and use
 % CHAPTER 2: RELEVANT ARCHITECTURAL DECISIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{RELEVANT ARCHITECTURAL DECISIONS}
+\label{chap:architecture}
 
 \section{Repository Ecosystem and System Boundaries}
 The final BOPADIGITAL solution uses several repositories with clear responsibilities: public website, CRM, mobile application, API, shared contracts, deployment, and project evidence. Clients connect through the REST API, and the shared package keeps their data contracts consistent.
@@ -2482,24 +2483,308 @@ used to support the current testing conclusions.
 % CHAPTER 7: SYSTEM DESCRIPTION AND DEMONSTRATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{SYSTEM DESCRIPTION AND DEMONSTRATION}
+\label{chap:system_description}
 
 \section{General System Description}
-% TODO: Describe the final verified BOPADIGITAL platform.
+The BOPADIGITAL platform centralizes the commercial activities of BOPACORP in one connected
+ecosystem. It brings together the public website, the content management interface, the internal
+CRM, the REST API, the shared contract package, and the advisor client. The system replaces
+fragmented handling of clients, negotiations, visits, documents, vacancies, and reports with
+role-aware workflows supported by a common API.
+
+The architectural boundaries and deployment arrangement are presented in
+Chapter~\ref{chap:architecture}. The repository index and access links are maintained in
+Appendix~\ref{app:project_links}. This chapter therefore concentrates on what each user-facing
+component provides and how the components support the final active scope. Quality controls and
+automated validation is documented in Chapters~\ref{chap:chapter4_standards},~\ref{chap:chapter5_preemptive},
+and~\ref{chap:chapter6_tests}.
+
+The final product includes the public catalog and employability flows, CMS content editing, CRM
+management and reporting, and the advisor workflows implemented through the mobile client. Offer
+Matrices and their dependent supervision or approval stories remain historical requirements and
+are excluded from the final active product, as recorded in the requirements traceability appendix.
 
 \section{Public Website}
-% TODO: Document verified public website workflows and screenshots.
+The public website is the corporate entry point for business visitors and candidates. It presents
+the company, its services, contact channels, and available vacancies. Public pages consume the
+same API-backed content that administrators maintain through the CMS, so the information shown to
+visitors follows the shared content model.
+
+\subsubsection{Home Page}
+The Home page presents BOPACORP's identity, central message, values, and links to the main public
+flows. Its hero area and summary sections guide visitors toward the service catalog, company
+information, and contact actions.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{home1.png}
+    \caption{Public Website --- Home page}
+    \label{fig:chapter7_website_home}
+\end{figure}
+
+\subsubsection{Services Page}
+The Services page presents BOPACORP's products and services by category. Visitors can inspect the
+description and conditions of an offering and use the contact flow to request information or begin
+a commercial conversation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{services1.png}
+    \caption{Public Website --- Services catalog}
+    \label{fig:chapter7_website_services}
+\end{figure}
+
+\subsubsection{About Us Page}
+The About Us page communicates the company's history, mission, vision, values, and organizational
+identity. It gives visitors the context needed to understand BOPACORP before they use the service
+or contact flows.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{about1.png}
+    \caption{Public Website --- About Us page}
+    \label{fig:chapter7_website_about}
+\end{figure}
+
+\subsubsection{Employability Portal}
+The Employability portal allows candidates to review available vacancies, read their requirements,
+and submit an application with contact information and a PDF resume. Required-field and file
+validation provide immediate feedback before the application is sent to the API.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{employabilty.png}
+    \caption{Public Website --- Employability portal}
+    \label{fig:chapter7_website_employability}
+\end{figure}
+\FloatBarrier
 
 \section{Content Management System}
-% TODO: Document verified CMS workflows and screenshots.
+The CMS gives authorized administrators a controlled interface for maintaining the dynamic content
+shown on the public website. Editing is performed through content blocks rather than source-code
+changes, which keeps routine updates within the administrative workflow while preserving the API
+authorization boundary.
+
+\subsubsection{Content Blocks Dashboard}
+The dashboard groups editable content into sections and displays each block with its key, type,
+preview, and available action. This organization allows administrators to locate the public text or
+image that must be updated without navigating the source repository.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{cms.png}
+    \caption{CMS --- Content blocks dashboard}
+    \label{fig:chapter7_cms_dashboard}
+\end{figure}
+
+\subsubsection{Text Content Edition}
+Text blocks are edited in a focused modal and saved through the authenticated API. The interface
+shows the selected content key and current value so that the administrator can review the change
+before it is applied to the public site.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{cms_modal_text.png}
+    \caption{CMS --- Text content edition}
+    \label{fig:chapter7_cms_text}
+\end{figure}
+
+\subsubsection{Media Asset Management}
+Image blocks use a dedicated upload action. The interface communicates the accepted image formats
+and the five-megabyte limit, while the API applies the corresponding validation before storing the
+asset. This keeps invalid media from silently replacing content on the public website.
+\FloatBarrier
 
 \section{Customer Relationship Management}
-% TODO: Document verified CRM roles and workflows.
+The CRM is the internal management platform for the commercial team. It provides role-aware access
+for administrators, managers, supervisors, coordinators, and advisors. The interface is built with
+React 19, TypeScript, and Tailwind CSS and communicates with the centralized REST API using the
+shared response and validation contracts. Its screens are internationalized so that the same
+business workflows remain consistent across the application.
+
+\subsubsection{Authentication and Access Control}
+Users sign in with their organizational credentials and receive access according to their assigned
+roles and permissions. The CRM protects both navigation and actions, allowing each user to work only
+with the modules and records permitted by the API authorization model.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_login.png}
+    \caption{CRM --- Authentication screen}
+    \label{fig:chapter7_crm_login}
+\end{figure}
+
+\subsubsection{Executive Overview Dashboard}
+The overview dashboard summarizes commercial activity through indicators, recent activity, funnel
+information, and advisor-level results. The scope of the displayed information follows the user's
+role: management views consolidated information, while advisors view the information relevant to
+their own work.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_overview.png}
+    \caption{CRM --- Executive overview dashboard}
+    \label{fig:chapter7_crm_overview}
+\end{figure}
+
+\subsubsection{Client Management}
+The client module maintains the central registry of business customers. Records include the RUC or
+business identifier, contact information, assigned advisor, billing information, and active status.
+Users with the corresponding permission can search, filter, create, update, assign, or deactivate
+records, while the detail view connects a client with its negotiations, visits, and activity.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_clients.png}
+    \caption{CRM --- Client management}
+    \label{fig:chapter7_crm_clients}
+\end{figure}
+
+\subsubsection{Negotiation Management}
+The negotiation module follows a commercial opportunity through its active states. It provides a
+filterable table and a Kanban view for reviewing and changing the state, together with a detail page
+for the related client, advisor, dates, observations, and activity history.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_negotiation_detail.png}
+    \caption{CRM --- Negotiation detail and activity tabs}
+    \label{fig:chapter7_crm_negotiation}
+\end{figure}
+
+The detail view organizes state history, visits, and documents in separate tabs. References to an
+Offer Matrix in the legacy interface are retained only as historical context; matrix construction,
+subsidy calculation, and approval workflows are excluded from the final active scope.
+
+\subsubsection{Document Management}
+The document module centralizes files associated with negotiations. Advisors can attach the
+required documentation, while coordinators and managers can filter pending, accepted, or rejected
+records, apply approval or rejection decisions with reasons, and download files individually or in
+bulk according to their permissions. Mandatory document types define the minimum documentation for
+a negotiation. The API validates PDF, JPG, and PNG files and the 50 MB limit before encrypting and
+storing them, and the resulting document state remains visible to the responsible users.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_documents.png}
+    \caption{CRM --- Document management dashboard}
+    \label{fig:chapter7_crm_documents}
+\end{figure}
+
+\subsubsection{Reporting and Supervision}
+The reporting area presents indicators for negotiations, visits, closures, billing, and time to
+close. Managers and supervisors can filter the information according to their permitted scope,
+review advisor-level results, compare progress against configured targets, and export the available
+report data in CSV format for external analysis.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_reports.png}
+    \caption{CRM --- Reporting and supervision indicators}
+    \label{fig:chapter7_crm_reports}
+\end{figure}
+
+\subsubsection{Product Catalog Management}
+Administrators manage the products and services presented by the public catalog. The module stores
+descriptions, categories, prices, benefits, media, and reference values used by the public website.
+It also provides access to contact requests submitted through the public catalog.
+
+\subsubsection{Employability Management}
+Authorized CRM users manage vacancies and review the applications submitted through the public
+employability portal. The application view supports vacancy CRUD operations, candidate information,
+resume download, and progression through the recorded states received, in review, accepted, and
+rejected.
+
+\subsubsection{Organization and Team Management}
+The organization area maintains departments, employees, organizational roles, and advisor--
+supervisor relationships. These records support the permission and ownership rules used by client,
+negotiation, visit, document, and report workflows.
+\FloatBarrier
 
 \section{Mobile Application}
-% TODO: Include mobile only after the repository and workflow are verified.
+The mobile application extends the advisor workflows to field work. It allows an authenticated
+advisor to consult assigned clients, maintain negotiations, register visits, consult documents,
+and record observations through the same API-backed business model used by the CRM. The description
+here documents the implemented application scope; it does not claim an Android or iOS device smoke
+execution, which is outside the evidence baseline of this report.
 
-\section{Feature Demonstration Runbook}
-% TODO: Define the English demonstration sequence, roles, timing and expected results.
+\subsubsection{Login Screen}
+The login screen authenticates the advisor and loads the permissions and assigned commercial data
+required by the mobile workflows.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mloginscreen.png}
+    \caption{Mobile application --- Login screen}
+    \label{fig:chapter7_mobile_login}
+\end{figure}
+
+\subsubsection{Clients List, Creation, and Editing}
+The Clients screen presents the advisor's assigned portfolio and supports search, filtering, detail
+review, and registration of new business clients. The creation form captures the RUC, company name,
+contact information, phone, email, and address; validation occurs before submission. The editing
+flow preserves the unique business identifier while synchronizing the remaining changes with the
+API.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mclients.png}
+    \caption{Mobile application --- Assigned clients}
+    \label{fig:chapter7_mobile_clients}
+\end{figure}
+
+\subsubsection{Negotiations List and Details}
+The Negotiations screen lists opportunities assigned to the advisor and allows a new negotiation to
+be created for an existing client. The creation flow records the client, initial stage, estimated
+closing date, and observations. A negotiation detail view presents its stage, dates, observations,
+visits, documents, and comments in one place, while the edit flow updates the stage, estimated
+closing date, observations, and active status. The available stage values keep commercial progress
+consistent across the field and CRM workflows.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mnegotiationdetail.png}
+    \caption{Mobile application --- Negotiation details}
+    \label{fig:chapter7_mobile_negotiation}
+\end{figure}
+
+\subsubsection{Register Visit}
+Advisors register a visit by selecting its type, date, and observations. The visit is associated with
+the corresponding negotiation so that the CRM can use it for follow-up and supervision.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mregistervisit.png}
+    \caption{Mobile application --- Register visit}
+    \label{fig:chapter7_mobile_visit}
+\end{figure}
+
+\subsubsection{Negotiation Documents and Comments}
+The negotiation detail exposes associated documents and commercial comments. Advisors can browse,
+search, upload, preview, and remove files associated with a negotiation, while the interface
+indicates whether each document is pending, approved, or rejected. Advisors can also preserve
+observations from customer interactions without leaving the negotiation context. Offer Matrix
+actions described in the legacy mobile screens are not part of the final active workflow.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mdocumentmanagement.png}
+    \caption{Mobile application --- Document management}
+    \label{fig:chapter7_mobile_documents}
+\end{figure}
+
+\subsubsection{Settings}
+The Settings screen presents the authenticated profile, application version, server configuration,
+and appearance preferences. It also provides a controlled way to close the current session,
+completing the advisor's basic account and session-management flow.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{msettings.png}
+    \caption{Mobile application --- Settings}
+    \label{fig:chapter7_mobile_settings}
+\end{figure}
+\FloatBarrier
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 8: INDIVIDUAL CONTRIBUTIONS AND AUTHORSHIP
@@ -2661,32 +2946,28 @@ as a final feature.
 \hline
 \texttt{HU-REP-008} & Manager & As a manager, I want to visualize consolidated information through charts and KPI indicators to easily interpret the team’s overall results. \\
 \hline
-\texttt{HU-REP-009} & Sales Advisor & As a sales advisor, I want to view my own performance metrics, including contacted clients, active negotiations, closures, and accumulated billing, so that I can assess my personal progress. \\
-\tablelastrow
+\texttt{HU-REP-009} & Sales Advisor & As a sales advisor, I want to view my own performance metrics, including contacted clients, active negotiations, closures, and accumulated billing, so that I can assess my personal progress. \tablelastrow
 \end{longtable}
 \endgroup
 
 The active table contains 55 stories. The 13 excluded requirement records are listed separately
 below. They remain part of the initial requirements history but are not part of the final product.
 
-\begin{longtable}{|L{2.8cm}|L{4.0cm}|L{8.0cm}|}
-\caption{Requirement records excluded from active scope}\label{tab:excluded_user_stories}\\
+\begin{table}[H]
+\centering
+\small
+\caption{Requirement records excluded from active scope}
+\label{tab:excluded_user_stories}
+\begin{tabular}{|L{2.8cm}|L{4.0cm}|L{8.0cm}|}
 \hline
 \textbf{Identifiers} & \textbf{Requirement area} & \textbf{Scope treatment} \\
 \hline
-\endfirsthead
-\continuedfrompreviouspage{3}
-\textbf{Identifiers} & \textbf{Requirement area} & \textbf{Scope treatment} \\
-\hline
-\endhead
-\continuedonnextpage{3}
-\endfoot
-\endlastfoot
 \texttt{HU-MAT-001}--\texttt{HU-MAT-007} & Offer Matrices & Matrix creation, items, subsidy calculations, attachments, draft submission, approval submission, and matrix history were removed from the active product. \\
 \hline
 \texttt{HU-SUP-001}--\texttt{HU-SUP-006} & Supervision and Approvals & Matrix indicators, approval or rejection, matrix history, matrix notifications, and matrix filters depend on the removed module and are excluded from active scenarios. \\
-\tablelastrow
-\end{longtable}
+\hline
+\end{tabular}
+\end{table}
 
 \chapter{REPOSITORIES, TOOLS AND PROJECT LINKS}
 \label{app:project_links}

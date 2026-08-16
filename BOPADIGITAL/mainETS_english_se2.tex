@@ -2184,9 +2184,8 @@ The testing strategy follows the same layered boundary used by the implementatio
 component tests protect local business rules and interface behavior; integration tests verify the
 HTTP and response contracts against an isolated API; browser acceptance tests exercise complete
 CRM and Web journeys; and manual review covers behavior that cannot be established by a simulated
-DOM. Mobile uses Jest and the Expo testing environment for its implemented logic and screen flows.
-It is not presented as a device test because no Android or iOS smoke execution is included in this
-evidence package.
+DOM. The mobile client supports the advisor workflows. The testing evidence presented in this
+chapter focuses on the API, CRM, and Web layers.
 
 The preventive controls described in
 \hyperref[chap:chapter5_preemptive]{Chapter~\ref*{chap:chapter5_preemptive}} establish that the
@@ -2222,8 +2221,7 @@ Operational validation & Check deployment configuration and service routing with
 \section{Test Management}
 Test management separates test design, execution, evidence review, and defect retesting. The API
 and shared-contract suites protect the service and contract boundaries. CRM and Web own their
-frontend behavior and coordinate integration credentials with the API environment. Mobile owns
-its Jest/Expo fixtures and keeps device validation separate from the unit gate. The final test
+frontend behavior and coordinate integration credentials with the API environment. The final test
 records identify the repository revision, command, environment, and artifact for every selected
 result.
 
@@ -2418,7 +2416,7 @@ AT-05 & Coordinator or supervisor, CRM & Review pending documentation and approv
 \hline
 AT-06 & Manager or supervisor, CRM & Filter reports, edit a sales target, and verify restoration of the original values. & Filtered values, access control, restored state, and browser artifact \\
 \hline
-AT-07 & Advisor, Mobile & Validate the advisor application logic for authentication, client, negotiation, visit, and document flows. & Jest/Expo output and critical-code coverage; no device claim \tablelastrow
+AT-07 & Advisor, Mobile & Validate authentication, client, negotiation, visit, and document flows. & Mobile test and coverage record \tablelastrow
 \end{longtable}
 
 The recorded CRM and Web Playwright results are represented by the selected browser artifacts rather
@@ -2512,7 +2510,16 @@ used to support the current testing conclusions.
 % TODO: Map each member to commits, artifacts and rubric criteria.
 
 \section{Authorship Declaration}
-% TODO: Add the final authorship declaration.
+The project was developed by five students of the Computer Engineering program at ESPOL. The
+signed authorship declaration confirms the participation and authorship of Shirley Yamel Aragón
+Intriago, Fernando Nahim Díaz Osorio, Anthony Josué Navarrete Castillo, Salvador Gabriel Muñoz
+Sánchez, and Gabriel Alejandro Tumbaco Santana.
+
+The declaration is presented separately from the client acceptance evidence because it confirms
+the authorship of the academic project, while the acceptance letters confirm the client's review and
+approval of the delivered increments.
+
+\includepdf[pages=-,fitpaper=true]{appendices/authorship/autorship.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % APPENDICES
@@ -2531,7 +2538,9 @@ identifier are maintained in the requirements specification. The remaining 61 no
 therefore visible through the active and excluded tables without presenting matrix functionality
 as a final feature.
 
-\begin{longtable}{|L{1.8cm}|L{2.8cm}|L{9.0cm}|}
+\begingroup
+\small
+\begin{longtable}{|L{2.5cm}|L{3.2cm}|L{7.9cm}|}
 \caption{Active user story traceability}\label{tab:final_user_story_traceability}\\
 \hline
 \textbf{ID} & \textbf{Actor} & \textbf{User story} \\
@@ -2655,6 +2664,7 @@ as a final feature.
 \texttt{HU-REP-009} & Sales Advisor & As a sales advisor, I want to view my own performance metrics, including contacted clients, active negotiations, closures, and accumulated billing, so that I can assess my personal progress. \\
 \tablelastrow
 \end{longtable}
+\endgroup
 
 The active table contains 55 stories. The 13 excluded requirement records are listed separately
 below. They remain part of the initial requirements history but are not part of the final product.
@@ -2749,9 +2759,7 @@ Final project acceptance & Formal acceptance of the complete project after the s
 \hline
 Virtual review and meeting coordination & Coordination and confirmation of the project review sessions with the client. & Image & Team and client & July--August 2026 \\
 \hline
-Closing meeting evidence & In-person closing meeting, client interaction, and delivery confirmation. & Photograph & Team and client & August 14, 2026 \\
-\hline
-Team authorship confirmation & Confirmation of the participation and authorship of the development team. & Document & All team members & August 2026 \tablelastrow
+Closing meeting evidence & In-person closing meeting, client interaction, and delivery confirmation. & Photograph & Team and client & August 14, 2026 \tablelastrow
 \end{longtable}
 \endgroup
 
@@ -2786,10 +2794,25 @@ incremental validation process for the second part of the project. They document
 quality assurance, risk-based testing, standards, deployment preparation, manuals, final
 validation, and project closure.
 
+\includepdf[pages=1-4,fitpaper=true]{appendices/communications/final_acceptance_s4_s7_2026-08-07.pdf}
+
 \section{Final Project Acceptance Form}
 The final project acceptance form was signed after the review of the seven sprint increments and
 the complete delivery package. It confirms the client's conformity with the delivered system,
 documentation, evidence, and project objectives.
+
+\includepdf[pages=5,fitpaper=true]{appendices/communications/final_acceptance_s4_s7_2026-08-07.pdf}
+
+\section{Virtual Review Meeting}
+The following figure documents the virtual review session held with the client during the final
+project activities.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth, keepaspectratio]{communications/virtual_review_session}
+    \caption{Virtual Project Review Session}
+    \label{fig:communications_virtual_review}
+\end{figure}
 
 \section{Client Evidence Photos}
 The following photographs document the interaction with the client during the review and system
@@ -2809,8 +2832,16 @@ demonstration activities.
     \label{fig:evidence_photo2}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth, keepaspectratio]{communications/client_closing_meeting}
+    \caption{Client Closing Meeting at BOPACORP}
+    \label{fig:communications_closing_meeting}
+\end{figure}
+
 The photographs provide supporting visual evidence of the client review and system demonstration;
-the signed acceptance letters provide the formal validation of each increment and the final project.
+the closing photograph documents the final client meeting, and the signed acceptance letters provide
+the formal validation of each increment and the final project.
 
 \chapter{SYSTEM DEPLOYMENT GUIDE}
 % TODO: Insert or reference the verified system deployment guide.

@@ -17,31 +17,31 @@ Before presenting, open the public Web, CRM, mobile recording/device, architectu
 
 **On screen:** title, client, three operational problems, final scope.
 
-Good morning. We are Team 2, and today we present BOPADIGITAL, the commercial digital platform developed for BOPACORP S.A., an Ecuadorian telecommunications company and strategic commercial partner of Movistar Ecuador.
+Good morning. We are Team 2, and today we will present BOPADIGITAL. We developed this digital sales platform for BOPACORP S.A., an Ecuadorian telecommunications company and a commercial partner of Movistar Ecuador.
 
-The project began from three operational problems. First, commercial documents were exchanged through separate channels, producing delays and extra office visits. Second, supervisors and managers had limited visibility of advisor visits and negotiation progress. Third, client portfolios and sales reports depended heavily on spreadsheets and manual communication.
+The project started because the company had three main problems. First, employees sent commercial documents through different channels. This caused delays and extra visits to the office. Second, supervisors and managers could not easily see advisor visits or negotiation progress. Third, the company used many spreadsheets and manual messages to manage clients and prepare sales reports.
 
-Our objective was to digitize and centralize this business-to-business commercial lifecycle. The final ecosystem includes a public website and employability portal, a content management interface, an internal CRM, a mobile advisor application, a REST API, and a shared TypeScript contract package.
+Our goal was to put this business sales process in one digital system. The final solution has a public website and job portal, a content management system, an internal CRM, a mobile application for advisors, a REST API, and a shared TypeScript package.
 
-The active scope covers authentication and role-based access, clients, negotiations, visits, documents, reports, catalog and public content, vacancies and applications, organization management, and advisor mobile workflows. The client removed Offer Matrices, subsidy calculations, and their approval stories from the final scope, so they are preserved only as historical traceability and are not part of this demonstration.
+The final scope includes login, role permissions, clients, negotiations, visits, documents, reports, the service catalog, public content, vacancies, job applications, company settings, and mobile tasks. The client removed Offer Matrices, subsidy calculations, and their approval process from the final scope. For this reason, we will not show those features today.
 
-The original requirements baseline contained 68 user stories. Thirteen matrix-related records were excluded, leaving 55 active stories. Today, we will demonstrate representative acceptance scenarios for visitors, candidates, administrators, managers, supervisors, coordinators, and advisors.
+The first requirements document had 68 user stories. We removed 13 stories related to Offer Matrices, so the final product has 55 active stories. Today, we will show important cases for visitors, candidates, administrators, managers, supervisors, coordinators, and advisors.
 
-I will now pass to my teammate, who will explain how we organized the project and why we selected this architecture.
+Now, my teammate will explain how we organized the project and why we chose this architecture.
 
 ## Person 2 — Scrum, Architecture, and Technical Decisions (2 minutes 30 seconds)
 
 **On screen:** seven-sprint timeline, component diagram, deployment diagram.
 
-We developed BOPADIGITAL through seven Scrum sprints, using ClickUp for planning and the communications repository for reviews and acceptance evidence.
+We developed BOPADIGITAL in seven Scrum sprints. We used ClickUp to plan the work, and we saved reviews and client acceptance evidence in the communications repository.
 
-Sprint 1 established repositories, database foundations, quality tools, authentication, and RBAC. Sprint 2 added catalog, CMS, employability, organization, users, the public Web, and initial CRM work. Sprint 3 consolidated the API and client integrations. Sprint 4 strengthened frontend tests and Scrum evidence. Sprint 5 focused on acceptance, integration, risk-based testing, metrics, and defect tracking. Sprint 6 added refactoring, static analysis, CI evidence, security, browser, and accessibility checks. Sprint 7 completed deployment, manuals, the final report, validation, and project closure. Each increment was reviewed, and final client acceptance was recorded after the seven sprints.
+In Sprint 1, we prepared the repositories, database, quality tools, login, and role permissions. Sprint 2 added the catalog, CMS, job portal, company data, users, public Web, and the first CRM features. Sprint 3 connected the API with the Web and CRM. Sprint 4 improved frontend tests and Scrum evidence. Sprint 5 focused on acceptance tests, integration tests, risk-based testing, measurements, and defect tracking. Sprint 6 added code improvements, static analysis, CI evidence, security, browser, and accessibility checks. Sprint 7 completed deployment, manuals, the final report, validation, and project closure. The client reviewed the work during the sprints and gave final acceptance after Sprint 7.
 
-Architecturally, Web, CRM, and Mobile are independent clients of one versioned REST API. The API is an Express and TypeScript modular monolith: routes call controllers, controllers call services, and services use Drizzle to access PostgreSQL. This gives clear domain separation without the operational cost of microservices.
+The Web, CRM, and Mobile applications are separate clients of one REST API. The API uses Express and TypeScript. Each request goes from a route to a controller, then to a service, and finally to PostgreSQL through Drizzle. This structure separates the business modules while keeping the backend simple to deploy and maintain.
 
-The package `@bopacorp/shared` provides Zod schemas, enums, types, and response contracts to the API and clients. React with Vite supports the Web and CRM, while Expo with React Native supports the advisor application. Development used a shared PostgreSQL database hosted by Supabase; production uses PostgreSQL through protected environment configuration. Docker Compose and Caddy provide reproducible deployment and HTTPS routing.
+The package `@bopacorp/shared` gives the API and clients the same Zod rules, data types, and response formats. Web and CRM use React with Vite. Mobile uses Expo with React Native. During development, we used PostgreSQL hosted by Supabase. Production also uses PostgreSQL, with private environment settings. Docker Compose starts the services, and Caddy supports secure HTTPS routes.
 
-These decisions reuse TypeScript across the ecosystem, centralize authorization and business rules, and prevent clients from accessing the database directly. My teammate will now present how we tested those boundaries and how our process compares with an international testing standard.
+These choices let us use TypeScript across the project, keep permissions and business rules in the API, and stop clients from connecting directly to the database. Next, my teammate will explain our tests and compare our work with an international testing standard.
 
 ## Person 3 — Test Management and Standards Comparison (2 minutes 30 seconds)
 
@@ -49,19 +49,19 @@ These decisions reuse TypeScript across the ecosystem, centralize authorization 
 
 ### Testing results — approximately 1 minute
 
-Our strategy separates evidence by level. Static analysis and strict TypeScript detect problems before execution. Unit and component suites validate business rules and interfaces. Integration tests verify HTTP contracts, authentication, RBAC, ownership, and validation. Playwright exercises complete browser journeys, while deployment checks remain separate from user acceptance.
+We organized our tests in different levels. Static analysis and strict TypeScript find some problems before the program runs. Unit and component tests check business rules and screen behavior. Integration tests check HTTP responses, login, role permissions, record ownership, and input validation. Playwright checks full tasks in a real browser. We keep deployment checks separate because they do not prove that a user task works.
 
-The recorded API run contains 61 files and 415 passing tests, with 94.84 percent line coverage. CRM records 12 API and RBAC integration cases and 16 passing Playwright tests. Web records 15 integration checks and 3 passing Chromium journeys. Mobile records 15 suites and 98 tests above its critical-code threshold. The Shared package validates schemas, exports, packaging, and consumer compatibility.
+The recorded API run has 61 files and 415 passing tests, with 94.84 percent line coverage. CRM has 12 API and permission integration cases, plus 16 passing Playwright tests. Web has 15 integration checks and 3 passing Chromium tests. Mobile has 15 test suites and 98 passing tests above the required coverage for critical code. The Shared package checks its data rules, public files, package, and use by the four applications.
 
 ### ISO/IEC/IEEE 29119-1 comparison — approximately 1 minute 30 seconds
 
-We compared our process with ISO/IEC/IEEE 29119-1:2022, especially Sections 4.4 to 4.7: test design and execution, project integration, communication, and incident management.
+We compared our work with ISO/IEC/IEEE 29119-1:2022, mainly Sections 4.4 to 4.7. These sections cover test design, project planning, communication, and test problems.
 
-We **followed** several of its main concepts. First, we selected tests from requirements and project risks, particularly unauthorized access, invalid commercial states, unsafe uploads, lost public requests, and contract drift. Second, we combined approaches instead of depending on one technique: static analysis, scripted unit tests, API integration, browser acceptance, and automated regression in continuous integration. Third, our browser tests used synthetic data and cleanup so that mutable cases could be repeated. We also communicated results through test plans, coverage reports, evidence registers, and artifacts for different repositories.
+We **followed** several important ideas. We selected tests from the requirements and the main risks, such as access without permission, incorrect business states, unsafe uploads, lost public requests, and different data formats. We also combined several methods: static analysis, planned unit tests, API integration tests, browser acceptance tests, and automatic regression tests in CI. Our browser tests used safe artificial data and cleanup steps, so we could repeat them without leaving unwanted records. We reported results through test plans, coverage reports, evidence tables, and test files.
 
-Our defect handling also reflects the standard. A failed test was treated as an incident requiring investigation, not immediate proof of a software defect. For example, a Web application test failed because its PDF fixture was only four bytes. We corrected the test data to a valid synthetic 10-kilobyte file and executed the mutation suite again successfully.
+We also investigated failures before calling them software defects. For example, one Web test failed because its PDF test file had only four bytes. We changed it to a valid artificial 10-kilobyte PDF and ran the test again successfully.
 
-We **partially followed** the standard because environment-readiness and incident reports were distributed across repositories instead of one formal test-management system. We **did not use** model-based test generation, fuzz testing, A/B testing, or back-to-back testing because they were not selected for our highest project risks. Complete mobile device or emulator smoke testing also remains a limitation. Therefore, BOPADIGITAL demonstrates practical alignment with selected ISO 29119 concepts, but we do not claim certification or full conformance.
+We **partially followed** the standard because environment and incident reports were stored in different repositories, not in one formal test system. We **did not use** model-based test generation, fuzz testing, A/B testing, or tests that compare two versions. These methods were not selected for our main risks. A complete test on a real mobile device or emulator is also missing. Therefore, we follow selected ISO 29119 ideas, but we do not claim full certification.
 
 We will now show the user-visible acceptance scenarios behind these results.
 
@@ -69,31 +69,31 @@ We will now show the user-visible acceptance scenarios behind these results.
 
 **On screen:** execute each action; do not narrate screens without showing them.
 
-We begin as a visitor on the public website. The visitor can inspect BOPACORP information, filter the service catalog, open a service, and submit a contact request. This demonstrates public access and form validation without authentication.
+We begin as a visitor on the public website. The visitor can read information about BOPACORP, filter the service catalog, open a service, and send a contact request. This shows public access and form validation without a login.
 
-Next, we open the employability portal as a candidate. We select a vacancy and first submit incomplete information to show controlled validation. We then attach a valid synthetic PDF résumé and complete the application. This scenario verifies both user feedback and the API file boundary.
+Next, we open the job portal as a candidate. We select a vacancy and first send an incomplete form to show the validation messages. Then, we attach a valid artificial PDF résumé and complete the application. This case shows clear user feedback and safe file validation by the API.
 
-Now we use an Administrator account. In the CMS, the administrator opens a content block, edits its text, saves it through the authenticated API, and verifies the change on the public website. After verification, we restore the original value. This shows authorization, persistence, public integration, and safe cleanup in one scenario.
+Now, we use an Administrator account. In the CMS, the administrator opens a content block, changes its text, and saves it through the API. We check the new text on the public website. After this check, we restore the original text. This one case shows permission control, saved data, communication between Web and API, and safe cleanup.
 
-We continue in the CRM as a Manager. The role-aware dashboard summarizes commercial activity, sales funnels, advisor results, and recent operations. In Reports, the manager applies a filter and reviews the resulting indicators. The manager has broader operational visibility, while the API still enforces permissions and record scope.
+We continue in the CRM as a Manager. The dashboard shows sales activity, the sales process, advisor results, and recent work. In the Reports section, the manager applies a filter and checks the results. The manager can see more business information, but the API still checks permissions and which records the user can access.
 
-These scenarios correspond to public catalog and contact, candidate application, administrator content management, and manager reporting acceptance flows. They also show why browser evidence complements unit tests: the browser confirms navigation, rendered feedback, permissions, and the final user-visible result.
+These cases cover the public catalog, contact requests, job applications, content management, and manager reports. They also show why browser tests are useful. A browser test checks navigation, messages, permissions, and what the user finally sees.
 
-My teammate will complete the demonstration with the operational roles and the advisor application.
+My teammate will finish the demonstration with the other business roles and the mobile application.
 
 ## Person 5 — Live Demonstration: Advisor, Coordinator, Supervisor, and Mobile (2 minutes 35 seconds)
 
 **On screen:** use prepared records to avoid waiting for data entry or uploads.
 
-We now enter the CRM as a Sales Advisor. The advisor opens an assigned client, creates or reviews a negotiation, records a visit, and uploads a commercial document. Advisor ownership limits which records can be viewed or changed.
+We now enter the CRM as a Sales Advisor. The advisor opens an assigned client, creates or checks a negotiation, records a visit, and uploads a commercial document. The ownership rules limit which records the advisor can see or change.
 
-Next, we switch to the Documentation Coordinator. The coordinator opens the pending document, reviews its information, and approves or rejects it with the required reason. This demonstrates a controlled state transition, visible feedback, and the separation between uploading a document and deciding its status.
+Next, we change to the Documentation Coordinator. The coordinator opens the pending document, checks its information, and approves or rejects it with a required reason. This shows a controlled status change and clear feedback. It also shows that uploading a document and deciding its final status are different responsibilities.
 
-We then use the Supervisor role. The supervisor monitors assigned advisors, checks their commercial activity and visits, and reviews progress without receiving unrestricted administrator access. Together, the Advisor, Coordinator, Supervisor, and Manager sessions make the role differences visible instead of only describing the RBAC matrix.
+We then use the Supervisor role. The supervisor checks assigned advisors, their sales work, their visits, and their progress. The supervisor does not receive full administrator access. The Advisor, Coordinator, Supervisor, and Manager sessions show the differences between the roles instead of only showing a permissions table.
 
-Finally, we show the Mobile Advisor application. The advisor authenticates and accesses client, negotiation, and document workflows through the same REST API and shared contracts used by the Web clients. Our automated mobile evidence covers these critical modules. However, we explicitly separate that evidence from a complete physical-device qualification, which remains outside the recorded final run.
+Finally, we show the Mobile Advisor application. The advisor logs in and opens client, negotiation, and document tasks. Mobile uses the same REST API and shared data rules as the Web applications. Our automatic mobile tests cover these important modules. However, those tests are not the same as a complete test on a real phone. That full device test is not part of our recorded final results.
 
-In conclusion, BOPADIGITAL replaces fragmented commercial work with one role-aware ecosystem. Its final scope is supported by seven accepted Scrum increments, shared architecture, repeatable quality controls, risk-based testing, user manuals, deployment documentation, and formal client acceptance.
+In conclusion, BOPADIGITAL changes separate manual sales tasks into one connected system with clear user roles. The final product is supported by seven accepted Scrum sprints, one shared architecture, repeatable quality checks, risk-based testing, user manuals, deployment documents, and final client acceptance.
 
 Thank you for your attention. We are ready for your questions.
 

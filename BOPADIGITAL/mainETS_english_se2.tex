@@ -54,6 +54,20 @@
     }%
 }
 
+% The signed authorship declaration is stored at the Overleaf project root.
+% Fallbacks keep the repository checkout compilable while the asset is reorganized.
+\newcommand{\insertauthorship}{%
+    \IfFileExists{authorship.pdf}{%
+        \includepdf[pages=-,fitpaper=true,pagecommand={\thispagestyle{plain}}]{authorship.pdf}%
+    }{%
+        \IfFileExists{../authorship.pdf}{%
+            \includepdf[pages=-,fitpaper=true,pagecommand={\thispagestyle{plain}}]{../authorship.pdf}%
+        }{%
+            \includepdf[pages=-,fitpaper=true,pagecommand={\thispagestyle{plain}}]{appendices/authorship/authorship.pdf}%
+        }%
+    }%
+}
+
 % Styled, compact code excerpts used as technical evidence in the report.
 \definecolor{codebackground}{RGB}{248,249,251}
 \definecolor{codeframe}{RGB}{190,198,208}
@@ -389,6 +403,19 @@ Table~\ref{tab:repository_ecosystem} summarizes these repositories. The communic
 \href{https://github.com/Bopacorp/communications}{\texttt{communications}} & Client and project evidence & Markdown and captured evidence & Indexes sprint communications and acceptance evidence; it is not a runtime component. \tablelastrow
 \end{longtable}
 
+\subsection{Branching, Review and Documentation Workflow}
+The repositories are developed through an isolated-branch workflow that protects the shared
+integration branch and keeps changes reviewable. A developer starts a feature or bug-fix branch
+for the assigned backlog item, validates the affected repository locally, and submits the change
+through a Pull Request. The repository checks then repeat the formatting, lint, type, test, and
+build gates on a clean runner before integration.
+
+The workflow also applies Conventional Commits and requires peer review before a change is
+integrated. This creates a consistent handoff between implementation, review, and release without
+making the report depend on private revision identifiers. Design notes, API contracts, diagrams,
+testing records, and client-evidence indexes are kept in the project documentation areas and are
+referenced by their public deliverable or repository section when needed.
+
 The system boundary includes the clients, API, shared package, database, and external services. Clients do not store database credentials or issue SQL. They call the versioned path \emph{/api/v1}, while the API enforces shared rules.
 
 The architecture uses a client--server boundary and a modular-monolith backend. This avoids duplicated business rules and is simpler to deploy than microservices. Domain modules still provide internal separation and one-way dependencies.
@@ -645,6 +672,46 @@ Service layer & Enforces business and state rules. & Checks existence, ownership
 \hline
 Database & Enforces database constraints. & Stores token and session records. \tablelastrow
 \end{longtable}
+
+\subsection{Module Access Matrix}
+The permission model combines module-level capabilities with record scoping. The operational
+roles below summarize the active product permissions; Offer Matrices are intentionally omitted
+because that module was removed from the final scope. The platform administrator account is an
+evaluation and maintenance account, while \emph{Web Admin} represents the public-site content
+administrator role.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{|p{2.45cm}|c|c|c|c|c|}
+\hline
+\textbf{Module} & \textbf{Manager} & \textbf{Supervisor} & \textbf{Advisor} & \textbf{Coordinator} & \textbf{Web Admin} \\
+\hline
+Clients & CRUD & CRUD & CRU & R & --- \\
+\hline
+Negotiations & CRUD & CRUD & CRU & R & --- \\
+\hline
+Visits & CRU/V & CRU/V & CRU & --- & --- \\
+\hline
+Documentation & CRX & CRX & CRD & CRUDX & --- \\
+\hline
+Reports & CR & CR & R & --- & --- \\
+\hline
+Catalog & --- & --- & --- & --- & CRUD \\
+\hline
+Employability & CRUD & --- & --- & --- & CRUD \\
+\hline
+Organization & R & R & --- & --- & --- \\
+\hline
+\end{tabular}
+\caption{Active RBAC module access summary}
+\label{tab:rbac_summary}
+\end{table}
+
+Here, C means create, R read, U update, D delete, X change state, and V verify. Data scoping
+restricts visibility further: advisors work with their assigned records, supervisors see the
+records of their supervised advisors, and managers have the broadest operational scope. Route
+permissions and service-level ownership checks remain the final enforcement points.
 
 \section{Shared Contracts and Data Architecture}
 The shared contract package is the integration boundary between the API and its clients. It provides common primitives, schemas, enums, and response wrappers. The package is published as \emph{@bopacorp/shared} and is consumed by the API, public website, CRM, and mobile repository.
@@ -1769,6 +1836,48 @@ Shared & TypeScript declaration build & Lint, typecheck, schema tests, coverage 
 Deploy & Compose and Caddy validation & Compose and Caddy validation & Runtime orchestration \tablelastrow
 \end{longtable}
 
+\section{Build, Release and Deployment Validation}
+The build and release process turns the repository sources into deployable application artifacts
+through the same quality sequence used by continuous integration. Dependencies are installed from
+the lockfiles, formatting and linting are checked, TypeScript is compiled, tests and coverage are
+executed, and each application is built using its repository-specific toolchain. The API build
+also resolves compiled aliases, the Vite applications produce their production bundles, and the
+Shared package produces the declarations consumed by the clients.
+
+Deployment validation is kept separate from browser acceptance. The Deploy repository checks the
+Compose services, image references, required variables, ports, and Caddy routing before the
+services are exposed. The operational checklist then verifies service availability, API routing
+through \emph{/api/v1}, frontend reachability, and the configured HTTPS boundary. The deployment
+diagram and the installation manual document the same service relationship and validation order.
+
+\begin{longtable}{|L{3.0cm}|L{4.0cm}|L{4.2cm}|L{3.0cm}|}
+\caption{Build, release, and deployment validation baseline}
+\label{tab:chapter4_release_validation}\\
+\hline
+\textbf{Stage} & \textbf{Main checks} & \textbf{Expected result} & \textbf{Evidence role} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{4}
+\textbf{Stage} & \textbf{Main checks} & \textbf{Expected result} & \textbf{Evidence role} \\
+\hline
+\endhead
+\continuedonnextpage{4}
+\endfoot
+\endlastfoot
+Source validation & Formatting, lint, typecheck, hooks, and Conventional Commits. & The submitted source satisfies the repository quality contract. & Preventive quality output \\
+\hline
+Application build & API compilation, Vite bundles, Expo build, and Shared declarations. & Each active software repository produces its expected build artifact. & Build output and CI result \\
+\hline
+Release packaging & Lockfile installation, container/image references, and environment-variable presence. & The release can be assembled without embedding credential values. & Release checklist \\
+\hline
+Runtime validation & Compose service status, API route, frontend reachability, ports, Caddy routing, and HTTPS. & The deployed boundary responds through the configured service endpoints. & Deployment validation and health checks \\
+\hline
+Operational handoff & Installation commands, manuals, environment notes, and rollback-oriented checks. & Another operator can reproduce the documented setup with protected secrets. & Delivery documentation \\ \tablelastrow
+\end{longtable}
+
+Credential values are not part of this evidence. They remain in protected configuration, while the
+report documents only the variable names, service relationships, commands, and observable checks.
+
 Table~\ref{tab:chapter4_repository_automation} summarizes the validation sequence and evidence
 role of each repository. Each result is associated with its environment, command, and validation
 artifact. Chapter~5 expands the compiler, Biome, hook, and CI diagnostics; this chapter focuses on
@@ -2413,16 +2522,65 @@ AT-06 & Manager or supervisor, CRM & Filter reports, edit a sales target, and ve
 AT-07 & Advisor, Mobile & Validate authentication, client, negotiation, visit, and document flows. & Mobile test and coverage record \tablelastrow
 \end{longtable}
 
-The recorded CRM and Web Playwright results are represented by the selected browser artifacts rather
-than by screenshots of every click. The report uses one concise result image for each frontend and
-one image for a representative permission or retest outcome. HTML reports, traces, and videos
-remain the detailed diagnostic artifacts and are not duplicated as figures.
+The recorded CRM and Web Playwright results are represented by concise evidence blocks rather
+than by screenshots of every click. The report keeps one consolidated unit-test image and records
+the browser, permission, and retest outcomes as compact terminal-style results. HTML reports,
+traces, and videos remain the detailed diagnostic artifacts and are not duplicated in the chapter.
 
-\chaptercapture{chapter6_web_playwright}{Web Playwright smoke result: three of three selected Chromium journeys passed}{fig:chapter6_web_playwright}
+\begin{samepage}
+\begin{minipage}{0.96\linewidth}
+\begin{lstlisting}[style=chaptercode,
+    caption={Web Playwright smoke result recorded in the Web testing registry},
+    label={fig:chapter6_web_playwright}]
+WEB PLAYWRIGHT ACCEPTANCE
+Command: npm run test:e2e
+Browser: Chromium
+Result: 3 passed, 0 failed, 0 skipped
 
-\chaptercapture{chapter6_crm_playwright}{CRM Playwright result: sixteen of sixteen browser tests passed, including five mutable journeys}{fig:chapter6_crm_playwright}
+Journeys:
+  visitor       catalog and contact request
+  candidate     validation and synthetic PDF application
+  administrator CMS edit, public verification, restoration
 
-\chaptercapture{chapter6_permission_retest}{Representative permission or retest outcome from the final acceptance evidence}{fig:chapter6_permission_retest}
+Artifact: playwright-report/
+\end{lstlisting}
+\end{minipage}
+\end{samepage}
+
+\begin{samepage}
+\begin{minipage}{0.96\linewidth}
+\begin{lstlisting}[style=chaptercode,
+    caption={CRM Playwright result recorded for read-only and mutable journeys},
+    label={fig:chapter6_crm_playwright}]
+CRM PLAYWRIGHT ACCEPTANCE
+Command: npm run test:e2e
+Browser: Chromium, workers: 1
+Read-only baseline: 11 passed
+Mutable journeys: 5 passed
+Total: 16 passed, 0 failed, 0 skipped
+Cleanup: passed; logical 404 verification: passed
+
+Artifacts: playwright-report/, test-results/
+\end{lstlisting}
+\end{minipage}
+\end{samepage}
+
+\begin{samepage}
+\begin{minipage}{0.96\linewidth}
+\begin{lstlisting}[style=chaptercode,
+    caption={Permission and retest outcomes recorded in the Web integration evidence},
+    label={fig:chapter6_permission_retest}]
+WEB CONTRACT AND RETEST EVIDENCE
+Authentication and permission suite: 4 passed, 0 failed
+Protected request without credentials: 401 UNAUTHORIZED
+CMS request without content_blocks.read: 403 FORBIDDEN
+
+Mutation retest: 4 passed, 0 failed
+Synthetic PDF fixture: 10 KB
+Observed application state: PENDING
+\end{lstlisting}
+\end{minipage}
+\end{samepage}
 
 \FloatBarrier
 
@@ -2467,10 +2625,33 @@ This keeps the evidence faithful to the tested revision without duplicating impl
 diagnostics in the chapter.
 
 \section{Application Profiling}
-Application profiling is not part of the final acceptance baseline. The chapter therefore focuses
-on functional correctness, risk control, contract compatibility, and reproducibility. A performance
-claim would require a separate workload, environment, measurement method, and artifact; none is
-used to support the current testing conclusions.
+Application profiling complements the functional and integration evidence by observing the CRM
+runtime under normal interaction. The team used the Chrome DevTools Performance panel to inspect
+dashboard loading, negotiation-list rendering, and Kanban interaction, including JavaScript
+execution, layout, paint, and idle periods.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth,keepaspectratio]{profiling_performance.png}
+\caption{Chrome DevTools --- Performance profiling trace of CRM dashboard load}
+\label{fig:profiling_performance}
+\end{figure}
+
+The React Developer Tools Profiler was also used to inspect component render times and re-render
+frequency. The flamegraph helps identify components with unnecessary rendering work that could
+affect perceived responsiveness.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth,keepaspectratio]{profiling_react.png}
+\caption{React DevTools --- Profiler flamegraph of CRM component rendering}
+\label{fig:profiling_react}
+\end{figure}
+
+The profiling observations confirmed responsive interaction under the analyzed normal-usage
+scenarios, and no critical performance degradation was identified. This is a qualitative result
+of the recorded browser profiling session; it is not a production SLA or a claim for workloads
+outside the analyzed environment.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 7: SYSTEM DESCRIPTION AND DEMONSTRATION
@@ -2515,6 +2696,27 @@ information, and contact actions.
     \label{fig:chapter7_website_home}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{home2.png}
+    \caption{Public Website --- Home page services categories}
+    \label{fig:chapter7_website_home_categories}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{home3.png}
+    \caption{Public Website --- Home page ``Why BOPACORP'' section}
+    \label{fig:chapter7_website_home_identity}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{home4.png}
+    \caption{Public Website --- Home page header and hero section}
+    \label{fig:chapter7_website_home_hero}
+\end{figure}
+
 \subsubsection{Services Page}
 The Services page presents BOPACORP's products and services by category. Visitors can inspect the
 description and conditions of an offering and use the contact flow to request information or begin
@@ -2525,6 +2727,20 @@ a commercial conversation.
     \includegraphics[width=0.82\linewidth,keepaspectratio]{services1.png}
     \caption{Public Website --- Services catalog}
     \label{fig:chapter7_website_services}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{services2.png}
+    \caption{Public Website --- Service detailed descriptions}
+    \label{fig:chapter7_website_services_details}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{services3.png}
+    \caption{Public Website --- Service request form}
+    \label{fig:chapter7_website_services_request}
 \end{figure}
 
 \subsubsection{About Us Page}
@@ -2539,6 +2755,13 @@ or contact flows.
     \label{fig:chapter7_website_about}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{about2.png}
+    \caption{Public Website --- About Us values and structure}
+    \label{fig:chapter7_website_about_structure}
+\end{figure}
+
 \subsubsection{Employability Portal}
 The Employability portal allows candidates to review available vacancies, read their requirements,
 and submit an application with contact information and a PDF resume. Required-field and file
@@ -2549,6 +2772,20 @@ validation provide immediate feedback before the application is sent to the API.
     \includegraphics[width=0.82\linewidth,keepaspectratio]{employabilty.png}
     \caption{Public Website --- Employability portal}
     \label{fig:chapter7_website_employability}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{employabilty_selected.png}
+    \caption{Public Website --- Detailed vacancy view}
+    \label{fig:chapter7_website_employability_selected}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{employabilty_modal.png}
+    \caption{Public Website --- Job application submission modal}
+    \label{fig:chapter7_website_employability_modal}
 \end{figure}
 \FloatBarrier
 
@@ -2586,6 +2823,13 @@ before it is applied to the public site.
 Image blocks use a dedicated upload action. The interface communicates the accepted image formats
 and the five-megabyte limit, while the API applies the corresponding validation before storing the
 asset. This keeps invalid media from silently replacing content on the public website.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{cms_modal.png}
+    \caption{CMS --- Image replacement and validation modal}
+    \label{fig:chapter7_cms_media}
+\end{figure}
 \FloatBarrier
 
 \section{Customer Relationship Management}
@@ -2620,6 +2864,13 @@ their own work.
     \label{fig:chapter7_crm_overview}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_overview2.png}
+    \caption{CRM --- Executive overview charts and advisor breakdown}
+    \label{fig:chapter7_crm_overview_details}
+\end{figure}
+
 \subsubsection{Client Management}
 The client module maintains the central registry of business customers. Records include the RUC or
 business identifier, contact information, assigned advisor, billing information, and active status.
@@ -2633,10 +2884,31 @@ records, while the detail view connects a client with its negotiations, visits, 
     \label{fig:chapter7_crm_clients}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_client_detail.png}
+    \caption{CRM --- Client detail side panel}
+    \label{fig:chapter7_crm_client_detail}
+\end{figure}
+
 \subsubsection{Negotiation Management}
 The negotiation module follows a commercial opportunity through its active states. It provides a
 filterable table and a Kanban view for reviewing and changing the state, together with a detail page
 for the related client, advisor, dates, observations, and activity history.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_negotiations_table.png}
+    \caption{CRM --- Negotiations table view with filters}
+    \label{fig:chapter7_crm_negotiations_table}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_negotiations_kanban.png}
+    \caption{CRM --- Negotiations Kanban board}
+    \label{fig:chapter7_crm_negotiations_kanban}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -2648,6 +2920,20 @@ for the related client, advisor, dates, observations, and activity history.
 The detail view organizes state history, visits, and documents in separate tabs. References to an
 Offer Matrix in the legacy interface are retained only as historical context; matrix construction,
 subsidy calculation, and approval workflows are excluded from the final active scope.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_negotiation_visits.png}
+    \caption{CRM --- Negotiation visits tab with GPS records}
+    \label{fig:chapter7_crm_negotiation_visits}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_negotiation_documents.png}
+    \caption{CRM --- Negotiation documents tab}
+    \label{fig:chapter7_crm_negotiation_documents}
+\end{figure}
 
 \subsubsection{Document Management}
 The document module centralizes files associated with negotiations. Advisors can attach the
@@ -2664,6 +2950,20 @@ storing them, and the resulting document state remains visible to the responsibl
     \label{fig:chapter7_crm_documents}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_document_upload.png}
+    \caption{CRM --- Document upload dialog with type selection}
+    \label{fig:chapter7_crm_document_upload}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_document_types.png}
+    \caption{CRM --- Document types configuration}
+    \label{fig:chapter7_crm_document_types}
+\end{figure}
+
 \subsubsection{Reporting and Supervision}
 The reporting area presents indicators for negotiations, visits, closures, billing, and time to
 close. Managers and supervisors can filter the information according to their permitted scope,
@@ -2677,10 +2977,31 @@ report data in CSV format for external analysis.
     \label{fig:chapter7_crm_reports}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_reports2.png}
+    \caption{CRM --- Advisor breakdown and tier targets}
+    \label{fig:chapter7_crm_reports_details}
+\end{figure}
+
 \subsubsection{Product Catalog Management}
 Administrators manage the products and services presented by the public catalog. The module stores
 descriptions, categories, prices, benefits, media, and reference values used by the public website.
 It also provides access to contact requests submitted through the public catalog.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_catalog.png}
+    \caption{CRM --- Product catalog management}
+    \label{fig:chapter7_crm_catalog}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_catalog_requests.png}
+    \caption{CRM --- Contact requests from the public catalog}
+    \label{fig:chapter7_crm_catalog_requests}
+\end{figure}
 
 \subsubsection{Employability Management}
 Authorized CRM users manage vacancies and review the applications submitted through the public
@@ -2688,10 +3009,38 @@ employability portal. The application view supports vacancy CRUD operations, can
 resume download, and progression through the recorded states received, in review, accepted, and
 rejected.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_vacancies.png}
+    \caption{CRM --- Job vacancies management}
+    \label{fig:chapter7_crm_vacancies}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_applicants.png}
+    \caption{CRM --- Job applications review}
+    \label{fig:chapter7_crm_applicants}
+\end{figure}
+
 \subsubsection{Organization and Team Management}
 The organization area maintains departments, employees, organizational roles, and advisor--
 supervisor relationships. These records support the permission and ownership rules used by client,
 negotiation, visit, document, and report workflows.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_team.png}
+    \caption{CRM --- Team members management}
+    \label{fig:chapter7_crm_team}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth,keepaspectratio]{crm_org_settings.png}
+    \caption{CRM --- Organization settings and departments}
+    \label{fig:chapter7_crm_org_settings}
+\end{figure}
 \FloatBarrier
 
 \section{Mobile Application}
@@ -2726,6 +3075,27 @@ API.
     \label{fig:chapter7_mobile_clients}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mcreateclient.png}
+    \caption{Mobile application --- Create client}
+    \label{fig:chapter7_mobile_create_client}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mclientdetail.png}
+    \caption{Mobile application --- Client details}
+    \label{fig:chapter7_mobile_client_details}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{meditclient.png}
+    \caption{Mobile application --- Edit client}
+    \label{fig:chapter7_mobile_edit_client}
+\end{figure}
+
 \subsubsection{Negotiations List and Details}
 The Negotiations screen lists opportunities assigned to the advisor and allows a new negotiation to
 be created for an existing client. The creation flow records the client, initial stage, estimated
@@ -2736,9 +3106,37 @@ consistent across the field and CRM workflows.
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mnegotiations.png}
+    \caption{Mobile application --- Negotiations list}
+    \label{fig:chapter7_mobile_negotiations_list}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mcreatenegotiation.png}
+    \caption{Mobile application --- Create negotiation}
+    \label{fig:chapter7_mobile_create_negotiation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mstatusselection.png}
+    \caption{Mobile application --- Negotiation status selection}
+    \label{fig:chapter7_mobile_status_selection}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
     \includegraphics[width=0.38\linewidth,keepaspectratio]{mnegotiationdetail.png}
     \caption{Mobile application --- Negotiation details}
     \label{fig:chapter7_mobile_negotiation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{meditnegotiation.png}
+    \caption{Mobile application --- Edit negotiation}
+    \label{fig:chapter7_mobile_edit_negotiation}
 \end{figure}
 
 \subsubsection{Register Visit}
@@ -2764,6 +3162,20 @@ actions described in the legacy mobile screens are not part of the final active 
     \includegraphics[width=0.38\linewidth,keepaspectratio]{mdocumentmanagement.png}
     \caption{Mobile application --- Document management}
     \label{fig:chapter7_mobile_documents}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mdocumentsdetail.png}
+    \caption{Mobile application --- Negotiation documents}
+    \label{fig:chapter7_mobile_negotiation_documents}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\linewidth,keepaspectratio]{mcomments.png}
+    \caption{Mobile application --- Negotiation comments}
+    \label{fig:chapter7_mobile_comments}
 \end{figure}
 
 \subsubsection{Settings}
@@ -2793,6 +3205,7 @@ already documented in the project evidence.
 
 \begingroup
 \small
+\renewcommand{\arraystretch}{1.0}
 \begin{longtable}{|L{4.1cm}|L{9.2cm}|}
 \caption{Individual contributions of the development team}
 \label{tab:individual_contributions}\\
@@ -2840,7 +3253,7 @@ the authorship of the academic project, while the acceptance letters confirm the
 approval of the delivered increments.
 
 \clearpage
-\includepdf[pages=-,fitpaper=true,pagecommand={\thispagestyle{plain}}]{appendices/authorship/authorship.pdf}
+\insertauthorship
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % APPENDICES
@@ -3091,18 +3504,12 @@ These accounts are intended only for academic evaluation and must not be used wi
 
 \section{Additional Deliverables}
 \begin{itemize}
-    \item \textbf{ClickUp workspace:} \url{https://sharing.clickup.com/90171310184/l/h/5-90179341245-1/26ab9e034992a64}
+    \item \textbf{ClickUp workspace:} \href{https://sharing.clickup.com/90171310184/l/h/5-90179341245-1/26ab9e034992a64}{\texttt{BOPADIGITAL ClickUp workspace}}
     (task, sprint, assignment, and progress tracking).
-    \item \textbf{Recorded presentation video:} \url{https://youtu.be/bKS1ZHdQ9hc}
+    \item \textbf{Recorded presentation video:} \href{https://youtu.be/bKS1ZHdQ9hc}{\texttt{Recorded presentation video}}
     (10-minute presentation of the running application).
-    \item \textbf{Slide presentation:} \url{https://canva.link/alyprj19gbzaavg}
+    \item \textbf{Slide presentation:} \href{https://canva.link/alyprj19gbzaavg}{\texttt{Slide presentation}}
 \end{itemize}
-
-\chapter{SOFTWARE BUILDING AND DEPLOYMENT EVIDENCE}
-% TODO: Add build/release evidence, deployed revisions and health checks.
-
-\chapter{PROJECT PRESENTATION AND DEMONSTRATION}
-The recorded presentation video and slide deck are listed in Appendix~\ref{app:project_links}.
 
 \chapter{CLIENT EVIDENCE AND COMMUNICATIONS INDEX}
 \label{chap:client_communications}
@@ -3233,11 +3640,10 @@ The photographs provide supporting visual evidence of the client review and syst
 the closing photograph documents the final client meeting, and the signed acceptance letters provide
 the formal validation of each increment and the final project.
 
-\chapter{SYSTEM DEPLOYMENT GUIDE}
-% TODO: Insert or reference the verified system deployment guide.
-
-\chapter{INSTALLATION GUIDE}
-% TODO: Insert or reference the verified installation guide.
+\chapter{INSTALLATION AND DEPLOYMENT GUIDE}
+The complete installation and deployment manual is included below as part of the final delivery
+package. It consolidates the operational instructions into one appendix.
+\insertmanual{Manual_Instalacion_Bopacorp.pdf}
 
 \chapter{USER MANUALS}
 The following role-based manuals provide the operational instructions for the final BOPADIGITAL
@@ -3259,8 +3665,5 @@ This manual documents the public website, catalog, company information, and init
 \section{Public Website and CMS User Manual --- Part II}
 This manual completes the public website and CMS operational instructions.
 \insertmanual{manual_web_2.pdf}
-
-\chapter{TESTING ARTIFACTS, TRACEABILITY AND SCHEDULE}
-% TODO: Add test logs, risk traceability, coverage artifacts and final schedule.
 
 \end{document}

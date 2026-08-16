@@ -337,6 +337,8 @@ Later chapters and appendices contain the detailed demonstration, tests, and use
 \section{Repository Ecosystem and System Boundaries}
 The final BOPADIGITAL solution uses several repositories with clear responsibilities: public website, CRM, mobile application, API, shared contracts, deployment, and project evidence. Clients connect through the REST API, and the shared package keeps their data contracts consistent.
 
+The team configured the public \href{https://github.com/Bopacorp}{\texttt{Bopacorp}} GitHub organization as the common ownership and handoff boundary. The seven repositories listed in Table~\ref{tab:repository_ecosystem} are therefore available from one administrative entry point, which simplifies maintenance and a later transfer to the client or another team.
+
 Table~\ref{tab:repository_ecosystem} summarizes these repositories. The communications repository stores project evidence; the other repositories contain software or deployment resources.
 
 \begin{longtable}{|L{3.2cm}|L{2.8cm}|L{3.0cm}|L{4.6cm}|}
@@ -353,19 +355,19 @@ Table~\ref{tab:repository_ecosystem} summarizes these repositories. The communic
 \continuedonnextpage{4}
 \endfoot
 \endlastfoot
-\texttt{bopacorp-\allowbreak{}web} & Public website and CMS & React, TypeScript, Vite & Provides catalog, contact, vacancy, and CMS workflows. It does not access the database directly. \\
+\href{https://github.com/Bopacorp/bopacorp-web}{\texttt{bopacorp-\allowbreak{}web}} & Public website and CMS & React, TypeScript, Vite & Provides catalog, contact, vacancy, and CMS workflows. It does not access the database directly. \\
 \hline
-\texttt{bopacorp-\allowbreak{}crm} & Internal commercial platform & React, TypeScript, Vite & Provides protected CRM and administration workflows. It uses the API through Axios. \\
+\href{https://github.com/Bopacorp/bopacorp-crm}{\texttt{bopacorp-\allowbreak{}crm}} & Internal commercial platform & React, TypeScript, Vite & Provides protected CRM and administration workflows. It uses the API through Axios. \\
 \hline
-\texttt{bopacorp-\allowbreak{}mobile} & Advisor field application & Expo, React Native, TypeScript & Provides advisor client, negotiation, and document workflows through the API. \\
+\href{https://github.com/Bopacorp/bopacorp-mobile}{\texttt{bopacorp-\allowbreak{}mobile}} & Advisor field application & Expo, React Native, TypeScript & Provides advisor client, negotiation, and document workflows through the API. \\
 \hline
-\texttt{bopacorp-\allowbreak{}api} & Backend and business services & Express, TypeScript, Drizzle ORM & Provides REST endpoints, security, validation, business rules, and persistence. \\
+\href{https://github.com/Bopacorp/bopacorp-api}{\texttt{bopacorp-\allowbreak{}api}} & Backend and business services & Express, TypeScript, Drizzle ORM & Provides REST endpoints, security, validation, business rules, and persistence. \\
 \hline
-\texttt{bopacorp-\allowbreak{}shared} & Shared contracts and schemas & TypeScript and Zod & Provides types, schemas, enums, and response contracts for the API and clients. \\
+\href{https://github.com/Bopacorp/bopacorp-shared}{\texttt{bopacorp-\allowbreak{}shared}} & Shared contracts and schemas & TypeScript and Zod & Provides types, schemas, enums, and response contracts for the API and clients. \\
 \hline
-\texttt{deploy} & Local and server deployment & Docker Compose and Caddy & Builds and runs the API, CRM, and website; Caddy can add a reverse proxy. \\
+\href{https://github.com/Bopacorp/deploy}{\texttt{deploy}} & Local and server deployment & Docker Compose and Caddy & Builds and runs the API, CRM, and website; Caddy can add a reverse proxy. \\
 \hline
-\texttt{communications} & Client and project evidence & Markdown and captured evidence & Indexes sprint communications and acceptance evidence; it is not a runtime component. \tablelastrow
+\href{https://github.com/Bopacorp/communications}{\texttt{communications}} & Client and project evidence & Markdown and captured evidence & Indexes sprint communications and acceptance evidence; it is not a runtime component. \tablelastrow
 \end{longtable}
 
 The system boundary includes the clients, API, shared package, database, and external services. Clients do not store database credentials or issue SQL. They call the versioned path \emph{/api/v1}, while the API enforces shared rules.
@@ -1734,17 +1736,17 @@ code-quality repository.
 \continuedonnextpage{5}
 \endfoot
 \endlastfoot
-API & \texttt{4018bd5} & TypeScript and alias build & Lint, typecheck, tests, coverage & Backend implementation \\
+API & \href{https://github.com/Bopacorp/bopacorp-api/commit/4018bd58c6856e9258b7e79b0b91eeaa852a5459}{\texttt{4018bd5}} & TypeScript and alias build & Lint, typecheck, tests, coverage & Backend implementation \\
 \hline
-CRM & \texttt{5011dc4} & Vite production build & Lint, typecheck, tests, coverage & Internal operations client \\
+CRM & \href{https://github.com/Bopacorp/bopacorp-crm/commit/5011dc46ceb81d39ca8b890fe122a014bd678370}{\texttt{5011dc4}} & Vite production build & Lint, typecheck, tests, coverage & Internal operations client \\
 \hline
-Web & \texttt{f527679} & Vite production build & Lint, typecheck, tests, coverage & Public website and CMS \\
+Web & \href{https://github.com/Bopacorp/bopacorp-web/commit/f5276792a4e7275603e39f228ee4d8490351d3cc}{\texttt{f527679}} & Vite production build & Lint, typecheck, tests, coverage & Public website and CMS \\
 \hline
-Mobile & \texttt{4638ea1} & Expo web/application build & Lint, typecheck, tests, coverage & Mobile client \\
+Mobile & \href{https://github.com/Bopacorp/bopacorp-mobile/commit/4638ea10464bb23650fef0b502d451e1a810e6cd}{\texttt{4638ea1}} & Expo web/application build & Lint, typecheck, tests, coverage & Mobile client \\
 \hline
-Shared & \texttt{4cbf3d4} & TypeScript declaration build & Lint, typecheck, schema tests, coverage & Shared contracts \\
+Shared & \href{https://github.com/Bopacorp/bopacorp-shared/commit/4cbf3d41a1c413fe2b93e2a64c117a0c024c8c91}{\texttt{4cbf3d4}} & TypeScript declaration build & Lint, typecheck, schema tests, coverage & Shared contracts \\
 \hline
-Deploy & \texttt{b6f2f6f} & Compose and Caddy validation & Compose and Caddy validation & Runtime orchestration \tablelastrow
+Deploy & \href{https://github.com/Bopacorp/deploy/commit/b6f2f6f5339be87fbc92bec37b632f0849ce1b27}{\texttt{b6f2f6f}} & Compose and Caddy validation & Compose and Caddy validation & Runtime orchestration \tablelastrow
 \end{longtable}
 
 The revision identifiers in Table~\ref{tab:chapter4_repository_automation} identify the repository
@@ -1752,6 +1754,8 @@ state associated with the final evidence package. Each result is associated with
 environment, command, and artifact reference. Chapter~5 expands the compiler, Biome, hook,
 and CI diagnostics; this chapter focuses on the automation design that makes those diagnostics
 repeatable.
+The complete API workflow is reproduced from the pinned
+\href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/.github/workflows/ci.yml}{\texttt{ci.yml}} file.
 \begin{chaptercodeblock}
 \begin{lstlisting}[style=chaptercode,language=chapteryaml,basicstyle=\ttfamily\scriptsize,framesep=3pt,aboveskip=0.3\baselineskip,belowskip=0.3\baselineskip,caption={Complete API continuous-integration workflow},label={lst:chapter4_ci_pipeline}]
 name: CI
@@ -1843,6 +1847,9 @@ The API demonstrates the rule through modules such as
 and validation middleware; the controller coordinates the request and response envelope; and the
 service contains the domain operation. This organization makes responsibilities visible during
 review and gives the quality tools a predictable source tree.
+The representative rules below come from the pinned
+\href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/biome.json}{\texttt{biome.json}}
+configuration.
 
 The client repositories apply the same idea at a different level. CRM centralizes pagination,
 unsaved-form protection, and common list controls in reusable hooks and UI components. Web isolates
@@ -1853,7 +1860,8 @@ preserving the boundaries required by each user interface.
 The Shared repository completes the boundary by exporting request and response schemas from each
 domain. For example, the CRM and document domains expose explicit barrel files and Zod definitions.
 Consumers therefore validate data at the API boundary and infer compatible TypeScript types from the
-same source of truth.
+same source of truth. The strict compiler options are taken from the pinned
+\href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/tsconfig.json}{\texttt{tsconfig.json}}.
 \begin{chaptercodeblock}
 \begin{lstlisting}[style=chaptercode,language=chapterjson,caption={Representative Biome quality rules from the API configuration},label={lst:chapter4_biome}]
 {
@@ -1903,8 +1911,11 @@ same source of truth.
 
 \section{Git Hooks and Commit Validation}
 The repository workflow applies quality checks before code reaches the shared branch. Husky owns the
-Git hook lifecycle, lint-staged limits local formatting and linting to staged source files, and
-Commitlint validates the commit message against the Conventional Commits format. The pre-commit hook
+Git hook lifecycle through the pinned \href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/.husky/pre-commit}{\texttt{pre-commit}}
+and \href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/.husky/commit-msg}{\texttt{commit-msg}}
+files. lint-staged limits local formatting and linting to staged source files, and
+\href{https://github.com/Bopacorp/bopacorp-api/blob/4018bd58c6856e9258b7e79b0b91eeaa852a5459/commitlint.config.js}{\texttt{commitlint.config.js}}
+validates the commit message against the Conventional Commits format. The pre-commit hook
 therefore protects the smallest relevant change set, while CI repeats the full repository checks on
 the complete revision.
 
@@ -2018,7 +2029,8 @@ Schema contract & Shared & Zod request/response schemas and inferred types & Com
 \end{longtable}
 
 \section{Refactoring Example}
-The principal refactoring example is recorded in revision \texttt{ed79e6b}, titled
+The principal refactoring example is recorded in revision
+\href{https://github.com/Bopacorp/bopacorp-api/commit/ed79e6b99dc8341766fe34e21af3466745a861bb}{\texttt{ed79e6b}}, titled
 \emph{refactor(shared): extract duplicated utilities to shared modules}. Before this change,
 several modules contained similar authentication constants, request helpers, query handling, and
 formatting logic. That structure increased the number of locations that required modification when
@@ -2029,6 +2041,11 @@ The refactoring extracted the duplicated behavior into explicit shared modules, 
 \path{src/shared/utils/query.ts}, and \path{src/shared/utils/request.ts}. The affected modules
 then imported the shared implementation instead of maintaining local copies. The change touched 16
 files and removed repeated utility code while adding a smaller, reusable shared surface.
+The extracted files are also available at the pinned revision as
+\href{https://github.com/Bopacorp/bopacorp-api/blob/ed79e6b99dc8341766fe34e21af3466745a861bb/src/shared/constants/auth.ts}{\texttt{auth.ts}},
+\href{https://github.com/Bopacorp/bopacorp-api/blob/ed79e6b99dc8341766fe34e21af3466745a861bb/src/shared/utils/format.ts}{\texttt{format.ts}},
+\href{https://github.com/Bopacorp/bopacorp-api/blob/ed79e6b99dc8341766fe34e21af3466745a861bb/src/shared/utils/query.ts}{\texttt{query.ts}},
+and \href{https://github.com/Bopacorp/bopacorp-api/blob/ed79e6b99dc8341766fe34e21af3466745a861bb/src/shared/utils/request.ts}{\texttt{request.ts}}.
 
 \begin{longtable}{|L{3.1cm}|L{3.7cm}|L{3.8cm}|L{3.4cm}|}
 \caption{Before-and-after analysis of the API utility refactoring}
@@ -2384,6 +2401,12 @@ be reviewed through the following read-only ClickUp workspace link:
 
 The report includes representative captures and a summarized backlog so that the main chapters
 remain focused on the project results.
+
+\section{Source Organization}
+The source repositories and the project-evidence repository are centrally administered through the public
+\href{https://github.com/Bopacorp}{\texttt{Bopacorp} GitHub organization}. Repository responsibilities are defined in
+Table~\ref{tab:repository_ecosystem}; Chapter~4 links the revision-specific commits and the representative
+configuration files used as evidence.
 
 \chapter{SOFTWARE BUILDING AND DEPLOYMENT EVIDENCE}
 % TODO: Add build/release evidence, deployed revisions and health checks.

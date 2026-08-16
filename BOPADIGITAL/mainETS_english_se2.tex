@@ -50,6 +50,14 @@
 \definecolor{codekeyword}{RGB}{31,78,121}
 \definecolor{codestring}{RGB}{128,64,0}
 \definecolor{codecomment}{RGB}{90,100,110}
+\definecolor{risklow}{RGB}{219,238,213}
+\definecolor{riskmoderate}{RGB}{255,242,204}
+\definecolor{riskhigh}{RGB}{244,204,204}
+\definecolor{riskcritical}{RGB}{234,153,153}
+
+\newcommand{\riskcell}[2]{%
+    \colorbox{#1}{\makebox[2.15cm][c]{\rule{0pt}{0.62cm}\footnotesize #2}}%
+}
 
 \lstdefinelanguage{chapteryaml}{
     morecomment=[l]{\#},
@@ -88,7 +96,7 @@
 }
 \lstset{style=chaptercode}
 
-% Chapter 4 captures are optional until the user inserts the PNG evidence.
+% Technical evidence captures are optional until the corresponding PNG is inserted.
 \newcommand{\chaptercapture}[3]{%
     \begin{figure}[htbp]
     \centering
@@ -1691,6 +1699,7 @@ with risks in application behavior.
 % CHAPTER 4: CODING STANDARDS DOCUMENTATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{CODING STANDARDS DOCUMENTATION}
+\label{chap:chapter4_standards}
 
 \section{Build Automation Configuration}
 The BOPADIGITAL implementation uses a repository-oriented automation model. The API, CRM, Web,
@@ -2091,6 +2100,7 @@ technical foundation for the preventive diagnostics described in Chapter~5.
 % CHAPTER 5: PREEMPTIVE ERROR DETECTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{PREEMPTIVE ERROR DETECTION}
+\label{chap:chapter5_preemptive}
 
 \section{TypeScript Compiler Diagnostics}
 Preemptive error detection begins with the TypeScript compiler. The platform uses one typed
@@ -2170,25 +2180,318 @@ test cases, risk priorities, coverage, incidents, and retests.
 \label{chap:chapter6_tests}
 
 \section{Testing Strategy and Test Levels}
-% TODO: Define unit, integration, API, frontend, acceptance and manual testing levels.
+The testing strategy follows the same layered boundary used by the implementation. Unit and
+component tests protect local business rules and interface behavior; integration tests verify the
+HTTP and response contracts against an isolated API; browser acceptance tests exercise complete
+CRM and Web journeys; and manual review covers behavior that cannot be established by a simulated
+DOM. Mobile uses Jest and the Expo testing environment for its implemented logic and screen flows.
+It is not presented as a device test because no Android or iOS smoke execution is included in this
+evidence package.
+
+The preventive controls described in
+\hyperref[chap:chapter5_preemptive]{Chapter~\ref*{chap:chapter5_preemptive}} establish that the
+submitted source is type-safe and buildable. This chapter evaluates behavior after those checks.
+The test suites therefore use deterministic fixtures, Arrange--Act--Assert structure, explicit
+boundary values, state transitions, parameterized cases, and controlled failure paths.
+
+\begin{longtable}{|L{2.6cm}|L{3.8cm}|L{3.4cm}|L{3.2cm}|}
+\caption{Testing levels and evidence ownership}
+\label{tab:chapter6_test_levels}\\
+\hline
+\textbf{Level} & \textbf{Purpose} & \textbf{Primary repositories} & \textbf{Evidence} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{Level} & \textbf{Purpose} & \textbf{Primary repositories} & \textbf{Evidence} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+Unit and component & Protect services, hooks, screens, components, validation, and error states in isolation. & API, CRM, Web, Mobile & Test output and critical-code coverage \\
+\hline
+Integration and API & Verify authentication, RBAC, envelopes, persistence boundaries, and consumer contracts against an isolated API. & API, CRM, Web, Shared & HTTP assertions, contract logs, and fixtures \\
+\hline
+Browser acceptance & Exercise role-based journeys and user-visible outcomes in a real browser. & CRM and Web & Playwright report, selected screenshots, and traces \\
+\hline
+Manual and device review & Verify viewport, focus, responsive layout, native behavior, and interactions not represented by simulated environments. & Web and Mobile & Manual run record or device log when executed \\
+\hline
+Operational validation & Check deployment configuration and service routing without treating configuration as user acceptance. & Deploy & Compose and Caddy validation output \tablelastrow
+\end{longtable}
 
 \section{Test Management}
-% TODO: Document responsibilities, test calendar, environments, data and entry/exit criteria.
+Test management separates test design, execution, evidence review, and defect retesting. The API
+and shared-contract suites protect the service and contract boundaries. CRM and Web own their
+frontend behavior and coordinate integration credentials with the API environment. Mobile owns
+its Jest/Expo fixtures and keeps device validation separate from the unit gate. The final test
+records identify the repository revision, command, environment, and artifact for every selected
+result.
+
+The test environment uses synthetic accounts and data. Credentials are injected through the
+environment and are not stored in source files. Mutation journeys use isolated records with a
+unique run marker and a reset or cleanup step. Uploaded documents and résumés are synthetic
+fixtures. Production data and production credentials are outside the testing boundary.
+
+Entry criteria are a known repository revision, installed lockfile dependencies, an available test
+environment, deterministic fixtures, and an identified test owner. Exit criteria are a recorded
+result for every selected case, a reproducible artifact, a documented defect or retest when
+applicable, and a review confirming that screenshots and logs contain no secrets or personal data.
+
+\begin{longtable}{|L{2.7cm}|L{3.6cm}|L{4.0cm}|L{2.6cm}|}
+\caption{Test management controls}
+\label{tab:chapter6_test_management}\\
+\hline
+\textbf{Activity} & \textbf{Control} & \textbf{Required record} & \textbf{Owner} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{Activity} & \textbf{Control} & \textbf{Required record} & \textbf{Owner} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+Test design & Map requirements and risks to named cases before execution. & Case identifier, priority, preconditions, and expected result & Test team \\
+\hline
+Local suites & Run deterministic tests without production services or credentials. & Command, SHA, test count, coverage scope, and console result & Repository owner \\
+\hline
+Integration & Use an isolated API, database, storage, and role accounts. & Base URLs, seed, involved SHAs, HTTP result, and cleanup & API and client owners \\
+\hline
+Browser acceptance & Execute selected CRM and Web journeys with semantic selectors and role fixtures. & Browser, role, case result, HTML report, screenshot, and trace when needed & CRM/Web owners \\
+\hline
+Defect and retest & Preserve the failure, fix, and second execution as one traceable chain. & Symptom, fix SHA, retest command, observed result, and artifact & Test owner \tablelastrow
+\end{longtable}
 
 \section{Risk-Based Testing}
-% TODO: Map risks to requirements, test cases, results, defects and retests.
+The risk-based strategy prioritizes behavior that could expose information, create an incorrect
+commercial state, lose a customer request, or break a consumer contract. Project-management risks
+remain in Table~\ref{tab:project_management_risks}; the following controls address application
+behavior. A case is considered useful when its expected result can be derived from a requirement,
+its execution can be repeated, and its artifact demonstrates the observed outcome.
+
+\begin{longtable}{|L{2.6cm}|L{3.8cm}|L{3.4cm}|L{3.2cm}|}
+\caption{Risk-based testing priorities}
+\label{tab:chapter6_risk_priorities}\\
+\hline
+\textbf{Risk} & \textbf{Test control} & \textbf{Acceptance focus} & \textbf{Evidence} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{Risk} & \textbf{Test control} & \textbf{Acceptance focus} & \textbf{Evidence} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+Unauthorized access or data leakage & Test JWT handling, RBAC, protected routes, ownership, and role-visible navigation. & 401/403 outcomes and advisor scope remain enforced. & API/CRM/Web integration logs and negative browser case \\
+\hline
+Incorrect commercial state & Test negotiation, visit, document, and approval transitions with valid and invalid states. & Required fields, permissions, history, and rejection reasons are preserved. & Service/component cases and CRM journey artifact \\
+\hline
+Invalid or unsafe file upload & Test extension, size, multipart payload, storage response, and document state. & Valid synthetic files pass; invalid files receive controlled feedback. & API/Web/CRM tests and selected upload result \\
+\hline
+Public request loss or misvalidation & Test catalog filters, contact requests, vacancy applications, and form boundaries. & Valid data is persisted and invalid data is rejected without losing user input. & Web integration result and browser acceptance artifact \\
+\hline
+Contract drift & Test shared schemas, response envelopes, package exports, and consumer compatibility. & API, CRM, Web, and Mobile interpret the same contract. & Shared phase gate and client contract suites \\
+\hline
+Deployment configuration failure & Validate Compose services, variables, ports, health checks, and Caddy routing. & Runtime configuration is internally consistent before deployment. & Deploy validation output \tablelastrow
+\end{longtable}
+
+\begin{figure}[htbp]
+\centering
+\small
+\begin{tabular}{c|c|c|c|c}
+    & \textbf{\shortstack{Low\\probability}} & \textbf{\shortstack{Moderate\\probability}} & \textbf{\shortstack{High\\probability}} & \textbf{\shortstack{Very high\\probability}} \\
+    \hline
+    \textbf{Critical impact} & \riskcell{riskmoderate}{Moderate} & \riskcell{riskhigh}{High} & \riskcell{riskcritical}{Critical} & \riskcell{riskcritical}{Critical} \\
+    \hline
+    \textbf{High impact} & \riskcell{risklow}{Low} & \riskcell{riskmoderate}{Moderate} & \riskcell{riskhigh}{High} & \riskcell{riskcritical}{Critical} \\
+    \hline
+    \textbf{Moderate impact} & \riskcell{risklow}{Low} & \riskcell{riskmoderate}{Moderate} & \riskcell{riskhigh}{High} & \riskcell{riskhigh}{High} \\
+    \hline
+    \textbf{Low impact} & \riskcell{risklow}{Low} & \riskcell{risklow}{Low} & \riskcell{riskmoderate}{Moderate} & \riskcell{riskmoderate}{Moderate}
+\end{tabular}
+\caption{Qualitative risk prioritization matrix used for application testing}
+\label{fig:chapter6_risk_matrix}
+\end{figure}
+
+The traceability chain used by the final evidence package is
+\emph{risk} $\rightarrow$ \emph{requirement} $\rightarrow$ \emph{test case}
+$\rightarrow$ \emph{observed result} $\rightarrow$ \emph{artifact} $\rightarrow$
+\emph{retest}. This structure keeps a passing unit test from being treated as proof of a complete
+browser journey and keeps a browser result from replacing coverage of service-level edge cases.
 
 \section{API Unit and Integration Testing}
-% TODO: Add current API test evidence, commands, coverage, SHA, date and artifacts.
+The API test suite covers the modular service and controller boundaries for authentication, users,
+roles, CRM, documents, uploads, reports, catalog, CMS, employability, notifications, matrices,
+and organizational operations. The recorded API run at revision \texttt{4018bd5} contains 61 test
+files and 415 passing tests. Its global measurement is 94.39\% statements, 86.91\% branches,
+83.04\% functions, and 94.84\% lines. These values describe the configured API measurement; they
+do not imply that every route, shared middleware, helper, or schema has direct integration coverage.
+
+The API suite is complemented by client-side contract runs. CRM records 12 API/RBAC integration
+tests together with its unit/component suite. Web records seven public-contract checks, four
+authentication/RBAC checks, and four mutation checks for contact, application, CMS, and upload
+flows. These tests verify the response envelope, status codes, validation details, ownership, and
+role boundaries from the consumer perspective.
+
+The Shared package adds a contract-specific gate: request and response schemas, type-level valid
+and invalid consumers, package exports, tarball contents, and compatibility checks for API, Web,
+CRM, and Mobile. This evidence is intentionally separated from application coverage because a
+schema can be exported correctly while a consumer still sends an incorrect request.
+
+\begin{longtable}{|L{2.3cm}|L{3.8cm}|L{3.9cm}|L{3.0cm}|}
+\caption{API and contract testing evidence}
+\label{tab:chapter6_api_evidence}\\
+\hline
+\textbf{Source} & \textbf{Scope} & \textbf{Observed result} & \textbf{Artifact} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{Source} & \textbf{Scope} & \textbf{Observed result} & \textbf{Artifact} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+API & Module service/controller tests and critical-code coverage. & 61 files and 415 tests pass; coverage is recorded by statements, branches, functions, and lines. & Vitest output and coverage report \\
+\hline
+CRM & HTTP authentication, RBAC, role scope, refresh/logout, and client-facing envelopes. & 12 integration cases pass alongside the unit/component suite. & Integration log and test report \\
+\hline
+Web & Public contracts, auth/RBAC errors, contact, application, CMS, and storage mutations. & Public 7/7, auth/RBAC 4/4, and mutation 4/4 pass in the recorded integration package. & Vitest integration log \\
+\hline
+Shared & Schema tests, type-level consumers, package exports, tarball, and compatibility. & The phase gate validates the published contract and its four consumers. & Quality-gate and evidence JSON \\
+\hline
+Deploy & Compose and Caddy configuration. & Service names, ports, variables, and routing are checked before runtime use. & Compose and Caddy validation output \tablelastrow
+\end{longtable}
+
+\chaptercapture{chapter6_unit_results}{Consolidated deterministic unit, component, and contract test results across the repositories}{fig:chapter6_unit_results}
+
+\FloatBarrier
 
 \section{Frontend and Acceptance Testing}
-% TODO: Document CRM/Web testing status and the Playwright acceptance scenarios.
+Frontend unit and component suites validate loading, empty, error, validation, navigation, role, and
+form behavior in CRM and Web. Playwright is the acceptance layer because it observes the browser,
+the rendered route, role-visible navigation, downloads, and user-facing feedback. It is not a
+replacement for the deterministic suites or the API contract checks.
+
+The recorded browser execution uses isolated accounts, synthetic records, semantic selectors, and
+failure artifacts. It records the CRM/API revisions, browser, environment, seed, command, cleanup,
+and selected screenshots. The following acceptance register keeps the final demonstration aligned
+with the requirements-to-test traceability document.
+
+The Web Playwright implementation and its evidence package are versioned in
+\href{https://github.com/Bopacorp/bopacorp-web/commit/32ea028a4c42f729bac5220438a30c13619c33c8}{\texttt{32ea028}}.
+The selected Chromium smoke execution records three passing journeys out of three: a visitor
+submitting a contact request, a candidate correcting invalid application feedback before uploading
+a synthetic PDF, and an administrator editing, verifying, and restoring a CMS text block. The Web
+runner uses the configurable \texttt{E2E\_BASE\_URL} (\texttt{http://localhost:5174} by default),
+and the HTML result is retained in the \texttt{playwright-report/} artifact. Image upload,
+browser-level unauthorized access, and retry recovery were outside this reduced demonstration run;
+they remain separate from the three browser journeys reported here.
+
+The CRM mutation package is preserved in
+\href{https://github.com/Bopacorp/bopacorp-crm/commit/49e0733ac3cb983962ffc029c099974b134b2854}{\texttt{49e0733}}.
+The execution record identifies \texttt{493caba} as the starting revision because the Phase 9 files
+were uncommitted during the run; the final commit preserves that implementation and its evidence.
+The recorded local execution passed five of five mutable journeys: client, negotiation, state, and
+visit creation; document approval and rejection; catalog and synthetic-image lifecycle;
+employability vacancy lifecycle; and sales-target edit with restoration. The complete CRM browser
+run passed sixteen of sixteen tests, combining the eleven read-only baseline cases with these five
+mutable cases. Each journey used unique markers, synthetic files, reverse cleanup, and missing-record
+verification through HTTP 404 responses. Document cleanup verifies the logical record; the current
+API uses soft-delete, so physical storage-object deletion is not claimed.
+
+\begin{longtable}{|L{1.7cm}|L{2.4cm}|L{5.1cm}|L{3.7cm}|}
+\caption{Acceptance scenario register}
+\label{tab:chapter6_acceptance_scenarios}\\
+\hline
+\textbf{ID} & \textbf{Role and system} & \textbf{Journey} & \textbf{Expected evidence} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{ID} & \textbf{Role and system} & \textbf{Journey} & \textbf{Expected evidence} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+AT-01 & Visitor, Web & Browse the public catalog, filter services, inspect information, and submit contact data. & Catalog result, validation, confirmation, and browser artifact \\
+\hline
+AT-02 & Candidate, Web & Open a vacancy and submit a validated application with a synthetic PDF résumé. & Vacancy, invalid input, upload, and application result \\
+\hline
+AT-03 & Administrator, Web/CRM & Edit a CMS block, create or update a catalog item, and verify the public result. & Role access, saved change, and public verification \\
+\hline
+AT-04 & Advisor, CRM & Register a client, create a negotiation, register a visit, and upload a document. & Owned records, state feedback, and document result \\
+\hline
+AT-05 & Coordinator or supervisor, CRM & Review pending documentation and approve or reject it with the required reason. & Permission outcome, state change, and visible feedback \\
+\hline
+AT-06 & Manager or supervisor, CRM & Filter reports, edit a sales target, and verify restoration of the original values. & Filtered values, access control, restored state, and browser artifact \\
+\hline
+AT-07 & Advisor, Mobile & Validate the advisor application logic for authentication, client, negotiation, visit, and document flows. & Jest/Expo output and critical-code coverage; no device claim \tablelastrow
+\end{longtable}
+
+The recorded CRM and Web Playwright results are represented by the selected browser artifacts rather
+than by screenshots of every click. The report uses one concise result image for each frontend and
+one image for a representative permission or retest outcome. HTML reports, traces, and videos
+remain the detailed diagnostic artifacts and are not duplicated as figures.
+
+\chaptercapture{chapter6_web_playwright}{Web Playwright smoke result: three of three selected Chromium journeys passed}{fig:chapter6_web_playwright}
+
+\chaptercapture{chapter6_crm_playwright}{CRM Playwright result: sixteen of sixteen browser tests passed, including five mutable journeys}{fig:chapter6_crm_playwright}
+
+\chaptercapture{chapter6_permission_retest}{Representative permission or retest outcome from the final acceptance evidence}{fig:chapter6_permission_retest}
+
+\FloatBarrier
 
 \section{Test Execution Results and Incidents}
-% TODO: Add observed results, blocked cases, defects, fixes and retests.
+The execution package distinguishes local deterministic results, API-backed integration results,
+browser acceptance, and operational validation. This distinction prevents a test count from being
+interpreted as a deployment or user-acceptance claim.
+
+\begin{longtable}{|L{2.2cm}|L{3.8cm}|L{4.0cm}|L{3.0cm}|}
+\caption{Repository testing execution summary}
+\label{tab:chapter6_execution_summary}\\
+\hline
+\textbf{Repository} & \textbf{Commands or layer} & \textbf{Result recorded} & \textbf{Artifact} \\
+\hline
+\endfirsthead
+\continuedfrompreviouspage{6}
+\textbf{Repository} & \textbf{Commands or layer} & \textbf{Result recorded} & \textbf{Artifact} \\
+\hline
+\endhead
+\continuedonnextpage{6}
+\endfoot
+\endlastfoot
+API & \texttt{test:run}, \texttt{test:coverage}, lint, typecheck, and build. & Module tests and critical-code coverage are recorded against the API revision. & Console and coverage report \\
+\hline
+CRM & Unit/component, API integration, and read-only/mutable Playwright acceptance. & 16/16 browser tests pass: 11 read-only baseline cases and 5 mutable journeys, with cleanup and 404 verification recorded. & Vitest, Playwright report, and mutation matrix \\
+\hline
+Web & Unit/component, HTTP integration, manual UI review, and Playwright smoke acceptance. & Three of three selected Chromium journeys pass: contact, PDF application, and CMS edit/verification/restoration. & Vitest, integration, and \texttt{playwright-report/} artifacts \\
+\hline
+Mobile & \texttt{test:run}, \texttt{test:coverage}, lint, TypeScript, and critical-code gate. & 15 suites and 98 tests pass; lines and statements exceed the configured critical-code threshold. & Jest and coverage artifact \\
+\hline
+Shared & \texttt{test:phase6} and the package quality gate. & Runtime schemas, type-level consumers, package exports, tarball, and consumer compatibility are checked. & Quality-gate log and evidence JSON \\
+\hline
+Deploy & Compose and Caddy validation. & Service configuration is checked before deployment; this is not a browser acceptance result. & Configuration output \tablelastrow
+\end{longtable}
+
+One representative retest corrected a synthetic Web résumé fixture that was rejected because a
+four-byte PDF rounded to \texttt{0.00 MB} at the API file-size check. A valid ten-kilobyte synthetic
+PDF was then used and the application returned the expected \texttt{PENDING} result. This example
+shows why the report records the observed payload, the defect symptom, the fix, and the second run
+rather than recording only the final green test count.
+
+The execution records also preserve contract differences as explicit observations. For example,
+the category endpoint currently returns a success envelope without pagination metadata, while other
+catalog responses include it. The client integration test records the actual contract instead of
+silently assigning a paginated interpretation. This keeps the evidence faithful to the tested
+revision and prevents an undocumented normalization from hiding integration risk.
 
 \section{Application Profiling}
-% TODO: Add profiling evidence only if the optional criterion is pursued.
+Application profiling is not part of the final acceptance baseline. The chapter therefore focuses
+on functional correctness, risk control, contract compatibility, and reproducibility. A performance
+claim would require a separate workload, environment, measurement method, and artifact; none is
+used to support the current testing conclusions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 7: SYSTEM DESCRIPTION AND DEMONSTRATION
@@ -2414,8 +2717,113 @@ configuration files used as evidence.
 \chapter{PROJECT PRESENTATION AND DEMONSTRATION}
 % TODO: Add the presentation/video link and demonstration evidence.
 
-\chapter{CLIENT COMMUNICATIONS AND ACCEPTANCE}
-% TODO: Add the communications index, sprint acceptance and final acceptance evidence.
+\chapter{CLIENT EVIDENCE AND COMMUNICATIONS INDEX}
+\label{chap:client_communications}
+
+\section{Communications Folder Indexing Document}
+A registry of the communications and validation activities held with the project client. The
+evidence includes messages, meetings, sprint acceptance letters, the final acceptance form, and
+photographs of the review and closing activities. The complete evidence package is preserved in the
+dedicated communications repository.
+
+\begingroup
+\footnotesize
+\begin{longtable}{|p{3.3cm}|p{4.5cm}|p{1.4cm}|p{2.6cm}|p{2.3cm}|}
+\caption{Communications Evidence Index}
+\label{tab:communications_index}\\
+\hline
+\textbf{Evidence} & \textbf{Description} & \textbf{Type} & \textbf{Participants} & \textbf{Date / Time} \\
+\hline
+\endfirsthead
+\multicolumn{5}{l}{\textit{Table continued from previous page}} \\
+\hline
+\textbf{Evidence} & \textbf{Description} & \textbf{Type} & \textbf{Participants} & \textbf{Date / Time} \\
+\hline
+\endhead
+Initial project contact & Request for the company information and service catalog required for the website. & Image & Team and client & May 2026 \\
+\hline
+Content and material coordination & Delivery and review of website content, commercial material, and availability information. & Image & Team and client & May--June 2026 \\
+\hline
+Sprint 1 acceptance letter & Acceptance of the project foundation, repositories, authentication, RBAC, and initial planning. & Document & Team and client & May 2026 \\
+\hline
+Sprint 2 acceptance letter & Acceptance of the catalog, CMS, employability, organization, users, and initial CRM work. & Document & Team and client & June 2026 \\
+\hline
+Sprint 3 acceptance letter & Acceptance of backend consolidation and the initial integration between the system components. & Document & Team and client & June 2026 \\
+\hline
+Sprint 4 acceptance letter & Acceptance of frontend testing and the compiled SCRUM evidence. & Document & Team and client & July 5, 2026 \\
+\hline
+Sprint 5 acceptance letter & Acceptance of system, integration, risk-based, data-flow, and quality testing activities. & Document & Team and client & July 14, 2026 \\
+\hline
+Sprint 6 acceptance letter & Acceptance of standards, refactoring, security, browser, accessibility, and delivery preparation. & Document & Team and client & July 21, 2026 \\
+\hline
+Sprint 7 acceptance letter & Acceptance of the final delivery package, guides, manuals, validation, and repository handoff. & Document & Team and client & July 28, 2026 \\
+\hline
+Final project acceptance & Formal acceptance of the complete project after the seven sprint increments. & Document & Team and client & August 7, 2026 \\
+\hline
+Virtual review and meeting coordination & Coordination and confirmation of the project review sessions with the client. & Image & Team and client & July--August 2026 \\
+\hline
+Closing meeting evidence & In-person closing meeting, client interaction, and delivery confirmation. & Photograph & Team and client & August 14, 2026 \\
+\hline
+Team authorship confirmation & Confirmation of the participation and authorship of the development team. & Document & All team members & August 2026 \tablelastrow
+\end{longtable}
+\endgroup
+
+\section{Sprint Acceptance Letters}
+At the end of each sprint, the client representative reviewed the delivered increment and signed an
+acceptance letter confirming the work met the agreed criteria. The acceptance sequence documents the
+progress from the initial technical foundation to the final delivery package.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth, keepaspectratio]{acceptance_s1.jpeg}
+    \caption{Sprint 1 Acceptance Letter}
+    \label{fig:acceptance_s1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth, keepaspectratio]{acceptance_s2.jpeg}
+    \caption{Sprint 2 Acceptance Letter}
+    \label{fig:acceptance_s2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth, keepaspectratio]{acceptance_s3.jpeg}
+    \caption{Sprint 3 Acceptance Letter}
+    \label{fig:acceptance_s3}
+\end{figure}
+
+The acceptance letters for Sprints 4--7 and the final project acceptance complete the same
+incremental validation process for the second part of the project. They document frontend testing,
+quality assurance, risk-based testing, standards, deployment preparation, manuals, final
+validation, and project closure.
+
+\section{Final Project Acceptance Form}
+The final project acceptance form was signed after the review of the seven sprint increments and
+the complete delivery package. It confirms the client's conformity with the delivered system,
+documentation, evidence, and project objectives.
+
+\section{Client Evidence Photos}
+The following photographs document the interaction with the client during the review and system
+demonstration activities.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth, keepaspectratio]{evidence_photo1.jpeg}
+    \caption{Client Evidence Photo 1}
+    \label{fig:evidence_photo1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth, keepaspectratio]{evidence_photo2.jpeg}
+    \caption{Client Evidence Photo 2}
+    \label{fig:evidence_photo2}
+\end{figure}
+
+The photographs provide supporting visual evidence of the client review and system demonstration;
+the signed acceptance letters provide the formal validation of each increment and the final project.
 
 \chapter{SYSTEM DEPLOYMENT GUIDE}
 % TODO: Insert or reference the verified system deployment guide.

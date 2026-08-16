@@ -2076,21 +2076,81 @@ technical foundation for the preventive diagnostics described in Chapter~5.
 \chapter{PREEMPTIVE ERROR DETECTION}
 
 \section{TypeScript Compiler Diagnostics}
-% TODO: Explain strict typing, type checking and compile-time protections.
+Preemptive error detection begins with the TypeScript compiler. The platform uses one typed
+language across the API, CRM, public Web application, Mobile application, and Shared contracts.
+The compiler therefore detects incompatible values, invalid property access, missing returns, unused
+symbols, and interface mismatches before the application is executed.
+
+The standardized compiler configuration enables strict type checking together with additional
+protections for indexed access, optional properties, return paths, and unused code. The Shared
+package extends this protection across repository boundaries because the clients and API consume the
+same typed contract definitions. The exact compiler options are documented once in
+\hyperref[lst:chapter4_tsconfig]{Listing~\ref*{lst:chapter4_tsconfig}}.
+
+Local validation uses \texttt{tsc --noEmit} so that the source is checked without producing
+temporary output. The production build then performs the corresponding compilation step and creates
+the artifact consumed by deployment. This separation makes type correctness visible before runtime
+while preserving a reproducible build process.
 
 \section{Biome Static Analysis}
-% TODO: Explain linting, formatting and static diagnostics.
+Biome complements the compiler by examining source structure and coding conventions. The common
+configuration enables formatting, import organization, and recommended lint rules across the
+TypeScript repositories. The baseline uses two-space indentation, a 100-character line width,
+single quotes, semicolons, and consistent trailing commas. Unused imports and variables are treated
+as quality violations, while explicit \texttt{any} is rejected where the repository contract requires
+complete type information. The complete Biome configuration is available in
+\hyperref[lst:chapter4_biome]{Listing~\ref*{lst:chapter4_biome}}.
+
+Biome is used through two different purposes: the formatting command applies an intentional local
+correction, while \texttt{format:check} and \texttt{lint} verify the result without rewriting the
+workspace. This distinction is important in continuous integration because a successful validation
+must describe the submitted revision, not silently modify it.
+
+The result is a single feedback mechanism for formatting defects, import inconsistencies, unused
+code, and suspicious patterns. These diagnostics are intentionally complementary to TypeScript:
+Biome evaluates source quality and structure, whereas the compiler evaluates type relationships and
+program consistency.
 
 \section{Hooks and Continuous Integration Gates}
-% TODO: Describe how preventive checks run before merge and deployment.
+The preventive process has a local layer and a repository layer. Their implementation is documented
+once in \hyperref[tab:chapter4_commit_controls]{Table~\ref*{tab:chapter4_commit_controls}} and in
+the complete workflow shown in
+\hyperref[lst:chapter4_ci_pipeline]{Listing~\ref*{lst:chapter4_ci_pipeline}}. In this chapter,
+the important relationship is that local hooks provide immediate feedback for staged changes, while
+continuous integration repeats the contract on a clean runner before merge and publication.
+
+The execution evidence is also presented once in Chapter~4:
+\hyperref[fig:chapter4_hooks_commitlint]{Figure~\ref*{fig:chapter4_hooks_commitlint}} shows the
+commit validation, and
+\hyperref[fig:chapter4_quality_output_part1]{Figure~\ref*{fig:chapter4_quality_output_part1}} plus
+\hyperref[fig:chapter4_quality_output_part2]{Figure~\ref*{fig:chapter4_quality_output_part2}} show
+the quality results. Chapter~6 uses the resulting test artifacts to analyze test levels and risk
+coverage.
 
 \section{Observed Preventive-Quality Results}
-% TODO: Add current command results and identify their SHA, date and environment.
+The final evidence package records the preventive checks against revision-specific repository states.
+For the API, revision \texttt{4018bd5} produced successful lint, TypeScript validation, security
+audit, coverage-enabled test execution, production build, and coverage artifact upload. The same
+standardized sequence is applied to CRM, Web, Mobile, and Shared, with the Shared package adding
+declaration, type-level, package, and compatibility checks for its consumer boundary. The repository
+revisions and evidence roles are summarized in
+\hyperref[tab:chapter4_repository_automation]{Table~\ref*{tab:chapter4_repository_automation}}.
+
+The observed result is a layered quality gate rather than a single tool result. A source change must
+first satisfy the compiler and Biome, then pass the local hook, and finally pass the clean-runner
+workflow. This order shortens feedback time during development and prevents a change that only
+works in one local workspace from being accepted as a final artifact.
+
+These controls do not replace functional or acceptance testing. They establish that the submitted
+source is structurally valid, consistently formatted, type-safe, and buildable before
+\hyperref[chap:chapter6_tests]{Chapter~\ref*{chap:chapter6_tests}} examines its behavior through
+test cases, risk priorities, coverage, incidents, and retests.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHAPTER 6: TEST CASES AND TEST MANAGEMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{TEST CASES AND TEST MANAGEMENT}
+\label{chap:chapter6_tests}
 
 \section{Testing Strategy and Test Levels}
 % TODO: Define unit, integration, API, frontend, acceptance and manual testing levels.

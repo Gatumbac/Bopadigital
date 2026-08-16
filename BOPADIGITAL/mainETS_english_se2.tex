@@ -44,15 +44,72 @@
     \\* \hline
 }
 
-% Compact, reproducible code excerpts used as technical evidence in the report.
-\lstset{
-    basicstyle=\ttfamily\scriptsize,
+% Styled, compact code excerpts used as technical evidence in the report.
+\definecolor{codebackground}{RGB}{248,249,251}
+\definecolor{codeframe}{RGB}{190,198,208}
+\definecolor{codekeyword}{RGB}{31,78,121}
+\definecolor{codestring}{RGB}{128,64,0}
+\definecolor{codecomment}{RGB}{90,100,110}
+
+\lstdefinelanguage{chapteryaml}{
+    morecomment=[l]{\#},
+    morestring=[b]"
+}
+\lstdefinelanguage{chapterjson}{
+    morecomment=[l]{//},
+    morestring=[b]",
+    morekeywords={true,false,null,error,space,es5}
+}
+\lstdefinestyle{chaptercode}{
+    basicstyle=\ttfamily\footnotesize,
+    basewidth=0.52em,
+    backgroundcolor=\color{codebackground},
     breaklines=true,
-    columns=fullflexible,
+    breakatwhitespace=false,
+    breakautoindent=false,
+    breakindent=0pt,
+    columns=fixed,
     frame=single,
+    framerule=0.4pt,
+    rulecolor=\color{codeframe},
+    framesep=5pt,
     keepspaces=true,
+    linewidth=\linewidth,
     showstringspaces=false,
-    tabsize=2
+    tabsize=2,
+    xleftmargin=0pt,
+    xrightmargin=0pt,
+    keywordstyle=\color{codekeyword}\bfseries,
+    commentstyle=\color{codecomment}\itshape,
+    stringstyle=\color{codestring},
+    captionpos=b,
+    aboveskip=0.8\baselineskip,
+    belowskip=0.8\baselineskip
+}
+\lstset{style=chaptercode}
+
+% Chapter 4 captures are optional until the user inserts the PNG evidence.
+\newcommand{\chaptercapture}[3]{%
+    \begin{figure}[htbp]
+    \centering
+    \IfFileExists{appendices/images/#1.png}{%
+        \includegraphics[width=0.96\linewidth,height=0.58\textheight,keepaspectratio]{#1}%
+    }{%
+        \fcolorbox{codeframe}{codebackground}{%
+            \parbox{0.86\linewidth}{\centering\footnotesize
+            \textit{Technical capture to be inserted: #2}}%
+        }%
+    }%
+    \caption{#2}
+    \label{#3}
+    \end{figure}
+}
+
+% Keep the short Chapter 4 listings together with their captions.
+\newenvironment{chaptercodeblock}{%
+    \par\noindent\begin{minipage}{\linewidth}%
+}{%
+    \end{minipage}\par%
 }
 
 % Compact PB-to-task references used inside sprint backlog cells.
@@ -1591,7 +1648,7 @@ High probability: likely to occur. & 61\%--80\% \\
 Very high probability: almost certain to occur. & 81\%--100\% \tablelastrow
 \end{longtable}
 
-\begin{longtable}{|L{3.0cm}|L{1.7cm}|L{1.7cm}|L{8.5cm}|}
+\begin{longtable}{|L{2.9cm}|L{2.1cm}|L{1.7cm}|L{8.2cm}|}
 \caption{Project risk analysis and mitigation}
 \label{tab:project_management_risks}\\
 \hline
@@ -1658,12 +1715,12 @@ pipeline, while Mobile uses the Expo build pipeline. Shared compiles its domain 
 declaration files before publication. All application repositories execute automated tests and
 produce a coverage report as part of their quality workflow.
 
-Deploy applies the same principle to infrastructure. Its validation checks Docker Compose, Caddy,
-service names, ports, required variables, image references, and service health without exposing
-credential values. Communications and this report repository apply the equivalent rule to
-documentation by validating Markdown structure and internal links.
+Deploy is included as operational automation rather than application source. Its validation covers
+Docker Compose, Caddy, service names, ports, required variables, and image references without
+exposing credential values. It is therefore reported as operational automation, not as a TypeScript
+code-quality repository.
 
-\begin{longtable}{|L{2.4cm}|L{2.7cm}|L{2.6cm}|L{2.7cm}|L{3.4cm}|}
+\begin{longtable}{|L{2.9cm}|L{2.4cm}|L{2.6cm}|L{2.7cm}|L{3.2cm}|}
 \caption{Repository automation and final evidence baseline}
 \label{tab:chapter4_repository_automation}\\
 \hline
@@ -1687,9 +1744,7 @@ Mobile & \texttt{4638ea1} & Expo web/application build & Lint, typecheck, tests,
 \hline
 Shared & \texttt{4cbf3d4} & TypeScript declaration build & Lint, typecheck, schema tests, coverage & Shared contracts \\
 \hline
-Deploy & \texttt{b6f2f6f} & Compose and Caddy validation & Configuration and health checks & Runtime orchestration \\
-\hline
-Communications & \texttt{369ae94} & Documentation validation & Markdown and link checks & Project evidence \\ \tablelastrow
+Deploy & \texttt{b6f2f6f} & Compose and Caddy validation & Compose and Caddy validation & Runtime orchestration \tablelastrow
 \end{longtable}
 
 The revision identifiers in Table~\ref{tab:chapter4_repository_automation} identify the repository
@@ -1697,7 +1752,14 @@ state associated with the final evidence package. Each result is associated with
 environment, command, and artifact reference. Chapter~5 expands the compiler, Biome, hook,
 and CI diagnostics; this chapter focuses on the automation design that makes those diagnostics
 repeatable.
-\begin{lstlisting}[caption={Representative continuous-integration quality sequence},label={lst:chapter4_ci_pipeline}]
+\begin{chaptercodeblock}
+\begin{lstlisting}[style=chaptercode,language=chapteryaml,basicstyle=\ttfamily\scriptsize,framesep=3pt,aboveskip=0.3\baselineskip,belowskip=0.3\baselineskip,caption={Complete API continuous-integration workflow},label={lst:chapter4_ci_pipeline}]
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -1707,12 +1769,31 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npx tsc --noEmit
-      - run: npm run test:coverage
-      - run: npm run build
+          registry-url: https://npm.pkg.github.com
+          scope: '@bopacorp'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npx tsc --noEmit
+      - name: Security audit
+        run: npm audit --audit-level=high || true
+      - name: Test with coverage
+        run: npm run test:coverage
+      - name: Build
+        run: npm run build
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          if-no-files-found: warn
 \end{lstlisting}
+\end{chaptercodeblock}
 
 \section{Coding Standards and Enforcers}
 The project applies one coding-quality baseline across its TypeScript repositories. TypeScript uses
@@ -1752,13 +1833,13 @@ Web & Strict TypeScript & Biome and React accessibility rules & Feature modules,
 \hline
 Mobile & Strict TypeScript & Biome with Expo-compatible exclusions & Screens, components, contexts, and services & Test coverage \\
 \hline
-Shared & Strict TypeScript and Zod inference & Biome, declaration-safe rules & Four-file domain contract pattern & Schema coverage \\ \tablelastrow
+Shared & Strict TypeScript and Zod inference & Biome, declaration-safe rules & Four-file domain contract pattern & Schema coverage \tablelastrow
 \end{longtable}
 
 The API demonstrates the rule through modules such as
-\texttt{src/modules/reports/reports.routes.ts},
-\texttt{src/modules/reports/reports.controller.ts}, and
-\texttt{src/modules/reports/reports.service.ts}. The route composes authentication, authorization,
+\path{src/modules/reports/reports.routes.ts},
+\path{src/modules/reports/reports.controller.ts}, and
+\path{src/modules/reports/reports.service.ts}. The route composes authentication, authorization,
 and validation middleware; the controller coordinates the request and response envelope; and the
 service contains the domain operation. This organization makes responsibilities visible during
 review and gives the quality tools a predictable source tree.
@@ -1773,7 +1854,8 @@ The Shared repository completes the boundary by exporting request and response s
 domain. For example, the CRM and document domains expose explicit barrel files and Zod definitions.
 Consumers therefore validate data at the API boundary and infer compatible TypeScript types from the
 same source of truth.
-\begin{lstlisting}[caption={Representative Biome quality rules from the API configuration},label={lst:chapter4_biome}]
+\begin{chaptercodeblock}
+\begin{lstlisting}[style=chaptercode,language=chapterjson,caption={Representative Biome quality rules from the API configuration},label={lst:chapter4_biome}]
 {
   "linter": {
     "enabled": true,
@@ -1800,8 +1882,10 @@ same source of truth.
   }
 }
 \end{lstlisting}
+\end{chaptercodeblock}
 
-\begin{lstlisting}[caption={Strict TypeScript compiler options},label={lst:chapter4_tsconfig}]
+\begin{chaptercodeblock}
+\begin{lstlisting}[style=chaptercode,language=chapterjson,caption={Strict TypeScript compiler options},label={lst:chapter4_tsconfig}]
 {
   "compilerOptions": {
     "strict": true,
@@ -1815,6 +1899,7 @@ same source of truth.
   }
 }
 \end{lstlisting}
+\end{chaptercodeblock}
 
 \section{Git Hooks and Commit Validation}
 The repository workflow applies quality checks before code reaches the shared branch. Husky owns the
@@ -1834,10 +1919,10 @@ The standardized commit flow is:
       tests, coverage, and build validation.
 \end{enumerate}
 
-API, CRM, Web, Mobile, and Shared use the same hook contract. Deploy and Communications use
-repository-specific CI checks instead of application-language hooks because their quality risks are
-Compose configuration and documentation integrity. In both cases, the principle is identical: a
-change is accepted only after its relevant automated controls complete successfully.
+API, CRM, Web, Mobile, and Shared use the same hook contract. Deploy uses repository-specific
+operational validation instead of application-language hooks because its quality risks are Compose
+configuration and proxy routing. These controls are limited to the implementation and deployment
+repositories covered by this chapter.
 
 \begin{longtable}{|L{2.5cm}|L{2.4cm}|L{2.4cm}|L{3.2cm}|L{3.6cm}|}
 \caption{Commit and continuous-integration controls}
@@ -1863,40 +1948,15 @@ Mobile & Husky and lint-staged & Commitlint & Quality, tests, coverage, build & 
 \hline
 Shared & Husky and lint-staged & Commitlint & Quality, schema tests, coverage, build & Compatible contracts \\
 \hline
-Deploy and Communications & Repository-specific validation & Conventional change record & Compose or Markdown checks & Safe operational evidence \\ \tablelastrow
+Deploy & Repository-specific validation & Repository change record & Compose and Caddy validation & Runtime orchestration \tablelastrow
 \end{longtable}
-\begin{lstlisting}[caption={Git hooks and staged-file validation},label={lst:chapter4_hooks_commitlint}]
-# .husky/pre-commit
-echo "Running Biome check on staged files..."
-npx lint-staged
+\chaptercapture{chapter4_hooks_commitlint}{Git hooks and staged-file validation in the API repository}{fig:chapter4_hooks_commitlint}
 
-# .husky/commit-msg
-npx --no -- commitlint --edit "$1"
+\chaptercapture{chapter4_quality_output_part1}{API quality output: revision, lint, and TypeScript validation}{fig:chapter4_quality_output_part1}
 
-# package.json
-"lint-staged": {
-  "*.{ts,tsx,js,jsx}": [
-    "biome check --write --no-errors-on-unmatched"
-  ]
-}
-\end{lstlisting}
+\chaptercapture{chapter4_quality_output_part2}{API quality output: tests and production build}{fig:chapter4_quality_output_part2}
 
-\begin{lstlisting}[caption={Representative API quality execution at revision \texttt{4018bd5}},label={lst:chapter4_quality_output}]
-$ npm run lint
-Checked 219 files. No fixes applied.
-
-$ npx tsc --noEmit
-passed
-
-$ npm run test:run
-Test Files  61 passed (61)
-Tests       415 passed (415)
-
-$ npm run build
-tsc && tsc-alias
-passed
-\end{lstlisting}
-
+\FloatBarrier
 \section{SOLID Principles and Design Patterns}
 The implementation applies SOLID principles as design criteria for concrete boundaries rather than as
 labels attached to entire repositories. The most visible application is the separation of the API
@@ -1914,7 +1974,7 @@ The following examples connect the principles to current source files:
       hooks and shared UI primitives, allowing new CRUD screens to reuse the behavior without
       copying its implementation.
 \item \textbf{Liskov Substitution:} the specialized errors in
-      \texttt{src/shared/errors/http-error.ts} extend the common HTTP error contract and are handled
+      \path{src/shared/errors/http-error.ts} extend the common HTTP error contract and are handled
       consistently by the error middleware.
 \item \textbf{Interface Segregation:} Shared separates request and response schemas by domain, so a
       consumer imports only the contract required by its operation.
@@ -1954,7 +2014,7 @@ Context/Provider & CRM and Mobile & Authentication state and session events & Co
 \hline
 Reusable Hook & CRM and Web & Pagination, form guards, and content loading & Reduced duplication \\
 \hline
-Schema contract & Shared & Zod request/response schemas and inferred types & Compatible boundaries \\ \tablelastrow
+Schema contract & Shared & Zod request/response schemas and inferred types & Compatible boundaries \tablelastrow
 \end{longtable}
 
 \section{Refactoring Example}
@@ -1965,8 +2025,8 @@ formatting logic. That structure increased the number of locations that required
 the shared behavior changed.
 
 The refactoring extracted the duplicated behavior into explicit shared modules, including
-\texttt{src/shared/constants/auth.ts}, \texttt{src/shared/utils/format.ts},
-\texttt{src/shared/utils/query.ts}, and \texttt{src/shared/utils/request.ts}. The affected modules
+\path{src/shared/constants/auth.ts}, \path{src/shared/utils/format.ts},
+\path{src/shared/utils/query.ts}, and \path{src/shared/utils/request.ts}. The affected modules
 then imported the shared implementation instead of maintaining local copies. The change touched 16
 files and removed repeated utility code while adding a smaller, reusable shared surface.
 
@@ -1992,19 +2052,11 @@ Formatting & Multiple local implementations & Shared formatting utility & Lower 
 \hline
 Maintenance & Several update points & One update point & Lower maintenance cost \\
 \hline
-Quality impact & Duplication could diverge & Shared code is checked once and reused & More predictable changes \\ \tablelastrow
+Quality impact & Duplication could diverge & Shared code is checked once and reused & More predictable changes \tablelastrow
 \end{longtable}
-\begin{lstlisting}[caption={Before-and-after refactoring excerpt from revision \texttt{ed79e6b}},label={lst:chapter4_refactor_diff}]
-- const permissionCodes = new Set<string>();
-- // duplicated query and permission collection
-+ const permissionCodes = await fetchPermissionCodes(roleIds);
+\chaptercapture{chapter4_refactor_diff}{Before-and-after API refactor output for revision ed79e6b}{fig:chapter4_refactor_diff}
 
-+ // src/shared/constants/auth.ts
-+ export const BCRYPT_SALT_ROUNDS = 12;
-
-Summary:
-16 files changed, 60 insertions(+), 105 deletions(-)
-\end{lstlisting}
+\FloatBarrier
 
 The same refactoring principle appears in the client repositories. Revision \texttt{be8aa54} in CRM
 extracted reusable CRUD primitives for pagination, form protection, and shared UI. Revision

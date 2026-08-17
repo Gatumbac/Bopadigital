@@ -31,25 +31,15 @@ Now, my teammate will explain how we organized the project and why we chose this
 
 ## Person 2 — Scrum, Architecture, and Technical Decisions (2 minutes 30 seconds)
 
-**On screen:** seven-sprint timeline, component diagram, deployment pipeline, technology decisions.
-
-**Slide 4 — Seven Scrum Sprints**
-
-We developed BOPADIGITAL in seven Scrum sprints and used ClickUp to plan the work. Sprint 1 created the foundations, login, and role permissions. Sprints 2 and 3 added the business features and API integration. Sprints 4 to 6 focused on testing, risk, security, and CI. Sprint 7 completed deployment, manuals, validation, and project closure. The client reviewed the stages and gave final acceptance after Sprint 7.
-
-**Slide 5 — Component Architecture**
+We developed BOPADIGITAL in seven Scrum sprints and used ClickUp to plan the work. Sprint 1 created the foundations, login, and role permissions. Sprints 2 and 3 added the business features and API integration. Sprints 4 to 6 focused on testing, risk, security, and CI. Sprint 7 completed deployment, manuals, validation, and project closure. Each sprint included planning, review, and retrospective activities. The client reviewed the stages and gave final acceptance after Sprint 7.
 
 Web, CRM, and Mobile communicate with one REST API. The API uses Express and TypeScript, with routes, controllers, and services. Drizzle connects the services with PostgreSQL. The Shared package keeps data types and validation consistent across the applications. This modular structure separates the business areas while keeping one backend.
 
-**Slide 6 — Deployment Pipeline**
+The source code and packages come from GitHub. We also used feature branches, Pull Requests, reviews, and CI checks before integration. A deployment script starts Web, CRM, and API with Docker Compose on the server. Caddy provides secure HTTPS access and domain routing. The API connects to PostgreSQL and file storage.
 
-The source code and packages come from GitHub. A deployment script starts Web, CRM, and API with Docker Compose on the server. Caddy provides secure HTTPS access and domain routing. The API connects to PostgreSQL and file storage.
+We compared alternatives before selecting the stack. We selected React and Vite over Angular or Vue because the team already knew React and development time was limited. Express kept the API in TypeScript instead of adding Django or Laravel. PostgreSQL fit our business rules and data-integrity needs better than MySQL. Expo reused our React and TypeScript knowledge instead of adding Flutter or separate native applications. Docker Compose was more repeatable than starting every service manually.
 
-**Slide 7 — Technology Decisions**
-
-We compared alternatives before selecting the stack. React and Vite matched our Web work better than Angular or Vue. Express kept the API in TypeScript instead of adding Django or Laravel. PostgreSQL fit our business rules and data-integrity needs better than MySQL. Expo reused our React and TypeScript knowledge instead of adding Flutter or separate native applications. Docker Compose was more repeatable than starting every service manually.
-
-These decisions gave us one consistent TypeScript ecosystem. Next, my teammate will explain our tests and compare our work with an international testing standard.
+These decisions gave us one consistent TypeScript ecosystem. Next, my teammate will present testing and standards.
 
 ## Person 3 — Test Management and Standards Comparison (2 minutes 30 seconds)
 

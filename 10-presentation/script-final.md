@@ -31,17 +31,25 @@ Now, my teammate will explain how we organized the project and why we chose this
 
 ## Person 2 — Scrum, Architecture, and Technical Decisions (2 minutes 30 seconds)
 
-**On screen:** seven-sprint timeline, component diagram, deployment diagram.
+**On screen:** seven-sprint timeline, component diagram, deployment pipeline, technology decisions.
 
-We developed BOPADIGITAL in seven Scrum sprints. We used ClickUp to plan the work, and we saved reviews and client acceptance evidence in the communications repository.
+**Slide 4 — Seven Scrum Sprints**
 
-In Sprint 1, we prepared the repositories, database, quality tools, login, and role permissions. Sprint 2 added the catalog, CMS, job portal, company data, users, public Web, and the first CRM features. Sprint 3 connected the API with the Web and CRM. Sprint 4 improved frontend tests and Scrum evidence. Sprint 5 focused on acceptance tests, integration tests, risk-based testing, measurements, and defect tracking. Sprint 6 added code improvements, static analysis, CI evidence, security, browser, and accessibility checks. Sprint 7 completed deployment, manuals, the final report, validation, and project closure. The client reviewed the work during the sprints and gave final acceptance after Sprint 7.
+We developed BOPADIGITAL in seven Scrum sprints and used ClickUp to plan the work. Sprint 1 created the foundations, login, and role permissions. Sprints 2 and 3 added the business features and API integration. Sprints 4 to 6 focused on testing, risk, security, and CI. Sprint 7 completed deployment, manuals, validation, and project closure. The client reviewed the stages and gave final acceptance after Sprint 7.
 
-The Web, CRM, and Mobile applications are separate clients of one REST API. The API uses Express and TypeScript. Each request goes from a route to a controller, then to a service, and finally to PostgreSQL through Drizzle. This structure separates the business modules while keeping the backend simple to deploy and maintain.
+**Slide 5 — Component Architecture**
 
-The package `@bopacorp/shared` gives the API and clients the same Zod rules, data types, and response formats. Web and CRM use React with Vite. Mobile uses Expo with React Native. During development, we used PostgreSQL hosted by Supabase. Production also uses PostgreSQL, with private environment settings. Docker Compose starts the services, and Caddy supports secure HTTPS routes.
+Web, CRM, and Mobile communicate with one REST API. The API uses Express and TypeScript, with routes, controllers, and services. Drizzle connects the services with PostgreSQL. The Shared package keeps data types and validation consistent across the applications. This modular structure separates the business areas while keeping one backend.
 
-These choices let us use TypeScript across the project, keep permissions and business rules in the API, and stop clients from connecting directly to the database. Next, my teammate will explain our tests and compare our work with an international testing standard.
+**Slide 6 — Deployment Pipeline**
+
+The source code and packages come from GitHub. A deployment script starts Web, CRM, and API with Docker Compose on the server. Caddy provides secure HTTPS access and domain routing. The API connects to PostgreSQL and file storage.
+
+**Slide 7 — Technology Decisions**
+
+We compared alternatives before selecting the stack. React and Vite matched our Web work better than Angular or Vue. Express kept the API in TypeScript instead of adding Django or Laravel. PostgreSQL fit our business rules and data-integrity needs better than MySQL. Expo reused our React and TypeScript knowledge instead of adding Flutter or separate native applications. Docker Compose was more repeatable than starting every service manually.
+
+These decisions gave us one consistent TypeScript ecosystem. Next, my teammate will explain our tests and compare our work with an international testing standard.
 
 ## Person 3 — Test Management and Standards Comparison (2 minutes 30 seconds)
 

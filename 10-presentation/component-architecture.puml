@@ -1,0 +1,51 @@
+@startuml
+title Component Architecture
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 18
+skinparam defaultFontName Arial
+skinparam defaultFontSize 17
+skinparam ArrowColor #527487
+skinparam ArrowThickness 2
+skinparam rectangle {
+  BorderColor #527487
+  BorderThickness 2
+  FontColor #17242C
+}
+
+top to bottom direction
+
+together {
+  rectangle "<b>PUBLIC WEB</b>\nReact + Vite" as WEB #E3E8EB
+  rectangle "<b>CRM</b>\nReact + Vite" as CRM #E3E8EB
+  rectangle "<b>MOBILE APP</b>\nExpo + React Native" as MOBILE #E3E8EB
+}
+
+rectangle "<b>REST API /api/v1</b>\nExpress + TypeScript" as API #7895A6
+
+together {
+  database "<b>PostgreSQL</b>\nBusiness data" as DB #EDF2F4
+  rectangle "<b>FILE STORAGE</b>\nDocuments and images" as STORAGE #EDF2F4
+}
+
+rectangle "<b>SHARED CONTRACTS</b>\nZod schemas\nTypeScript types\nResponse formats\n\n<i>Used by clients and API</i>" as SHARED #D5E7F0
+
+WEB --> API
+CRM --> API
+MOBILE --> API
+
+API --> DB
+API --> STORAGE
+
+SHARED -[hidden]right- API
+SHARED .. WEB : shared rules
+SHARED .. CRM
+SHARED .. MOBILE
+SHARED .. API : validation
+
+legend bottom
+  <b>Central business rules and shared contracts across all applications</b>
+endlegend
+
+@enduml

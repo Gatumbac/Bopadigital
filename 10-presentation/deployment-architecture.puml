@@ -1,0 +1,55 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 16
+skinparam defaultFontName Arial
+skinparam defaultFontSize 17
+skinparam ArrowColor #527487
+skinparam ArrowThickness 2
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam rectangle {
+  BorderColor #527487
+  BorderThickness 2
+  FontColor #17242C
+}
+skinparam node {
+  BorderColor #7895A6
+  BorderThickness 2
+  FontColor #17242C
+}
+skinparam database {
+  BorderColor #527487
+  BorderThickness 2
+  FontColor #17242C
+}
+skinparam cloud {
+  BorderColor #527487
+  BorderThickness 2
+  FontColor #17242C
+}
+
+left to right direction
+
+cloud "<b>GITHUB</b>\nRepositories\nand Packages" as GITHUB #EDF2F4
+
+node "<b>SERVER / VPS</b>" as VPS #F7F8F9 {
+  rectangle "<b>DEPLOYMENT</b>\ndeploy.sh + protected .env" as DEPLOY #E9E1CF
+  rectangle "<b>DOCKER COMPOSE</b>\nPublic Web  |  CRM  |  REST API" as DOCKER #E3E8EB
+  rectangle "<b>CADDY</b>\nHTTPS reverse proxy and domain routing" as CADDY #D5E7F0
+  database "<b>PostgreSQL</b>" as DB #EDF2F4
+
+  DEPLOY -down-> DOCKER : build and start
+  CADDY -down-> DOCKER : route traffic
+  DOCKER -down-> DB : database connection
+}
+
+rectangle "<b>USERS</b>\nWeb Browser\nMobile App" as USERS #E3E8EB
+
+rectangle "<b>FILE STORAGE</b>\nDocuments and images" as STORAGE #EDF2F4
+
+GITHUB -right-> DEPLOY : clone / pull
+USERS -left-> CADDY
+DOCKER -down-> STORAGE : files
+
+@enduml
